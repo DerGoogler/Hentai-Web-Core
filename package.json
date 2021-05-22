@@ -1,0 +1,43 @@
+{
+  "name": "hentai-web",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.jsx",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "install-dep": "npm i @babel/preset-env @babel/preset-react @hot-loader/react-dom react-hot-loader --no-bin-links",
+    "build-dev": "webpack --mode development",
+    "build-prod": "webpack --mode production",
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.2.5",
+    "hmtai": "^2.0.4",
+    "onsenui": "^2.11.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-hot-loader": "^4.13.0",
+    "react-onsenui": "^1.11.4",
+    "sass": "^1.34.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "@hot-loader/react-dom": "^17.0.1+4.13.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.5",
+    "file-loader": "^6.2.0",
+    "less-loader": "^9.0.0",
+    "postcss-loader": "^5.3.0",
+    "sass-loader": "^11.1.1",
+    "style-loader": "^2.0.0",
+    "url-loader": "^4.1.1",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
+  }
+}
