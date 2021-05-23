@@ -127,7 +127,7 @@ class App extends React.Component {
         <Fab>
           <Icon icon='md-more' />
         </Fab>
-        <SpeedDialItem onClick={() => {window.open('https://github.com/0076FF/Hentai-Web/')}}>
+        <SpeedDialItem onClick={() => {window.open('https://github.com/DerGoogler/Hentai-Web/blob/master/src/App.jsx')}}>
           <Icon icon='md-github' />
         </SpeedDialItem>
       </SpeedDial>
