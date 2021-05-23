@@ -135,12 +135,13 @@ class App extends React.Component {
 
  render() {
   return (
-   <Page renderToolbar={this.renderToolbar}>
+   <Page 
+   renderToolbar={this.renderToolbar}
+   renderFixed={this.renderFixed}>
     <Tabbar 
     swipeable={true} 
     position="auto" 
     renderTabs={this.renderTabs}
-    renderFixed={this.renderFixed}
     />
    </Page>
   );
