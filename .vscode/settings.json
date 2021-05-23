@@ -1,0 +1,4 @@
+{
+    "remote.onstartup": true,
+    "github.allowUnsafeSSL": true
+}

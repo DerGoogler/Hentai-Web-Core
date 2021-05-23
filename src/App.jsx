@@ -7,6 +7,7 @@ import {
  Tabbar,
  Card,
  Fab,
+ Button,
  SpeedDial,
  SpeedDialItem,
  ToolbarButton,
@@ -70,7 +71,7 @@ class AnimePicture extends React.Component {
   const { note, source } = this.props;
   return (
    <Card>
-    <img src={source} alt={note} style={{ width: "100%" }} />
+    <img onDoubleClick={() => {this.setAttribute("src", source)}} src={source} alt={note} style={{ width: "100%" }} />
     <div className="title right">{note.charAt(0).toUpperCase() + note.slice(1)}</div>
    </Card>
   );
