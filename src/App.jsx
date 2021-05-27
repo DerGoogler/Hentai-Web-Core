@@ -1,3 +1,7 @@
+// App Pages
+import Settings from './Settings';
+
+// Regular Modules
 import hmtai from "hmtai";
 import React from "react";
 import {
@@ -117,7 +121,11 @@ class App extends React.Component {
       {
         content: <AnimeTab content={<NSFW />} />,
         tab: <Tab label="NSFW" />
-      }
+      },
+      /*{
+        content: <AnimeTab content={<Settings />} />,
+        tab: <Tab label="Settings" />
+      }*/
     ];
   }
 
@@ -141,7 +149,7 @@ class App extends React.Component {
         renderFixed={this.renderFixed}>
         <Tabbar
           swipeable={true}
-          position="auto"
+          position="top"
           renderTabs={this.renderTabs}
         />
       </Page>

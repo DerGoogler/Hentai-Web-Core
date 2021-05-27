@@ -21,7 +21,8 @@
     "react-dom": "^16.14.0",
     "react-hot-loader": "^4.13.0",
     "react-onsenui": "^1.11.4",
-    "sass": "^1.34.0"
+    "sass": "^1.34.0",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
