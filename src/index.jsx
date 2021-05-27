@@ -1,8 +1,8 @@
-// App pages
+// App Pages
 import App from "./App";
 import Splash from "./Splash";
 
-// Regular imports
+// Regular Modules
 import React from "react";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
@@ -15,9 +15,12 @@ import 'onsenui/css/onsen-css-components.css';
 const cookies = new Cookies();
 
 ons.ready(function () {
-    if (cookies.get('useAndroidDesign')) {
+    // can only edit with an cookie editor
+    if (cookies.get('useAndroidDesign') === true) {
         ons.platform.select("android");
-    } else {
+    } else if (cookies.get('useAndroidDesign') === true
+        || cookies.get('useAndroidDesign') === undefined
+        || cookies.get('useAndroidDesign') === '') {
         ons.platform.select("ios");
     }
 

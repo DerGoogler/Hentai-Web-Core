@@ -8,7 +8,8 @@ import {
   Toolbar,
   Button,
   Icon,
-  ToolbarButton
+  ToolbarButton,
+  Input
 } from "react-onsenui";
 import { hot } from "react-hot-loader/root";
 import Cookies from 'universal-cookie';
@@ -17,16 +18,6 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 class Splash extends React.Component {
-  ageConfim() {
-    try {
-      cookies.set('age18', true, { path: '/' });
-      var mountNode = document.getElementById("app");
-      ReactDOM.render(<App />, mountNode);
-    } catch (error) {
-      alert(error);
-    }
-  }
-
   renderToolbar() {
     return (
       <Toolbar>
@@ -44,18 +35,52 @@ class Splash extends React.Component {
       </Toolbar>
     );
   }
+  handleClick() {
+    if (cookies.get('username') === 'bob' && cookies.get('password') === 'bob') {
+      cookies.set('age18', true, { path: '/' });
+      location.reload();
+    }
+    else {
+      ons.notification.alert('Username or password incorrect!');
+    }
+  }
+
+  handleUsernameChange(e) {
+    cookies.set('username', e.target.value, { path: '/' });
+  }
+
+  handlePasswordChange(e) {
+    cookies.set('password', e.target.value, { path: '/' });
+  }
 
   render() {
     return (
       <Page renderToolbar={this.renderToolbar}>
-        <p style={{ textAlign: 'center' }}>
-          <Button onClick={this.ageConfim}>
-            Are you 18 years?
-            </Button>
-        </p>
+        <section style={{ textAlign: 'center' }}>
+          <p>
+            <Input
+              value={cookies.get('username')}
+              onChange={this.handleUsernameChange}
+              modifier='underbar'
+              float
+              placeholder='Username' />
+          </p>
+          <p>
+            <Input
+              value={cookies.get('password')}
+              onChange={this.handlePasswordChange}
+              modifier='underbar'
+              type='password'
+              float
+              placeholder='Password' />
+          </p>
+          <p>
+            <Button onClick={this.handleClick}>Sign in</Button>
+          </p>
+        </section>
       </Page>
     );
   }
-};
+}
 
 export default hot(Splash);
