@@ -4,6 +4,7 @@ import AnimeTab from './makers/AnimeTab';
 // Pages
 import SFW from './pages/SFW';
 import NSFW from './pages/NSFW';
+import Settings from './pages/Settings';
 
 // Regular Modules
 import React from "react";
@@ -48,6 +49,10 @@ class App extends React.Component {
       {
         content: <AnimeTab content={<NSFW />} />,
         tab: <Tab label="NSFW" />
+      },
+      {
+        content: <AnimeTab content={<Settings />} />,
+        tab: <Tab label="Settings" />
       }
     ];
   }

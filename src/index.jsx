@@ -1,6 +1,5 @@
 // App Pages
 import App from "./App";
-import Splash from "./Splash";
 
 // Regular Modules
 import React from "react";
@@ -14,8 +13,9 @@ import 'onsenui/css/onsen-css-components.css';
 
 const cookies = new Cookies();
 
+
 ons.ready(function () {
-    // can only edit with an cookie editor
+    // Can only edit with an cookie editor
     if (cookies.get('useAndroidDesign') === true) {
         ons.platform.select("android");
     } else if (cookies.get('useAndroidDesign') === true
@@ -23,12 +23,6 @@ ons.ready(function () {
         || cookies.get('useAndroidDesign') === '') {
         ons.platform.select("ios");
     }
-
-    if (cookies.get('age18')) {
-        var mountNode = document.getElementById("app");
-        ReactDOM.render(<App />, mountNode);
-    } else {
-        var mountNode = document.getElementById("app");
-        ReactDOM.render(<Splash />, mountNode);
-    }
+    var mountNode = document.getElementById("app");
+    ReactDOM.render(<App />, mountNode);
 });
