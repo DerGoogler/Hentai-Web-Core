@@ -1,13 +1,8 @@
-// Makers
-import AnimeTab from './makers/AnimeTab';
-
-// Pages
-import SFW from './pages/SFW';
-import NSFW from './pages/NSFW';
-import Settings from './pages/Settings';
-
-// Regular Modules
-import React from "react";
+import AnimeTab         from './makers/AnimeTab';
+import SFW              from './pages/SFW';
+import NSFW             from './pages/NSFW';
+import ons              from "onsenui";
+import React            from "react";
 import {
   Page,
   Toolbar,
@@ -18,9 +13,20 @@ import {
   SpeedDialItem,
   ToolbarButton,
   Icon
-} from "react-onsenui";
-import { hot } from "react-hot-loader/root";
-
+}                       from "react-onsenui";
+import {
+  isElectron,
+  isDesktop,
+  isEdgeChromium,
+  isSmartTV,
+  isWindows,
+  isIE,
+  isIOS,
+  isSafari,
+  isMobileSafari,
+  isTablet
+}                       from "react-device-detect";
+import { hot }          from "react-hot-loader/root";
 
 class App extends React.Component {
   renderToolbar() {
@@ -49,10 +55,6 @@ class App extends React.Component {
       {
         content: <AnimeTab content={<NSFW />} />,
         tab: <Tab label="NSFW" />
-      },
-      {
-        content: <AnimeTab content={<Settings />} />,
-        tab: <Tab label="Settings" />
       }
     ];
   }
@@ -63,7 +65,19 @@ class App extends React.Component {
         <Fab>
           <Icon icon='md-more' />
         </Fab>
-        <SpeedDialItem onClick={() => { window.open('https://github.com/DerGoogler/Hentai-Web/blob/master/src/App.jsx') }}>
+        <SpeedDialItem onClick={() => {
+          ons.notification.confirm({
+            message: 'This web app contains +18 content',
+            title: 'Content',
+            buttonLabels: ['Ok'],
+            animation: 'default',
+            primaryButtonIndex: 0,
+            cancelable: false,
+          })
+        }}>
+          <Icon icon='md-info' />
+        </SpeedDialItem>
+        <SpeedDialItem onClick={() => { window.open('https://github.com/DerGoogler/Hentai-Web') }}>
           <Icon icon='md-github' />
         </SpeedDialItem>
       </SpeedDial>
@@ -71,6 +85,9 @@ class App extends React.Component {
   }
 
   render() {
+    if (isIE) return (<div> IE is not supported. Download Chrome/Opera/Firefox </div>);
+    if (isIOS || isMobileSafari || isSafari) return (<div> iOS/iPhone/Safari are not allowed to view this </div>);
+    if (isWindows || isTablet || isEdgeChromium || isElectron || isDesktop || isSmartTV) return (<div> Hentai Web is on a pc not supported </div>);
     return (
       <Page
         renderToolbar={this.renderToolbar}

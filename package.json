@@ -18,6 +18,7 @@
     "hmtai": "^2.0.4",
     "onsenui": "^2.11.2",
     "react": "^16.14.0",
+    "react-device-detect": "^1.17.0",
     "react-dom": "^16.14.0",
     "react-hot-loader": "^4.13.0",
     "react-onsenui": "^1.11.4",
