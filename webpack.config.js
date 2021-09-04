@@ -7,7 +7,7 @@ const config = {
     './src/index.jsx'
   ],
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'output'),
     filename: 'bundle.js'
   },
   module: {
@@ -52,7 +52,7 @@ const config = {
   },
   devServer: {
     port: 9950,
-    contentBase: './dist',
+    contentBase: './output',
     writeToDisk: true
   }
 };

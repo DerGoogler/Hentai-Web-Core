@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "autoprefixer": "^10.2.5",
-    "hmtai": "^2.0.4",
+    "hmtai": "^2.0.9",
     "onsenui": "^2.11.2",
     "react": "^16.14.0",
     "react-device-detect": "^1.17.0",
