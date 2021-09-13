@@ -1,12 +1,13 @@
-import App              from "./App";
-import React            from "react";
-import ReactDOM         from "react-dom";
-import ons              from "onsenui";
-import                  'onsenui/css/onsenui.css';
-import                  'onsenui/css/onsen-css-components.css';
+import App from "./App";
+import React from "react";
+import ReactDOM from "react-dom";
+import ons from "onsenui";
+import "onsenui/css/onsenui.css";
+import "onsenui/css/onsen-css-components.css";
 
 
 ons.ready(function () {
-    var mountNode = document.getElementById("app");
-    ReactDOM.render(<App />, mountNode);
+  ons.platform.select('ios');
+  var mountNode = document.getElementById("app");
+  ReactDOM.render(<App />, mountNode);
 });
