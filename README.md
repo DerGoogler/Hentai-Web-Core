@@ -5,4 +5,4 @@ How to install:
 - launch any `localhost`
 
 
-Enjoying the Hentai`s.
+Enjoying the Hentais.

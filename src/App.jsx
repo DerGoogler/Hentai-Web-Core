@@ -14,18 +14,7 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
-import {
-  isElectron,
-  isDesktop,
-  isEdgeChromium,
-  isSmartTV,
-  isWindows,
-  isIE,
-  isIOS,
-  isSafari,
-  isMobileSafari,
-  isTablet,
-} from "react-device-detect";
+import { isIE, isIOS, isSafari, isMobileSafari } from "react-device-detect";
 import { hot } from "react-hot-loader/root";
 import config from "./config";
 

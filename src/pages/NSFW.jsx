@@ -2,14 +2,9 @@ import AnimePicture from "../makers/AniemePicture";
 import hmtai from "hmtai";
 import React from "react";
 import { hot } from "react-hot-loader/root";
-import { Card, Button } from "react-onsenui";
 
 class NSFW extends React.Component {
   render() {
-    if (
-      navigator.userAgent ===
-      atob("SEVOVEFJd2ViQXBwbGljYXRpb25NYWRlYnlERVJfR09PR0xFUg==")
-    ) {
       return (
         <>
           <AnimePicture source={hmtai.nsfw.ass()} note="ass" />
@@ -52,29 +47,6 @@ class NSFW extends React.Component {
           />
         </>
       );
-    } else {
-      return (
-        <>
-          <center>
-            <Card>
-              <div className="title">Get the Hentai Web App</div>
-              <div className="content">
-                <Button
-                  modifier="large"
-                  onClick={() => {
-                    window.open(
-                      "https://github.com/DerGoogler/Hentai-Web/releases/"
-                    );
-                  }}
-                >
-                  Download
-                </Button>
-              </div>
-            </Card>
-          </center>
-        </>
-      );
-    }
   }
 }
 
