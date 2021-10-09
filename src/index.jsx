@@ -1,4 +1,5 @@
 import App from "./App";
+import ContextMenu from "./makers/ContextMenu";
 import BrowserApp from "./browser/App";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -29,7 +30,13 @@ ons.ready(function () {
     ons.platform.select(config.base.platform);
     var mountNode = document.getElementById("app");
     if (isWindows || isElectron || isSmartTV || isTablet || isIE || isDesktop) {
-      ReactDOM.render(<BrowserApp />, mountNode);
+      ReactDOM.render(
+        <>
+          <BrowserApp />
+          <ContextMenu />
+        </>,
+        mountNode
+      );
     } else {
       ReactDOM.render(<App />, mountNode);
     }
