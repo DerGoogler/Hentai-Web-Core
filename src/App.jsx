@@ -1,7 +1,6 @@
 import AnimeTab from "./makers/AnimeTab";
 import SFW from "./pages/SFW";
 import NSFW from "./pages/NSFW";
-import Settings from "./pages/Settings";
 import ons from "onsenui";
 import React from "react";
 import {
@@ -47,10 +46,6 @@ class App extends React.Component {
         content: <AnimeTab content={<NSFW />} />,
         tab: <Tab label="NSFW" />,
       },
-      {
-        content: <AnimeTab content={<Settings />} />,
-        tab: <Tab label="Settings" />,
-      },
     ];
   }
 
@@ -88,8 +83,6 @@ class App extends React.Component {
   render() {
     if (isIE)
       return <div> IE is not supported. Download Chrome/Opera/Firefox </div>;
-    if (isIOS || isMobileSafari || isSafari)
-      return <div> iOS/iPhone/Safari are not allowed to view this </div>;
     return (
       <Page renderToolbar={this.renderToolbar} renderFixed={this.renderFixed}>
         <Tabbar
