@@ -2,6 +2,7 @@
 .cache/
 coverage/
 dist/*
+.vscode/*
 !dist/index.html
 node_modules/
 *.log
