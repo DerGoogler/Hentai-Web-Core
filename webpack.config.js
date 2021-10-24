@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 
 const config = {
-  entry: ["react-hot-loader/patch", "./src/index.jsx"],
+  entry: ["react-hot-loader/patch", "./src/index.tsx"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -12,6 +12,11 @@ const config = {
       {
         test: /\.(js|jsx)$/,
         use: "babel-loader",
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.ts(x)?$/,
+        loader: "ts-loader",
         exclude: /node_modules/,
       },
       {
@@ -35,7 +40,7 @@ const config = {
       "node_modules",
       path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules"),
     ],
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
       "react-dom": "@hot-loader/react-dom",
     },

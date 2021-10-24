@@ -1,6 +1,6 @@
 {
   "name": "hentai-web",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "",
   "main": "index.jsx",
   "keywords": [],
@@ -14,6 +14,8 @@
     "start": "webpack-dev-server"
   },
   "dependencies": {
+    "@types/react": "^17.0.32",
+    "@types/react-onsenui": "^2.9.16",
     "autoprefixer": "^10.2.5",
     "core-js": "^3.18.1",
     "hmtai": "^2.0.9",
@@ -42,6 +44,8 @@
     "postcss-loader": "^5.3.0",
     "sass-loader": "^11.1.1",
     "style-loader": "^2.0.0",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.4.4",
     "url-loader": "^4.1.1",
     "webpack": "^5.10.0",
     "webpack-cli": "^4.2.0",
