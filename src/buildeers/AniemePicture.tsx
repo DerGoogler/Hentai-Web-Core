@@ -2,9 +2,9 @@
 import * as React from "react";
 import { Card } from "react-onsenui";
 import { hot } from "react-hot-loader/root";
-import All from "../inferface";
+import { AnimePictureInterface } from "../d/inferface";
 
-class AnimePicture extends React.Component<All> {
+class AnimePicture extends React.Component<AnimePictureInterface> {
   render() {
     const { note, source } = this.props;
     return (

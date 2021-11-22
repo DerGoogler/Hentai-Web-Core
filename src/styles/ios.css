@@ -1,0 +1,40 @@
+/*
+* This is the style file for the iOS design.
+*/
+
+:root {
+  --main-background: lightslategray;
+  --white: white;
+}
+
+/* Toolbar */
+
+.toolbat__title {
+  color: var(--white);
+}
+
+.toolbar--top {
+  background-color: var(--main-background);
+}
+
+.toolbar {
+  background-color: var(--main-background);
+}
+
+/* (I'm not sure to add this)
+.toolbar__button {
+  color: var(--white);
+}
+*/
+
+:checked + .tabber__button {
+  color: var(--white);
+}
+
+/* Fab button */
+
+ons-fab.fab,
+ons-speed-dial-item,
+button.fab {
+  background-color: var(--main-background);
+}

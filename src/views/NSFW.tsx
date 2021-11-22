@@ -1,4 +1,4 @@
-import AnimePicture from "../makers/AniemePicture";
+import AnimePicture from "../buildeers/AniemePicture";
 import hmtai from "hmtai";
 import * as React from "react";
 import { hot } from "react-hot-loader/root";

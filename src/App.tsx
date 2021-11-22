@@ -1,11 +1,11 @@
-import AnimeTab from "./makers/AnimeTab";
-import SFW from "./pages/SFW";
-import NSFW from "./pages/NSFW";
+import AnimeTab from "./buildeers/AnimeTab";
+import SFW from "./views/SFW";
+import NSFW from "./views/NSFW";
 import * as ons from "onsenui";
 import * as React from "react";
 import { isIE } from "react-device-detect";
 import { hot } from "react-hot-loader/root";
-import config from "./config";
+import config from "./misc/config";
 import {
   Page,
   Toolbar,
@@ -17,7 +17,7 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
-import string from "./strings";
+import string from "./misc/strings";
 
 class App extends React.Component {
   renderToolbar() {

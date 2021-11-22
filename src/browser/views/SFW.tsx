@@ -1,7 +1,7 @@
 import * as React from "react";
 import { NavPageContainer } from "react-windows-ui";
 import { hot } from "react-hot-loader/root";
-import AnimePicture from "../maker/AniemePicture";
+import AnimePicture from "../builders/AnimePicture";
 import { Col, Row } from "react-onsenui";
 import hmtai from "hmtai";
 

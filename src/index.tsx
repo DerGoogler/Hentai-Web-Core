@@ -16,7 +16,9 @@ import "onsenui/css/onsen-css-components.css";
 import "react-windows-ui/config/app-config.css";
 import "react-windows-ui/dist/react-windows-ui.min.css";
 import "react-windows-ui/icons/fonts/fonts.min.css";
-import "./styles/styles.css";
+import "./styles/default.css";
+// import "./styles/android.css";
+// import "./styles/ios.css";
 
 ons.ready(function () {
   var mountNode = document.getElementById("app");

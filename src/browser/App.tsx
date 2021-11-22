@@ -2,12 +2,12 @@ import * as React from "react";
 import { NavBar, NavBarLink, SystemThemeFollower } from "react-windows-ui";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { hot } from "react-hot-loader/root";
-import SFW from "./pages/SFW";
-import NSFW from "./pages/NSFW";
-import config from "../config";
+import SFW from "./views/SFW";
+import NSFW from "./views/NSFW";
+import config from "../misc/config";
 
 class BrowserApp extends React.Component {
-  render() {
+  public render() {
     return (
       <>
         <Router basename="hentai-web">

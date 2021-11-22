@@ -1,0 +1,15 @@
+/*
+* This is the default style file from across the app
+*/
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --white: white;
+}
+
+body {
+  overflow: overlay;
+}

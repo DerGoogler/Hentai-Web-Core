@@ -2,10 +2,10 @@
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { ImageView } from "react-windows-ui";
-import All from "../../inferface";
+import { AnimePictureInterface } from "../../d/inferface";
 
-class AnimePicture extends React.Component<All> {
-  render() {
+class AnimePicture extends React.Component<AnimePictureInterface> {
+  public render() {
     const { note, source } = this.props;
     return (
       <div style={{ margin: "8px" }}>
