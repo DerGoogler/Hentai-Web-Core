@@ -2,11 +2,12 @@ import AnimePicture from "../buildeers/AniemePicture";
 import hmtai from "hmtai";
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
+import { List } from "react-onsenui";
 
 class NSFW extends React.Component {
   render() {
     return (
-      <>
+      <List>
         <AnimePicture source={hmtai.nsfw.ass()} note="ass" />
         <AnimePicture source={hmtai.nsfw.bdsm()} note="bdsm" />
         <AnimePicture source={hmtai.nsfw.cum()} note="cum" />
@@ -42,7 +43,7 @@ class NSFW extends React.Component {
           source={hmtai.nsfw.zettaiRyouiki()}
           note="zettaiRyouiki"
         />
-      </>
+      </List>
     );
   }
 }

@@ -8,8 +8,8 @@ class AnimeTab extends React.Component<AnimeTabInterface> {
   public render() {
     return (
       <Page>
-        <section style={{ marginTop: "8px", marginBottom: "8px" }}>
-          <p>{this.props.content}</p>
+        <section>
+          <span>{this.props.content}</span>
         </section>
       </Page>
     );
