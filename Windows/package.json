@@ -2,9 +2,14 @@
   "name": "hentai-web-windows",
   "version": "1.0.0",
   "license": "MIT",
+  "author": "Der_Googler",
   "build": {
     "appId": "com.dergoogler.hentaiweb.windows",
-    "productName": "Hentai Web Windows"
+    "productName": "Hentai Web Windows",
+    "copyright": "Copyright © 2021 ${author}",
+    "win": {
+      "icon": "./src/img/icon.png"
+    }
   },
   "scripts": {
     "dev": "electron-webpack dev",

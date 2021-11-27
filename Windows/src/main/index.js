@@ -10,10 +10,18 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 let mainWindow;
 
 function createMainWindow() {
+  var iconPath;
   const window = new BrowserWindow({
+    icon: iconPath,
     frame: false,
     webPreferences: { nodeIntegration: true },
   });
+
+  if (isDevelopment && !process.env.IS_TEST) {
+    iconPath = require("path").join("img/icon.png");
+  } else {
+    iconPath = require("path").join(process.resourcesPath, "img", "icon.png");
+  }
 
   if (isDevelopment) {
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`);
@@ -43,9 +51,21 @@ function createMainWindow() {
       label: "GitHub",
       submenu: [
         {
-          label: "Source",
+          label: "Source Website",
           click: function () {
-            shell.openExternal("https://github.com/Hentai-Web/Windows")
+            shell.openExternal("https://github.com/Hentai-Web/Website");
+          },
+        },
+        {
+          label: "Source Windows",
+          click: function () {
+            shell.openExternal("https://github.com/Hentai-Web/Windows");
+          },
+        },
+        {
+          label: "Source Android",
+          click: function () {
+            shell.openExternal("https://github.com/Hentai-Web/Android");
           },
         },
       ],
