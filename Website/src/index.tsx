@@ -21,7 +21,7 @@ import "./styles/default.css";
 // import "./styles/ios.css";
 
 ons.ready(function () {
-  var mountNode = document.getElementById("app");
+  var mountNode = document.body;
   if (isWindows || isElectron || isSmartTV || isTablet || isIE || isDesktop) {
     ReactDOM.render(
       <>

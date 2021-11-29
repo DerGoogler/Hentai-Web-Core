@@ -1,6 +1,6 @@
 {
   "name": "hentai-web-windows",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "license": "MIT",
   "author": "Der_Googler",
   "build": {
@@ -8,7 +8,7 @@
     "productName": "Hentai Web Windows",
     "copyright": "Copyright © 2021 ${author}",
     "win": {
-      "icon": "./src/img/icon.png"
+      "icon": "./src/main/icon.png"
     }
   },
   "scripts": {
@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "custom-electron-titlebar": "^3.2.7",
+    "electron-context-menu": "^3.1.1",
     "source-map-support": "^0.5.16"
   },
   "devDependencies": {

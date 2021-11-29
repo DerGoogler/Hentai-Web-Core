@@ -1,8 +1,7 @@
-"use strict";
-
 import { app, BrowserWindow, Menu, MenuItem, shell } from "electron";
 import * as path from "path";
 import { format as formatUrl } from "url";
+const contextMenu = require("electron-context-menu");
 
 const isDevelopment = process.env.NODE_ENV !== "production";
 
@@ -10,18 +9,15 @@ const isDevelopment = process.env.NODE_ENV !== "production";
 let mainWindow;
 
 function createMainWindow() {
-  var iconPath;
   const window = new BrowserWindow({
-    icon: iconPath,
+    icon: path.join(__dirname, "icon.png"),
     frame: false,
-    webPreferences: { nodeIntegration: true },
+    titleBarStyle: "hidden",
+    webPreferences: {
+      nodeIntegration: true,
+      devTools: true,
+    },
   });
-
-  if (isDevelopment && !process.env.IS_TEST) {
-    iconPath = require("path").join("img/icon.png");
-  } else {
-    iconPath = require("path").join(process.resourcesPath, "img", "icon.png");
-  }
 
   if (isDevelopment) {
     window.loadURL(`http://localhost:${process.env.ELECTRON_WEBPACK_WDS_PORT}`);
@@ -34,6 +30,28 @@ function createMainWindow() {
       })
     );
   }
+
+  contextMenu({
+    prepend: (defaultActions, parameters, browserWindow) => [
+      {
+        label: "Rainbow",
+        // Only show it when right-clicking images
+        visible: parameters.mediaType === "image",
+      },
+      {
+        label: "Search Google for “{selection}”",
+        // Only show it when right-clicking text
+        visible: parameters.selectionText.trim().length > 0,
+        click: () => {
+          shell.openExternal(
+            `https://google.com/search?q=${encodeURIComponent(
+              parameters.selectionText
+            )}`
+          );
+        },
+      },
+    ],
+  });
 
   window.on("closed", () => {
     mainWindow = null;

@@ -1,5 +1,6 @@
 package com.dergoogler.hentai;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.view.KeyEvent;
@@ -26,14 +28,16 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     WebView webView;
-    String urlCore = "https://www.dergoogler.com/hentai-web";
+    String urlCore = "file:///android_asset/www/index.html";
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         getWindow().setStatusBarColor(0xFFFFFFFF);
 
         Objects.requireNonNull(getSupportActionBar()).hide();

@@ -1,3 +1,7 @@
+# 1.3.2
+
+- remove comments
+
 # 1.3.1
 
 - improve file and folder system
