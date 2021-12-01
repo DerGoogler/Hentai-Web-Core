@@ -1,4 +1,4 @@
-import AnimeTab from "./buildeers/AnimeTab";
+import AnimeTab from "./builders/AnimeTab";
 import SFW from "./views/SFW";
 import NSFW from "./views/NSFW";
 import * as ons from "onsenui";

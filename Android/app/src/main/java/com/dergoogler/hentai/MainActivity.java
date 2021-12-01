@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getWindow().setStatusBarColor(0xFFFFFFFF);
+        getWindow().setStatusBarColor(0xFF4A148C);
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 

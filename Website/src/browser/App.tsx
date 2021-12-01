@@ -10,12 +10,12 @@ class BrowserApp extends React.Component {
   public render() {
     return (
       <>
-        <Router basename="hentai-web">
+        <Router basename={window.location.pathname}>
           <SystemThemeFollower />
 
           <NavBar
             title={config.base.title}
-            //titleShort="R" render text or icons
+            titleShort="H"
             //mobileHasIcons={true}
             shadowOnScroll={true}
           >
@@ -37,8 +37,12 @@ class BrowserApp extends React.Component {
           </NavBar>
 
           <Switch>
-            <Route path="/" component={SFW} exact />
-            <Route path="/nsfw" component={NSFW} />
+            <Route path="/" exact>
+              <SFW />
+            </Route>
+            <Route path="/nsfw">
+              <NSFW />
+            </Route>
           </Switch>
         </Router>
       </>
