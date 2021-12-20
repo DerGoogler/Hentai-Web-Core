@@ -1,5 +1,5 @@
 export interface AnimeTabInterface {
-  content: any
+  content: any;
 }
 
 export interface AnimePictureInterface {

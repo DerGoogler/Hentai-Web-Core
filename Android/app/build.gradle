@@ -8,7 +8,7 @@ android {
         targetCompatibility 1.8
     }
     defaultConfig {
-        applicationId 'com.dergoogler.hytts'
+        applicationId 'com.dergoogler.hentai'
         minSdkVersion 21
         targetSdkVersion 31
         versionCode 120

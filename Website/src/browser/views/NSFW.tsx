@@ -43,10 +43,7 @@ class NSFW extends React.Component {
               <AnimePicture source={hmtai.nsfw.incest()} note="incest" />
             </Col>
             <Col>
-              <AnimePicture
-                source={hmtai.nsfw.masturbation()}
-                note="masturbation"
-              />
+              <AnimePicture source={hmtai.nsfw.masturbation()} note="masturbation" />
             </Col>
           </Row>
 
@@ -124,16 +121,10 @@ class NSFW extends React.Component {
 
           <Row>
             <Col>
-              <AnimePicture
-                source={hmtai.nsfw.nsfwMobileWallpaper()}
-                note="nsfwMobileWallpaper"
-              />
+              <AnimePicture source={hmtai.nsfw.nsfwMobileWallpaper()} note="nsfwMobileWallpaper" />
             </Col>
             <Col>
-              <AnimePicture
-                source={hmtai.nsfw.zettaiRyouiki()}
-                note="zettaiRyouiki"
-              />
+              <AnimePicture source={hmtai.nsfw.zettaiRyouiki()} note="zettaiRyouiki" />
             </Col>
           </Row>
         </div>

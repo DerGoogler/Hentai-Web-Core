@@ -6,6 +6,7 @@ import * as React from "react";
 import { isIE } from "react-device-detect";
 import { hot } from "react-hot-loader/root";
 import config from "./misc/config";
+import { Provider, Translate, Translator } from "react-translated";
 import {
   Page,
   Toolbar,
@@ -17,10 +18,11 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
-import string from "./misc/strings";
 
 class App extends React.Component {
-  renderToolbar() {
+  private element!: HTMLElement | null;
+
+  private renderToolbar() {
     return (
       <Toolbar>
         <div className="center">{config.base.title}</div>
@@ -37,7 +39,7 @@ class App extends React.Component {
     );
   }
 
-  renderTabs() {
+  private renderTabs() {
     return [
       {
         content: <AnimeTab content={<SFW />} />,
@@ -50,39 +52,60 @@ class App extends React.Component {
     ];
   }
 
-  renderFixed() {
+  private renderFixed() {
     return (
-      <SpeedDial position="bottom right">
-        <Fab>
-          <Icon icon="md-more" />
-        </Fab>
-        <SpeedDialItem
-          onClick={() => {
-            ons.notification.confirm({
-              message: string.dialog_message,
-              title: string.dialog_title,
-              buttonLabels: [string.ok],
-              animation: "default",
-              primaryButtonIndex: 0,
-              cancelable: false,
-            });
-          }}
-        >
-          <Icon icon="md-info" />
-        </SpeedDialItem>
-        <SpeedDialItem
-          onClick={() => {
-            window.open(string.repo_link);
-          }}
-        >
-          <Icon icon="md-github" />
-        </SpeedDialItem>
-      </SpeedDial>
+      <Translator>
+        {({ translate }: any) => (
+          <SpeedDial position="bottom right">
+            <Fab>
+              <Icon icon="md-more" />
+            </Fab>
+            <SpeedDialItem
+              onClick={() => {
+                ons.notification.confirm({
+                  message: translate({
+                    text: "dialog-message",
+                  }),
+                  title: translate({
+                    text: "dialog-title",
+                  }),
+                  buttonLabels: [
+                    translate({
+                      text: "ok",
+                    }),
+                  ],
+                  animation: "default",
+                  primaryButtonIndex: 0,
+                  cancelable: false,
+                });
+              }}
+            >
+              <Icon icon="md-info" />
+            </SpeedDialItem>
+            <SpeedDialItem
+              onClick={() => {
+                window.open(
+                  translate({
+                    text: "repo-link",
+                  })
+                );
+              }}
+            >
+              <Icon icon="md-github" />
+            </SpeedDialItem>
+          </SpeedDial>
+        )}
+      </Translator>
     );
   }
 
-  render() {
-    if (isIE) return <div> {string.ie_text} </div>;
+  public render() {
+    if (isIE)
+      return (
+        <div>
+          <Translate text="ie-text" />
+        </div>
+      );
     return (
       <Page renderToolbar={this.renderToolbar} renderFixed={this.renderFixed}>
         <Tabbar

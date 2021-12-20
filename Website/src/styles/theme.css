@@ -1,13 +1,12 @@
 /* Custom Theme for Onsen UI 2.11.2 */
 
-
 :root {
   /* variables for iOS components */
-  --background-color: rgba(255,255,255,1);
+  --background-color: rgba(255, 255, 255, 1);
   --text-color: #1f1f21;
   --sub-text-color: #999;
-  --highlight-color: #4A148C;
-  --second-highlight-color: #7C43BD;
+  --highlight-color: #4a148c;
+  --second-highlight-color: #7c43bd;
   --border-color: #ccc;
   --button-background-color: var(--highlight-color);
   --button-cta-background-color: var(--second-highlight-color);
@@ -74,27 +73,27 @@
   --select-input-border-color: var(--border-color);
 
   /* variables for Material Design components */
-  --material-background-color: rgba(255,255,255,1);
+  --material-background-color: rgba(255, 255, 255, 1);
   --material-text-color: var(--text-color);
-  --material-notification-background-color: #4A148C;
+  --material-notification-background-color: #4a148c;
   --material-notification-color: white;
-  --material-switch-active-thumb-color: #4A148C;
-  --material-switch-active-background-color: #7C43BD;
+  --material-switch-active-thumb-color: #4a148c;
+  --material-switch-active-background-color: #7c43bd;
   --material-switch-inactive-thumb-color: #f1f1f1;
   --material-switch-inactive-background-color: #b0afaf;
   --material-range-track-color: #bdbdbd;
-  --material-range-thumb-color: #4A148C;
+  --material-range-thumb-color: #4a148c;
   --material-range-disabled-thumb-color: #b0b0b0;
   --material-range-disabled-thumb-border-color: #eeeeee;
   --material-range-zero-thumb-color: #f2f2f2;
-  --material-toolbar-background-color: #4A148C;
-  --material-toolbar-text-color: rgba(255,255,255,1);
-  --material-toolbar-button-color: rgba(255,255,255,1);
+  --material-toolbar-background-color: #4a148c;
+  --material-toolbar-text-color: rgba(255, 255, 255, 1);
+  --material-toolbar-button-color: rgba(255, 255, 255, 1);
   --material-segment-background-color: #fafafa;
   --material-segment-active-background-color: #c8c8c8;
   --material-segment-text-color: color-mod(black a(38%));
   --material-segment-active-text-color: #353535;
-  --material-button-background-color: #4A148C;
+  --material-button-background-color: #4a148c;
   --material-button-text-color: #ffffff;
   --material-button-disabled-background-color: color-mod(#4f4f4f a(26%));
   --material-button-disabled-color: color-mod(black a(26%));
@@ -102,10 +101,10 @@
   --material-list-background-color: #fff;
   --material-list-item-separator-color: #eee;
   --material-list-header-text-color: #757575;
-  --material-checkbox-active-color: #4A148C;
+  --material-checkbox-active-color: #4a148c;
   --material-checkbox-inactive-color: #717171;
   --material-checkbox-checkmark-color: #ffffff;
-  --material-radio-button-active-color: #4A148C;
+  --material-radio-button-active-color: #4a148c;
   --material-radio-button-inactive-color: #717171;
   --material-radio-button-disabled-color: #afafaf;
   --material-text-input-text-color: #212121;
@@ -117,25 +116,25 @@
   --material-alert-dialog-background-color: #ffffff;
   --material-alert-dialog-title-color: #31313a;
   --material-alert-dialog-content-color: rgba(49, 49, 58, 0.85);
-  --material-alert-dialog-button-color: #4A148C;
-  --material-progress-bar-primary-color: #4A148C;
-  --material-progress-bar-secondary-color: #12005E;
+  --material-alert-dialog-button-color: #4a148c;
+  --material-progress-bar-primary-color: #4a148c;
+  --material-progress-bar-secondary-color: #12005e;
   --material-progress-bar-background-color: transparent;
-  --material-progress-circle-primary-color: #4A148C;
-  --material-progress-circle-secondary-color: #12005E;
+  --material-progress-circle-primary-color: #4a148c;
+  --material-progress-circle-secondary-color: #12005e;
   --material-progress-circle-background-color: transparent;
-  --material-tabbar-background-color: #4A148C;
-  --material-tabbar-text-color: rgba(255,255,255,1);
-  --material-tabbar-highlight-text-color: rgba(255,255,255,1);
+  --material-tabbar-background-color: #4a148c;
+  --material-tabbar-text-color: rgba(255, 255, 255, 1);
+  --material-tabbar-highlight-text-color: rgba(255, 255, 255, 1);
   --material-tabbar-highlight-color: rgba(49, 49, 58, 0.1);
-  --material-fab-text-color: rgba(255,255,255,1);
-  --material-fab-background-color: #4A148C;
+  --material-fab-text-color: rgba(255, 255, 255, 1);
+  --material-fab-background-color: #4a148c;
   --material-fab-active-background-color: rgba(255, 255, 255, 0.75);
   --material-card-background-color: white;
   --material-card-text-color: rgba(0, 0, 0, 0.54);
   --material-toast-background-color: rgba(0, 0, 0, 0.8);
   --material-toast-text-color: white;
-  --material-toast-button-text-color: #4A148C;
+  --material-toast-button-text-color: #4a148c;
   --material-select-input-color: var(--material-text-color);
   --material-select-input-active-color: rgba(0, 0, 0, 0.15);
   --material-select-input-inactive-color: rgba(0, 0, 0, 0.81);

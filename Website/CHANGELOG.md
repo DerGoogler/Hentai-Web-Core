@@ -1,3 +1,14 @@
+# 1.3.3
+
+**Hentai Web on desktop will have the iOS Design** 
+
+- fies has been formated
+- desktop view has been removed
+- android app will get no updates at the moment.(Have no time at the moment...)
+    - PWA support (alternative to andoid app, can also used on ios)
+    - added service worker
+- 
+
 # 1.3.2
 
 - remove comments

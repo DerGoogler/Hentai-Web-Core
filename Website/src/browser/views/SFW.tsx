@@ -16,10 +16,7 @@ class SFW extends React.Component {
               <AnimePicture source={hmtai.wallpaper()} note="wallpaper" />
             </Col>
             <Col>
-              <AnimePicture
-                source={hmtai.mobileWallpaper()}
-                note="mobileWallpaper"
-              />
+              <AnimePicture source={hmtai.mobileWallpaper()} note="mobileWallpaper" />
             </Col>
             <Col>
               <AnimePicture source={hmtai.neko()} note="neko" />
