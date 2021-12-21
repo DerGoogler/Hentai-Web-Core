@@ -7,6 +7,7 @@ import { isIE } from "react-device-detect";
 import { hot } from "react-hot-loader/root";
 import config from "./misc/config";
 import { Provider, Translate, Translator } from "react-translated";
+import pkg from "./../package.json";
 import {
   Page,
   Toolbar,
@@ -21,6 +22,16 @@ import {
 
 class App extends React.Component {
   private element!: HTMLElement | null;
+
+  public componentDidMount() {
+    // To remvoe the button if is in app opened
+    if (window.navigator.userAgent === config.options.userAgent) {
+      if ((this.element = document.getElementById("download-app"))) {
+        this.element.style.display = "none";
+        this.element.setAttribute("title", `Download the last ${pkg.version} Hentai Web version!`);
+      }
+    }
+  }
 
   private renderToolbar() {
     return (
@@ -93,6 +104,18 @@ class App extends React.Component {
             >
               <Icon icon="md-github" />
             </SpeedDialItem>
+            <SpeedDialItem
+              id="download-app"
+              onClick={() => {
+                window.open(
+                  // If the relase code/name is not the package version, it'll not finded
+                  `https://github.com/DerGoogler/Hentai-Web/releases/download/${pkg.version}/app-release.apk`
+                );
+              }}
+            >
+              <Icon icon="md-download" />
+            </SpeedDialItem>
+            ;
           </SpeedDial>
         )}
       </Translator>

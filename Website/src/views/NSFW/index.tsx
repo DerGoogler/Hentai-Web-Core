@@ -1,4 +1,4 @@
-import AnimePicture from "../../builders/AniemePicture";
+import AnimePicture from "../../builders/AnimePicture";
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { List } from "react-onsenui";

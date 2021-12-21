@@ -2,10 +2,11 @@
 import * as React from "react";
 import { Card, Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
-import { AnimePictureInterface } from "../d/inferface";
+import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
+import ContextMenu from "./ContextMenu";
 
 class AnimePicture extends React.Component<AnimePictureInterface> {
   private element!: HTMLElement | null;
@@ -74,13 +75,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                       />
 
                       <Dropdown.Menu>
-                        <Dropdown.Item
-                          onClick={() => {
-                            window.open(source, "_blank");
-                          }}
-                        >
-                          <Translate text="view-image" />
-                        </Dropdown.Item>
+                        <ContextMenu />
                       </Dropdown.Menu>
                     </Dropdown>
                   </p>

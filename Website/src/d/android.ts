@@ -1,3 +1,5 @@
+import config from "../misc/config";
+
 declare global {
   /**
    * A window containing a DOM document; the document property points to the DOM document loaded in that window.
@@ -40,10 +42,10 @@ export default class android {
    * @returns {String}
    */
   static getBuildMANUFACTURER(): string {
-    if (window.navigator.userAgent === "HENTAI_WEB_AGENT") {
+    if (window.navigator.userAgent === config.options.userAgent) {
       return window.Android.BuildMANUFACTURER().toUpperCase();
     } else {
-      return window.navigator.appCodeName;
+      return window.navigator.appCodeName.toUpperCase();
     }
   }
 
@@ -52,10 +54,10 @@ export default class android {
    * @returns {String}
    */
   static getBuildMODEL(): string {
-    if (window.navigator.userAgent === "HENTAI_WEB_AGENT") {
+    if (window.navigator.userAgent === config.options.userAgent) {
       return window.Android.BuildMODEL().toUpperCase();
     } else {
-      return window.navigator.platform;
+      return window.navigator.platform.toUpperCase();
     }
   }
 
@@ -64,7 +66,7 @@ export default class android {
    * @returns
    */
   static reload(): void {
-    if (window.navigator.userAgent === "HENTAI_WEB_AGENT") {
+    if (window.navigator.userAgent === config.options.userAgent) {
       return window.Android.reload();
     } else {
       return window.location.reload();

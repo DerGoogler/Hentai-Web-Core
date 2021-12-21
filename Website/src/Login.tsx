@@ -36,11 +36,11 @@ class Login extends React.Component<{}, { username: string; password: string }> 
   };
 
   private handleUsernameChange = (e: any) => {
-    this.setState({ username: e.target.value });
+    this.setState({ username: e.target.value.toUpperCase() });
   };
 
   private handlePasswordChange = (e: any) => {
-    this.setState({ password: e.target.value });
+    this.setState({ password: e.target.value.toUpperCase() });
   };
 
   private placeholderIF(IFdata: any, return_: any, else_: any) {

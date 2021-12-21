@@ -4,7 +4,7 @@ const config = {
     swipeable: true,
   },
   options: {
-    page: {},
+    userAgent: "HENTAI_WEB_AGENT",
   },
 };
 

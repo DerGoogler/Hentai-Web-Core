@@ -51,4 +51,9 @@ export default {
     en: "https://dergoogler.com/?/guide/hentai-web/en/how-to-login/",
     de: "https://dergoogler.com/?/guide/hentai-web/de/how-to-login/",
   },
+  
+  "copy-link": {
+    en: "Copy link",
+    de: "Link kopieren",
+  },
 };
