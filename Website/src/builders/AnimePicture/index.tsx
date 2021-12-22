@@ -6,10 +6,17 @@ import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
 import android from "../../misc/android";
 import ContextMenu from "./ContextMenu";
+import settingsEffect from "../../views/Settings/settingsEffect";
 
 class AnimePicture extends React.Component<AnimePictureInterface> {
   private element!: HTMLElement | null;
   private buttonDesign: string = "lila";
+
+  public componentDidMount() {
+    settingsEffect("displayDownload", "." + this.getID, (element: any) => {
+      element.style.display = "block";
+    });
+  }
 
   private id() {
     const { note } = this.props;
@@ -45,7 +52,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
       <>
         <Translator>
           {({ translate }: any) => (
-            <Card key={this.getID} className={this.getID} style={{ padding: "0px" }}>
+            <Card key={this.getID} style={{ padding: "0px" }}>
               <Card.Header>
                 <h4>{note.charAt(0).toUpperCase() + note.slice(1)}</h4>
               </Card.Header>
@@ -62,8 +69,11 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                         window.open(source, "_blank");
                       }}
                     />{" "}
-                    <p> </p>
-                    <Dropdown as={ButtonGroup}>
+                    <Dropdown
+                      className={this.getID}
+                      style={{ marginTop: "16px", display: "none" }}
+                      as={ButtonGroup}
+                    >
                       <Button
                         id="download-button"
                         variant={this.buttonDesign}

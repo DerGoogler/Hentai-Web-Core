@@ -19,6 +19,9 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
+import Settings from "./views/Settings";
+import settingsEffect from "./views/Settings/settingsEffect";
+import android from "./misc/android";
 
 class App extends React.Component {
   private element!: HTMLElement | null;
@@ -31,6 +34,9 @@ class App extends React.Component {
         this.element.setAttribute("title", `Download the last ${pkg.version} Hentai Web version!`);
       }
     }
+    settingsEffect("hideFAB", "#fab-element", (element: any) => {
+      element.style.display = "none";
+    });
   }
 
   private renderToolbar() {
@@ -40,7 +46,7 @@ class App extends React.Component {
         <div className="right">
           <ToolbarButton
             onClick={() => {
-              location.reload();
+              android.reload();
             }}
           >
             <Icon icon="md-refresh"></Icon>
@@ -60,6 +66,10 @@ class App extends React.Component {
         content: <AnimeTab content={<NSFW />} />,
         tab: <Tab label="NSFW" />,
       },
+      {
+        content: <AnimeTab content={<Settings />} />,
+        tab: <Tab label="Settings" />,
+      },
     ];
   }
 
@@ -67,7 +77,7 @@ class App extends React.Component {
     return (
       <Translator>
         {({ translate }: any) => (
-          <SpeedDial position="bottom right">
+          <SpeedDial id="fab-element" position="bottom right">
             <Fab>
               <Icon icon="md-more" />
             </Fab>

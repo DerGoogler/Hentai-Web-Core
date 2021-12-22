@@ -23,8 +23,6 @@ import Login from "./Login";
 import { Provider } from "react-translated";
 import translation from "./misc/strings";
 
-if (window.location.search === "") window.location.search = "lang=en";
-
 class boot {
   private element!: HTMLElement | null;
   private mountNode: any = document.querySelector("app");
@@ -45,20 +43,29 @@ class boot {
     return match ? match[1] : "";
   }
 
+  private checkLanguage() {
+    var get = localStorage.getItem("language");
+    if (get === undefined || get === null || get === "") {
+      return "en";
+    } else {
+      return get;
+    }
+  }
+
   public init() {
     ons.ready(() => {
       if (isDesktop) ons.platform.select("ios");
       ons.platform.select("android");
       if (localStorage.getItem("loggedIn") === "true") {
         ReactDOM.render(
-          <Provider language={this.getUrlParam("lang")} translation={translation}>
+          <Provider language={this.checkLanguage()} translation={translation}>
             <App />
           </Provider>,
           this.mountNode
         );
       } else {
         ReactDOM.render(
-          <Provider language={this.getUrlParam("lang")} translation={translation}>
+          <Provider language={this.checkLanguage()} translation={translation}>
             <Login />
           </Provider>,
           this.mountNode

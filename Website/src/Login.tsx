@@ -1,5 +1,6 @@
 import ons from "onsenui";
 import React from "react";
+import { Card } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { Toolbar, Page, Input, Button } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
@@ -65,47 +66,49 @@ class Login extends React.Component<{}, { username: string; password: string }> 
                 alignItems: "center",
               }}
             >
-              <p>
-                <Input
-                  value={this.state.username}
-                  onChange={this.handleUsernameChange}
-                  modifier="underbar"
-                  float
-                  placeholder={this.placeholderIF(
-                    window.navigator.userAgent === "HENTAI_WEB_AGENT",
-                    "MANUFACTURER",
-                    "appCodeName"
-                  )}
-                />
-              </p>
-              <p>
-                <Input
-                  value={this.state.password}
-                  onChange={this.handlePasswordChange}
-                  modifier="underbar"
-                  float
-                  placeholder={this.placeholderIF(
-                    window.navigator.userAgent === "HENTAI_WEB_AGENT",
-                    "MODEL",
-                    "platform"
-                  )}
-                />
-              </p>
-              <p>
-                <Button onClick={this.handleClick}>
-                  <Translate text="sign-in" />
-                </Button>
-              </p>
-              <p>
-                <a
-                  style={{ textDecoration: "none" }}
-                  href={translate({
-                    text: "how-to-login-link",
-                  })}
-                >
-                  <Translate text="how-to-login" />
-                </a>
-              </p>
+              <div>
+                <p>
+                  <Input
+                    value={this.state.username}
+                    onChange={this.handleUsernameChange}
+                    modifier="underbar"
+                    float
+                    placeholder={this.placeholderIF(
+                      window.navigator.userAgent === "HENTAI_WEB_AGENT",
+                      "MANUFACTURER",
+                      "appCodeName"
+                    )}
+                  />
+                </p>
+                <p>
+                  <Input
+                    value={this.state.password}
+                    onChange={this.handlePasswordChange}
+                    modifier="underbar"
+                    float
+                    placeholder={this.placeholderIF(
+                      window.navigator.userAgent === "HENTAI_WEB_AGENT",
+                      "MODEL",
+                      "platform"
+                    )}
+                  />
+                </p>
+                <p>
+                  <Button onClick={this.handleClick}>
+                    <Translate text="sign-in" />
+                  </Button>
+                </p>
+                <p>
+                  <a
+                    style={{ textDecoration: "none" }}
+                    href={translate({
+                      text: "how-to-login-link",
+                    })}
+                  >
+                    <Translate text="how-to-login" />
+                  </a>
+                </p>
+              </div>
             </section>
           </Page>
         )}

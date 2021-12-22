@@ -4,7 +4,7 @@
 export default {
   "dialog-message": {
     en: "This web app contains +18 content",
-    de: "Die Seite beinhalten Bilder die nicht unter 18 sind!",
+    de: "Die Seite beinhaltet Bilder die nicht für unter 18 sind!",
   },
 
   "dialog-title": {
@@ -51,9 +51,30 @@ export default {
     en: "https://dergoogler.com/?/guide/hentai-web/en/how-to-login/",
     de: "https://dergoogler.com/?/guide/hentai-web/de/how-to-login/",
   },
-  
+
   "copy-link": {
     en: "Copy link",
     de: "Link kopieren",
+  },
+
+  // Settings strings
+  "displayDownload-string": {
+    en: "Display download button",
+    de: "Download Button anzeigen",
+  },
+
+  "hideFAB-string": {
+    en: "Hide FAB",
+    de: "Verstecke FAB",
+  },
+
+  appearance: {
+    en: "Appearance",
+    de: "Aussehen",
+  },
+
+  "language-string": {
+    en: "Language",
+    de: "Sprache",
   },
 };

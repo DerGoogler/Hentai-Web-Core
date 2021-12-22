@@ -94,7 +94,7 @@ export default class android {
     if (window.navigator.userAgent === config.options.userAgent) {
       window.Android.copyToClipboard(content);
     } else {
-      console.log("Browser are not supported to copy");
+      navigator.clipboard.writeText(content);
     }
   }
 
