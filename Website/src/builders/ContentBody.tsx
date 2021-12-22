@@ -1,28 +1,30 @@
 import * as React from "react";
-import { isDesktop } from "react-device-detect";
 import { hot } from "react-hot-loader/root";
+import config from "../misc/config";
 
 class ContentBody extends React.Component {
   private stlye: any = {
     boxSizing: "border-box",
+    display: "flex",
+    justifyContent: "center",
     minWidth: "200px",
-    maxWidth: "980px",
-    margin: "0 auto",
+    maxWidth: "580px",
+    margin: "0px auto",
     padding: "45px",
   };
 
-  private typeIf(IF: any, returnIFtrue: any, returnELSE: any) {
-    if (IF) {
-      return returnIFtrue;
+  private checkDevice(designWindows: any, designAndroid: any) {
+    if (window.navigator.userAgent !== config.options.userAgent) {
+      return designWindows;
     } else {
-      return returnELSE;
+      return designAndroid;
     }
   }
 
   public render() {
     return (
-      <div style={this.typeIf(isDesktop, { padding: "16px" }, { padding: "24px" })}>
-        <div style={this.typeIf(isDesktop, this.stlye, {})}>{this.props.children}</div>
+      <div style={this.checkDevice({ padding: "16px" }, {})}>
+        <div style={this.checkDevice(this.stlye, {})}>{this.props.children}</div>
       </div>
     );
   }

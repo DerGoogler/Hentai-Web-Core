@@ -115,7 +115,6 @@ class App extends React.Component {
             >
               <Icon icon="md-download" />
             </SpeedDialItem>
-            ;
           </SpeedDial>
         )}
       </Translator>
