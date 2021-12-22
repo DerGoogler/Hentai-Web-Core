@@ -1,17 +1,24 @@
 package com.dergoogler.hentai;
 
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.net.http.SslError;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -25,15 +32,19 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.io.File;
 import java.security.GeneralSecurityException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     WebView webView;
+    ProgressDialog progressDialog;
     String langSetting = "?lang=";
     String urlCore = "https://dergoogler.com/hentai-web/" + langSetting;
     String urlCore_ = "192.168.178.81:5500" + langSetting; // For debugging
-    String mainURL = urlCore; // Main url
+    String mainURL = urlCore_; // Main url
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetJavaScriptEnabled")
@@ -115,6 +126,20 @@ public class MainActivity extends AppCompatActivity {
                 ClipData clip = ClipData.newPlainText("copy", content);
                 clipboard.setPrimaryClip(clip);
             }
+
+            @JavascriptInterface
+            public void downloadImage(String filename, String downloadUrlOfImage) {
+                // Need to give permission to read an write external storage
+                if (Build.VERSION.SDK_INT >= 23) {
+                    if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
+                    } else {
+                        downloadImageNew(filename, downloadUrlOfImage);
+                    }
+                } else {
+                    downloadImageNew(filename, downloadUrlOfImage);
+                }
+            }
         }, "Android");
         webView.loadUrl(mainURL + getResources().getString(R.string.lang));
     }
@@ -129,6 +154,25 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
             return true;
+        }
+    }
+
+    // Download images form hentai web to the storage
+    private void downloadImageNew(String filename, String downloadUrlOfImage) {
+        try {
+            DownloadManager dm = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            Uri downloadUri = Uri.parse(downloadUrlOfImage);
+            DownloadManager.Request request = new DownloadManager.Request(downloadUri);
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
+                    .setAllowedOverRoaming(false)
+                    .setTitle(filename)
+                    .setMimeType("image/jpeg") // Your file type. You can use this code to download other file types also.
+                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, File.separator + filename + ".jpg");
+            dm.enqueue(request);
+            Toast.makeText(this, "Image download started.", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Image download failed." + e, Toast.LENGTH_SHORT).show();
         }
     }
 

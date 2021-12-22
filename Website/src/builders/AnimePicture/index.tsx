@@ -4,13 +4,21 @@ import { Card, Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
-import * as htmlToImage from "html-to-image";
-import { saveAs } from "file-saver";
+import android from "./../../d/android";
 import ContextMenu from "./ContextMenu";
+import config from "../../misc/config";
 
 class AnimePicture extends React.Component<AnimePictureInterface> {
   private element!: HTMLElement | null;
   private buttonDesign: string = "lila";
+
+  public componentDidMount() {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      if ((this.element = document.getElementById("download-buttom"))) {
+        this.element.setAttribute("disabled", "");
+      }
+    }
+  }
 
   private id() {
     const { note } = this.props;
@@ -19,15 +27,16 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
   }
 
   // To generate an id that refresh every page reload, to avoid duplicte ids
-  private getID = this.props.note + this.id();
+  private getID = this.props.note.replace(/ /g, "") + this.id();
 
-  private performDownload() {
-    if ((this.element = document.getElementById(this.getID))) {
-      htmlToImage.toBlob(this.element).then((blob) => {
-        saveAs(blob, Date.now() + ".png");
-      });
-    }
-  }
+  /**
+   * Performs an native android download
+   * **DON'T REMOVE THE ARROW FUNCTION**
+   */
+  private performDownload = () => {
+    const { note, source } = this.props;
+    android.downloadPicture(this.getID, source);
+  };
 
   private makeUUID(length: number) {
     var result = "";
@@ -57,14 +66,18 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                       id={this.getID}
                       src={source}
                       alt={note.charAt(0).toUpperCase() + note.slice(1)}
-                      style={{ width: "100%" }}
+                      style={{ width: "100%", borderRadius: ".25rem" }}
                       onDoubleClick={() => {
                         window.open(source, "_blank");
                       }}
                     />{" "}
                     <p> </p>
                     <Dropdown as={ButtonGroup}>
-                      <Button disabled variant={this.buttonDesign} onClick={this.performDownload}>
+                      <Button
+                        id="download-button"
+                        variant={this.buttonDesign}
+                        onClick={this.performDownload}
+                      >
                         <Translate text="download-text" />
                       </Button>
 
@@ -75,7 +88,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                       />
 
                       <Dropdown.Menu>
-                        <ContextMenu />
+                        <ContextMenu source={source} note={note} />
                       </Dropdown.Menu>
                     </Dropdown>
                   </p>

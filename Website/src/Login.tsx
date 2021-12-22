@@ -6,8 +6,6 @@ import { Provider, Translate, Translator } from "react-translated";
 import android from "./d/android";
 
 class Login extends React.Component<{}, { username: string; password: string }> {
-  private android = new android();
-
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };

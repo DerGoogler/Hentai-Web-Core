@@ -12,8 +12,6 @@ import {
   isChromium,
 } from "react-device-detect";
 import * as serviceWorker from "./misc/serviceWorker";
-import { Provider } from "react-translated";
-import translation from "./misc/strings";
 import "onsenui/css/onsenui.css";
 import "./styles/onsen-css-components.css";
 import "react-windows-ui/config/app-config.css";
@@ -22,6 +20,8 @@ import "react-windows-ui/icons/fonts/fonts.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/default.css";
 import Login from "./Login";
+import { Provider } from "react-translated";
+import translation from "./misc/strings";
 
 if (window.location.search === "") window.location.search = "lang=en";
 

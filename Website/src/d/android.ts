@@ -27,6 +27,16 @@ interface Android {
    * @Native
    */
   reload(): void;
+
+  /**
+   * @Native
+   */
+  copyToClipboard(content: string): void;
+
+  /**
+   * @Native
+   */
+  downloadImage(filename: string, downloadUrlOfImage: string): void;
 }
 
 export default class android {
@@ -70,6 +80,26 @@ export default class android {
       return window.Android.reload();
     } else {
       return window.location.reload();
+    }
+  }
+
+  /**
+   * Copy an string to clipboard on Android
+   * @param content
+   */
+  static copyClipborad(content: string): void {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      window.Android.copyToClipboard(content);
+    } else {
+      console.log("Browser are not supported to copy");
+    }
+  }
+
+  static downloadPicture(filename: string, downloadUrlOfImage: string): void {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      window.Android.downloadImage(filename, downloadUrlOfImage);
+    } else {
+      console.log("This option is not supported");
     }
   }
 }

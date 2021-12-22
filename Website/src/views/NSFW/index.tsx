@@ -3,9 +3,10 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { List } from "react-onsenui";
 import data from "./data";
+import ContentBody from "../../builders/ContentBody";
 
 class NSFW extends React.Component {
-  render() {
+  public render() {
     /**
      * To load for every object an own AnimePicture from `data.ts`
      */
@@ -13,7 +14,11 @@ class NSFW extends React.Component {
       <AnimePicture key={item.name} source={item.source} note={item.name} />
     ));
 
-    return <List>{listItems}</List>;
+    return (
+      <ContentBody>
+        <List>{listItems}</List>
+      </ContentBody>
+    );
   }
 }
 

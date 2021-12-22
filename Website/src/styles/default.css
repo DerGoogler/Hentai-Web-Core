@@ -26,24 +26,34 @@ body {
   border-color: #49148a;
 }
 
-.btn-lila:focus, .btn-lila.focus {
+.btn-lila:focus,
+.btn-lila.focus {
   box-shadow: 0 0 0 0.2rem rgba(73, 20, 138, 0.5);
 }
 
-.btn-lila.disabled, .btn-lila:disabled {
+.btn-lila.disabled,
+.btn-lila:disabled {
   color: #fff;
   background-color: #4a148c;
   border-color: #4a148c;
 }
 
-.btn-lila:not(:disabled):not(.disabled):active, .btn-lila:not(:disabled):not(.disabled).active,
+.btn-lila:not(:disabled):not(.disabled):active,
+.btn-lila:not(:disabled):not(.disabled).active,
 .show > .btn-lila.dropdown-toggle {
   color: #fff;
   background-color: #4a148c;
   border-color: #4a148c;
 }
 
-.btn-lila:not(:disabled):not(.disabled):active:focus, .btn-lila:not(:disabled):not(.disabled).active:focus,
+.btn-lila:not(:disabled):not(.disabled):active:focus,
+.btn-lila:not(:disabled):not(.disabled).active:focus,
 .show > .btn-lila.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(73, 20, 138, 0.5);
+}
+
+.search-input--custom {
+  box-shadow: none;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.125);
 }
