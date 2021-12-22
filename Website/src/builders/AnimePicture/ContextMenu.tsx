@@ -5,7 +5,7 @@ import { hot } from "react-hot-loader/root";
 import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
 import config from "../../misc/config";
-import android from "../../d/android";
+import android from "../../misc/android";
 
 /**
  * Creates an context menu for the images

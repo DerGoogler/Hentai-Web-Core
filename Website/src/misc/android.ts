@@ -1,4 +1,6 @@
-import config from "../misc/config";
+import config from "./config";
+import * as htmlToImage from "html-to-image";
+import { saveAs } from "file-saver";
 
 declare global {
   /**
@@ -40,6 +42,7 @@ interface Android {
 }
 
 export default class android {
+  static element: HTMLElement | null;
   /**
    * Builds the basic constructor
    */
@@ -95,10 +98,15 @@ export default class android {
     }
   }
 
-  static downloadPicture(filename: string, downloadUrlOfImage: string): void {
+  static downloadPicture(filename: string, downloadUrlOfImage: string, id?: any): void {
     if (window.navigator.userAgent === config.options.userAgent) {
       window.Android.downloadImage(filename, downloadUrlOfImage);
     } else {
+      if ((this.element = document.getElementById(id))) {
+        htmlToImage.toBlob(this.element).then((blob: any) => {
+          saveAs(blob, id + ".png");
+        });
+      }
       console.log("This option is not supported");
     }
   }

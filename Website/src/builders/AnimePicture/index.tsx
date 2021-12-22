@@ -4,21 +4,12 @@ import { Card, Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
-import android from "./../../d/android";
+import android from "../../misc/android";
 import ContextMenu from "./ContextMenu";
-import config from "../../misc/config";
 
 class AnimePicture extends React.Component<AnimePictureInterface> {
   private element!: HTMLElement | null;
   private buttonDesign: string = "lila";
-
-  public componentDidMount() {
-    if (window.navigator.userAgent === config.options.userAgent) {
-      if ((this.element = document.getElementById("download-buttom"))) {
-        this.element.setAttribute("disabled", "");
-      }
-    }
-  }
 
   private id() {
     const { note } = this.props;
@@ -35,7 +26,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
    */
   private performDownload = () => {
     const { note, source } = this.props;
-    android.downloadPicture(this.getID, source);
+    android.downloadPicture(this.getID, source, this.getID);
   };
 
   private makeUUID(length: number) {
@@ -54,7 +45,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
       <>
         <Translator>
           {({ translate }: any) => (
-            <Card key={this.getID} style={{ padding: "0px" }}>
+            <Card key={this.getID} className={this.getID} style={{ padding: "0px" }}>
               <Card.Header>
                 <h4>{note.charAt(0).toUpperCase() + note.slice(1)}</h4>
               </Card.Header>

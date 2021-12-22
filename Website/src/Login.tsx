@@ -3,7 +3,7 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Toolbar, Page, Input, Button } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import android from "./d/android";
+import android from "./misc/android";
 
 class Login extends React.Component<{}, { username: string; password: string }> {
   public constructor(props: any) {
