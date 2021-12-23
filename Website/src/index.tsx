@@ -3,7 +3,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import { isDesktop, isTablet, isElectron, isSmartTV, isWindows, isIE } from "react-device-detect";
-import * as serviceWorker from "./misc/serviceWorker";
 import "onsenui/css/onsenui.css";
 import "./styles/onsen-css-components.css";
 import "react-windows-ui/config/app-config.css";
@@ -40,7 +39,7 @@ class boot {
 
   private checkLanguage() {
     var get = android.getPref("language");
-    if (get === undefined || get === null || get === "") {
+    if (get === "false") {
       return "en";
     } else {
       return get;
@@ -73,7 +72,6 @@ class boot {
         this.loadActivity(<SplashActivity />);
       }
     });
-    serviceWorker.register();
   }
 }
 
