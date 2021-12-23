@@ -29,6 +29,11 @@ class Settings extends React.Component {
             <Translate text="security" />
           </ListHeader>
           <Switchh _key="alwaysLogin">alwaysLogin-string</Switchh>
+
+          <ListHeader>
+            <Translate text="others" />
+          </ListHeader>
+          <Switchh _key="enableSwipeBetweenTabs">enableSwipeBetweenTabs-string</Switchh>
         </List>
       </ContentBody>
     );

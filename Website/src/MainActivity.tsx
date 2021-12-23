@@ -22,6 +22,7 @@ import AnimeTab from "./builders/AnimeTab";
 import NSFW from "./views/NSFW";
 import Settings from "./views/Settings";
 import SFW from "./views/SFW";
+import { stringToBoolean } from "./misc/tools";
 
 class MainActivity extends React.Component<{ navigator?: any }> {
   private element!: HTMLElement | null;
@@ -141,7 +142,8 @@ class MainActivity extends React.Component<{ navigator?: any }> {
     return (
       <Page renderToolbar={this.renderToolbar} renderFixed={this.renderFixed}>
         <Tabbar
-          swipeable={config.base.swipeable}
+          // @ts-ignore
+          swipeable={stringToBoolean(android.getPref("enableSwipeBetweenTabs"))}
           position="top"
           index={0}
           renderTabs={this.renderTabs}

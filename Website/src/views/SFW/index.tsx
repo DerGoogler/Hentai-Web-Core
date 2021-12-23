@@ -1,5 +1,4 @@
 import AnimePicture from "../../builders/AnimePicture";
-import hmtai from "hmtai";
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { List, SearchInput } from "react-onsenui";
@@ -9,9 +8,28 @@ import ContentBody from "../../builders/ContentBody";
 class SFW extends React.Component {
   private element!: HTMLElement | null;
 
-  public state = {
-    searchValue: "",
-  };
+  private filter(e: any) {
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    filter = e.target.value.toUpperCase();
+    ul = document.getElementById("picture-list-sfw");
+    // @ts-ignore
+    li = ul.getElementsByTagName("card");
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName("name")[0];
+      // @ts-ignore
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        // @ts-ignore
+        li[i].style.display = "";
+      } else {
+        // @ts-ignore
+        li[i].style.display = "none";
+      }
+    }
+  }
 
   public render() {
     /**
@@ -26,20 +44,32 @@ class SFW extends React.Component {
         <div
           style={{
             textAlign: "center",
-            display: /*"flex"*/ "none",
+            display: /*"flex"*/ "flex",
             justifyContent: "center",
-            padding: "8px",
+            padding: "0px",
             paddingBottom: "0px",
             flexDirection: "column",
           }}
         >
-          <SearchInput
-            // @ts-ignore
-            placeholder="Search"
-            modifier="custom"
-          />
+          <div
+            style={{
+              textAlign: "center",
+              display: /*"flex"*/ "flex",
+              justifyContent: "center",
+              padding: "8px",
+              paddingBottom: "0px",
+              flexDirection: "column",
+            }}
+          >
+            <SearchInput
+              // @ts-ignore
+              placeholder="Search SFW"
+              modifier="custom"
+              onChange={this.filter}
+            />
+          </div>
+          <List id="picture-list-sfw">{listItems}</List>
         </div>
-        <List id="picture-list">{listItems}</List>
       </ContentBody>
     );
   }

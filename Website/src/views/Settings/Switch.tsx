@@ -1,6 +1,6 @@
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
-import { ListItem, Switch } from "react-onsenui";
+import { Checkbox, ListItem, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import android from "../../misc/android";
 

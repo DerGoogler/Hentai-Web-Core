@@ -104,6 +104,16 @@ export default {
     de: "Anzeige",
   },
 
+  others: {
+    en: "Others",
+    de: "Anderes",
+  },
+
+  "enableSwipeBetweenTabs-string": {
+    en: "Enable swipe between tabs",
+    de: "Wischen zwischen Registerkarten",
+  },
+
   "alwaysLogin-string": {
     en: "Always login",
     de: "Immer anmelden",

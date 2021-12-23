@@ -11,6 +11,10 @@ import settingsEffect from "../../views/Settings/settingsEffect";
 class AnimePicture extends React.Component<AnimePictureInterface> {
   private element!: HTMLElement | null;
   private buttonDesign: string = "lila";
+  /**
+   * To generate an id that refresh every page reload, to avoid duplicte ids
+   */
+  private getID = this.props.note.replace(/ /g, "") + this.id();
 
   public componentDidMount() {
     settingsEffect("displayDownload", "." + this.getID, (element: any) => {
@@ -23,9 +27,6 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
     var id: any = note.length;
     return this.makeUUID(id);
   }
-
-  // To generate an id that refresh every page reload, to avoid duplicte ids
-  private getID = this.props.note.replace(/ /g, "") + this.id();
 
   /**
    * Performs an native android download
@@ -52,50 +53,63 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
       <>
         <Translator>
           {({ translate }: any) => (
-            <Card key={this.getID} style={{ padding: "0px" }}>
-              <Card.Header>
-                <h4>{note.charAt(0).toUpperCase() + note.slice(1)}</h4>
-              </Card.Header>
-              <Card.Body>
-                <blockquote className="blockquote mb-0">
-                  <p>
-                    {" "}
-                    <img
-                      id={this.getID}
-                      src={source}
-                      alt={note.charAt(0).toUpperCase() + note.slice(1)}
-                      style={{ width: "100%", borderRadius: ".25rem" }}
-                      onDoubleClick={() => {
-                        window.open(source, "_blank");
-                      }}
-                    />{" "}
-                    <Dropdown
-                      className={this.getID}
-                      style={{ marginTop: "16px", display: "none" }}
-                      as={ButtonGroup}
-                    >
-                      <Button
-                        id="download-button"
-                        variant={this.buttonDesign}
-                        onClick={this.performDownload}
+            // @ts-ignore
+            <card>
+              <Card key={this.getID} style={{ padding: "0px" }}>
+                <Card.Header>
+                  {/*
+                // @ts-ignore */}
+                  <name>
+                    <h4 className={"searchKey> " + this.getID + "_search"}>
+                      {note.charAt(0).toUpperCase() + note.slice(1)}
+                    </h4>
+                    {/*
+                  // @ts-ignore */}
+                  </name>
+                </Card.Header>
+                <Card.Body>
+                  <blockquote className="blockquote mb-0">
+                    <p>
+                      {" "}
+                      <img
+                        id={this.getID}
+                        src={source}
+                        alt={note.charAt(0).toUpperCase() + note.slice(1)}
+                        style={{ width: "100%", borderRadius: ".25rem" }}
+                        onDoubleClick={() => {
+                          window.open(source, "_blank");
+                        }}
+                      />{" "}
+                      <Dropdown
+                        className={this.getID}
+                        style={{ marginTop: "16px", display: "none" }}
+                        as={ButtonGroup}
                       >
-                        <Translate text="download-text" />
-                      </Button>
+                        <Button
+                          id="download-button"
+                          variant={this.buttonDesign}
+                          onClick={this.performDownload}
+                        >
+                          <Translate text="download-text" />
+                        </Button>
 
-                      <Dropdown.Toggle
-                        split
-                        variant={this.buttonDesign}
-                        id="dropdown-split-basic"
-                      />
+                        <Dropdown.Toggle
+                          split
+                          variant={this.buttonDesign}
+                          id="dropdown-split-basic"
+                        />
 
-                      <Dropdown.Menu>
-                        <ContextMenu source={source} note={note} />
-                      </Dropdown.Menu>
-                    </Dropdown>
-                  </p>
-                </blockquote>
-              </Card.Body>
-            </Card>
+                        <Dropdown.Menu>
+                          <ContextMenu source={source} note={note} />
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </p>
+                  </blockquote>
+                </Card.Body>
+              </Card>
+              {/*
+                // @ts-ignore */}
+            </card>
           )}
         </Translator>
       </>
