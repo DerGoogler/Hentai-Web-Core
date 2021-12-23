@@ -146,6 +146,11 @@ export default {
     de: "Immer anmelden",
   },
 
+  "disableSplashscreen-string": {
+    en: "Disable splash screen",
+    de: "Deaktivire Startbildschirm",
+  },
+
   "language-string": {
     en: "Language",
     de: "Sprache",

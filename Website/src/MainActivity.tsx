@@ -23,8 +23,10 @@ import NSFW from "./views/NSFW";
 import Settings from "./views/Settings";
 import SFW from "./views/SFW";
 import { stringToBoolean } from "./misc/tools";
+import boot from "./index";
+import LoginActivity from "./LoginActivity";
 
-class MainActivity extends React.Component<{ navigator?: any }> {
+class MainActivity extends React.Component {
   private element!: HTMLElement | null;
 
   public componentDidMount() {
@@ -38,6 +40,10 @@ class MainActivity extends React.Component<{ navigator?: any }> {
     settingsEffect("hideFAB", "#fab-element", (element: any) => {
       element.style.display = "none";
     });
+
+    if (android.getPref("loggedIn") === "false") {
+      new boot().loadActivity(<LoginActivity />);
+    }
   }
 
   private renderToolbar() {

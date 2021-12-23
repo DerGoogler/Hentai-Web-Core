@@ -15,6 +15,8 @@ import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
 import translation from "./misc/strings";
 import android from "./misc/android";
+import SplashActivity from "./SplashActivity";
+import { hot } from "react-hot-loader/root";
 
 class boot {
   private element!: HTMLElement | null;
@@ -45,19 +47,10 @@ class boot {
     }
   }
 
-  private loadMainActivity() {
+  public loadActivity(node: JSX.Element) {
     ReactDOM.render(
       <Provider language={this.checkLanguage()} translation={translation}>
-        <MainActivity />
-      </Provider>,
-      this.mountNode
-    );
-  }
-
-  private loadLoginActivity() {
-    ReactDOM.render(
-      <Provider language={this.checkLanguage()} translation={translation}>
-        <LoginActivity />
+        {node}
       </Provider>,
       this.mountNode
     );
@@ -66,14 +59,18 @@ class boot {
   public init() {
     ons.ready(() => {
       ons.platform.select("android");
-      if (android.getPref("loggedIn") === "true") {
-        // Removes the `loggedIn` key if always login is enabled
-        if (android.getPref("alwaysLogin") === "true") {
-          android.removePref("loggedIn");
+      if (android.getPref("disableSplashscreen") === "true") {
+        if (android.getPref("loggedIn") === "true") {
+          // Removes the `loggedIn` key if always login is enabled
+          if (android.getPref("alwaysLogin") === "true") {
+            android.removePref("loggedIn");
+          }
+          this.loadActivity(<MainActivity />);
+        } else {
+          this.loadActivity(<LoginActivity />);
         }
-        this.loadMainActivity();
       } else {
-        this.loadLoginActivity();
+        this.loadActivity(<SplashActivity />);
       }
     });
     serviceWorker.register();
@@ -81,3 +78,5 @@ class boot {
 }
 
 new boot().init();
+
+export default hot(boot);

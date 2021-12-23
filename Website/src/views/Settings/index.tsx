@@ -37,6 +37,7 @@ class Settings extends React.Component {
           </ListHeader>
           <Switchh _key="enableSwipeBetweenTabs">enableSwipeBetweenTabs-string</Switchh>
           <Switchh _key="saveLastUsedTab">saveLastUsedTab-string</Switchh>
+          <Switchh _key="disableSplashscreen">disableSplashscreen-string</Switchh>
         </List>
       </ContentBody>
     );

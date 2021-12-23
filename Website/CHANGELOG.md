@@ -3,6 +3,8 @@
 - Added settings
 - added option to reload images without app reload
 - you can view now the image source
+- added splash screen
+  - can be diabled in settngs
 
 # 1.3.3
 
