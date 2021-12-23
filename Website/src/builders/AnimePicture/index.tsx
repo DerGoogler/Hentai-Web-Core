@@ -71,7 +71,12 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                   </name>
                 </Card.Header>
                 <Card.Body
-                  style={{ padding: typeIF(android.getPref("fitImageToCard"), "0px", "") }}
+                  style={{
+                    padding: typeIF(android.getPref("fitImageToCard"), "0px", ""),
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                  }}
                 >
                   <blockquote className="blockquote mb-0">
                     <p>
@@ -100,7 +105,9 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                         className={this.getID}
                         style={{
                           marginTop: typeIF(android.getPref("fitImageToCard"), "0px", "16px"),
-                          display: "none",
+                          display: typeIF(android.getPref("displayDownload"), "flex", "none"),
+                          padding: "0px",
+                          justifyContent: "center",
                         }}
                         as={ButtonGroup}
                       >
