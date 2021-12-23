@@ -2,6 +2,7 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { ListItem, Select, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
+import android from "../../misc/android";
 
 class Selectt extends React.Component<{ _key: string }> {
   private element!: HTMLElement | null;
@@ -12,7 +13,7 @@ class Selectt extends React.Component<{ _key: string }> {
    * @returns {String}
    */
   private getSetting(key: string): string {
-    var get = localStorage.getItem(key);
+    var get = android.getPref(key);
     if (get === undefined || get === null || get === "") {
       return "en";
     } else {
@@ -21,7 +22,7 @@ class Selectt extends React.Component<{ _key: string }> {
   }
 
   private setSetting(key: string, data: any) {
-    localStorage.setItem(key, data);
+    android.setPref(key, data);
   }
 
   public render() {

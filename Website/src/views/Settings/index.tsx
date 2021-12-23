@@ -14,9 +14,16 @@ class Settings extends React.Component {
           <ListHeader>
             <Translate text="appearance" />
           </ListHeader>
-          <Switchh _key="displayDownload">displayDownload-string</Switchh>
+          <Switchh _key="enableDarkmode" disabled={true}>
+            enableDarkmode-string
+          </Switchh>
           <Switchh _key="hideFAB">hideFAB-string</Switchh>
           <Selectt _key="language">language-string</Selectt>
+
+          <ListHeader>
+            <Translate text="view" />
+          </ListHeader>
+          <Switchh _key="displayDownload">displayDownload-string</Switchh>
         </List>
       </ContentBody>
     );

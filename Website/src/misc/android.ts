@@ -39,6 +39,21 @@ interface Android {
    * @Native
    */
   downloadImage(filename: string, downloadUrlOfImage: string): void;
+
+  /**
+   * @Native
+   */
+  setPref(key: string, content: string): void;
+
+  /**
+   * @Native
+   */
+  getPref(key: string): string;
+
+  /**
+   * @Native
+   */
+  removePref(key: string): void;
 }
 
 export default class android {
@@ -98,6 +113,12 @@ export default class android {
     }
   }
 
+  /**
+   * Download an anime picture
+   * @param filename
+   * @param downloadUrlOfImage
+   * @param id
+   */
   static downloadPicture(filename: string, downloadUrlOfImage: string, id?: any): void {
     if (window.navigator.userAgent === config.options.userAgent) {
       window.Android.downloadImage(filename, downloadUrlOfImage);
@@ -108,6 +129,44 @@ export default class android {
         });
       }
       console.log("This option is not supported");
+    }
+  }
+
+  /**
+   * Set an saved key from localstorage or shared prefs
+   * @param key
+   * @param content
+   */
+  static setPref(key: string, content: string): void {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      window.Android.setPref(key, content.toString());
+    } else {
+      localStorage.setItem(key, content.toString());
+    }
+  }
+
+  /**
+   * Get an saved key from localstorage or shared prefs
+   * @param key
+   * @returns
+   */
+  static getPref(key: string): string | null {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      return window.Android.getPref(key);
+    } else {
+      return localStorage.getItem(key);
+    }
+  }
+
+  /**
+   * Remove an saved key from localstorage or shared prefs
+   * @param key
+   */
+  static removePref(key: string): void {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      window.Android.removePref(key);
+    } else {
+      localStorage.removeItem(key);
     }
   }
 }

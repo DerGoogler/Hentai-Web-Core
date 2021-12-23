@@ -27,7 +27,7 @@ class Login extends React.Component<{}, { username: string; password: string }> 
       this.state.username === android.getBuildMANUFACTURER() &&
       this.state.password === android.getBuildMODEL()
     ) {
-      localStorage.setItem("loggedIn", "true");
+      android.setPref("loggedIn", "true");
       android.reload();
     } else {
       ons.notification.alert("Username or password incorrect!");
@@ -75,7 +75,9 @@ class Login extends React.Component<{}, { username: string; password: string }> 
                     float
                     placeholder={this.placeholderIF(
                       window.navigator.userAgent === "HENTAI_WEB_AGENT",
-                      "MANUFACTURER",
+                      translate({
+                        text: "MANUFACTURER",
+                      }),
                       "appCodeName"
                     )}
                   />
@@ -88,7 +90,9 @@ class Login extends React.Component<{}, { username: string; password: string }> 
                     float
                     placeholder={this.placeholderIF(
                       window.navigator.userAgent === "HENTAI_WEB_AGENT",
-                      "MODEL",
+                      translate({
+                        text: "MODEL",
+                      }),
                       "platform"
                     )}
                   />

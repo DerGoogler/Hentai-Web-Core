@@ -2,11 +2,12 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { ListItem, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
+import android from "../../misc/android";
 
 /**
  * Create an precreated switch
  */
-class Switchh extends React.Component<{ _key: string }> {
+class Switchh extends React.Component<{ _key: string; disabled?: boolean }> {
   private element!: HTMLElement | null;
 
   /**
@@ -15,7 +16,7 @@ class Switchh extends React.Component<{ _key: string }> {
    * @returns {Boolean}
    */
   private getSetting(key: string): boolean {
-    var get = localStorage.getItem(key);
+    var get = android.getPref(key);
     if (get === undefined || get === null || get === "" || get === "false") {
       return false;
     } else {
@@ -24,7 +25,7 @@ class Switchh extends React.Component<{ _key: string }> {
   }
 
   private setSetting(key: string, data: any) {
-    localStorage.setItem(key, data);
+    android.setPref(key, data);
   }
 
   public render() {
@@ -37,6 +38,7 @@ class Switchh extends React.Component<{ _key: string }> {
           <Switch
             // @ts-ignore
             checked={this.getSetting(this.props._key)}
+            disabled={this.props.disabled}
             onChange={(e: any) => {
               this.setSetting(this.props._key, e.target.checked);
             }}

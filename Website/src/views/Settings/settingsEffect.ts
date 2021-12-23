@@ -1,4 +1,5 @@
 import { hot } from "react-hot-loader/root";
+import android from "../../misc/android";
 
 /**
  * To enable deifferent functions from settings
@@ -7,7 +8,7 @@ import { hot } from "react-hot-loader/root";
  */
 function settingsEfect(key: string, _element: string, callback: Function) {
   var element: HTMLElement | null;
-  if (localStorage.getItem(key) === "true") {
+  if (android.getPref(key) === "true") {
     if ((element = document.querySelector(_element))) {
       if (typeof callback == "function") {
         callback(element);

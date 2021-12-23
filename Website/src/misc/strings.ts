@@ -27,6 +27,11 @@ export default {
     de: "Im Browser ansehen",
   },
 
+  settings: {
+    en: "Settings",
+    de: "Einstellungen",
+  },
+
   "repo-link": {
     en: "https://github.com/DerGoogler/Hentai-Web",
     de: "https://github.com/DerGoogler/Hentai-Web",
@@ -37,6 +42,12 @@ export default {
     de: "IE wird nicht unterstüzt. Lade Chrome/Opera/Firefox herunter",
   },
 
+  "copy-link": {
+    en: "Copy link",
+    de: "Link kopieren",
+  },
+
+  // Login strings
   "sign-in": {
     en: "Sign in",
     de: "Anmelden",
@@ -52,9 +63,14 @@ export default {
     de: "https://dergoogler.com/?/guide/hentai-web/de/how-to-login/",
   },
 
-  "copy-link": {
-    en: "Copy link",
-    de: "Link kopieren",
+  MODEL: {
+    en: "MODEL",
+    de: "MODELL",
+  },
+
+  MANUFACTURER: {
+    en: "MANUFACTURER",
+    de: "HERSTELLER",
   },
 
   // Settings strings
@@ -68,9 +84,19 @@ export default {
     de: "Verstecke FAB",
   },
 
+  "enableDarkmode-string": {
+    en: "Enable dark mode",
+    de: "Dark Mode aktiviren",
+  },
+
   appearance: {
     en: "Appearance",
     de: "Aussehen",
+  },
+
+  view: {
+    en: "View",
+    de: "Anzeige",
   },
 
   "language-string": {

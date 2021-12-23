@@ -8,12 +8,14 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -39,11 +41,10 @@ import java.util.Date;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    private SharedPreferences nativaeLocalstorage;
     WebView webView;
-    ProgressDialog progressDialog;
-    String langSetting = "?lang=";
-    String urlCore = "https://dergoogler.com/hentai-web/" + langSetting;
-    String urlCore_ = "192.168.178.81:5500" + langSetting; // For debugging
+    String urlCore = "https://dergoogler.com/hentai-web/";
+    String urlCore_ = "192.168.178.81:5500"; // For debugging
     String mainURL = urlCore_; // Main url
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -53,13 +54,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        nativaeLocalstorage = getSharedPreferences("localstorage", Activity.MODE_PRIVATE);
         // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        getWindow().setStatusBarColor(0xFF4A148C);
+        if (nativaeLocalstorage.getString("darkMode", "").equals("true")) {
+            getWindow().setStatusBarColor(0xFF000000);
+        } else {
+            getWindow().setStatusBarColor(0xFF4A148C);
+        }
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
         webView = findViewById(R.id.web);
-
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setSupportZoom(false);
         webView.getSettings().setDomStorageEnabled(true);
@@ -128,6 +133,21 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @JavascriptInterface
+            public void setPref(String key, String content) {
+                nativaeLocalstorage.edit().putString(key, content).apply();
+            }
+
+            @JavascriptInterface
+            public String getPref(String key) {
+                return nativaeLocalstorage.getString(key, "");
+            }
+
+            @JavascriptInterface
+            public void removePref(String key) {
+                nativaeLocalstorage.edit().remove(key).apply();
+            }
+
+            @JavascriptInterface
             public void downloadImage(String filename, String downloadUrlOfImage) {
                 // Need to give permission to read an write external storage
                 if (Build.VERSION.SDK_INT >= 23) {
@@ -141,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }, "Android");
-        webView.loadUrl(mainURL + getResources().getString(R.string.lang));
+        webView.loadUrl(mainURL);
     }
 
     public class Client extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.contains(mainURL + getResources().getString(R.string.lang)) || url.contains(mainURL)) {
+            if (url.contains(mainURL)) {
                 view.loadUrl(url);
             } else {
                 Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

@@ -22,6 +22,8 @@ import "./styles/default.css";
 import Login from "./Login";
 import { Provider } from "react-translated";
 import translation from "./misc/strings";
+import android from "./misc/android";
+import axios from "axios";
 
 class boot {
   private element!: HTMLElement | null;
@@ -44,7 +46,7 @@ class boot {
   }
 
   private checkLanguage() {
-    var get = localStorage.getItem("language");
+    var get = android.getPref("language");
     if (get === undefined || get === null || get === "") {
       return "en";
     } else {
@@ -54,9 +56,8 @@ class boot {
 
   public init() {
     ons.ready(() => {
-      if (isDesktop) ons.platform.select("ios");
       ons.platform.select("android");
-      if (localStorage.getItem("loggedIn") === "true") {
+      if (android.getPref("loggedIn") === "true") {
         ReactDOM.render(
           <Provider language={this.checkLanguage()} translation={translation}>
             <App />
