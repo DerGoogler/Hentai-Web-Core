@@ -18,6 +18,7 @@ class Settings extends React.Component {
             enableDarkmode-string
           </Switchh>
           <Switchh _key="hideFAB">hideFAB-string</Switchh>
+          <Switchh _key="fitImageToCard">fitImageToCard-string</Switchh>
           <Selectt _key="language">language-string</Selectt>
 
           <ListHeader>

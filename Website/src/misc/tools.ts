@@ -20,3 +20,25 @@ export function stringToBoolean(string: string): boolean {
       return Boolean(string);
   }
 }
+
+/**
+ * Simplfied
+ * @param id
+ * @param callback
+ */
+export function getByElementId(id: string, callback: Function) {
+  var e: HTMLElement | null;
+  if ((e = document.getElementById(id))) {
+    if (typeof callback == "function") {
+      callback(e);
+    }
+  }
+}
+
+export function typeIF(_: any, __: any, ___: any) {
+  if (stringToBoolean(_)) {
+    return __;
+  } else {
+    return ___;
+  }
+}

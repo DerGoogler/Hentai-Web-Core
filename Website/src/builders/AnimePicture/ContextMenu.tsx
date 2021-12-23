@@ -6,13 +6,13 @@ import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
 import config from "../../misc/config";
 import android from "../../misc/android";
+import { getByElementId } from "../../misc/tools";
 
 /**
  * Creates an context menu for the images
  */
 class ContextMenu extends React.Component<AnimePictureInterface> {
   private element!: HTMLElement | null;
-  private android = new android();
 
   public componentDidMount() {
     // Remove elements if not app
@@ -25,7 +25,7 @@ class ContextMenu extends React.Component<AnimePictureInterface> {
 
   public render() {
     // To get note and source url
-    const { note, source } = this.props;
+    const { note, source, getId } = this.props;
     return (
       <>
         <Dropdown.Item
@@ -42,6 +42,30 @@ class ContextMenu extends React.Component<AnimePictureInterface> {
           }}
         >
           <Translate text="copy-link" />
+        </Dropdown.Item>
+
+        <Dropdown.Item
+          disabled
+          onClick={() => {
+            getByElementId(getId, (e: any) => {
+              e.setAttribute("src", source);
+            });
+          }}
+        >
+          <Translate text="reload-image" />
+        </Dropdown.Item>
+
+        <Dropdown.Item
+          onClick={() => {
+            window.open(
+              `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
+                / /g,
+                ""
+              )}.json`
+            );
+          }}
+        >
+          <Translate text="view-hmtai-image-source" />
         </Dropdown.Item>
       </>
     );

@@ -17,15 +17,27 @@ export default {
     de: "ok",
   },
 
+  // Context menu
   "download-text": {
     en: "Download",
     de: "Herunterladen",
+  },
+
+  "reload-image": {
+    en: "Reload image",
+    de: "Bild neu laden",
+  },
+
+  "view-hmtai-image-source": {
+    en: "View source",
+    de: "Quelle anzeigen",
   },
 
   "view-image": {
     en: "View image in browser",
     de: "Im Browser ansehen",
   },
+  // end
 
   settings: {
     en: "Settings",
@@ -82,6 +94,11 @@ export default {
   "hideFAB-string": {
     en: "Hide FAB",
     de: "Verstecke FAB",
+  },
+
+  "fitImageToCard-string": {
+    en: "Fit image to card",
+    de: "Bild auf Karte anpassen",
   },
 
   "enableDarkmode-string": {

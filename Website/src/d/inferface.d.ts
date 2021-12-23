@@ -5,5 +5,5 @@ export interface AnimeTabInterface {
 export interface AnimePictureInterface {
   note?: any;
   source?: any;
-  data?: any;
+  getId?: any;
 }

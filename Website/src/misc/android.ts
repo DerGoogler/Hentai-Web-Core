@@ -152,9 +152,19 @@ export default class android {
    */
   static getPref(key: string): string | null {
     if (window.navigator.userAgent === config.options.userAgent) {
-      return window.Android.getPref(key);
+      const get = window.Android.getPref(key);
+      if (get === undefined || get === null || get === "") {
+        return "false";
+      } else {
+        return get;
+      }
     } else {
-      return localStorage.getItem(key);
+      const get = localStorage.getItem(key);
+      if (get === undefined || get === null || get === "") {
+        return "false";
+      } else {
+        return get;
+      }
     }
   }
 

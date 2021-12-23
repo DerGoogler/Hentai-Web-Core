@@ -7,6 +7,7 @@ import { Provider, Translate, Translator } from "react-translated";
 import android from "../../misc/android";
 import ContextMenu from "./ContextMenu";
 import settingsEffect from "../../views/Settings/settingsEffect";
+import { typeIF } from "../../misc/tools";
 
 class AnimePicture extends React.Component<AnimePictureInterface> {
   private element!: HTMLElement | null;
@@ -67,7 +68,9 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                   // @ts-ignore */}
                   </name>
                 </Card.Header>
-                <Card.Body>
+                <Card.Body
+                  style={{ padding: typeIF(android.getPref("fitImageToCard"), "0px", "") }}
+                >
                   <blockquote className="blockquote mb-0">
                     <p>
                       {" "}
@@ -75,18 +78,44 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                         id={this.getID}
                         src={source}
                         alt={note.charAt(0).toUpperCase() + note.slice(1)}
-                        style={{ width: "100%", borderRadius: ".25rem" }}
+                        style={{
+                          width: "100%",
+                          borderRadius: typeIF(
+                            android.getPref("fitImageToCard"),
+                            typeIF(
+                              android.getPref("displayDownload"),
+                              "0rem 0rem 0rem 0rem",
+                              "0rem 0rem 0.25rem 0.25rem"
+                            ),
+                            ".25rem"
+                          ),
+                        }}
                         onDoubleClick={() => {
                           window.open(source, "_blank");
                         }}
                       />{" "}
                       <Dropdown
                         className={this.getID}
-                        style={{ marginTop: "16px", display: "none" }}
+                        style={{
+                          marginTop: typeIF(android.getPref("fitImageToCard"), "0px", "16px"),
+                          display: "none",
+                        }}
                         as={ButtonGroup}
                       >
                         <Button
                           id="download-button"
+                          style={{
+                            borderRadius: typeIF(
+                              android.getPref("fitImageToCard"),
+                              "0rem 0rem 0rem 0.25rem",
+                              ""
+                            ),
+                            width: typeIF(
+                              android.getPref("fitImageToCard"),
+                              "calc(100% - 29px)",
+                              ""
+                            ),
+                          }}
                           variant={this.buttonDesign}
                           onClick={this.performDownload}
                         >
@@ -95,12 +124,19 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
 
                         <Dropdown.Toggle
                           split
+                          style={{
+                            borderRadius: typeIF(
+                              android.getPref("fitImageToCard"),
+                              "0rem 0rem 0.25rem 0rem",
+                              ""
+                            ),
+                          }}
                           variant={this.buttonDesign}
                           id="dropdown-split-basic"
                         />
 
                         <Dropdown.Menu>
-                          <ContextMenu source={source} note={note} />
+                          <ContextMenu source={source} note={note} getId={this.getID} />
                         </Dropdown.Menu>
                       </Dropdown>
                     </p>

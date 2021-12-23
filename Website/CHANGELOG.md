@@ -1,3 +1,9 @@
+# 1.3.5
+
+- Added settings
+- added option to reload images without app reload
+- you can view now the image source
+
 # 1.3.3
 
 **Hentai Web on desktop will have the iOS Design**
@@ -7,7 +13,6 @@
 - android app will get no updates at the moment.(Have no time at the moment...)
   - PWA support (alternative to andoid app, can also used on ios)
   - added service worker
--
 
 # 1.3.2
 
