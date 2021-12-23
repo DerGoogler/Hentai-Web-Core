@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root";
-import hmtai from "hmtai";
+import hmtai from "../../misc/hmtai";
 
 const data = [
   {

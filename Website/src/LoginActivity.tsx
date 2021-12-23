@@ -6,7 +6,7 @@ import { Toolbar, Page, Input, Button } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import android from "./misc/android";
 
-class Login extends React.Component<{}, { username: string; password: string }> {
+class LoginActivity extends React.Component<{}, { username: string; password: string }> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };
@@ -121,4 +121,4 @@ class Login extends React.Component<{}, { username: string; password: string }> 
   }
 }
 
-export default hot(Login);
+export default hot(LoginActivity);

@@ -24,6 +24,11 @@ class Settings extends React.Component {
             <Translate text="view" />
           </ListHeader>
           <Switchh _key="displayDownload">displayDownload-string</Switchh>
+
+          <ListHeader>
+            <Translate text="security" />
+          </ListHeader>
+          <Switchh _key="alwaysLogin">alwaysLogin-string</Switchh>
         </List>
       </ContentBody>
     );

@@ -94,9 +94,19 @@ export default {
     de: "Aussehen",
   },
 
+  security: {
+    en: "Security",
+    de: "Sicherheit",
+  },
+
   view: {
     en: "View",
     de: "Anzeige",
+  },
+
+  "alwaysLogin-string": {
+    en: "Always login",
+    de: "Immer anmelden",
   },
 
   "language-string": {

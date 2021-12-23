@@ -1,11 +1,7 @@
-import AnimeTab from "./builders/AnimeTab";
-import SFW from "./views/SFW";
-import NSFW from "./views/NSFW";
 import * as ons from "onsenui";
 import * as React from "react";
 import { isIE } from "react-device-detect";
 import { hot } from "react-hot-loader/root";
-import config from "./misc/config";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
 import {
@@ -19,11 +15,15 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
-import Settings from "./views/Settings";
 import settingsEffect from "./views/Settings/settingsEffect";
+import config from "./misc/config";
 import android from "./misc/android";
+import AnimeTab from "./builders/AnimeTab";
+import NSFW from "./views/NSFW";
+import Settings from "./views/Settings";
+import SFW from "./views/SFW";
 
-class App extends React.Component {
+class MainActivity extends React.Component<{ navigator?: any }> {
   private element!: HTMLElement | null;
 
   public componentDidMount() {
@@ -151,4 +151,4 @@ class App extends React.Component {
   }
 }
 
-export default hot(App);
+export default hot(MainActivity);
