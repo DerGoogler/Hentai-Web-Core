@@ -57,7 +57,9 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
             // @ts-ignore
             <card>
               <Card key={this.getID} style={{ padding: "0px" }}>
-                <Card.Header>
+                <Card.Header
+                  style={{ display: typeIF(android.getPref("removeTitle"), "none", "block") }}
+                >
                   {/*
                 // @ts-ignore */}
                   <name>

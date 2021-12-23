@@ -132,6 +132,19 @@ class MainActivity extends React.Component<{ navigator?: any }> {
     );
   }
 
+  private tabIndexChecker(): number {
+    var get = android.getPref("tabIndex");
+    if (get === undefined || get === null || get === "") {
+      return 0;
+    } else {
+      if (android.getPref("saveLastUsedTab") === "true") {
+        return Number(get);
+      } else {
+        return 0;
+      }
+    }
+  }
+
   public render() {
     if (isIE)
       return (
@@ -145,7 +158,13 @@ class MainActivity extends React.Component<{ navigator?: any }> {
           // @ts-ignore
           swipeable={stringToBoolean(android.getPref("enableSwipeBetweenTabs"))}
           position="top"
-          index={0}
+          index={this.tabIndexChecker()}
+          // @ts-ignore
+          onPreChange={(event: any) => {
+            if (event.index != this.tabIndexChecker) {
+              android.setPref("tabIndex", event.index);
+            }
+          }}
           renderTabs={this.renderTabs}
         />
       </Page>

@@ -18,13 +18,14 @@ class Settings extends React.Component {
             enableDarkmode-string
           </Switchh>
           <Switchh _key="hideFAB">hideFAB-string</Switchh>
-          <Switchh _key="fitImageToCard">fitImageToCard-string</Switchh>
           <Selectt _key="language">language-string</Selectt>
 
           <ListHeader>
-            <Translate text="view" />
+            <Translate text="card" />
           </ListHeader>
+          <Switchh _key="fitImageToCard">fitImageToCard-string</Switchh>
           <Switchh _key="displayDownload">displayDownload-string</Switchh>
+          <Switchh _key="removeTitle">removeTitle-string</Switchh>
 
           <ListHeader>
             <Translate text="security" />
@@ -35,6 +36,7 @@ class Settings extends React.Component {
             <Translate text="others" />
           </ListHeader>
           <Switchh _key="enableSwipeBetweenTabs">enableSwipeBetweenTabs-string</Switchh>
+          <Switchh _key="saveLastUsedTab">saveLastUsedTab-string</Switchh>
         </List>
       </ContentBody>
     );

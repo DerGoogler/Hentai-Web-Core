@@ -116,14 +116,24 @@ export default {
     de: "Sicherheit",
   },
 
-  view: {
-    en: "View",
-    de: "Anzeige",
+  card: {
+    en: "Card",
+    de: "Karte",
   },
 
   others: {
     en: "Others",
     de: "Anderes",
+  },
+
+  "saveLastUsedTab-string": {
+    en: "Save last used tab",
+    de: "Letzten benutzten Tab speichern",
+  },
+
+  "removeTitle-string": {
+    en: "Remove title from card",
+    de: "Entferne Title von Karte",
   },
 
   "enableSwipeBetweenTabs-string": {
