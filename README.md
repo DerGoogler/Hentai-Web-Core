@@ -1,5 +1,5 @@
 # Hentai Web
-
+Get updates in the [Telegram](https://t.me/HentaiWebUpdates) channel
 Lets get started! The sources listed below:
 
 - `/Website` Source for the website
