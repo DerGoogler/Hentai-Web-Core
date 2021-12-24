@@ -1,8 +1,6 @@
 import MainActivity from "./MainActivity";
-import React from "react";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
-import { isDesktop, isTablet, isElectron, isSmartTV, isWindows, isIE } from "react-device-detect";
 import "onsenui/css/onsenui.css";
 import "./styles/onsen-css-components.css";
 import "react-windows-ui/config/app-config.css";
@@ -13,21 +11,14 @@ import "./styles/default.css";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
 import translation from "./misc/strings";
-import android from "./misc/android";
+import { android } from "./misc/android";
 import SplashActivity from "./SplashActivity";
 import { hot } from "react-hot-loader/root";
+import eruda from "eruda";
 
-class boot {
+class Bootloader {
   private element!: HTMLElement | null;
   private mountNode: any = document.querySelector("app");
-
-  private checkDevice(mountNode: Element, mobile: JSX.Element, browser: JSX.Element) {
-    if (isWindows || isElectron || isSmartTV || isTablet || isIE || isDesktop) {
-      ReactDOM.render(browser, mountNode);
-    } else {
-      ReactDOM.render(mobile, mountNode);
-    }
-  }
 
   private getUrlParam(param: string) {
     param = param.replace(/([\[\](){}*?+^$.\\|])/g, "\\$1");
@@ -46,6 +37,15 @@ class boot {
     }
   }
 
+  private loadConsole() {
+    if (android.getPref("erudaEnabled") === "true") {
+      eruda.init({
+        tool: ["console", "elements"],
+        plugins: ["fps", "timing", "memory", "benchmark"],
+      });
+    }
+  }
+
   public loadActivity(node: JSX.Element) {
     ReactDOM.render(
       <Provider language={this.checkLanguage()} translation={translation}>
@@ -58,6 +58,7 @@ class boot {
   public init() {
     ons.ready(() => {
       ons.platform.select("android");
+      this.loadConsole();
       if (android.getPref("disableSplashscreen") === "true") {
         if (android.getPref("loggedIn") === "true") {
           // Removes the `loggedIn` key if always login is enabled
@@ -75,6 +76,6 @@ class boot {
   }
 }
 
-new boot().init();
+new Bootloader().init();
 
-export default hot(boot);
+export default hot(Bootloader);

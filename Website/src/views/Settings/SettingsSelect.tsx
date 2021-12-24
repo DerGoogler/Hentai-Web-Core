@@ -1,10 +1,17 @@
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
-import { ListItem, Select, Switch } from "react-onsenui";
+import { ListItem, Select } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import android from "../../misc/android";
+import { android } from "../../misc/android";
 
-class Selectt extends React.Component<{ _key: string }> {
+/**
+ * Creates an switch able dialog box
+ */
+class SettingsSelect extends React.Component<{
+  _key: string;
+  id?: string;
+  style?: React.CSSProperties;
+}> {
   private element!: HTMLElement | null;
 
   /**
@@ -27,7 +34,7 @@ class Selectt extends React.Component<{ _key: string }> {
 
   public render() {
     return (
-      <ListItem>
+      <ListItem id={this.props.id} style={this.props.style}>
         <div className="center">
           <Translate text={this.props.children} />
         </div>
@@ -48,4 +55,4 @@ class Selectt extends React.Component<{ _key: string }> {
   }
 }
 
-export default hot(Selectt);
+export default hot(SettingsSelect);

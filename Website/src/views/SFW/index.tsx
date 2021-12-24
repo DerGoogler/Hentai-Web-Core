@@ -4,6 +4,8 @@ import { hot } from "react-hot-loader/root";
 import { List, SearchInput } from "react-onsenui";
 import data from "./data";
 import ContentBody from "../../builders/ContentBody";
+import { android } from "../../misc/android";
+import tools from "../../misc/tools";
 
 class SFW extends React.Component {
   private element!: HTMLElement | null;
@@ -64,6 +66,9 @@ class SFW extends React.Component {
             <SearchInput
               // @ts-ignore
               placeholder="Search SFW"
+              style={{
+                display: tools.typeIF(android.getPref("hideSearchbar"), "none", ""),
+              }}
               modifier="custom"
               onChange={this.filter}
             />

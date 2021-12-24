@@ -1,13 +1,18 @@
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
-import { Checkbox, ListItem, Switch } from "react-onsenui";
+import { ListItem, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import android from "../../misc/android";
+import { android } from "../../misc/android";
 
 /**
  * Create an precreated switch
  */
-class Switchh extends React.Component<{ _key: string; disabled?: boolean }> {
+class SettingsSwitch extends React.Component<{
+  _key: string;
+  disabled?: boolean;
+  id?: string;
+  style?: React.CSSProperties;
+}> {
   private element!: HTMLElement | null;
 
   /**
@@ -30,7 +35,7 @@ class Switchh extends React.Component<{ _key: string; disabled?: boolean }> {
 
   public render() {
     return (
-      <ListItem>
+      <ListItem id={this.props.id} style={this.props.style}>
         <div className="center">
           <Translate text={this.props.children} />
         </div>
@@ -49,4 +54,4 @@ class Switchh extends React.Component<{ _key: string; disabled?: boolean }> {
   }
 }
 
-export default hot(Switchh);
+export default hot(SettingsSwitch);

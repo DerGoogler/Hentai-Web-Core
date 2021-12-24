@@ -1,6 +1,5 @@
 import * as ons from "onsenui";
 import * as React from "react";
-import { isIE } from "react-device-detect";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
@@ -15,15 +14,14 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
-import settingsEffect from "./views/Settings/settingsEffect";
 import config from "./misc/config";
-import android from "./misc/android";
+import { android } from "./misc/android";
 import AnimeTab from "./builders/AnimeTab";
 import NSFW from "./views/NSFW";
 import Settings from "./views/Settings";
 import SFW from "./views/SFW";
-import { stringToBoolean } from "./misc/tools";
-import boot from "./index";
+import tools from "./misc/tools";
+import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
 
 class MainActivity extends React.Component {
@@ -37,12 +35,12 @@ class MainActivity extends React.Component {
         this.element.setAttribute("title", `Download the last ${pkg.version} Hentai Web version!`);
       }
     }
-    settingsEffect("hideFAB", "#fab-element", (element: any) => {
+    tools.settingsEfect("hideFAB", "#fab-element", (element: any) => {
       element.style.display = "none";
     });
 
     if (android.getPref("loggedIn") === "false") {
-      new boot().loadActivity(<LoginActivity />);
+      new Bootloader().loadActivity(<LoginActivity />);
     }
   }
 
@@ -152,17 +150,11 @@ class MainActivity extends React.Component {
   }
 
   public render() {
-    if (isIE)
-      return (
-        <div>
-          <Translate text="ie-text" />
-        </div>
-      );
     return (
       <Page renderToolbar={this.renderToolbar} renderFixed={this.renderFixed}>
         <Tabbar
           // @ts-ignore
-          swipeable={stringToBoolean(android.getPref("enableSwipeBetweenTabs"))}
+          swipeable={tools.stringToBoolean(android.getPref("enableSwipeBetweenTabs"))}
           position="top"
           index={this.tabIndexChecker()}
           // @ts-ignore

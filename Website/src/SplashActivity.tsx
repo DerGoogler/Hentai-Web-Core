@@ -1,18 +1,18 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Page, ProgressCircular } from "react-onsenui";
-import boot from "./index";
+import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
 import MainActivity from "./MainActivity";
-import android from "./misc/android";
+import { android } from "./misc/android";
 
 class SplashActivity extends React.Component {
   public componentDidMount() {
     setTimeout(() => {
       if (android.getPref("loggedIn") === "false") {
-        new boot().loadActivity(<LoginActivity />);
+        new Bootloader().loadActivity(<LoginActivity />);
       } else {
-        new boot().loadActivity(<MainActivity />);
+        new Bootloader().loadActivity(<MainActivity />);
       }
     }, 5000);
   }

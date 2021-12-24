@@ -1,24 +1,26 @@
-// Regular Modules
 import * as React from "react";
 import { Card, Dropdown, Button, ButtonGroup } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
-import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
-import android from "../../misc/android";
+import { android } from "../../misc/android";
 import ContextMenu from "./ContextMenu";
-import settingsEffect from "../../views/Settings/settingsEffect";
-import { typeIF } from "../../misc/tools";
+import tools from "../../misc/tools";
 
-class AnimePicture extends React.Component<AnimePictureInterface> {
+class AnimePicture extends React.Component<{
+  note?: any;
+  source?: any;
+  getId?: any;
+}> {
   private element!: HTMLElement | null;
   private buttonDesign: string = "lila";
+
   /**
    * To generate an id that refresh every page reload, to avoid duplicte ids
    */
   private getID = this.props.note.replace(/ /g, "") + this.id();
 
   public componentDidMount() {
-    settingsEffect("displayDownload", "." + this.getID, (element: any) => {
+    tools.settingsEfect("displayDownload", "." + this.getID, (element: any) => {
       element.style.display = "block";
     });
   }
@@ -58,7 +60,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
             <card>
               <Card key={this.getID} style={{ padding: "0px" }}>
                 <Card.Header
-                  style={{ display: typeIF(android.getPref("removeTitle"), "none", "block") }}
+                  style={{ display: tools.typeIF(android.getPref("removeTitle"), "none", "block") }}
                 >
                   {/*
                 // @ts-ignore */}
@@ -72,7 +74,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                 </Card.Header>
                 <Card.Body
                   style={{
-                    padding: typeIF(android.getPref("fitImageToCard"), "0px", ""),
+                    padding: tools.typeIF(android.getPref("fitImageToCard"), "0px", ""),
                     display: "flex",
                     justifyContent: "center",
                     flexDirection: "column",
@@ -87,12 +89,20 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                         alt={note.charAt(0).toUpperCase() + note.slice(1)}
                         style={{
                           width: "100%",
-                          borderRadius: typeIF(
+                          borderRadius: tools.typeIF(
                             android.getPref("fitImageToCard"),
-                            typeIF(
+                            tools.typeIF(
                               android.getPref("displayDownload"),
-                              "0rem 0rem 0rem 0rem",
-                              "0rem 0rem 0.25rem 0.25rem"
+                              tools.typeIF(
+                                android.getPref("removeTitle"),
+                                "0.25rem 0.25rem 0rem 0rem",
+                                "0rem 0rem 0rem 0rem"
+                              ),
+                              tools.typeIF(
+                                android.getPref("removeTitle"),
+                                "0.25rem 0.25rem 0.25rem 0.25rem",
+                                "0rem 0rem 0.25rem 0.25rem"
+                              )
                             ),
                             ".25rem"
                           ),
@@ -104,8 +114,8 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                       <Dropdown
                         className={this.getID}
                         style={{
-                          marginTop: typeIF(android.getPref("fitImageToCard"), "0px", "16px"),
-                          display: typeIF(android.getPref("displayDownload"), "flex", "none"),
+                          marginTop: tools.typeIF(android.getPref("fitImageToCard"), "0px", "16px"),
+                          display: tools.typeIF(android.getPref("displayDownload"), "flex", "none"),
                           padding: "0px",
                           justifyContent: "center",
                         }}
@@ -114,12 +124,12 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                         <Button
                           id="download-button"
                           style={{
-                            borderRadius: typeIF(
+                            borderRadius: tools.typeIF(
                               android.getPref("fitImageToCard"),
                               "0rem 0rem 0rem 0.25rem",
                               ""
                             ),
-                            width: typeIF(
+                            width: tools.typeIF(
                               android.getPref("fitImageToCard"),
                               "calc(100% - 29px)",
                               ""
@@ -134,7 +144,7 @@ class AnimePicture extends React.Component<AnimePictureInterface> {
                         <Dropdown.Toggle
                           split
                           style={{
-                            borderRadius: typeIF(
+                            borderRadius: tools.typeIF(
                               android.getPref("fitImageToCard"),
                               "0rem 0rem 0.25rem 0rem",
                               ""

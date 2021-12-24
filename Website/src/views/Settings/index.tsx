@@ -1,12 +1,22 @@
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
-import Switchh from "./Switch";
+import SettingsSwitch from "./SettingsSwitch";
 import { List, ListHeader } from "react-onsenui";
 import ContentBody from "../../builders/ContentBody";
 import { Provider, Translate, Translator } from "react-translated";
-import Selectt from "./Select";
+import SettingsSelect from "./SettingsSelect";
+import tools from "../../misc/tools";
+import config from "../../misc/config";
 
 class Settings extends React.Component {
+  public componentDidMount() {
+    if (window.navigator.userAgent != config.options.userAgent) {
+      tools.getByElementId("erudaConsole", (e: HTMLElement) => {
+        e.style.display = "none";
+      });
+    }
+  }
+
   public render() {
     return (
       <ContentBody>
@@ -14,30 +24,36 @@ class Settings extends React.Component {
           <ListHeader>
             <Translate text="appearance" />
           </ListHeader>
-          <Switchh _key="enableDarkmode" disabled={true}>
+          <SettingsSwitch _key="enableDarkmode" disabled={true}>
             enableDarkmode-string
-          </Switchh>
-          <Switchh _key="hideFAB">hideFAB-string</Switchh>
-          <Selectt _key="language">language-string</Selectt>
+          </SettingsSwitch>
+          <SettingsSwitch _key="hideFAB">hideFAB-string</SettingsSwitch>
+          <SettingsSwitch _key="hideSearchbar">hideSearchbar-string</SettingsSwitch>
+          <SettingsSelect _key="language">language-string</SettingsSelect>
 
           <ListHeader>
             <Translate text="card" />
           </ListHeader>
-          <Switchh _key="fitImageToCard">fitImageToCard-string</Switchh>
-          <Switchh _key="displayDownload">displayDownload-string</Switchh>
-          <Switchh _key="removeTitle">removeTitle-string</Switchh>
+          <SettingsSwitch _key="fitImageToCard">fitImageToCard-string</SettingsSwitch>
+          <SettingsSwitch _key="displayDownload">displayDownload-string</SettingsSwitch>
+          <SettingsSwitch _key="removeTitle">removeTitle-string</SettingsSwitch>
 
           <ListHeader>
             <Translate text="security" />
           </ListHeader>
-          <Switchh _key="alwaysLogin">alwaysLogin-string</Switchh>
+          <SettingsSwitch _key="alwaysLogin">alwaysLogin-string</SettingsSwitch>
+          <SettingsSwitch id="erudaConsole" _key="erudaEnabled">
+            erudaEnabled-string
+          </SettingsSwitch>
 
           <ListHeader>
             <Translate text="others" />
           </ListHeader>
-          <Switchh _key="enableSwipeBetweenTabs">enableSwipeBetweenTabs-string</Switchh>
-          <Switchh _key="saveLastUsedTab">saveLastUsedTab-string</Switchh>
-          <Switchh _key="disableSplashscreen">disableSplashscreen-string</Switchh>
+          <SettingsSwitch _key="enableSwipeBetweenTabs">
+            enableSwipeBetweenTabs-string
+          </SettingsSwitch>
+          <SettingsSwitch _key="saveLastUsedTab">saveLastUsedTab-string</SettingsSwitch>
+          <SettingsSwitch _key="disableSplashscreen">disableSplashscreen-string</SettingsSwitch>
         </List>
       </ContentBody>
     );

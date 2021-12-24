@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
+    "typeRoots": [
+      "./src/d/global.d.ts"
+  ],
     "sourceMap": true,
+    "declaration": false,
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
-    "declaration": false,
     "module": "es6",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",

@@ -27,7 +27,7 @@ const data = [
     source: hmtai.nsfw.femdom(),
   },
   {
-    name: "hentai",
+    name: "hmtai",
     source: hmtai.nsfw.hentai(),
   },
   {

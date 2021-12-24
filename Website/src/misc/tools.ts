@@ -1,44 +1,62 @@
-/**
- * Converts an string into boolean
- * @param string
- * @returns {Boolean}
- */
-export function stringToBoolean(string: string): boolean {
-  switch (string.toLowerCase().trim()) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
+import { hot } from "react-hot-loader/root";
+import { android } from "./android";
 
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
+class tools {
+  /**
+   * Converts an string into boolean
+   * @param string
+   * @returns {Boolean}
+   */
+  static stringToBoolean(string: string): boolean {
+    switch (string.toLowerCase().trim()) {
+      case "true":
+      case "yes":
+      case "1":
+        return true;
 
-    default:
-      return Boolean(string);
+      case "false":
+      case "no":
+      case "0":
+      case null:
+        return false;
+
+      default:
+        return Boolean(string);
+    }
   }
-}
 
-/**
- * Simplfied
- * @param id
- * @param callback
- */
-export function getByElementId(id: string, callback: Function) {
-  var e: HTMLElement | null;
-  if ((e = document.getElementById(id))) {
-    if (typeof callback == "function") {
-      callback(e);
+  /**
+   * Simplfied
+   * @param id
+   * @param callback HTMLElement
+   */
+  static getByElementId(id: string, callback: Function) {
+    var e: HTMLElement | null;
+    if ((e = document.getElementById(id))) {
+      if (typeof callback == "function") {
+        callback(e);
+      }
+    }
+  }
+
+  static typeIF(_: any, __: any, ___: any) {
+    if (this.stringToBoolean(_)) {
+      return __;
+    } else {
+      return ___;
+    }
+  }
+
+  static settingsEfect(key: string, _element: string, callback: Function) {
+    var element: HTMLElement | null;
+    if (android.getPref(key) === "true") {
+      if ((element = document.querySelector(_element))) {
+        if (typeof callback == "function") {
+          callback(element);
+        }
+      }
     }
   }
 }
 
-export function typeIF(_: any, __: any, ___: any) {
-  if (stringToBoolean(_)) {
-    return __;
-  } else {
-    return ___;
-  }
-}
+export default hot(tools);

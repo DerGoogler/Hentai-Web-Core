@@ -49,11 +49,6 @@ export default {
     de: "https://github.com/DerGoogler/Hentai-Web",
   },
 
-  "ie-text": {
-    en: "IE is not supported. Download Chrome/Opera/Firefox",
-    de: "IE wird nicht unterstüzt. Lade Chrome/Opera/Firefox herunter",
-  },
-
   "copy-link": {
     en: "Copy link",
     de: "Link kopieren",
@@ -144,6 +139,16 @@ export default {
   "alwaysLogin-string": {
     en: "Always login",
     de: "Immer anmelden",
+  },
+
+  "hideSearchbar-string": {
+    en: "Hide search bars",
+    de: "Verstecke Suche",
+  },
+
+  "erudaEnabled-string": {
+    en: "Enable console",
+    de: "Konsole aktiviren",
   },
 
   "disableSplashscreen-string": {

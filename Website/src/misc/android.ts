@@ -2,19 +2,7 @@ import config from "./config";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
 
-declare global {
-  /**
-   * A window containing a DOM document; the document property points to the DOM document loaded in that window.
-   */
-  interface Window {
-    /**
-     * Declare the custom window event (`Android`) for the WebView
-     */
-    Android: Android;
-  }
-}
-
-interface Android {
+export interface Android {
   /**
    * @Native
    */
@@ -54,9 +42,24 @@ interface Android {
    * @Native
    */
   removePref(key: string): void;
+
+  /**
+   * @Native
+   */
+  getAppManifest(state: string): string;
+
+  /**
+   * @Native
+   */
+  encryptAES(password?: string, text?: string): string;
+
+  /**
+   * @Native
+   */
+  decryptAES(password?: string, text?: string): string;
 }
 
-export default class android {
+export class android {
   static element: HTMLElement | null;
   /**
    * Builds the basic constructor
@@ -177,6 +180,29 @@ export default class android {
       window.Android.removePref(key);
     } else {
       localStorage.removeItem(key);
+    }
+  }
+
+  static getAppManifest(state: string): string {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      return window.Android.getAppManifest(state);
+    }
+    return state;
+  }
+
+  static encodeAES(text: string, password?: string): string {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      return window.Android.encryptAES(password, text);
+    } else {
+      return window.btoa(text);
+    }
+  }
+
+  static decodeAES(text: string, password?: string): string {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      return window.Android.decryptAES(password, text);
+    } else {
+      return window.atob(text);
     }
   }
 }

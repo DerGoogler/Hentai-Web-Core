@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     WebView webView;
     String urlCore = "https://dergoogler.com/hentai-web/";
     String urlCore_ = "192.168.178.81:5500"; // For debugging
-    String mainURL = urlCore; // Main url
+    String mainURL = urlCore_; // Main url
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @SuppressLint("SetJavaScriptEnabled")
@@ -114,6 +114,19 @@ public class MainActivity extends AppCompatActivity {
             @JavascriptInterface
             public String BuildMODEL() {
                 return Build.MODEL;
+            }
+
+            @JavascriptInterface
+            public String getAppManifest(String state) {
+                switch(state) {
+                    case "vasionName":
+                        return BuildConfig.VERSION_NAME;
+                    case "versionCode":
+                        return String.valueOf(BuildConfig.VERSION_CODE);
+                    case "packageName":
+                        return BuildConfig.APPLICATION_ID;
+                }
+                return state;
             }
 
             @JavascriptInterface

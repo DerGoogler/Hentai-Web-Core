@@ -1,31 +1,24 @@
-// Regular Modules
 import * as React from "react";
 import { Dropdown } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
-import { AnimePictureInterface } from "../../d/inferface";
 import { Provider, Translate, Translator } from "react-translated";
-import config from "../../misc/config";
-import android from "../../misc/android";
-import { getByElementId } from "../../misc/tools";
+import { android } from "../../misc/android";
+import tools from "../../misc/tools";
 
 /**
  * Creates an context menu for the images
  */
-class ContextMenu extends React.Component<AnimePictureInterface> {
+class ContextMenu extends React.Component<{
+  note?: any;
+  source?: any;
+  getId?: any;
+}> {
   private element!: HTMLElement | null;
-
-  public componentDidMount() {
-    // Remove elements if not app
-    if (window.navigator.userAgent === config.options.userAgent) {
-      if ((this.element = document.querySelector(".only-mobile"))) {
-        this.element.style.display = "none";
-      }
-    }
-  }
 
   public render() {
     // To get note and source url
     const { note, source, getId } = this.props;
+
     return (
       <>
         <Dropdown.Item
@@ -47,7 +40,7 @@ class ContextMenu extends React.Component<AnimePictureInterface> {
         <Dropdown.Item
           disabled
           onClick={() => {
-            getByElementId(getId, (e: any) => {
+            tools.getByElementId(getId, (e: any) => {
               e.setAttribute("src", source);
             });
           }}

@@ -1,10 +1,9 @@
 import ons from "onsenui";
 import React from "react";
-import { Card } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { Toolbar, Page, Input, Button } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import android from "./misc/android";
+import { android } from "./misc/android";
 
 class LoginActivity extends React.Component<{}, { username: string; password: string }> {
   public constructor(props: any) {
