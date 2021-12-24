@@ -23,7 +23,6 @@ import SFW from "./views/SFW";
 import tools from "./misc/tools";
 import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
-import { NavItem } from "react-bootstrap";
 
 class MainActivity extends React.Component {
   private element!: HTMLElement | null;
