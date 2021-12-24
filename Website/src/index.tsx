@@ -56,7 +56,7 @@ class Bootloader {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                zIndex: 0
+                zIndex: 0,
               }}
             >
               <button>Button 1</button>
@@ -73,7 +73,12 @@ class Bootloader {
 
   public init() {
     ons.ready(() => {
-      ons.platform.select("android");
+      const getDesignCookie = android.getPref("useIOSdesign");
+      if (getDesignCookie === "true") {
+        ons.platform.select("ios");
+      } else {
+        ons.platform.select("android");
+      }
       this.loadConsole();
       if (android.getPref("disableSplashscreen") === "true") {
         if (android.getPref("loggedIn") === "true") {

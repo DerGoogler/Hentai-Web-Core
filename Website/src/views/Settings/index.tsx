@@ -9,14 +9,6 @@ import tools from "../../misc/tools";
 import config from "../../misc/config";
 
 class Settings extends React.Component {
-  public componentDidMount() {
-    if (window.navigator.userAgent != config.options.userAgent) {
-      tools.getByElementId("erudaConsole", (e: HTMLElement) => {
-        e.style.display = "none";
-      });
-    }
-  }
-
   public render() {
     return (
       <ContentBody>
@@ -26,6 +18,12 @@ class Settings extends React.Component {
           </ListHeader>
           <SettingsSwitch _key="enableDarkmode" disabled={true}>
             enableDarkmode-string
+          </SettingsSwitch>
+          <SettingsSwitch
+            disabled={window.navigator.userAgent === config.options.userAgent}
+            _key="useIOSdesign"
+          >
+            useIOSdesign-string
           </SettingsSwitch>
           <SettingsSwitch _key="hideFAB">hideFAB-string</SettingsSwitch>
           <SettingsSwitch _key="hideSearchbar">hideSearchbar-string</SettingsSwitch>
@@ -42,7 +40,10 @@ class Settings extends React.Component {
             <Translate text="security" />
           </ListHeader>
           <SettingsSwitch _key="alwaysLogin">alwaysLogin-string</SettingsSwitch>
-          <SettingsSwitch id="erudaConsole" _key="erudaEnabled">
+          <SettingsSwitch
+            disabled={window.navigator.userAgent != config.options.userAgent}
+            _key="erudaEnabled"
+          >
             erudaEnabled-string
           </SettingsSwitch>
 

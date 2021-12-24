@@ -136,6 +136,11 @@ export default {
     de: "Entferne Title von Karte",
   },
 
+  "useIOSdesign-string": {
+    en: "Use iOS design",
+    de: "Benutze iOS Design",
+  },
+
   "enableSwipeBetweenTabs-string": {
     en: "Enable swipe between tabs",
     de: "Wischen zwischen Registerkarten",
