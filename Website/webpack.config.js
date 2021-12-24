@@ -15,7 +15,7 @@ const config = {
         exclude: /node_modules/,
       },
       {
-        test: /\.ts(x)?$/,
+        test: /(d)?\.ts(x)?$/,
         loader: "ts-loader",
         exclude: /node_modules/,
       },

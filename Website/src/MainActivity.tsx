@@ -23,9 +23,14 @@ import SFW from "./views/SFW";
 import tools from "./misc/tools";
 import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
+import { NavItem } from "react-bootstrap";
 
 class MainActivity extends React.Component {
   private element!: HTMLElement | null;
+
+  public state = {
+    settings_string: "",
+  };
 
   public componentDidMount() {
     // To remvoe the button if is in app opened
@@ -62,26 +67,35 @@ class MainActivity extends React.Component {
   }
 
   private renderTabs() {
-    return [
+    const sections = [
       {
-        content: <AnimeTab content={<SFW />} />,
-        tab: <Tab label="SFW" />,
+        label: "SFW",
+        content: <SFW />,
       },
       {
-        content: <AnimeTab content={<NSFW />} />,
-        tab: <Tab label="NSFW" />,
+        label: "NSFW",
+        content: <NSFW />,
       },
       {
-        content: <AnimeTab content={<Settings />} />,
-        tab: <Tab label="Settings" />,
+        label: "Settings",
+        content: <Settings />,
       },
     ];
+
+    return sections.map((item) => {
+      return {
+        content: <AnimeTab key={item.label} content={item.content} />,
+        // @ts-ignore
+        tab: <Tab key={item.label} label={item.label} />,
+      };
+    });
   }
 
   private renderFixed() {
     return (
       <Translator>
         {({ translate }: any) => (
+          // @ts-ignore
           <SpeedDial id="fab-element" position="bottom right">
             <Fab>
               <Icon icon="md-more" />

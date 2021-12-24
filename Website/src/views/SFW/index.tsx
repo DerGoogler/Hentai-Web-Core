@@ -6,6 +6,7 @@ import data from "./data";
 import ContentBody from "../../builders/ContentBody";
 import { android } from "../../misc/android";
 import tools from "../../misc/tools";
+import hmtai from "./../../misc/hmtai";
 
 class SFW extends React.Component {
   private element!: HTMLElement | null;

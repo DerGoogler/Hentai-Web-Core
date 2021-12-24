@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "dev": "electron-webpack dev",
+    "dev": "electron-webpack dev --openssl-legacy-provider",
     "compile": "electron-webpack",
     "dist": "yarn compile && electron-builder",
     "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"

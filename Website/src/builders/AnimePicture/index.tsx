@@ -1,10 +1,11 @@
 import * as React from "react";
-import { Card, Dropdown, Button, ButtonGroup } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
 import { android } from "../../misc/android";
 import ContextMenu from "./ContextMenu";
 import tools from "../../misc/tools";
+import { ActionSheet, ActionSheetButton, Icon } from "react-onsenui";
 
 class AnimePicture extends React.Component<{
   note?: any;
@@ -14,31 +15,21 @@ class AnimePicture extends React.Component<{
   private element!: HTMLElement | null;
   private buttonDesign: string = "lila";
 
+  public state = {
+    isContextOpen: false,
+  };
+
   /**
    * To generate an id that refresh every page reload, to avoid duplicte ids
    */
   private getID = this.props.note.replace(/ /g, "") + this.id();
-
-  public componentDidMount() {
-    tools.settingsEfect("displayDownload", "." + this.getID, (element: any) => {
-      element.style.display = "block";
-    });
-  }
+  private getNote = this.props.note.charAt(0).toUpperCase() + this.props.note.slice(1);
 
   private id() {
     const { note } = this.props;
     var id: any = note.length;
     return this.makeUUID(id);
   }
-
-  /**
-   * Performs an native android download
-   * **DON'T REMOVE THE ARROW FUNCTION**
-   */
-  private performDownload = () => {
-    const { note, source } = this.props;
-    android.downloadPicture(this.getID, source, this.getID);
-  };
 
   private makeUUID(length: number) {
     var result = "";
@@ -49,6 +40,14 @@ class AnimePicture extends React.Component<{
     }
     return result;
   }
+
+  private handleClick = () => {
+    this.setState({ isContextOpen: true });
+  };
+
+  private handleCancel = () => {
+    this.setState({ isContextOpen: false });
+  };
 
   public render() {
     const { note, source } = this.props;
@@ -64,10 +63,22 @@ class AnimePicture extends React.Component<{
                 >
                   {/*
                 // @ts-ignore */}
-                  <name>
-                    <h4 className={"searchKey> " + this.getID + "_search"}>
-                      {note.charAt(0).toUpperCase() + note.slice(1)}
+                  <name style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
+                    <h4
+                      style={{ width: "100%" }}
+                      className={"searchKey> " + this.getID + "_search"}
+                    >
+                      {this.getNote}
                     </h4>
+                    <Button
+                      style={{
+                        display: tools.typeIF(android.getPref("displayDownload"), "flex", "none"),
+                      }}
+                      onClick={this.handleClick}
+                      variant={this.buttonDesign}
+                    >
+                      <Icon icon="md-more" />
+                    </Button>
                     {/*
                   // @ts-ignore */}
                   </name>
@@ -86,7 +97,7 @@ class AnimePicture extends React.Component<{
                       <img
                         id={this.getID}
                         src={source}
-                        alt={note.charAt(0).toUpperCase() + note.slice(1)}
+                        alt={this.getNote}
                         style={{
                           width: "100%",
                           borderRadius: tools.typeIF(
@@ -107,57 +118,19 @@ class AnimePicture extends React.Component<{
                             ".25rem"
                           ),
                         }}
-                        onDoubleClick={() => {
-                          window.open(source, "_blank");
-                        }}
                       />{" "}
-                      <Dropdown
-                        className={this.getID}
-                        style={{
-                          marginTop: tools.typeIF(android.getPref("fitImageToCard"), "0px", "16px"),
-                          display: tools.typeIF(android.getPref("displayDownload"), "flex", "none"),
-                          padding: "0px",
-                          justifyContent: "center",
-                        }}
-                        as={ButtonGroup}
+                      <ActionSheet
+                        isOpen={this.state.isContextOpen}
+                        animation="default"
+                        onCancel={this.handleCancel}
+                        isCancelable={true}
+                        title={this.getNote + "'s options"}
                       >
-                        <Button
-                          id="download-button"
-                          style={{
-                            borderRadius: tools.typeIF(
-                              android.getPref("fitImageToCard"),
-                              "0rem 0rem 0rem 0.25rem",
-                              ""
-                            ),
-                            width: tools.typeIF(
-                              android.getPref("fitImageToCard"),
-                              "calc(100% - 29px)",
-                              ""
-                            ),
-                          }}
-                          variant={this.buttonDesign}
-                          onClick={this.performDownload}
-                        >
-                          <Translate text="download-text" />
-                        </Button>
-
-                        <Dropdown.Toggle
-                          split
-                          style={{
-                            borderRadius: tools.typeIF(
-                              android.getPref("fitImageToCard"),
-                              "0rem 0rem 0.25rem 0rem",
-                              ""
-                            ),
-                          }}
-                          variant={this.buttonDesign}
-                          id="dropdown-split-basic"
-                        />
-
-                        <Dropdown.Menu>
-                          <ContextMenu source={source} note={note} getId={this.getID} />
-                        </Dropdown.Menu>
-                      </Dropdown>
+                        <ContextMenu source={source} note={note} getId={this.getID} />
+                        <ActionSheetButton onClick={this.handleCancel} icon={"md-close"}>
+                          Cancel
+                        </ActionSheetButton>
+                      </ActionSheet>
                     </p>
                   </blockquote>
                 </Card.Body>

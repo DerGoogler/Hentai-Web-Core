@@ -7,6 +7,7 @@ class ContentBody extends React.Component {
     boxSizing: "border-box",
     display: "flex",
     justifyContent: "center",
+    flexDirection: "column",
     minWidth: "200px",
     maxWidth: "580px",
     margin: "0px auto",

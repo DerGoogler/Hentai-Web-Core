@@ -14,6 +14,7 @@ import translation from "./misc/strings";
 import { android } from "./misc/android";
 import SplashActivity from "./SplashActivity";
 import { hot } from "react-hot-loader/root";
+import ContextMenu from "react-jsx-context-menu";
 import eruda from "eruda";
 
 class Bootloader {
@@ -49,7 +50,22 @@ class Bootloader {
   public loadActivity(node: JSX.Element) {
     ReactDOM.render(
       <Provider language={this.checkLanguage()} translation={translation}>
-        {node}
+        <ContextMenu
+          menu={
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                zIndex: 0
+              }}
+            >
+              <button>Button 1</button>
+              <button>Button 2</button>
+            </div>
+          }
+        >
+          {node}
+        </ContextMenu>
       </Provider>,
       this.mountNode
     );

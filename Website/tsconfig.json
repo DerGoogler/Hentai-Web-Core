@@ -1,9 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "typeRoots": [
-      "./src/d/global.d.ts"
-  ],
+    "typeRoots": ["./src/d/global.d.ts"],
     "sourceMap": true,
     "declaration": false,
     "strict": true,

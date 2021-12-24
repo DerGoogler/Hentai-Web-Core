@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Dropdown } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
+import { ActionSheetButton } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import { android } from "../../misc/android";
 import tools from "../../misc/tools";
@@ -20,47 +20,61 @@ class ContextMenu extends React.Component<{
     const { note, source, getId } = this.props;
 
     return (
-      <>
-        <Dropdown.Item
-          onClick={() => {
-            window.open(source, "_blank");
-          }}
-        >
-          <Translate text="view-image" />
-        </Dropdown.Item>
+      <Translator>
+        {({ translate }: any) => (
+          <>
+            <ActionSheetButton
+              icon="md-eye"
+              onClick={() => {
+                window.open(source, "_blank");
+              }}
+            >
+              <Translate text="view-image" />
+            </ActionSheetButton>
+            <ActionSheetButton
+              icon="copy"
+              onClick={() => {
+                android.copyClipborad(source);
+              }}
+            >
+              <Translate text="copy-link" />
+            </ActionSheetButton>
+            <ActionSheetButton
+              style={{ display: "none" }}
+              icon="md-refresh"
+              onClick={() => {
+                tools.getByElementId(getId, (e: HTMLElement) => {
+                  e.setAttribute("src", source);
+                });
+              }}
+            >
+              <Translate text="reload-image" />
+            </ActionSheetButton>
+            <ActionSheetButton
+              icon="md-link"
+              onClick={() => {
+                window.open(
+                  `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
+                    / /g,
+                    ""
+                  )}.json`
+                );
+              }}
+            >
+              <Translate text="view-hmtai-image-source" />
+            </ActionSheetButton>
 
-        <Dropdown.Item
-          onClick={() => {
-            android.copyClipborad(source);
-          }}
-        >
-          <Translate text="copy-link" />
-        </Dropdown.Item>
-
-        <Dropdown.Item
-          disabled
-          onClick={() => {
-            tools.getByElementId(getId, (e: any) => {
-              e.setAttribute("src", source);
-            });
-          }}
-        >
-          <Translate text="reload-image" />
-        </Dropdown.Item>
-
-        <Dropdown.Item
-          onClick={() => {
-            window.open(
-              `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
-                / /g,
-                ""
-              )}.json`
-            );
-          }}
-        >
-          <Translate text="view-hmtai-image-source" />
-        </Dropdown.Item>
-      </>
+            <ActionSheetButton
+              icon="md-download"
+              onClick={() => {
+                android.downloadPicture(getId, source, getId);
+              }}
+            >
+              <Translate text="download-text" />
+            </ActionSheetButton>
+          </>
+        )}
+      </Translator>
     );
   }
 }

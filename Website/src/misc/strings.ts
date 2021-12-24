@@ -17,6 +17,11 @@ export default {
     de: "ok",
   },
 
+  "option-diabled-string": {
+    en: "This option has been disabled",
+    de: "Diese Option wurde deaktiviert",
+  },
+
   // Context menu
   "download-text": {
     en: "Download",
@@ -82,8 +87,8 @@ export default {
 
   // Settings strings
   "displayDownload-string": {
-    en: "Display download button",
-    de: "Download Button anzeigen",
+    en: "Display more button",
+    de: "Mehr Button anzeigen",
   },
 
   "hideFAB-string": {
