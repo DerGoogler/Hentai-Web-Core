@@ -1,8 +1,7 @@
-import * as ons from "onsenui";
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
-import pkg from "./../package.json";
+import pkg from "./../../../package.json";
 import {
   Page,
   Toolbar,
@@ -14,22 +13,18 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
-import config from "./misc/config";
-import { android } from "./misc/android";
-import AnimeTab from "./builders/AnimeTab";
-import Settings from "./views/Settings";
-import AnimeContent from "./builders/AnimeContent";
-import tools from "./misc/tools";
-import Bootloader from "./index";
-import LoginActivity from "./LoginActivity";
-import { nsfwData, sfwData } from "./builders/AnimeContent/data";
+import config from "../../misc/config";
+import { android } from "../../misc/android";
+import AnimeTab from "../../builders/AnimeTab";
+import AnimeContent from "../../builders/AnimeContent";
+import tools from "../../misc/tools";
+import { nsfwData, sfwData } from "../../dataPacks/hmtai";
+import Bootloader from "../../index";
+import LoginActivity from "../../LoginActivity";
+import SpeedDialBuilder from "./SpeedDialBuilder";
 
-class MainActivity extends React.Component {
+class MainActivity extends React.Component<{ router?: any }> {
   private element!: HTMLElement | null;
-
-  public state = {
-    settings_string: "",
-  };
 
   public componentDidMount() {
     // To remvoe the button if is in app opened
@@ -55,10 +50,10 @@ class MainActivity extends React.Component {
         <div className="right">
           <ToolbarButton
             onClick={() => {
-              android.reload();
+              window.location.search = "activity=settings";
             }}
           >
-            <Icon icon="md-refresh"></Icon>
+            <Icon icon="md-settings"></Icon>
           </ToolbarButton>
         </div>
       </Toolbar>
@@ -74,10 +69,6 @@ class MainActivity extends React.Component {
       {
         label: "NSFW",
         content: <AnimeContent name="NSFW" data={nsfwData} />,
-      },
-      {
-        label: "Settings",
-        content: <Settings />,
       },
     ];
 
@@ -99,50 +90,7 @@ class MainActivity extends React.Component {
             <Fab>
               <Icon icon="md-more" />
             </Fab>
-            <SpeedDialItem
-              onClick={() => {
-                ons.notification.confirm({
-                  message: translate({
-                    text: "dialog-message",
-                  }),
-                  title: translate({
-                    text: "dialog-title",
-                  }),
-                  buttonLabels: [
-                    translate({
-                      text: "ok",
-                    }),
-                  ],
-                  animation: "default",
-                  primaryButtonIndex: 0,
-                  cancelable: false,
-                });
-              }}
-            >
-              <Icon icon="md-info" />
-            </SpeedDialItem>
-            <SpeedDialItem
-              onClick={() => {
-                window.open(
-                  translate({
-                    text: "repo-link",
-                  })
-                );
-              }}
-            >
-              <Icon icon="md-github" />
-            </SpeedDialItem>
-            <SpeedDialItem
-              id="download-app"
-              onClick={() => {
-                window.open(
-                  // If the relase code/name is not the package version, it'll not finded
-                  `https://github.com/DerGoogler/Hentai-Web/releases/download/${pkg.version}/app-release.apk`
-                );
-              }}
-            >
-              <Icon icon="md-download" />
-            </SpeedDialItem>
+            {SpeedDialBuilder}
           </SpeedDial>
         )}
       </Translator>

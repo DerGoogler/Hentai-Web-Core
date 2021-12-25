@@ -1,10 +1,10 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Page, ProgressCircular } from "react-onsenui";
+import { android } from "./misc/android";
 import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
-import MainActivity from "./MainActivity";
-import { android } from "./misc/android";
+import MainActivity from "./views/MainActivity";
 
 class SplashActivity extends React.Component {
   public componentDidMount() {
@@ -16,7 +16,6 @@ class SplashActivity extends React.Component {
       }
     }, 5000);
   }
-
   public render() {
     return (
       <Page>

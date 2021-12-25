@@ -1,4 +1,4 @@
-import MainActivity from "./MainActivity";
+import MainActivity from "./views/MainActivity";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import "onsenui/css/onsenui.css";
@@ -10,12 +10,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/default.css";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
-import translation from "./misc/strings";
+import translation from "./dataPacks/strings";
 import { android } from "./misc/android";
 import SplashActivity from "./SplashActivity";
 import { hot } from "react-hot-loader/root";
-import ContextMenu from "react-jsx-context-menu";
 import eruda from "eruda";
+import { BrowserRouter as Router, Routes, Switch, Route } from "react-router-dom";
+import SettingsActivity from "./views/SettingsActivity";
 
 class Bootloader {
   private element!: HTMLElement | null;
@@ -50,22 +51,7 @@ class Bootloader {
   public loadActivity(node: JSX.Element) {
     ReactDOM.render(
       <Provider language={this.checkLanguage()} translation={translation}>
-        <ContextMenu
-          menu={
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                zIndex: 0,
-              }}
-            >
-              <button>Button 1</button>
-              <button>Button 2</button>
-            </div>
-          }
-        >
-          {node}
-        </ContextMenu>
+        {node}
       </Provider>,
       this.mountNode
     );
@@ -86,7 +72,15 @@ class Bootloader {
           if (android.getPref("alwaysLogin") === "true") {
             android.removePref("loggedIn");
           }
-          this.loadActivity(<MainActivity />);
+          switch (this.getUrlParam("activity")) {
+            case "settings":
+              this.loadActivity(<SettingsActivity />);
+              break;
+
+            default:
+              this.loadActivity(<MainActivity />);
+              break;
+          }
         } else {
           this.loadActivity(<LoginActivity />);
         }

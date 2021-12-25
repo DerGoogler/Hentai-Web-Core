@@ -1,4 +1,4 @@
-import hmtai from "../../misc/hmtai";
+import hmtai from "../misc/hmtai";
 
 export const sfwData = [
   {
