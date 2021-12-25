@@ -142,7 +142,7 @@ export default {
   },
 
   "enableSwipeBetweenTabs-string": {
-    en: "Enable swipe between tabs",
+    en: "Swipe between tabs",
     de: "Wischen zwischen Registerkarten",
   },
 

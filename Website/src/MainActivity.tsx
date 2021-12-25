@@ -17,12 +17,12 @@ import {
 import config from "./misc/config";
 import { android } from "./misc/android";
 import AnimeTab from "./builders/AnimeTab";
-import NSFW from "./views/NSFW";
 import Settings from "./views/Settings";
-import SFW from "./views/SFW";
+import AnimeContent from "./builders/AnimeContent";
 import tools from "./misc/tools";
 import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
+import { nsfwData, sfwData } from "./builders/AnimeContent/data";
 
 class MainActivity extends React.Component {
   private element!: HTMLElement | null;
@@ -69,11 +69,11 @@ class MainActivity extends React.Component {
     const sections = [
       {
         label: "SFW",
-        content: <SFW />,
+        content: <AnimeContent name="SFW" data={sfwData} />,
       },
       {
         label: "NSFW",
-        content: <NSFW />,
+        content: <AnimeContent name="NSFW" data={nsfwData} />,
       },
       {
         label: "Settings",

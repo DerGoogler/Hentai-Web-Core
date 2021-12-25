@@ -1,18 +1,19 @@
-import AnimePicture from "../../builders/AnimePicture";
+import AnimePicture from "../AnimePicture";
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { List, SearchInput } from "react-onsenui";
-import data from "./data";
-import ContentBody from "../../builders/ContentBody";
+import ContentBody from "../ContentBody";
 import { android } from "../../misc/android";
 import tools from "../../misc/tools";
 
-class NSFW extends React.Component {
+class AnimeContent extends React.Component<{ data: any; name: string }> {
+  private element!: HTMLElement | null;
+
   private filter(e: any) {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
     filter = e.target.value.toUpperCase();
-    ul = document.getElementById("picture-list-nsfw");
+    ul = document.getElementById("picture-list-sfw");
     // @ts-ignore
     li = ul.getElementsByTagName("card");
 
@@ -35,7 +36,7 @@ class NSFW extends React.Component {
     /**
      * To load for every object an own AnimePicture from `data.ts`
      */
-    const listItems = data.map((item) => (
+    const listItems = this.props.data.map((item: { name: string; source: any }) => (
       <AnimePicture key={item.name} source={item.source} note={item.name} />
     ));
 
@@ -63,7 +64,7 @@ class NSFW extends React.Component {
           >
             <SearchInput
               // @ts-ignore
-              placeholder="Search NSWF"
+              placeholder={"Search " + this.props.name}
               style={{
                 display: tools.typeIF(android.getPref("hideSearchbar"), "none", ""),
               }}
@@ -71,11 +72,11 @@ class NSFW extends React.Component {
               onChange={this.filter}
             />
           </div>
-          <List id="picture-list-nsfw">{listItems}</List>
+          <List id="picture-list-sfw">{listItems}</List>
         </div>
       </ContentBody>
     );
   }
 }
 
-export default hot(NSFW);
+export default hot(AnimeContent);
