@@ -17,7 +17,7 @@ import android.util.*;
 
 public class AESCrypt {
     private static final String TAG = "AESCrypt";
-    private static final String AES_MODE = "AES/CBC/PKCS7Padding";
+    private static final String AES_MODE = "AES";
     private static final String CHARSET = "UTF-8";
     private static final String HASH_ALGORITHM = "SHA-256";
     private static final byte[] ivBytes = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
