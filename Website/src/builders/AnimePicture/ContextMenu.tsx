@@ -26,7 +26,7 @@ class ContextMenu extends React.Component<{
             <ActionSheetButton
               icon="md-eye"
               onClick={() => {
-                window.open(source, "_blank");
+                android.open(source);
               }}
             >
               <Translate text="view-image" />
@@ -53,7 +53,7 @@ class ContextMenu extends React.Component<{
             <ActionSheetButton
               icon="md-link"
               onClick={() => {
-                window.open(
+                android.open(
                   `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
                     / /g,
                     ""

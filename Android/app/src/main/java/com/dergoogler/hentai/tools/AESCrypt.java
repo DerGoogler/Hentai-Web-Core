@@ -1,4 +1,4 @@
-package com.dergoogler.hentai;
+package com.dergoogler.hentai.tools;
 
 
 import javax.crypto.spec.SecretKeySpec;

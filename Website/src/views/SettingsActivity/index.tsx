@@ -27,9 +27,6 @@ class SettingsActivity extends React.Component {
             <ListHeader>
               <Translate text="appearance" />
             </ListHeader>
-            <SettingsSwitch _key="enableDarkmode" disabled={true}>
-              enableDarkmode-string
-            </SettingsSwitch>
             <SettingsSwitch
               disabled={window.navigator.userAgent === config.options.userAgent}
               _key="useIOSdesign"

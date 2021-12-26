@@ -13,17 +13,16 @@ const SpeedDial = [
     id: "download-app",
     icon: "md-download",
     onClick: () => {
-      window.open(
+      android.open(
         // If the relase code/name is not the package version, it'll not finded
-        `https://github.com/DerGoogler/Hentai-Web/releases/download/${pkg.version}/app-release.apk`,
-        "_blank"
+        `https://github.com/DerGoogler/Hentai-Web/releases/download/${pkg.version}/app-release.apk`
       );
     },
   },
   {
     icon: "md-github",
     onClick: () => {
-      window.open("https://github.com/DerGoogler/Hentai-Web/", "_blank");
+      android.open("https://github.com/DerGoogler/Hentai-Web/");
     },
   },
 ];

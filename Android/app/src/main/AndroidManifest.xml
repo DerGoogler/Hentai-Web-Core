@@ -3,22 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dergoogler.hentai">
 
+    <!-- Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- External Storage -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28"
         tools:ignore="ScopedStorage" />
 
+    <!-- Camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+    <!-- Geolocation -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- RECORD AUDIO -->
+    <!-- The tablet device may not be supported when the permission is applied. -->
+    <uses-permission android:name="android.permission.MICROPHONE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-feature android:name="android.hardware.audio.low_latency" />
+    <uses-feature android:name="android.hardware.audio.pro" />
+    <uses-feature android:name="android.hardware.microphone"/>
+
+    <!-- Get Package Info -->
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <!-- Screen -->
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:resizeable="true"
+        android:anyDensity="true" />
+
     <application
-        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/app_backup_rules"
+        android:largeHeap="true"
+        android:extractNativeLibs="false"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+
+        <!-- EnableSafeBrowsing -->
+        <meta-data
+            android:name="android.webkit.WebView.EnableSafeBrowsing"
+            android:value="true" />
+
         <activity
-            android:name="com.dergoogler.hentai.MainActivity"
+            android:name="com.dergoogler.hentai.activity.WebViewActivity"
+            android:launchMode="singleTop"
+            android:configChanges="keyboardHidden|orientation|screenLayout|screenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +74,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Provider -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.snc.sample.webview.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
     </application>
 
 </manifest>

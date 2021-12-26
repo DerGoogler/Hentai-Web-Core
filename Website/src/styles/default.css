@@ -54,7 +54,7 @@ body {
 
 .search-input--custom {
   box-shadow: none;
-  background-color: white;
+  background-color: transparent;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }

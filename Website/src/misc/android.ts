@@ -57,6 +57,11 @@ export interface Android {
    * @Native
    */
   decryptAES(password?: string, text?: string): string;
+
+  /**
+   * @Native
+   */
+  open(link: string): void;
 }
 
 export class android {
@@ -203,6 +208,18 @@ export class android {
       return window.Android.decryptAES(password, text);
     } else {
       return window.atob(text);
+    }
+  }
+
+  /**
+   * Opens an link with native Android method
+   * @param link
+   */
+  static open(link: string): void {
+    if (window.navigator.userAgent === config.options.userAgent) {
+      window.Android.open(link);
+    } else {
+      window.open(link, "_blank");
     }
   }
 }
