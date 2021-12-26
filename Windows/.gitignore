@@ -1,6 +1,1 @@
-.DS_Store
-dist/
-node_modules/
-thumbs.db
-.idea/
-*.sketch
+node_modules
