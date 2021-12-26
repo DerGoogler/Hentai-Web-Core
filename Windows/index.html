@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <link href="./styles.css" rel="stylesheet">
-    <title>Hello World!</title>
+    <meta charset="UTF-8" />
+
+    <style>
+      html {
+        width: 100%;
+        height: 100%;
+        user-select: none;
+      }
+
+      body {
+        user-select: none;
+        position: absolute;
+        margin: 0px;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        background-color: #4a148c;
+        color: white;
+        font-family: -apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande",
+          sans-serif;
+      }
+
+      #container {
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <webview
+      id="container"
+      src="https://www.dergoogler.com/hentai-web"
+      webpreferences="devTools=false, nodeIntegration=true"
+      useragent="HENTAI_WEB_WINDOWS"
+    ></webview>
 
     <!-- You can also require other files to run in this process -->
     <script src="./renderer.js"></script>

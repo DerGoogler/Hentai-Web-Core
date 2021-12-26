@@ -1,6 +1,6 @@
 {
   "name": "hentai-web-windows",
-  "version": "1.3.4",
+  "version": "1.3.6",
   "license": "MIT",
   "author": "Der_Googler",
   "main": "main.js",
@@ -13,10 +13,13 @@
     }
   },
   "scripts": {
-    "start": "electron ."
+    "build-dev": "electron ."
   },
   "repository": "https://github.com/DerGoogler/Hentai-Web/Windows",
   "devDependencies": {
     "electron": "^16.0.5"
+  },
+  "dependencies": {
+    "custom-electron-titlebar": "^3.2.10"
   }
 }

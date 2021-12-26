@@ -7,17 +7,28 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    frame: true,
+    backgroundColor: "#4a148c",
+    fullscreenable: true,
+    titleBarStyle: "hidden", // add this line
+    autoHideMenuBar: true,
+    title: "Hentai Web Windows",
     icon: path.join(__dirname, "ic_launcher.png"),
     webPreferences: {
+      webSecurity: false,
+      enableRemoteModule: true,
+      nodeIntegration: true,
+      contextIsolation: false,
+      webviewTag: true,
       preload: path.join(__dirname, "preload.js"),
     },
   });
 
-  const url = "https://dergoogler.com/hentai-web";
-  const url_ = "http://127.0.0.1:5500/";
   // and load the index.html of the app.
-  mainWindow.loadURL(url_);
-
+  mainWindow.loadFile("index.html");
+  mainWindow.on("page-title-updated", function (e) {
+    e.preventDefault();
+  });
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }

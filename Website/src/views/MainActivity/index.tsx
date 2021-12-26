@@ -22,6 +22,7 @@ import { nsfwData, sfwData } from "../../dataPacks/hmtai";
 import Bootloader from "../../index";
 import LoginActivity from "../../LoginActivity";
 import SpeedDialBuilder from "./SpeedDialBuilder";
+import ons from "onsenui";
 
 class MainActivity extends React.Component<{ router?: any }> {
   private element!: HTMLElement | null;
@@ -45,7 +46,7 @@ class MainActivity extends React.Component<{ router?: any }> {
 
   private renderToolbar() {
     return (
-      <Toolbar>
+      <Toolbar modifier="material noshadow windows">
         <div className="center">{config.base.title}</div>
         <div className="right">
           <ToolbarButton
@@ -54,6 +55,38 @@ class MainActivity extends React.Component<{ router?: any }> {
             }}
           >
             <Icon icon="md-settings"></Icon>
+          </ToolbarButton>
+          <ToolbarButton
+            // Close button for the Windows app
+            style={{
+              display: tools.typeIF(
+                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
+                "",
+                "none"
+              ),
+            }}
+            onClick={() => {
+              ons.notification.confirm({
+                message: "Do you want to close this app?",
+                title: "Close app?",
+                buttonLabels: ["Yes", "No"],
+                animation: "default",
+                primaryButtonIndex: 1,
+                cancelable: true,
+                callback: (index: number) => {
+                  switch (index) {
+                    case 0:
+                      window.close();
+                      break;
+
+                    default:
+                      break;
+                  }
+                },
+              });
+            }}
+          >
+            <Icon icon="md-close"></Icon>
           </ToolbarButton>
         </div>
       </Toolbar>

@@ -7,7 +7,8 @@ class tools {
    * @param string
    * @returns {Boolean}
    */
-  static stringToBoolean(string: string): boolean {
+  static stringToBoolean(string: any): boolean {
+    if (typeof string == "boolean") return string;
     switch (string.toLowerCase().trim()) {
       case "true":
       case "yes":

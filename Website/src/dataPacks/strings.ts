@@ -2,19 +2,29 @@
  * Strings of the app
  */
 export default {
-  "dialog-message": {
-    en: "This web app contains +18 content",
-    de: "Die Seite beinhaltet Bilder die nicht für unter 18 sind!",
+  "close-windows-dialog-message-app-string": {
+    en: "Do you want to close this app?",
+    de: "Möchtest Du diese App schließen?",
   },
 
-  "dialog-title": {
-    en: "Content",
-    de: "Inhalt",
+  "close-windows-dialog-title-app-string": {
+    en: "Close app?",
+    de: "App schließen",
   },
 
   ok: {
     en: "ok",
     de: "ok",
+  },
+
+  yes: {
+    en: "Yes",
+    de: "Ja",
+  },
+
+  no: {
+    en: "No",
+    de: "Nein",
   },
 
   "option-diabled-string": {
