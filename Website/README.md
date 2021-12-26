@@ -62,19 +62,19 @@ Add more settings in `view/Settings/index.tsx`:
 If `loggedIn` is false it'll load the `<LoginActivity/>`
 
 ```tsx
-if (android.getPref("loggedIn") === "false") {
+if (native.getPref("loggedIn") === "false") {
   new Bootloader().loadActivity(<LoginActivity />);
 }
 ```
 
-Hide Elements with `tools.typeIF()` and `android.getPref()`
+Hide Elements with `tools.typeIF()` and `native.getPref()`
 
 > The button gets hidden if `displayDownload` is `false` or `undefined`
 
 ```tsx
 <Button
   style={{
-    display: tools.typeIF(android.getPref("displayDownload"), "flex", "none"),
+    display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
   }}
   onClick={this.handleClick}
   variant={this.buttonDesign}
@@ -93,16 +93,16 @@ Complex usage with `tools.typeIF()`
   style={{
     width: "100%",
     borderRadius: tools.typeIF(
-      android.getPref("fitImageToCard"),
+      native.getPref("fitImageToCard"),
       tools.typeIF(
-        android.getPref("displayDownload"),
+        native.getPref("displayDownload"),
         tools.typeIF(
-          android.getPref("removeTitle"),
+          native.getPref("removeTitle"),
           "0.25rem 0.25rem 0rem 0rem",
           "0rem 0rem 0rem 0rem"
         ),
         tools.typeIF(
-          android.getPref("removeTitle"),
+          native.getPref("removeTitle"),
           "0.25rem 0.25rem 0.25rem 0.25rem",
           "0rem 0rem 0.25rem 0.25rem"
         )

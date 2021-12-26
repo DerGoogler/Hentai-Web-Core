@@ -1,7 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Page, ProgressCircular } from "react-onsenui";
-import { android } from "./misc/android";
+import native from "./native";
 import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
 import MainActivity from "./views/MainActivity";
@@ -9,7 +9,7 @@ import MainActivity from "./views/MainActivity";
 class SplashActivity extends React.Component {
   public componentDidMount() {
     setTimeout(() => {
-      if (android.getPref("loggedIn") === "false") {
+      if (native.getPref("loggedIn") === "false") {
         new Bootloader().loadActivity(<LoginActivity />);
       } else {
         new Bootloader().loadActivity(<MainActivity />);
@@ -18,7 +18,7 @@ class SplashActivity extends React.Component {
   }
   public render() {
     return (
-      <Page>
+      <Page modifier="windows">
         <div
           style={{
             textAlign: "center",

@@ -1,4 +1,5 @@
-import { Android } from "../misc/android";
+import Android from "../native/android.i";
+import Windows from "../native/window.i";
 
 declare global {
   /**
@@ -9,5 +10,10 @@ declare global {
      * Declare the custom window event (`Android`) for the WebView
      */
     Android: Android;
+
+    /**
+     * Declare the custom window event (`Windows`) for the WebView
+     */
+    Windows: Windows;
   }
 }

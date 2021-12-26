@@ -3,7 +3,7 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { List, SearchInput } from "react-onsenui";
 import ContentBody from "../ContentBody";
-import { android } from "../../misc/android";
+import native from "../../native";
 import tools from "../../misc/tools";
 
 class AnimeContent extends React.Component<{ data: any; name: string }> {
@@ -66,7 +66,7 @@ class AnimeContent extends React.Component<{ data: any; name: string }> {
               // @ts-ignore
               placeholder={"Search " + this.props.name}
               style={{
-                display: tools.typeIF(android.getPref("hideSearchbar"), "none", ""),
+                display: tools.typeIF(native.getPref("hideSearchbar"), "none", ""),
               }}
               modifier="custom"
               onChange={this.filter}

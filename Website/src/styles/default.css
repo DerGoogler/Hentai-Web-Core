@@ -59,6 +59,10 @@ body {
   border-radius: 0.25rem;
 }
 
-.toolbar--windows {
+.drag--windows {
+  -webkit-app-region: drag;
+}
+
+.page--windows {
   -webkit-app-region: drag;
 }

@@ -14,7 +14,7 @@ import {
   Icon,
 } from "react-onsenui";
 import config from "../../misc/config";
-import { android } from "../../misc/android";
+import native from "../../native";
 import AnimeTab from "../../builders/AnimeTab";
 import AnimeContent from "../../builders/AnimeContent";
 import tools from "../../misc/tools";
@@ -39,15 +39,15 @@ class MainActivity extends React.Component<{ router?: any }> {
       element.style.display = "none";
     });
 
-    if (android.getPref("loggedIn") === "false") {
+    if (native.getPref("loggedIn") === "false") {
       new Bootloader().loadActivity(<LoginActivity />);
     }
   }
 
   private renderToolbar() {
     return (
-      <Toolbar modifier="material noshadow windows">
-        <div className="center">{config.base.title}</div>
+      <Toolbar>
+        <div className="center drag--windows">{config.base.title}</div>
         <div className="right">
           <ToolbarButton
             onClick={() => {
@@ -55,6 +55,21 @@ class MainActivity extends React.Component<{ router?: any }> {
             }}
           >
             <Icon icon="md-settings"></Icon>
+          </ToolbarButton>
+          <ToolbarButton
+            // Close button for the Windows app
+            style={{
+              display: tools.typeIF(
+                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
+                "",
+                "none"
+              ),
+            }}
+            onClick={() => {
+              window.Windows.minimize();
+            }}
+          >
+            <Icon icon="md-minus"></Icon>
           </ToolbarButton>
           <ToolbarButton
             // Close button for the Windows app
@@ -76,7 +91,7 @@ class MainActivity extends React.Component<{ router?: any }> {
                 callback: (index: number) => {
                   switch (index) {
                     case 0:
-                      window.close();
+                      window.Windows.close();
                       break;
 
                     default:
@@ -131,11 +146,11 @@ class MainActivity extends React.Component<{ router?: any }> {
   }
 
   private tabIndexChecker(): number {
-    var get = android.getPref("tabIndex");
+    var get = native.getPref("tabIndex");
     if (get === undefined || get === null || get === "") {
       return 0;
     } else {
-      if (android.getPref("saveLastUsedTab") === "true") {
+      if (native.getPref("saveLastUsedTab") === "true") {
         return Number(get);
       } else {
         return 0;
@@ -148,13 +163,13 @@ class MainActivity extends React.Component<{ router?: any }> {
       <Page renderToolbar={this.renderToolbar} renderFixed={this.renderFixed}>
         <Tabbar
           // @ts-ignore
-          swipeable={tools.stringToBoolean(android.getPref("enableSwipeBetweenTabs"))}
+          swipeable={tools.stringToBoolean(native.getPref("enableSwipeBetweenTabs"))}
           position="top"
           index={this.tabIndexChecker()}
           // @ts-ignore
           onPreChange={(event: any) => {
             if (event.index != this.tabIndexChecker) {
-              android.setPref("tabIndex", event.index);
+              native.setPref("tabIndex", event.index);
             }
           }}
           renderTabs={this.renderTabs}

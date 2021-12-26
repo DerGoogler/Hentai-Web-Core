@@ -8,7 +8,7 @@ import "./styles/default.css";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
 import translation from "./dataPacks/strings";
-import { android } from "./misc/android";
+import native from "./native";
 import SplashActivity from "./SplashActivity";
 import { hot } from "react-hot-loader/root";
 import eruda from "eruda";
@@ -28,7 +28,7 @@ class Bootloader {
   }
 
   private checkLanguage() {
-    var get = android.getPref("language");
+    var get = native.getPref("language");
     if (get === "false") {
       return "en";
     } else {
@@ -37,7 +37,7 @@ class Bootloader {
   }
 
   private loadConsole() {
-    if (android.getPref("erudaEnabled") === "true") {
+    if (native.getPref("erudaEnabled") === "true") {
       eruda.init({
         tool: ["console", "elements"],
         plugins: ["fps", "timing", "memory", "benchmark"],
@@ -56,19 +56,17 @@ class Bootloader {
 
   public init() {
     ons.ready(() => {
-      const getDesignCookie = android.getPref("useIOSdesign");
+      const getDesignCookie = native.getPref("useIOSdesign");
       if (getDesignCookie === "true") {
         ons.platform.select("ios");
       } else {
         ons.platform.select("android");
       }
       this.loadConsole();
-      if (android.getPref("disableSplashscreen") === "true") {
-        if (android.getPref("loggedIn") === "true") {
+      if (native.getPref("disableSplashscreen")) {
+        if (native.getPref("loggedIn") === "true") {
           // Removes the `loggedIn` key if always login is enabled
-          if (android.getPref("alwaysLogin") === "true") {
-            android.removePref("loggedIn");
-          }
+          if (native.getPref("alwaysLogin") === "true") return native.removePref("loggedIn");
           switch (this.getUrlParam("activity")) {
             case "settings":
               this.loadActivity(<SettingsActivity />);

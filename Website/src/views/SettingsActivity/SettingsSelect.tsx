@@ -2,7 +2,7 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { ListItem, Select } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import { android } from "../../misc/android";
+import native from "../../native";
 
 /**
  * Creates an switch able dialog box
@@ -20,7 +20,7 @@ class SettingsSelect extends React.Component<{
    * @returns {String}
    */
   private getSetting(key: string): string {
-    var get = android.getPref(key);
+    var get = native.getPref(key);
     if (get === undefined || get === null || get === "") {
       return "en";
     } else {
@@ -29,7 +29,7 @@ class SettingsSelect extends React.Component<{
   }
 
   private setSetting(key: string, data: any) {
-    android.setPref(key, data);
+    native.setPref(key, data);
   }
 
   public render() {

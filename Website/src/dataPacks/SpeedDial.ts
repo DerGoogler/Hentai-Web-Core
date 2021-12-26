@@ -1,19 +1,19 @@
 import { hot } from "react-hot-loader/root";
-import { android } from "../misc/android";
+import native from "../native";
 import pkg from "../../package.json";
 
 const SpeedDial = [
   {
     icon: "md-refresh",
     onClick: () => {
-      android.reload();
+      native.reload();
     },
   },
   {
     id: "download-app",
     icon: "md-download",
     onClick: () => {
-      android.open(
+      native.open(
         // If the relase code/name is not the package version, it'll not finded
         `https://github.com/DerGoogler/Hentai-Web/releases/download/${pkg.version}/app-release.apk`
       );
@@ -22,7 +22,7 @@ const SpeedDial = [
   {
     icon: "md-github",
     onClick: () => {
-      android.open("https://github.com/DerGoogler/Hentai-Web/");
+      native.open("https://github.com/DerGoogler/Hentai-Web/");
     },
   },
 ];

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Card, Button } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
-import { android } from "../../misc/android";
+import native from "../../native";
 import ContextMenu from "./ContextMenu";
 import tools from "../../misc/tools";
 import { ActionSheet, ActionSheetButton, Icon } from "react-onsenui";
@@ -59,7 +59,7 @@ class AnimePicture extends React.Component<{
             <card>
               <Card key={this.getID} style={{ padding: "0px" }}>
                 <Card.Header
-                  style={{ display: tools.typeIF(android.getPref("removeTitle"), "none", "block") }}
+                  style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}
                 >
                   {/*
                 // @ts-ignore */}
@@ -72,7 +72,7 @@ class AnimePicture extends React.Component<{
                     </h4>
                     <Button
                       style={{
-                        display: tools.typeIF(android.getPref("displayDownload"), "flex", "none"),
+                        display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
                       }}
                       onClick={this.handleClick}
                       variant={this.buttonDesign}
@@ -85,7 +85,7 @@ class AnimePicture extends React.Component<{
                 </Card.Header>
                 <Card.Body
                   style={{
-                    padding: tools.typeIF(android.getPref("fitImageToCard"), "0px", ""),
+                    padding: tools.typeIF(native.getPref("fitImageToCard"), "0px", ""),
                     display: "flex",
                     justifyContent: "center",
                     flexDirection: "column",
@@ -101,16 +101,16 @@ class AnimePicture extends React.Component<{
                         style={{
                           width: "100%",
                           borderRadius: tools.typeIF(
-                            android.getPref("fitImageToCard"),
+                            native.getPref("fitImageToCard"),
                             tools.typeIF(
-                              android.getPref("displayDownload"),
+                              native.getPref("displayDownload"),
                               tools.typeIF(
-                                android.getPref("removeTitle"),
+                                native.getPref("removeTitle"),
                                 "0.25rem 0.25rem 0rem 0rem",
                                 "0rem 0rem 0rem 0rem"
                               ),
                               tools.typeIF(
-                                android.getPref("removeTitle"),
+                                native.getPref("removeTitle"),
                                 "0.25rem 0.25rem 0.25rem 0.25rem",
                                 "0rem 0rem 0.25rem 0.25rem"
                               )

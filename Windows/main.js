@@ -1,12 +1,12 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, session } = require("electron");
 const path = require("path");
 
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 400,
+    height: 750,
     frame: true,
     backgroundColor: "#4a148c",
     fullscreenable: true,
@@ -15,22 +15,29 @@ function createWindow() {
     title: "Hentai Web Windows",
     icon: path.join(__dirname, "ic_launcher.png"),
     webPreferences: {
-      webSecurity: false,
-      enableRemoteModule: true,
+      devTools: true,
       nodeIntegration: true,
-      contextIsolation: false,
-      webviewTag: true,
-      preload: path.join(__dirname, "preload.js"),
+      preload: path.join(app.getAppPath(), "preload.js"),
+      contextIsolation: true,
+      enableRemoteModule: true,
     },
   });
+  const webContents = mainWindow.webContents;
+
+  require("@electron/remote/main").initialize();
+  require("@electron/remote/main").enable(webContents);
 
   // and load the index.html of the app.
-  mainWindow.loadFile("index.html");
+  const url = "https://www.dergoogler.com/hentai-web";
+  const url_ = "http://192.168.178.81:5500/";
+
+  mainWindow.user;
+  mainWindow.loadURL(url_);
   mainWindow.on("page-title-updated", function (e) {
     e.preventDefault();
   });
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+
+  webContents.setUserAgent("HENTAI_WEB_WINDOWS");
 }
 
 // This method will be called when Electron has finished

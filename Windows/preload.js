@@ -1,9 +1,18 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 // preload.js
-const remote = require("electron").remote;
-const { BrowserWindow } = remote;
+const { BrowserWindow } = require("@electron/remote");
+const { contextBridge } = require("electron");
 
-window.closeApp = () => {
-  BrowserWindow.getCurrentWindow().window.close();
-};
+contextBridge.exposeInMainWorld("Windows", {
+  newWindow: (width = 800, height = 600, uri) => {
+    let win = new BrowserWindow({ width: width, height: height });
+    win.loadURL(uri);
+  },
+  close: () => {
+    require("@electron/remote").getCurrentWindow().close();
+  },
+  minimize: () => {
+    require("@electron/remote").getCurrentWindow().minimize();
+  },
+});

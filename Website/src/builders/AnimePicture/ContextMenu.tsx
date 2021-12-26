@@ -2,7 +2,7 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { ActionSheetButton } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import { android } from "../../misc/android";
+import native from "../../native";
 import tools from "../../misc/tools";
 
 /**
@@ -26,7 +26,7 @@ class ContextMenu extends React.Component<{
             <ActionSheetButton
               icon="md-eye"
               onClick={() => {
-                android.open(source);
+                native.open(source);
               }}
             >
               <Translate text="view-image" />
@@ -34,7 +34,7 @@ class ContextMenu extends React.Component<{
             <ActionSheetButton
               icon="copy"
               onClick={() => {
-                android.copyClipborad(source);
+                native.copyClipborad(source);
               }}
             >
               <Translate text="copy-link" />
@@ -53,7 +53,7 @@ class ContextMenu extends React.Component<{
             <ActionSheetButton
               icon="md-link"
               onClick={() => {
-                android.open(
+                native.open(
                   `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
                     / /g,
                     ""
@@ -67,7 +67,7 @@ class ContextMenu extends React.Component<{
             <ActionSheetButton
               icon="md-download"
               onClick={() => {
-                android.downloadPicture(getId, source, getId);
+                native.downloadPicture(getId, source, getId);
               }}
             >
               <Translate text="download-text" />

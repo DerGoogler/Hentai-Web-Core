@@ -2,7 +2,7 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { ListItem, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import { android } from "../../misc/android";
+import native from "../../native";
 
 /**
  * Create an precreated switch
@@ -21,7 +21,7 @@ class SettingsSwitch extends React.Component<{
    * @returns {Boolean}
    */
   private getSetting(key: string): boolean {
-    var get = android.getPref(key);
+    var get = native.getPref(key);
     if (get === undefined || get === null || get === "" || get === "false") {
       return false;
     } else {
@@ -30,7 +30,7 @@ class SettingsSwitch extends React.Component<{
   }
 
   private setSetting(key: string, data: any) {
-    android.setPref(key, data);
+    native.setPref(key, data);
   }
 
   public render() {

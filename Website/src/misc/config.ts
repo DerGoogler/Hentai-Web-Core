@@ -7,9 +7,8 @@ const config = {
   },
   options: {
     userAgent: "HENTAI_WEB_AGENT",
+    userAgentWindows: "HENTAI_WEB_WINDOWS",
   },
 };
 
 export default hot(config);
-
-

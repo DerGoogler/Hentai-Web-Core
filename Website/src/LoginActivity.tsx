@@ -3,7 +3,7 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Toolbar, Page, Input, Button } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import { android } from "./misc/android";
+import native from "./native";
 
 class LoginActivity extends React.Component<{}, { username: string; password: string }> {
   public constructor(props: any) {
@@ -23,11 +23,11 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
 
   private handleClick = () => {
     if (
-      this.state.username === android.getBuildMANUFACTURER() &&
-      this.state.password === android.getBuildMODEL()
+      this.state.username === native.getBuildMANUFACTURER() &&
+      this.state.password === native.getBuildMODEL()
     ) {
-      android.setPref("loggedIn", "true");
-      android.reload();
+      native.setPref("loggedIn", "true");
+      native.reload();
     } else {
       ons.notification.alert("Username or password incorrect!");
     }

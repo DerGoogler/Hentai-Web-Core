@@ -7,6 +7,7 @@ import ContentBody from "../../builders/ContentBody";
 import { Provider, Translate, Translator } from "react-translated";
 import SettingsSelect from "./SettingsSelect";
 import config from "../../misc/config";
+import tools from "../../misc/tools";
 
 class SettingsActivity extends React.Component {
   renderToolbar() {
@@ -28,6 +29,13 @@ class SettingsActivity extends React.Component {
               <Translate text="appearance" />
             </ListHeader>
             <SettingsSwitch
+              style={{
+                display: tools.typeIF(
+                  window.navigator.userAgent === config.options.userAgent,
+                  "none",
+                  ""
+                ),
+              }}
               disabled={window.navigator.userAgent === config.options.userAgent}
               _key="useIOSdesign"
             >
@@ -49,6 +57,13 @@ class SettingsActivity extends React.Component {
             </ListHeader>
             <SettingsSwitch _key="alwaysLogin">alwaysLogin-string</SettingsSwitch>
             <SettingsSwitch
+              style={{
+                display: tools.typeIF(
+                  window.navigator.userAgent != config.options.userAgent,
+                  "none",
+                  ""
+                ),
+              }}
               disabled={window.navigator.userAgent != config.options.userAgent}
               _key="erudaEnabled"
             >

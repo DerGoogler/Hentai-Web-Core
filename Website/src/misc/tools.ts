@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root";
-import { android } from "./android";
+import native from "../native";
 
 class tools {
   /**
@@ -7,9 +7,9 @@ class tools {
    * @param string
    * @returns {Boolean}
    */
-  static stringToBoolean(string: any): boolean {
+  static stringToBoolean(string: string): boolean {
     if (typeof string == "boolean") return string;
-    switch (string.toLowerCase().trim()) {
+    switch (string) {
       case "true":
       case "yes":
       case "1":
@@ -50,7 +50,7 @@ class tools {
 
   static settingsEfect(key: string, _element: string, callback: Function) {
     var element: HTMLElement | null;
-    if (android.getPref(key) === "true") {
+    if (native.getPref(key) === "true") {
       if ((element = document.querySelector(_element))) {
         if (typeof callback == "function") {
           callback(element);
