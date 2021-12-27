@@ -138,7 +138,11 @@ class AnimePicture extends React.Component<{
                         title={this.getNote + "'s options"}
                       >
                         <ContextMenu source={source} note={note} getId={this.getID} />
-                        <ActionSheetButton onClick={this.handleCancel} icon={"md-close"}>
+                        <ActionSheetButton
+                          onClick={this.handleCancel}
+                          modifier={native.checkPlatformForBorderStyle}
+                          icon={"md-close"}
+                        >
                           Cancel
                         </ActionSheetButton>
                       </ActionSheet>

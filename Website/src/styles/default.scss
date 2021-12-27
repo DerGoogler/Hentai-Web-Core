@@ -123,6 +123,10 @@ body {
   border: 1px solid #00000000;
 }
 
+.action-sheet-button--windows:last-of-type {
+  border-radius: 0px 0px 8px 8px;
+}
+
 .alert-dialog-mask--windows {
   border-radius: 8px;
   border: 1px solid #00000000;
