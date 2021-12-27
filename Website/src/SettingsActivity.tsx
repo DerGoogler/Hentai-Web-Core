@@ -5,6 +5,7 @@ import {
   Icon,
   Input,
   ListItem,
+  ListTitle,
   Page,
   Toolbar,
   ToolbarButton,
@@ -29,6 +30,7 @@ class SettingsActivity extends React.Component {
           title={<Translate text="settings" />}
           hasBackButton={true}
           hasWindowsButtons={true}
+          hasDarkMode={true}
         />
       </Toolbar>
     );
@@ -36,12 +38,15 @@ class SettingsActivity extends React.Component {
 
   public render() {
     return (
-      <Page renderToolbar={this.renderToolbar}>
+      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
         <ContentBody>
           <List>
-            <ListHeader>
+            <ListTitle>
               <Translate text="appearance" />
-            </ListHeader>
+            </ListTitle>
+            <SettingsBuilder type="switch" _key="enableDarkmode">
+              enableDarkmode-string
+            </SettingsBuilder>
             <SettingsBuilder
               type="switch"
               style={{
@@ -72,9 +77,9 @@ class SettingsActivity extends React.Component {
               language-string
             </SettingsBuilder>
 
-            <ListHeader>
+            <ListTitle>
               <Translate text="card" />
-            </ListHeader>
+            </ListTitle>
             <SettingsBuilder type="switch" _key="fitImageToCard">
               fitImageToCard-string
             </SettingsBuilder>
@@ -85,9 +90,9 @@ class SettingsActivity extends React.Component {
               removeTitle-string
             </SettingsBuilder>
 
-            <ListHeader>
+            <ListTitle>
               <Translate text="security" />
-            </ListHeader>
+            </ListTitle>
             <SettingsBuilder
               type="switch"
               _key="alwaysLogin"
@@ -126,9 +131,9 @@ class SettingsActivity extends React.Component {
               erudaEnabled-string
             </SettingsBuilder>
 
-            <ListHeader>
+            <ListTitle>
               <Translate text="others" />
-            </ListHeader>
+            </ListTitle>
             <SettingsBuilder type="switch" _key="enableSwipeBetweenTabs">
               enableSwipeBetweenTabs-string
             </SettingsBuilder>
@@ -145,22 +150,24 @@ class SettingsActivity extends React.Component {
                 display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
               }}
             >
-              <ListHeader>
+              <ListTitle>
                 Electron <Badge bg="danger">DANGER</Badge>
-              </ListHeader>
+              </ListTitle>
               <SettingsBuilder
                 type="select"
                 selectDefaultValue="<width>375</width><height>812</height>"
-                _key="screenSizeInUse"
+                _key="electron.screenSizeInUse"
                 callback={(e: any, _key: string) => {
-                  const key = "electronWindowSize";
+                  const key = "electron.WindowSize";
                   const regex = /<width>(.*?)<\/width><height>(.*?)<\/height>/gm;
+                  const width = Number(e.target.value.replace(regex, "$1"));
+                  const height = Number(e.target.value.replace(regex, "$2"));
 
                   ons.notification.confirm({
                     message: `You want change the screen size to ${e.target.value.replace(
                       regex,
                       "$1x$2"
-                    )}? The app will close and need to be reopened.`,
+                    )}?`,
                     title: "Change size?",
                     buttonLabels: ["Yes", "No"],
                     animation: "default",
@@ -169,16 +176,10 @@ class SettingsActivity extends React.Component {
                     callback: (index: number) => {
                       switch (index) {
                         case 0:
-                          window.Windows.setPref(
-                            key + ".width",
-                            Number(e.target.value.replace(regex, "$1"))
-                          );
-                          window.Windows.setPref(
-                            key + ".height",
-                            Number(e.target.value.replace(regex, "$2"))
-                          );
+                          window.Windows.setPref(key + ".width", width);
+                          window.Windows.setPref(key + ".height", height);
                           window.Windows.setPref(_key, e.target.value);
-                          window.Windows.close();
+                          window.Windows.setWindowSize(width, height);
                           break;
 
                         default:
@@ -200,6 +201,39 @@ class SettingsActivity extends React.Component {
                     <option value="<width>280</width><height>653</height>">Galaxy Fold</option>
                     <option value="<width>1024</width><height>600</height>">Nest Hub</option>
                     <option value="<width>1280</width><height>800</height>">Nest Hub Max</option>
+                  </>
+                }
+              >
+                Screen/Window Size
+              </SettingsBuilder>
+              <SettingsBuilder
+                style={{
+                  display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
+                }}
+                type="switch"
+                _key="electron.devTools"
+              >
+                Enable DevTools
+              </SettingsBuilder>
+              <SettingsBuilder
+                style={{
+                  display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
+                }}
+                type="switch"
+                _key="alwaysOnTop"
+              >
+                Always on top
+              </SettingsBuilder>
+              <SettingsBuilder
+                type="select"
+                selectDefaultValue="windows"
+                _key="electron.borderStyle"
+                selectValue={
+                  <>
+                    <option value="windows">Windows</option>
+                    <option value="none">None</option>
+                    <option value="samsungBorderRadius">Samsung (w/o border)</option>
+                    <option value="samsungBorderRadiusWithBourder">Samsung (w/ border)</option>
                   </>
                 }
               >

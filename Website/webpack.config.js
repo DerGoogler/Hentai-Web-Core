@@ -5,10 +5,11 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
 
 const config = {
-  entry: ["react-hot-loader/patch", "./src/index.tsx"],
+  entry: ["react-hot-loader/patch", "./src/index.tsx", "./src/native/index.ts"],
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: `bundle.js`,
+    filename: "bundle.js",
+    library: "native",
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -30,6 +31,10 @@ const config = {
       {
         test: /(\.css$)/,
         use: ["style-loader", "css-loader", "postcss-loader"],
+      },
+      {
+        test: /\.s[ac]ss$/i,
+        use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(png|woff|woff2|eot|ttf|svg)$/,

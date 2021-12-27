@@ -1,17 +1,17 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 // preload.js
-const { BrowserWindow, shell, app } = require("@electron/remote");
+const { BrowserWindow, shell, globalShortcut } = require("@electron/remote");
 const { contextBridge } = require("electron");
 const Store = require("electron-store");
-
 const fenster = require("@electron/remote");
 
 const store = new Store();
 
 contextBridge.exposeInMainWorld("Windows", {
   newWindow: (width = 800, height = 600, uri) => {
-    let win = new BrowserWindow({ width: width, height: height });
+    const win = new BrowserWindow({ width: width, height: height });
     win.loadURL(uri);
   },
 
@@ -26,9 +26,13 @@ contextBridge.exposeInMainWorld("Windows", {
   maximize: () => {
     fenster.isMaximized() ? fenster.unmaximize() : fenster.maximize();
   },
+
+  setWindowSize: (width, height) => {
+    fenster.getCurrentWindow().setSize(width, height);
+  },
+
   reload: () => {
-    app.relaunch({ args: process.argv.slice(1).concat(["--relaunch"]) });
-    app.exit(0);
+    fenster.getCurrentWindow().reload();
   },
 
   open: (link) => {
@@ -45,5 +49,23 @@ contextBridge.exposeInMainWorld("Windows", {
 
   removePref: (key) => {
     store.delete(key);
+  },
+
+  registerShortcut: (shortcut, callback) => {
+    globalShortcut.register(shortcut, () => {
+      if (typeof callback == "function") {
+        callback(shortcut);
+      } else {
+        console.log(shortcut + " pressed Successfully");
+      }
+    });
+  },
+
+  isRegisteredShortcut: (shortcut) => {
+    return globalShortcut.isRegistered(shortcut);
+  },
+
+  unregisterShortcut: (shortcut) => {
+    globalShortcut.unregister(shortcut);
   },
 });

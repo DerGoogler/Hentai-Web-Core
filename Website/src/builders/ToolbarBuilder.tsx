@@ -11,7 +11,22 @@ class ToolbarBuilder extends React.Component<{
   hasWindowsButtons: boolean;
   addToolbarButton?: HTMLElement | JSX.Element | null;
   addToolbarButtonPosition?: string;
+  hasDarkMode?: boolean;
 }> {
+  public componentDidMount() {
+    const { hasDarkMode } = this.props;
+    if (hasDarkMode) {
+      if (native.getPref("enableDarkmode") === "true") {
+        var favicon = document.createElement("link");
+        favicon.rel = "stylesheet";
+        favicon.href =
+          "https://cdn.dergoogler.com/others/hentai-web/styles/dark-theme-onsen-css-components.css";
+
+        document.head.appendChild(favicon);
+      }
+    }
+  }
+
   public render() {
     const { title, hasBackButton, addToolbarButton, addToolbarButtonPosition, hasWindowsButtons } =
       this.props;

@@ -54,6 +54,32 @@ interface Windows {
    * Reload the windows
    */
   reload(): void;
+
+  /**
+   *
+   * @param shortcut
+   * @param callbacl
+   */
+  registerShortcut(shortcut: string, callback?: Function): void;
+
+  /**
+   *
+   * @param shortcut
+   */
+  isRegisteredShortcut(shortcut: string): boolean;
+
+  /**
+   *
+   * @param shortcut
+   */
+  unregisterShortcut(shortcut: string): void;
+
+  /**
+   *
+   * @param width
+   * @param height
+   */
+  setWindowSize(width: number, height: number): void;
 }
 
 export default Windows;

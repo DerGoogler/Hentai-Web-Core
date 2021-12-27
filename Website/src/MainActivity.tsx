@@ -64,6 +64,7 @@ class MainActivity extends React.Component<{ router?: any }> {
             </>
           }
           addToolbarButtonPosition="left"
+          hasDarkMode={true}
         />
       </Toolbar>
     );
@@ -121,7 +122,11 @@ class MainActivity extends React.Component<{ router?: any }> {
 
   public render() {
     return (
-      <Page renderToolbar={this.renderToolbar} renderFixed={this.renderFixed}>
+      <Page
+        modifier={native.checkPlatformForBorderStyle}
+        renderToolbar={this.renderToolbar}
+        renderFixed={this.renderFixed}
+      >
         <Tabbar
           // @ts-ignore
           swipeable={tools.stringToBoolean(native.getPref("enableSwipeBetweenTabs"))}

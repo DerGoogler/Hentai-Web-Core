@@ -2,12 +2,19 @@ import config from "../misc/config";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
 import { hot } from "react-hot-loader/root";
+import tools from "../misc/tools";
 
 class native {
   private static element: HTMLElement | null;
   private static userAgentAndroid = "HENTAI_WEB_AGENT";
   private static userAgentWindows = "HENTAI_WEB_WINDOWS";
   private static agent = window.navigator.userAgent;
+
+  public static checkPlatformForBorderStyle = tools.typeIF(
+    native.userAgentEqualWindows(true),
+    tools.typeCheck(native.getPref("electron.borderStyle"), "windows"),
+    ""
+  );
 
   public static userAgentEqualAndroid(state: boolean) {
     if (state) {
@@ -219,6 +226,42 @@ class native {
       window.open(link, target);
     }
   }
+
+  public static globalShortcut = {
+    userAgentAndroid: "HENTAI_WEB_AGENT",
+    userAgentWindows: "HENTAI_WEB_WINDOWS",
+    agent: window.navigator.userAgent,
+
+    registerShortcut(shortcut: string, callback?: Function) {
+      if (this.agent === this.userAgentAndroid) {
+        console.log("globalShortcut are not supported on Android");
+      } else if (this.agent === this.userAgentWindows) {
+        window.Windows.registerShortcut(shortcut, callback);
+      } else {
+        console.log("globalShortcut are not supported on Browsers");
+      }
+    },
+
+    isRegisteredShortcut(shortcut: string): boolean {
+      if (this.agent === this.userAgentAndroid) {
+        return false;
+      } else if (this.agent === this.userAgentWindows) {
+        return window.Windows.isRegisteredShortcut(shortcut);
+      } else {
+        return false;
+      }
+    },
+
+    unregisterShortcut(shortcut: string) {
+      if (this.agent === this.userAgentAndroid) {
+        console.log("globalShortcut are not supported on Android");
+      } else if (this.agent === this.userAgentWindows) {
+        window.Windows.unregisterShortcut(shortcut);
+      } else {
+        console.log("globalShortcut are not supported on Browsers");
+      }
+    },
+  };
 }
 
 export default hot(native);

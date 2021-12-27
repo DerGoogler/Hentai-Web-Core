@@ -4,7 +4,7 @@ import ons from "onsenui";
 import "onsenui/css/onsenui.css";
 import "./styles/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/default.css";
+import "./styles/default.scss";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
 import translation from "./dataPacks/strings";

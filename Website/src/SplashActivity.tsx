@@ -18,7 +18,7 @@ class SplashActivity extends React.Component {
   }
   public render() {
     return (
-      <Page modifier="windows">
+      <Page modifier={native.checkPlatformForBorderStyle}>
         <div
           style={{
             textAlign: "center",

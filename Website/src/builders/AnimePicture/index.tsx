@@ -13,7 +13,11 @@ class AnimePicture extends React.Component<{
   getId?: any;
 }> {
   private element!: HTMLElement | null;
-  private buttonDesign: string = "lila";
+  private buttonDesign: string = tools.typeIF(
+    native.getPref("enableDarkmode"),
+    "lilaDarkMode",
+    "lila"
+  );
 
   public state = {
     isContextOpen: false,
@@ -57,7 +61,13 @@ class AnimePicture extends React.Component<{
           {({ translate }: any) => (
             // @ts-ignore
             <card>
-              <Card key={this.getID} style={{ padding: "0px" }}>
+              <Card
+                key={this.getID}
+                style={{
+                  padding: "0px",
+                  backgroundColor: tools.typeIF(native.getPref("enableDarkmode"), "#1F1F1F", ""),
+                }}
+              >
                 <Card.Header
                   style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}
                 >

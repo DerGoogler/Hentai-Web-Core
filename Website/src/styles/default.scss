@@ -1,0 +1,132 @@
+/*
+* This is the default style file from across the app
+*/
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+:root {
+  --white: white;
+}
+
+body {
+  overflow: overlay;
+  background-color: transparent;
+}
+
+.btn-lila {
+  color: #fff;
+  background-color: #4a148c;
+  border-color: #4a148c;
+
+  &:hover {
+    color: #fff;
+    background-color: #4a148c;
+    border-color: #49148a;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 0.2rem rgba(73, 20, 138, 0.5);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: #fff;
+    background-color: #4a148c;
+    border-color: #4a148c;
+  }
+
+  &:not(:disabled):not(.disabled) {
+    &:active,
+    &.active {
+      color: #fff;
+      background-color: #4a148c;
+      border-color: #4a148c;
+    }
+  }
+}
+
+.btn-lilaDarkMode {
+  color: #fff;
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+
+  &:hover {
+    color: #fff;
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+  }
+
+  &:focus,
+  &.focus {
+    box-shadow: 0 0 0 0.2rem rgba(187, 134, 252, 0.502);
+  }
+
+  &.disabled,
+  &:disabled {
+    color: #fff;
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+  }
+
+  &:not(:disabled):not(.disabled) {
+    &:active,
+    &.active {
+      color: #fff;
+      background-color: #bb86fc;
+      border-color: #bb86fc;
+    }
+  }
+}
+
+.show > .btn-lilaDarkMode.dropdown-toggle {
+  color: #fff;
+  background-color: #4a148c;
+  border-color: #4a148c;
+}
+
+.btn-lilaDarkMode:not(:disabled):not(.disabled) {
+  &:active:focus,
+  &.active:focus {
+    box-shadow: 0 0 0 0.2rem rgba(73, 20, 138, 0.5);
+  }
+}
+
+.show > .btn-lilaDarkMode.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(73, 20, 138, 0.5);
+}
+
+.search-input--custom {
+  box-shadow: none;
+  background-color: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.search-input--material {
+  background-color: transparent;
+}
+
+.drag--windows {
+  -webkit-app-region: drag;
+}
+
+.page--windows {
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.page--none {
+  border-radius: 8px;
+}
+
+.page--samsungBorderRadius {
+  border-radius: 32px;
+}
+
+.page--samsungBorderRadiusWithBourder {
+  border-radius: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}

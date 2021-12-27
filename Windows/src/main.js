@@ -1,36 +1,38 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require("electron");
-const Store = require("electron-store");
 const path = require("path");
+const Store = require("electron-store");
 const fenster = require("@electron/remote/main");
+const setting = require("./defaultSettings");
+const Analytics = require("electron-google-analytics");
 
 function createWindow() {
   // Create the browser window.
   const store = new Store();
 
-  const width = store.get("electronWindowSize.width");
-  const height = store.get("electronWindowSize.height");
-
-  if (width === undefined && height === undefined) {
-    store.set("electronWindowSize.width", 375);
-    store.set("electronWindowSize.height", 812);
-  }
+  const width = Number(setting("electron.windowSize.width", 375));
+  const height = Number(setting("electron.windowSize.height", 812));
+  const devTools = Boolean(setting("electron.devTools", "false"));
+  const alwaysOnTop = Boolean(setting("electron.alwaysOnTop", "false"));
 
   const mainWindow = new BrowserWindow({
-    width: store.get("electronWindowSize.width"),
-    height: store.get("electronWindowSize.height"),
+    width: width,
+    height: height,
     frame: true,
+    hasShadow: false,
     resizable: false,
-    backgroundColor: "#4a148c",
+    transparent: true,
+    alwaysOnTop: alwaysOnTop,
+    // backgroundColor: "#4a148c",
     fullscreenable: true,
     titleBarStyle: "hidden",
     autoHideMenuBar: true,
     title: "Hentai Web Windows",
-    icon: path.join(__dirname, "ic_launcher.png"),
+    icon: path.join(app.getAppPath(), "ic_launcher.png"),
     webPreferences: {
-      devTools: true,
+      devTools: devTools,
       nodeIntegration: true,
-      preload: path.join(app.getAppPath(), "preload.js"),
+      preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
       enableRemoteModule: true,
     },
@@ -40,12 +42,11 @@ function createWindow() {
 
   Store.initRenderer();
 
+  console.log(app.getPath("userData"));
+
   fenster.initialize();
   fenster.enable(webContents);
 
-  console.log(app.getPath("userData") + "///");
-
-  // and load the index.html of the app.
   const url = "https://www.dergoogler.com/hentai-web";
   const url_ = "http://192.168.178.81:5500/";
 

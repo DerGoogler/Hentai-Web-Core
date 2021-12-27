@@ -20,6 +20,7 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
           title={<Translate text="sign-in" />}
           hasBackButton={false}
           hasWindowsButtons={true}
+          hasDarkMode={true}
         />
       </Toolbar>
     );
@@ -57,7 +58,7 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
     return (
       <Translator>
         {({ translate }: any) => (
-          <Page renderToolbar={this.renderToolbar}>
+          <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
             <section
               style={{
                 textAlign: "center",
