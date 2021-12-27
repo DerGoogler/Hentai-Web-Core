@@ -1,13 +1,34 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, session } = require("electron");
+const { app, BrowserWindow } = require("electron");
+const Store = require("electron-store");
 const path = require("path");
+const fenster = require("@electron/remote/main");
+
+function typeCheck(_, __) {
+  if (
+    _ === undefined ||
+    _ === null ||
+    _ === "" ||
+    __ === 0 ||
+    _ === "0" ||
+    _ === false ||
+    _ === "false"
+  ) {
+    return __;
+  } else {
+    return _;
+  }
+}
 
 function createWindow() {
   // Create the browser window.
+  const store = new Store();
+
   const mainWindow = new BrowserWindow({
-    width: 400,
-    height: 750,
+    width: typeCheck(Number(store.get("electronWindowWidth")), 400),
+    height: typeCheck(Number(store.get("electronWindowHeoght")), 700),
     frame: true,
+    resizable: false,
     backgroundColor: "#4a148c",
     fullscreenable: true,
     titleBarStyle: "hidden", // add this line
@@ -22,16 +43,22 @@ function createWindow() {
       enableRemoteModule: true,
     },
   });
+
+  module.exports = mainWindow;
+
   const webContents = mainWindow.webContents;
 
-  require("@electron/remote/main").initialize();
-  require("@electron/remote/main").enable(webContents);
+  Store.initRenderer();
+
+  fenster.initialize();
+  fenster.enable(webContents);
+
+  console.log(app.getPath("userData") + "///");
 
   // and load the index.html of the app.
   const url = "https://www.dergoogler.com/hentai-web";
   const url_ = "http://192.168.178.81:5500/";
 
-  mainWindow.user;
   mainWindow.loadURL(url_);
   mainWindow.on("page-title-updated", function (e) {
     e.preventDefault();

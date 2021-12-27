@@ -57,7 +57,6 @@ class MainActivity extends React.Component<{ router?: any }> {
             <Icon icon="md-settings"></Icon>
           </ToolbarButton>
           <ToolbarButton
-            // Close button for the Windows app
             style={{
               display: tools.typeIF(
                 window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
@@ -72,7 +71,6 @@ class MainActivity extends React.Component<{ router?: any }> {
             <Icon icon="md-minus"></Icon>
           </ToolbarButton>
           <ToolbarButton
-            // Close button for the Windows app
             style={{
               display: tools.typeIF(
                 window.navigator.userAgent === "HENTAI_WEB_WINDOWS",

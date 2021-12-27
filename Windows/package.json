@@ -33,6 +33,8 @@
   "dependencies": {
     "@electron/remote": "^2.0.1",
     "custom-electron-titlebar": "^3.2.10",
-    "dragscroll": "^0.0.8"
+    "dragscroll": "^0.0.8",
+    "electron-preferences": "^2.5.0",
+    "electron-store": "^8.0.1"
   }
 }

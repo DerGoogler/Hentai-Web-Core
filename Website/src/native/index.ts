@@ -7,6 +7,7 @@ class native {
   private static element: HTMLElement | null;
   private static userAgentAndroid = "HENTAI_WEB_AGENT";
   private static userAgentWindows = "HENTAI_WEB_WINDOWS";
+  private static agent = window.navigator.userAgent;
 
   public static userAgentEqualAndroid(state: boolean) {
     if (state) {
@@ -37,13 +38,12 @@ class native {
    */
   public static getBuildMANUFACTURER(): string {
     const appCodeName = window.navigator.appCodeName.toUpperCase();
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        return window.Android.BuildMANUFACTURER().toUpperCase();
-      case this.userAgentWindows:
-        return appCodeName;
-      default:
-        return appCodeName;
+    if (this.agent === this.userAgentAndroid) {
+      return window.Android.BuildMANUFACTURER().toUpperCase();
+    } else if (this.agent === this.userAgentWindows) {
+      return appCodeName;
+    } else {
+      return appCodeName;
     }
   }
 
@@ -53,13 +53,12 @@ class native {
    */
   public static getBuildMODEL(): string {
     const platform = window.navigator.platform.toUpperCase();
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        return window.Android.BuildMODEL().toUpperCase();
-      case this.userAgentWindows:
-        return platform;
-      default:
-        return platform;
+    if (this.agent === this.userAgentAndroid) {
+      return window.Android.BuildMODEL().toUpperCase();
+    } else if (this.agent === this.userAgentWindows) {
+      return platform;
+    } else {
+      return platform;
     }
   }
 
@@ -69,14 +68,12 @@ class native {
    */
   public static reload(): void {
     const reload = window.location.reload();
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        window.Android.BuildMANUFACTURER().toUpperCase();
-        break;
-      case this.userAgentWindows:
-        return reload;
-      default:
-        return reload;
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.reload();
+    } else if (this.agent === this.userAgentWindows) {
+      window.Windows.reload();
+    } else {
+      return reload;
     }
   }
 
@@ -86,16 +83,12 @@ class native {
    */
   public static copyClipborad(content: string): void {
     const copy = window.navigator.clipboard.writeText(content);
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        window.Android.copyToClipboard(content);
-        break;
-      case this.userAgentWindows:
-        copy;
-        break;
-      default:
-        copy;
-        break;
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.copyToClipboard(content);
+    } else if (this.agent === this.userAgentWindows) {
+      copy;
+    } else {
+      copy;
     }
   }
 
@@ -113,16 +106,12 @@ class native {
         });
       }
     };
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        window.Android.downloadImage(filename, downloadUrlOfImage);
-        break;
-      case this.userAgentWindows:
-        dwnl();
-        break;
-      default:
-        dwnl();
-        break;
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.downloadImage(filename, downloadUrlOfImage);
+    } else if (this.agent === this.userAgentWindows) {
+      return dwnl();
+    } else {
+      return dwnl();
     }
   }
 
@@ -132,15 +121,12 @@ class native {
    * @param content
    */
   public static setPref(key: string, content: string): void {
-    const add = localStorage.setItem(key, content.toString());
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        window.Android.setPref(key, content.toString());
-        break;
-      case this.userAgentWindows:
-        return add;
-      default:
-        return add;
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.setPref(key, content.toString());
+    } else if (this.agent === this.userAgentWindows) {
+      window.Windows.setPref(key, content.toString());
+    } else {
+      localStorage.setItem(key, content.toString());
     }
   }
 
@@ -150,30 +136,27 @@ class native {
    * @returns
    */
   public static getPref(key: string): string {
-    const and = (): string => {
+    if (this.agent === this.userAgentAndroid) {
       const get = window.Android.getPref(key);
       if (get === undefined || get === null || get === "") {
         return "false";
       } else {
         return get;
       }
-    };
-
-    const bro = (): string => {
+    } else if (this.agent === this.userAgentWindows) {
+      const get = window.Windows.getPref(key);
+      if (get === undefined || get === null || get === "") {
+        return "false";
+      } else {
+        return get;
+      }
+    } else {
       const get = localStorage.getItem(key);
       if (get === undefined || get === null || get === "") {
         return "false";
       } else {
         return get;
       }
-    };
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        return and();
-      case this.userAgentWindows:
-        return bro();
-      default:
-        return bro();
     }
   }
 
@@ -182,50 +165,44 @@ class native {
    * @param key
    */
   public static removePref(key: string): void {
-    const remove = localStorage.removeItem(key);
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        window.Android.removePref(key);
-        break;
-      case this.userAgentWindows:
-        return remove;
-      default:
-        return remove;
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.removePref(key);
+    } else if (this.agent === this.userAgentWindows) {
+      window.Windows.removePref(key);
+    } else {
+      localStorage.removeItem(key);
     }
   }
 
   public static getAppManifest(state: string): string {
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        return window.Android.getAppManifest(state);
-      case this.userAgentWindows:
-        return "null";
-      default:
-        return "null";
+    if (this.agent === this.userAgentAndroid) {
+      return window.Android.getAppManifest(state);
+    } else if (this.agent === this.userAgentWindows) {
+      return "null";
+    } else {
+      return "null";
     }
   }
 
   public static encodeAES(text: string, password?: string): string {
     const btoa = window.atob(text);
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        return window.Android.encryptAES(password, text);
-      case this.userAgentWindows:
-        return btoa;
-      default:
-        return btoa;
+    if (this.agent === this.userAgentAndroid) {
+      return window.Android.encryptAES(password, text);
+    } else if (this.agent === this.userAgentWindows) {
+      return btoa;
+    } else {
+      return btoa;
     }
   }
 
   public static decodeAES(text: string, password?: string): string {
     const atob = window.atob(text);
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        return window.Android.decryptAES(password, text);
-      case this.userAgentWindows:
-        return atob;
-      default:
-        return atob;
+    if (this.agent === this.userAgentAndroid) {
+      return window.Android.decryptAES(password, text);
+    } else if (this.agent === this.userAgentWindows) {
+      return atob;
+    } else {
+      return atob;
     }
   }
 
@@ -234,17 +211,12 @@ class native {
    * @param link
    */
   public static open(link: string, target?: string): void {
-    const open = window.open(link, target);
-    switch (window.navigator.userAgent) {
-      case this.userAgentAndroid:
-        window.Android.open(link);
-        break;
-      case this.userAgentWindows:
-        open;
-        break;
-      default:
-        open;
-        break;
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.open(link);
+    } else if (this.agent === this.userAgentWindows) {
+      window.Windows.open(link);
+    } else {
+      window.open(link, target);
     }
   }
 }

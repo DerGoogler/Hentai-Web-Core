@@ -7,7 +7,7 @@ class tools {
    * @param string
    * @returns {Boolean}
    */
-  static stringToBoolean(string: string): boolean {
+  public static stringToBoolean(string: string): boolean {
     if (typeof string == "boolean") return string;
     switch (string) {
       case "true":
@@ -31,7 +31,7 @@ class tools {
    * @param id
    * @param callback HTMLElement
    */
-  static getByElementId(id: string, callback: Function) {
+  public static getByElementId(id: string, callback: Function) {
     var e: HTMLElement | null;
     if ((e = document.getElementById(id))) {
       if (typeof callback == "function") {
@@ -40,7 +40,7 @@ class tools {
     }
   }
 
-  static typeIF(_: any, __: any, ___: any) {
+  public static typeIF(_: any, __: any, ___: any) {
     if (this.stringToBoolean(_)) {
       return __;
     } else {
@@ -48,7 +48,23 @@ class tools {
     }
   }
 
-  static settingsEfect(key: string, _element: string, callback: Function) {
+  public static typeCheck(_: any, __: any) {
+    if (
+      _ === undefined ||
+      _ === null ||
+      _ === "" ||
+      __ === 0 ||
+      _ === "0" ||
+      _ === false ||
+      _ === "false"
+    ) {
+      return __;
+    } else {
+      return _;
+    }
+  }
+
+  public static settingsEfect(key: string, _element: string, callback: Function) {
     var element: HTMLElement | null;
     if (native.getPref(key) === "true") {
       if ((element = document.querySelector(_element))) {
