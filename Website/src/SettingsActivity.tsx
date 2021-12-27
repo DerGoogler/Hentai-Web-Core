@@ -57,9 +57,6 @@ class SettingsActivity extends React.Component {
             >
               useIOSdesign-string
             </SettingsBuilder>
-            <SettingsBuilder type="switch" _key="hideFAB">
-              hideFAB-string
-            </SettingsBuilder>
             <SettingsBuilder type="switch" _key="hideSearchbar">
               hideSearchbar-string
             </SettingsBuilder>

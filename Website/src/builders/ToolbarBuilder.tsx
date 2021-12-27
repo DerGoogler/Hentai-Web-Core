@@ -11,6 +11,9 @@ class ToolbarBuilder extends React.Component<{
   hasWindowsButtons: boolean;
   addToolbarButton?: HTMLElement | JSX.Element | null;
   addToolbarButtonPosition?: string;
+  /**
+   * Enable dark mode for this activity that includes this Toolbar.
+   */
   hasDarkMode?: boolean;
 }> {
   public componentDidMount() {

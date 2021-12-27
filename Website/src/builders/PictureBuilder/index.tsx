@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Badge } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
 import native from "../../native";
@@ -7,10 +7,12 @@ import ContextMenu from "./ContextMenu";
 import tools from "../../misc/tools";
 import { ActionSheet, ActionSheetButton, Icon } from "react-onsenui";
 
-class AnimePicture extends React.Component<{
+class PictureBuilder extends React.Component<{
   note?: any;
   source?: any;
   getId?: any;
+  isNew?: any;
+  isHmtai?: boolean;
 }> {
   private element!: HTMLElement | null;
   private buttonDesign: string = tools.typeIF(
@@ -54,7 +56,7 @@ class AnimePicture extends React.Component<{
   };
 
   public render() {
-    const { note, source } = this.props;
+    const { note, source, isNew, isHmtai } = this.props;
     return (
       <>
         <Translator>
@@ -75,9 +77,28 @@ class AnimePicture extends React.Component<{
                 // @ts-ignore */}
                   <name style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
                     <h4
-                      style={{ width: "100%" }}
+                      style={{
+                        width: "100%",
+                        display: "flex",
+                        justifyContent: "left",
+                        alignItems: "center",
+                      }}
                       className={"searchKey> " + this.getID + "_search"}
                     >
+                      {(() => {
+                        if (isNew) {
+                          return (
+                            <>
+                              <Badge style={{ fontSize: "10px" }} bg={"primary"}>
+                                NEW
+                              </Badge>
+                              &nbsp;
+                            </>
+                          );
+                        } else {
+                          return;
+                        }
+                      })()}
                       {this.getNote}
                     </h4>
                     <Button
@@ -137,7 +158,12 @@ class AnimePicture extends React.Component<{
                         isCancelable={true}
                         title={this.getNote + "'s options"}
                       >
-                        <ContextMenu source={source} note={note} getId={this.getID} />
+                        <ContextMenu
+                          source={source}
+                          note={note}
+                          getId={this.getID}
+                          isHmtai={isHmtai}
+                        />
                         <ActionSheetButton
                           onClick={this.handleCancel}
                           modifier={native.checkPlatformForBorderStyle}
@@ -160,4 +186,4 @@ class AnimePicture extends React.Component<{
   }
 }
 
-export default hot(AnimePicture);
+export default hot(PictureBuilder);

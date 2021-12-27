@@ -62,7 +62,7 @@ class Bootloader {
         ons.platform.select("android");
       }
       this.loadConsole();
-      if (native.getPref("disableSplashscreen")) {
+      if (native.getPref("disableSplashscreen") === "true") {
         if (native.getPref("loggedIn") === "true") {
           // Removes the `loggedIn` key if always login is enabled
           if (native.getPref("alwaysLogin") === "true") return native.removePref("loggedIn");
@@ -79,7 +79,15 @@ class Bootloader {
           this.loadActivity(<LoginActivity />);
         }
       } else {
-        this.loadActivity(<SplashActivity />);
+        switch (this.getUrlParam("activity")) {
+          case "settings":
+            this.loadActivity(<SettingsActivity />);
+            break;
+
+          default:
+            this.loadActivity(<SplashActivity />);
+            break;
+        }
       }
     });
   }

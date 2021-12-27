@@ -1,4 +1,4 @@
-import AnimePicture from "../AnimePicture";
+import PictureBuilder from "../PictureBuilder";
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { List, SearchInput } from "react-onsenui";
@@ -36,8 +36,14 @@ class AnimeContent extends React.Component<{ data: any; name: string }> {
     /**
      * To load for every object an own AnimePicture from `data.ts`
      */
-    const listItems = this.props.data.map((item: { name: string; source: any }) => (
-      <AnimePicture key={item.name} source={item.source} note={item.name} />
+    const listItems = this.props.data.map((item: { name: string; source: any; isNew: boolean }) => (
+      <PictureBuilder
+        key={item.name}
+        source={item.source}
+        note={item.name}
+        isNew={item.isNew}
+        isHmtai={true}
+      />
     ));
 
     return (

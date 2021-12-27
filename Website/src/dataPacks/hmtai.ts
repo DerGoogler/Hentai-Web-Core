@@ -29,6 +29,16 @@ export const sfwData = [
     name: "depression",
     source: hmtai.depression(),
   },
+  {
+    name: "legs",
+    source: hmtai.legs(),
+    isNew: true,
+  },
+  {
+    name: "christmas",
+    source: hmtai.christmas(),
+    isNew: true,
+  },
 ];
 
 export const nsfwData = [
@@ -147,5 +157,10 @@ export const nsfwData = [
   {
     name: "zettai Ryouiki",
     source: hmtai.nsfw.zettaiRyouiki(),
+  },
+  {
+    name: "nSFW Christmas",
+    source: hmtai.nsfw.nsfwChristmas(),
+    isNew: true,
   },
 ];

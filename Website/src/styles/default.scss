@@ -109,6 +109,10 @@ body {
   background-color: transparent;
 }
 
+.page--dragWindows {
+  -webkit-app-region: drag;
+}
+
 .drag--windows {
   -webkit-app-region: drag;
 }

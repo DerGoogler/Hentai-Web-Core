@@ -12,12 +12,13 @@ class ContextMenu extends React.Component<{
   note?: any;
   source?: any;
   getId?: any;
+  isHmtai?: boolean;
 }> {
   private element!: HTMLElement | null;
 
   public render() {
     // To get note and source url
-    const { note, source, getId } = this.props;
+    const { note, source, getId, isHmtai } = this.props;
 
     return (
       <Translator>
@@ -52,13 +53,18 @@ class ContextMenu extends React.Component<{
             </ActionSheetButton>
             <ActionSheetButton
               icon="md-link"
+              style={{ display: tools.typeIF(isHmtai, "", "none") }}
               onClick={() => {
-                native.open(
-                  `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
-                    / /g,
-                    ""
-                  )}.json`
-                );
+                if (isHmtai) {
+                  native.open(
+                    `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
+                      / /g,
+                      ""
+                    )}.json`
+                  );
+                } else {
+                  console.log("Not supported");
+                }
               }}
             >
               <Translate text="view-hmtai-image-source" />

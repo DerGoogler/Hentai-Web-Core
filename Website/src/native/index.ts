@@ -264,4 +264,7 @@ class native {
   };
 }
 
+/**
+ * Native calls for Windows and Android
+ */
 export default hot(native);

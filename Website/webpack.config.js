@@ -3,6 +3,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
+const FsWebpackPlugin = require("fs-webpack-plugin");
 
 const config = {
   entry: ["react-hot-loader/patch", "./src/index.tsx", "./src/native/index.ts"],
@@ -12,9 +13,9 @@ const config = {
     library: "native",
   },
   plugins: [
-    new HtmlWebpackPlugin({
+    /*new HtmlWebpackPlugin({
       template: "src/templates/index.html",
-    }),
+    }),*/
   ],
   module: {
     rules: [
@@ -57,6 +58,10 @@ const config = {
     alias: {
       "react-dom": "@hot-loader/react-dom",
     },
+    fallback: {
+      path: require.resolve("path-browserify"),
+      fs: false,
+    },
   },
   devServer: {
     port: 9950,
@@ -66,13 +71,3 @@ const config = {
 };
 
 module.exports = config;
-
-function makeUUID(length) {
-  var result = "";
-  var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
