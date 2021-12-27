@@ -171,6 +171,7 @@ class SettingsActivity extends React.Component {
                     title: "Change size?",
                     buttonLabels: ["Yes", "No"],
                     animation: "default",
+                    modifier: native.checkPlatformForBorderStyle,
                     primaryButtonIndex: 1,
                     cancelable: true,
                     callback: (index: number) => {
@@ -220,24 +221,9 @@ class SettingsActivity extends React.Component {
                   display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                 }}
                 type="switch"
-                _key="alwaysOnTop"
+                _key="electron.alwaysOnTop"
               >
                 Always on top
-              </SettingsBuilder>
-              <SettingsBuilder
-                type="select"
-                selectDefaultValue="windows"
-                _key="electron.borderStyle"
-                selectValue={
-                  <>
-                    <option value="windows">Windows</option>
-                    <option value="none">None</option>
-                    <option value="samsungBorderRadius">Samsung (w/o border)</option>
-                    <option value="samsungBorderRadiusWithBourder">Samsung (w/ border)</option>
-                  </>
-                }
-              >
-                Screen/Window Size
               </SettingsBuilder>
             </section>
           </List>

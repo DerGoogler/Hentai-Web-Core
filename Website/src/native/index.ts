@@ -12,7 +12,7 @@ class native {
 
   public static checkPlatformForBorderStyle = tools.typeIF(
     native.userAgentEqualWindows(true),
-    tools.typeCheck(native.getPref("electron.borderStyle"), "windows"),
+    "windows",
     ""
   );
 

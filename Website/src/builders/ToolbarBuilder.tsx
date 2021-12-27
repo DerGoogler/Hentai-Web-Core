@@ -20,7 +20,7 @@ class ToolbarBuilder extends React.Component<{
         var favicon = document.createElement("link");
         favicon.rel = "stylesheet";
         favicon.href =
-          "https://cdn.dergoogler.com/others/hentai-web/styles/dark-theme-onsen-css-components.css";
+          "https://cdn.dergoogler.com/others/hentai-web/styles/dark-onsen-css-components.min.css";
 
         document.head.appendChild(favicon);
       }
@@ -82,6 +82,7 @@ class ToolbarBuilder extends React.Component<{
                         message: "Do you want to close this app?",
                         title: "Close app?",
                         buttonLabels: ["Yes", "No"],
+                        modifier: native.checkPlatformForBorderStyle,
                         animation: "default",
                         primaryButtonIndex: 1,
                         cancelable: true,

@@ -118,15 +118,12 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
-.page--none {
+.action-sheet-mask--windows {
   border-radius: 8px;
+  border: 1px solid #00000000;
 }
 
-.page--samsungBorderRadius {
-  border-radius: 32px;
-}
-
-.page--samsungBorderRadiusWithBourder {
-  border-radius: 32px;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+.alert-dialog-mask--windows {
+  border-radius: 8px;
+  border: 1px solid #00000000;
 }

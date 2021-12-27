@@ -55,7 +55,7 @@ class AnimeContent extends React.Component<{ data: any; name: string }> {
           <div
             style={{
               textAlign: "center",
-              display: /*"flex"*/ "flex",
+              display: "flex",
               justifyContent: "center",
               padding: "8px",
               paddingBottom: "0px",
@@ -67,6 +67,12 @@ class AnimeContent extends React.Component<{ data: any; name: string }> {
               placeholder={"Search " + this.props.name}
               style={{
                 display: tools.typeIF(native.getPref("hideSearchbar"), "none", ""),
+                borderRadius: "8px",
+                backgroundColor: tools.typeIF(
+                  native.getPref("enableDarkmode"),
+                  "#1F1F1F",
+                  "transparent"
+                ),
               }}
               modifier="custom"
               onChange={this.filter}

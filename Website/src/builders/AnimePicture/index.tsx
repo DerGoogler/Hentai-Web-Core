@@ -132,6 +132,7 @@ class AnimePicture extends React.Component<{
                       <ActionSheet
                         isOpen={this.state.isContextOpen}
                         animation="default"
+                        modifier={native.checkPlatformForBorderStyle}
                         onCancel={this.handleCancel}
                         isCancelable={true}
                         title={this.getNote + "'s options"}

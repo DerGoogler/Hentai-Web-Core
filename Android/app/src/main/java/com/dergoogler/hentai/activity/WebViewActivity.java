@@ -1,7 +1,9 @@
 package com.dergoogler.hentai.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,7 +38,7 @@ import java.util.Objects;
  */
 public class WebViewActivity extends BaseActivity {
     private static final String TAG = WebViewActivity.class.getSimpleName();
-
+    private SharedPreferences nativaeLocalstorage;
     private WebView webview;
     private CSWebChromeClient webChromeClient;
     private CSFileChooserListener webviewFileChooser;
@@ -103,8 +105,14 @@ public class WebViewActivity extends BaseActivity {
 
         // add download listener
         this.webview.setDownloadListener(new CSDownloadListener(getActivity()));
+        nativaeLocalstorage = this.getSharedPreferences("localstorage", Activity.MODE_PRIVATE);
 
-        getWindow().setStatusBarColor(0xFF4A148C);
+        if (nativaeLocalstorage.getString("enableDarkmode", "").equals("true")) {
+            getWindow().setStatusBarColor(0xFF1f1f1f);
+        } else {
+            getWindow().setStatusBarColor(0xFF4A148C);
+        }
+
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
