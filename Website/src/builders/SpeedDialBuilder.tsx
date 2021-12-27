@@ -1,7 +1,7 @@
 import { CSSProperties } from "react";
 import { hot } from "react-hot-loader/root";
 import { Icon, SpeedDialItem } from "react-onsenui";
-import SpeedDial from "../../dataPacks/SpeedDial";
+import SpeedDial from "../dataPacks/SpeedDial";
 
 const SpeedDialBuilder = SpeedDial.map(
   (item: {

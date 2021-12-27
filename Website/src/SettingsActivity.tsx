@@ -10,83 +10,26 @@ import {
   ToolbarButton,
 } from "react-onsenui";
 import { hot } from "react-hot-loader/root";
-import SettingsBuilder from "./SettingsBuilder";
+import SettingsBuilder from "./builders/SettingsBuilder";
 import { List, ListHeader } from "react-onsenui";
-import ContentBody from "../../builders/ContentBody";
+import ContentBody from "./builders/ContentBody";
 import { Provider, Translate, Translator } from "react-translated";
-import config from "../../misc/config";
-import tools from "../../misc/tools";
+import config from "./misc/config";
+import tools from "./misc/tools";
 import ons from "onsenui";
-import native from "../../native";
+import native from "./native";
+import ToolbarBuilder from "./builders/ToolbarBuilder";
+import { Badge } from "react-bootstrap";
 
 class SettingsActivity extends React.Component {
-  public state = {
-    electronWindowWidth: 400,
-    electronWindowHright: 750,
-  };
-
   private renderToolbar() {
     return (
       <Toolbar>
-        <div className="left">
-          <BackButton
-            onClick={() => {
-              window.location.search = "";
-            }}
-          >
-            Back
-          </BackButton>
-        </div>
-        <div className="center drag--windows">
-          <Translate text="settings" />
-        </div>
-        <div className="right">
-          <ToolbarButton
-            style={{
-              display: tools.typeIF(
-                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
-                "",
-                "none"
-              ),
-            }}
-            onClick={() => {
-              window.Windows.minimize();
-            }}
-          >
-            <Icon icon="md-minus"></Icon>
-          </ToolbarButton>
-          <ToolbarButton
-            style={{
-              display: tools.typeIF(
-                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
-                "",
-                "none"
-              ),
-            }}
-            onClick={() => {
-              ons.notification.confirm({
-                message: "Do you want to close this app?",
-                title: "Close app?",
-                buttonLabels: ["Yes", "No"],
-                animation: "default",
-                primaryButtonIndex: 1,
-                cancelable: true,
-                callback: (index: number) => {
-                  switch (index) {
-                    case 0:
-                      window.Windows.close();
-                      break;
-
-                    default:
-                      break;
-                  }
-                },
-              });
-            }}
-          >
-            <Icon icon="md-close"></Icon>
-          </ToolbarButton>
-        </div>
+        <ToolbarBuilder
+          title={<Translate text="settings" />}
+          hasBackButton={true}
+          hasWindowsButtons={true}
+        />
       </Toolbar>
     );
   }
@@ -202,49 +145,65 @@ class SettingsActivity extends React.Component {
                 display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
               }}
             >
-              <ListHeader>Electron</ListHeader>
+              <ListHeader>
+                Electron <Badge bg="danger">DANGER</Badge>
+              </ListHeader>
               <SettingsBuilder
                 type="select"
-                selectDefaultValue="400"
-                _key="electronWindowWidth"
+                selectDefaultValue="<width>375</width><height>812</height>"
+                _key="screenSizeInUse"
+                callback={(e: any, _key: string) => {
+                  const key = "electronWindowSize";
+                  const regex = /<width>(.*?)<\/width><height>(.*?)<\/height>/gm;
+
+                  ons.notification.confirm({
+                    message: `You want change the screen size to ${e.target.value.replace(
+                      regex,
+                      "$1x$2"
+                    )}? The app will close and need to be reopened.`,
+                    title: "Change size?",
+                    buttonLabels: ["Yes", "No"],
+                    animation: "default",
+                    primaryButtonIndex: 1,
+                    cancelable: true,
+                    callback: (index: number) => {
+                      switch (index) {
+                        case 0:
+                          window.Windows.setPref(
+                            key + ".width",
+                            Number(e.target.value.replace(regex, "$1"))
+                          );
+                          window.Windows.setPref(
+                            key + ".height",
+                            Number(e.target.value.replace(regex, "$2"))
+                          );
+                          window.Windows.setPref(_key, e.target.value);
+                          window.Windows.close();
+                          break;
+
+                        default:
+                          e.target.value = window.Windows.getPref(_key);
+                          break;
+                      }
+                    },
+                  });
+                }}
                 selectValue={
                   <>
-                    <option value="400">400</option>
-                    <option value="500">500</option>
-                    <option value="600">600</option>
-                    <option value="700">700</option>
-                    <option value="800">800</option>
-                    <option value="900">900</option>
-                    <option value="1000">1000</option>
-                    <option value="1100">1100</option>
-                    <option value="1200">1200</option>
-                    <option value="1300">1300</option>
-                    <option value="1400">1400</option>
-                    <option value="1500">1500</option>
-                    <option value="1600">1600</option>
-                    <option value="1700">1700</option>
+                    <option value="<width>375</width><height>812</height>">iPhone X</option>
+                    <option value="<width>540</width><height>720</height>">Surface Duo</option>
+                    <option value="<width>360</width><height>640</height>">
+                      Moto G4 / Galaxy S5
+                    </option>
+                    <option value="<width>411</width><height>731</height>">Pixel 2</option>
+                    <option value="<width>411</width><height>823</height>">Pixel 2 XL</option>
+                    <option value="<width>280</width><height>653</height>">Galaxy Fold</option>
+                    <option value="<width>1024</width><height>600</height>">Nest Hub</option>
+                    <option value="<width>1280</width><height>800</height>">Nest Hub Max</option>
                   </>
                 }
               >
-                Screen/Window Width
-              </SettingsBuilder>
-              <SettingsBuilder
-                type="select"
-                selectDefaultValue="700"
-                _key="electronWindowHeigth"
-                selectValue={
-                  <>
-                    <option value="400">400</option>
-                    <option value="500">500</option>
-                    <option value="600">600</option>
-                    <option value="700">700</option>
-                    <option value="800">800</option>
-                    <option value="900">900</option>
-                    <option value="1000">1000</option>
-                  </>
-                }
-              >
-                Screen/Window Height
+                Screen/Window Size
               </SettingsBuilder>
             </section>
           </List>

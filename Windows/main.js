@@ -4,34 +4,26 @@ const Store = require("electron-store");
 const path = require("path");
 const fenster = require("@electron/remote/main");
 
-function typeCheck(_, __) {
-  if (
-    _ === undefined ||
-    _ === null ||
-    _ === "" ||
-    __ === 0 ||
-    _ === "0" ||
-    _ === false ||
-    _ === "false"
-  ) {
-    return __;
-  } else {
-    return _;
-  }
-}
-
 function createWindow() {
   // Create the browser window.
   const store = new Store();
 
+  const width = store.get("electronWindowSize.width");
+  const height = store.get("electronWindowSize.height");
+
+  if (width === undefined && height === undefined) {
+    store.set("electronWindowSize.width", 375);
+    store.set("electronWindowSize.height", 812);
+  }
+
   const mainWindow = new BrowserWindow({
-    width: typeCheck(Number(store.get("electronWindowWidth")), 400),
-    height: typeCheck(Number(store.get("electronWindowHeoght")), 700),
+    width: store.get("electronWindowSize.width"),
+    height: store.get("electronWindowSize.height"),
     frame: true,
     resizable: false,
     backgroundColor: "#4a148c",
     fullscreenable: true,
-    titleBarStyle: "hidden", // add this line
+    titleBarStyle: "hidden",
     autoHideMenuBar: true,
     title: "Hentai Web Windows",
     icon: path.join(__dirname, "ic_launcher.png"),
@@ -43,8 +35,6 @@ function createWindow() {
       enableRemoteModule: true,
     },
   });
-
-  module.exports = mainWindow;
 
   const webContents = mainWindow.webContents;
 

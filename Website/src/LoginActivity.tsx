@@ -3,6 +3,7 @@ import React from "react";
 import { hot } from "react-hot-loader/root";
 import { Toolbar, Page, Input, Button, Icon, ToolbarButton } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
+import ToolbarBuilder from "./builders/ToolbarBuilder";
 import tools from "./misc/tools";
 import native from "./native";
 
@@ -15,56 +16,11 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
   private renderToolbar() {
     return (
       <Toolbar>
-        <div className="center drag--windows">
-          <Translate text="sign-in" />
-        </div>
-        <div className="right">
-          <ToolbarButton
-            style={{
-              display: tools.typeIF(
-                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
-                "",
-                "none"
-              ),
-            }}
-            onClick={() => {
-              window.Windows.minimize();
-            }}
-          >
-            <Icon icon="md-minus"></Icon>
-          </ToolbarButton>
-          <ToolbarButton
-            style={{
-              display: tools.typeIF(
-                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
-                "",
-                "none"
-              ),
-            }}
-            onClick={() => {
-              ons.notification.confirm({
-                message: "Do you want to close this app?",
-                title: "Close app?",
-                buttonLabels: ["Yes", "No"],
-                animation: "default",
-                primaryButtonIndex: 1,
-                cancelable: true,
-                callback: (index: number) => {
-                  switch (index) {
-                    case 0:
-                      window.Windows.close();
-                      break;
-
-                    default:
-                      break;
-                  }
-                },
-              });
-            }}
-          >
-            <Icon icon="md-close"></Icon>
-          </ToolbarButton>
-        </div>
+        <ToolbarBuilder
+          title={<Translate text="sign-in" />}
+          hasBackButton={false}
+          hasWindowsButtons={true}
+        />
       </Toolbar>
     );
   }

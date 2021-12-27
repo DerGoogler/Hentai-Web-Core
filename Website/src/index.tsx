@@ -1,4 +1,4 @@
-import MainActivity from "./views/MainActivity";
+import MainActivity from "./MainActivity";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import "onsenui/css/onsenui.css";
@@ -12,8 +12,7 @@ import native from "./native";
 import SplashActivity from "./SplashActivity";
 import { hot } from "react-hot-loader/root";
 import eruda from "eruda";
-import { BrowserRouter as Router, Routes, Switch, Route } from "react-router-dom";
-import SettingsActivity from "./views/SettingsActivity";
+import SettingsActivity from "./SettingsActivity";
 
 class Bootloader {
   private element!: HTMLElement | null;

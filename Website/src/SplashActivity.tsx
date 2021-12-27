@@ -4,7 +4,7 @@ import { Page, ProgressCircular } from "react-onsenui";
 import native from "./native";
 import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
-import MainActivity from "./views/MainActivity";
+import MainActivity from "./MainActivity";
 
 class SplashActivity extends React.Component {
   public componentDidMount() {

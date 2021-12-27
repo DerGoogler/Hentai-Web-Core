@@ -2,8 +2,8 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { Icon, ListItem, Select, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import tools from "../../misc/tools";
-import native from "../../native";
+import tools from "../misc/tools";
+import native from "../native";
 
 /**
  * Create an precreated switch
@@ -20,6 +20,7 @@ class SettingsBuilder extends React.Component<{
   icon?: string;
   selectDefaultValue?: string;
   switchDefaultValue?: boolean;
+  callback?: Function;
 }> {
   private element!: HTMLElement | null;
 
@@ -72,6 +73,7 @@ class SettingsBuilder extends React.Component<{
       selectValue,
       selectDefaultValue,
       switchDefaultValue,
+      callback,
     } = this.props;
     return (
       <ListItem expandable={tools.typeCheck(expandable, false)} id={id} style={style}>
@@ -108,10 +110,14 @@ class SettingsBuilder extends React.Component<{
                     id="choose-sel"
                     value={tools.typeCheck(
                       this.getSettingSelect(_key!),
-                      tools.typeCheck(switchDefaultValue, "")
+                      tools.typeCheck(selectDefaultValue, "")
                     )}
                     onChange={(e: any) => {
-                      this.setSetting(_key!, e.target.value);
+                      if (typeof callback == "function") {
+                        callback(e, _key);
+                      } else {
+                        this.setSetting(_key!, e.target.value);
+                      }
                     }}
                   >
                     <option value="" selected disabled hidden>

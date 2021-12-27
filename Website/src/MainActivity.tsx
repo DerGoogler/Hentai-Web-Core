@@ -1,7 +1,7 @@
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
-import pkg from "./../../../package.json";
+import pkg from "./../package.json";
 import {
   Page,
   Toolbar,
@@ -13,16 +13,17 @@ import {
   ToolbarButton,
   Icon,
 } from "react-onsenui";
-import config from "../../misc/config";
-import native from "../../native";
-import AnimeTab from "../../builders/AnimeTab";
-import AnimeContent from "../../builders/AnimeContent";
-import tools from "../../misc/tools";
-import { nsfwData, sfwData } from "../../dataPacks/hmtai";
-import Bootloader from "../../index";
-import LoginActivity from "../../LoginActivity";
-import SpeedDialBuilder from "./SpeedDialBuilder";
+import config from "./misc/config";
+import native from "./native";
+import AnimeTab from "./builders/AnimeTab";
+import AnimeContent from "./builders/AnimeContent";
+import tools from "./misc/tools";
+import { nsfwData, sfwData } from "./dataPacks/hmtai";
+import Bootloader from "./index";
+import LoginActivity from "./LoginActivity";
+import SpeedDialBuilder from "./builders/SpeedDialBuilder";
 import ons from "onsenui";
+import ToolbarBuilder from "./builders/ToolbarBuilder";
 
 class MainActivity extends React.Component<{ router?: any }> {
   private element!: HTMLElement | null;
@@ -47,61 +48,23 @@ class MainActivity extends React.Component<{ router?: any }> {
   private renderToolbar() {
     return (
       <Toolbar>
-        <div className="center drag--windows">{config.base.title}</div>
-        <div className="right">
-          <ToolbarButton
-            onClick={() => {
-              window.location.search = "activity=settings";
-            }}
-          >
-            <Icon icon="md-settings"></Icon>
-          </ToolbarButton>
-          <ToolbarButton
-            style={{
-              display: tools.typeIF(
-                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
-                "",
-                "none"
-              ),
-            }}
-            onClick={() => {
-              window.Windows.minimize();
-            }}
-          >
-            <Icon icon="md-minus"></Icon>
-          </ToolbarButton>
-          <ToolbarButton
-            style={{
-              display: tools.typeIF(
-                window.navigator.userAgent === "HENTAI_WEB_WINDOWS",
-                "",
-                "none"
-              ),
-            }}
-            onClick={() => {
-              ons.notification.confirm({
-                message: "Do you want to close this app?",
-                title: "Close app?",
-                buttonLabels: ["Yes", "No"],
-                animation: "default",
-                primaryButtonIndex: 1,
-                cancelable: true,
-                callback: (index: number) => {
-                  switch (index) {
-                    case 0:
-                      window.Windows.close();
-                      break;
-
-                    default:
-                      break;
-                  }
-                },
-              });
-            }}
-          >
-            <Icon icon="md-close"></Icon>
-          </ToolbarButton>
-        </div>
+        <ToolbarBuilder
+          title="Hentai Web"
+          hasBackButton={false}
+          hasWindowsButtons={true}
+          addToolbarButton={
+            <>
+              <ToolbarButton
+                onClick={() => {
+                  window.location.search = "activity=settings";
+                }}
+              >
+                <Icon icon="md-settings"></Icon>
+              </ToolbarButton>
+            </>
+          }
+          addToolbarButtonPosition="left"
+        />
       </Toolbar>
     );
   }
