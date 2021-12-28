@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "typeRoots": ["./src/d/global.d.ts"],
+    "typeRoots": ["src/typings/global.d.ts"],
     "sourceMap": true,
     "declaration": false,
     "strict": true,
@@ -14,7 +14,11 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowJs": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "./src",
+    "paths": {
+      "@DerGoogler/native": ["./native/index.ts"],
+    }
   },
   "include": ["./src/**/*"]
 }

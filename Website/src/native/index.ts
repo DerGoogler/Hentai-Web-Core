@@ -3,6 +3,7 @@ import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
 import { hot } from "react-hot-loader/root";
 import tools from "../misc/tools";
+import Mousetrap from "mousetrap";
 
 class native {
   private static element: HTMLElement | null;
@@ -237,20 +238,26 @@ class native {
     },
   };
 
-  public static globalShortcut = {
+  public static registerShortcut(shortcut: string, callback?: Function): any | void {
+    if (this.agent === this.userAgentAndroid) {
+      console.log("globalShortcut are not supported on Android");
+    } else if (this.agent === this.userAgentWindows) {
+      window.Windows.registerShortcut(shortcut, callback);
+    } else {
+      Mousetrap.bind(shortcut, (e) => {
+        if (typeof callback == "function") {
+          callback(e, shortcut);
+        } else {
+          console.log(shortcut + " pressed Successfully");
+        }
+      });
+    }
+  }
+
+  public static electron = {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
-
-    registerShortcut(shortcut: string, callback?: Function): void {
-      if (this.agent === this.userAgentAndroid) {
-        console.log("globalShortcut are not supported on Android");
-      } else if (this.agent === this.userAgentWindows) {
-        window.Windows.registerShortcut(shortcut, callback);
-      } else {
-        console.log("globalShortcut are not supported on Browsers");
-      }
-    },
 
     isRegisteredShortcut(shortcut: string): boolean | Boolean {
       if (this.agent === this.userAgentAndroid) {
@@ -269,6 +276,44 @@ class native {
         window.Windows.unregisterShortcut(shortcut);
       } else {
         console.log("globalShortcut are not supported on Browsers");
+      }
+    },
+
+    addEventListener(event: string, callback: Function) {
+      if (this.agent === this.userAgentAndroid) {
+        console.log("Shortcut are not supported on Android");
+      } else if (this.agent === this.userAgentWindows) {
+        window.Windows.webContentsAddEventListener(event, callback);
+      } else {
+        console.log("Electrons event listener's are not supported on Browsers");
+      }
+    },
+
+    /**
+     * Opens the devtools.
+     *
+     * When `contents` is a `<webview>` tag, the `mode` would be `detach` by default,
+     * explicitly passing an empty `mode` can force using last used dock state.
+     */
+    openDevTools() {
+      if (this.agent === this.userAgentAndroid) {
+        console.log("DevTools open event listener are not supported on Android");
+      } else if (this.agent === this.userAgentWindows) {
+        window.Windows.openDevTools();
+      } else {
+        console.log("DevTools open event listener are not supported on Browsers");
+      }
+    },
+    /**
+     * Closes the devtools.
+     */
+    closeDevTools() {
+      if (this.agent === this.userAgentAndroid) {
+        console.log("DevTools close event listener are not supported on Android");
+      } else if (this.agent === this.userAgentWindows) {
+        window.Windows.closeDevTools();
+      } else {
+        console.log("DevTools close event listener are not supported on Browsers");
       }
     },
   };

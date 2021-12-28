@@ -1,6 +1,6 @@
 import ons from "onsenui";
 import { List, ListItem } from "react-onsenui";
-import { SettingsOptions, SettingsInterface } from "../builders/SettingsBuilder";
+import { SettingsInterface } from "../builders/SettingsBuilder";
 import tools from "../misc/tools";
 import native from "../native";
 
@@ -12,15 +12,25 @@ const settings: SettingsInterface[] = [
         key: "enableDarkmode",
         type: "switch",
         text: "enableDarkmode-string",
+        disabled: tools.typeIF(native.getPref("useIOSdesign"), true, false),
+        expandable: tools.typeIF(native.getPref("useIOSdesign"), true, false),
+        expandableContent: (
+          <>
+            <p>Dark mode isn't available while the iOS design is on</p>
+          </>
+        ),
       },
       {
         key: "useIOSdesign",
         type: "switch",
         text: "useIOSdesign-string",
-        style: {
-          display: tools.typeIF(native.userAgentEqualAndroid(true), "none", ""),
-        },
-        disabled: Boolean(native.getPref("enableDarkmode")),
+        disabled: tools.typeIF(native.getPref("enableDarkmode"), true, false),
+        expandable: tools.typeIF(native.getPref("enableDarkmode"), true, false),
+        expandableContent: (
+          <>
+            <p>iOS design isn't available while the dark mode is on</p>
+          </>
+        ),
       },
       {
         key: "hideSearchbar",

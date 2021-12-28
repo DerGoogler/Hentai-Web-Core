@@ -37,6 +37,7 @@ class ActionSheetBuilder extends React.Component<{ data: MenuBuild[]; options: O
         {({ translate }: any) => (
           <ActionSheetButton
             icon={item.icon}
+            style={item.style}
             modifier={item.modifier}
             onClick={() => {
               if (typeof item.onClick == "function") {

@@ -5,14 +5,14 @@ import { Provider, Translate, Translator } from "react-translated";
 import tools from "../misc/tools";
 import native from "../native";
 
-export interface SettingsOptions {
+interface SettingsOptions {
   key?: string;
-  disabled?: boolean;
+  disabled?: boolean | any;
   id?: string;
   style?: React.CSSProperties;
   expandableContent?: JSX.Element | HTMLElement | string | undefined;
   expandable?: boolean;
-  type: string;
+  type: "switch" | "select";
   text: string;
   selectValue?: JSX.Element | HTMLOptionElement;
   icon?: string;
@@ -114,7 +114,7 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                                   this.getSettingSwitch(setting.key!),
                                   false
                                 )}
-                                disabled={setting.disabled}
+                                disabled={Boolean(setting.disabled)}
                                 onChange={(e: any) => {
                                   this.setSetting(setting.key!, e.target.checked);
                                 }}
@@ -124,6 +124,7 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                             return (
                               <Select
                                 id="choose-sel"
+                                disabled={Boolean(setting.disabled)}
                                 value={tools.typeCheck(
                                   this.getSettingSelect(setting.key!),
                                   tools.typeCheck(setting.selectDefaultValue, "")

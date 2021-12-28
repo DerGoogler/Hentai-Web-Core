@@ -2,10 +2,11 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 // preload.js
-const { BrowserWindow, shell, globalShortcut } = require("@electron/remote");
+const { BrowserWindow, shell, Notification, app } = require("@electron/remote");
 const { contextBridge } = require("electron");
 const Store = require("electron-store");
 const fenster = require("@electron/remote");
+const Mousetrap = require("mousetrap");
 
 const store = new Store();
 
@@ -39,6 +40,18 @@ contextBridge.exposeInMainWorld("Windows", {
     shell.openExternal(link);
   },
 
+  openDevTools: () => {
+    fenster.getCurrentWindow().webContents.openDevTools();
+  },
+
+  closeDevTools: () => {
+    fenster.getCurrentWindow().webContents.closeDevTools();
+  },
+
+  openPath: (path) => {
+    shell.openPath(path);
+  },
+
   setPref: (key, value) => {
     store.set(key, value);
   },
@@ -52,20 +65,37 @@ contextBridge.exposeInMainWorld("Windows", {
   },
 
   registerShortcut: (shortcut, callback) => {
-    globalShortcut.register(shortcut, () => {
+    Mousetrap.bind(shortcut, (e) => {
       if (typeof callback == "function") {
-        callback(shortcut);
+        callback(e, shortcut);
       } else {
         console.log(shortcut + " pressed Successfully");
       }
     });
   },
+  /*
+  unregisterShortcut: (shortcut) => {
+    unregister(shortcut);
+  },
+*/
 
-  isRegisteredShortcut: (shortcut) => {
-    return globalShortcut.isRegistered(shortcut);
+  webContentsAddEventListener: (event, callback) => {
+    fenster.getCurrentWindow().webContents.on(event, () => {
+      if (typeof callback == "function") {
+        callback();
+      }
+    });
   },
 
-  unregisterShortcut: (shortcut) => {
-    globalShortcut.unregister(shortcut);
+  notification: (title, body, callback) => {
+    new Notification(title, { body: body }).onclick = () => {
+      if (typeof callback) {
+        callback(title, body);
+      }
+    };
+  },
+
+  appGetPath: (path) => {
+    return app.getPath(path);
   },
 });

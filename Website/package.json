@@ -2,7 +2,7 @@
   "name": "hentai-web",
   "version": "1.3.6",
   "description": "",
-  "main": "index.jsx",
+  "main": "src/index.tsx",
   "keywords": [
     "anime",
     "hentai",
@@ -57,6 +57,8 @@
     "hmfull": "^1.3.0",
     "html-to-image": "^1.9.0",
     "image-info": "^0.0.2",
+    "module-alias": "^2.2.2",
+    "mousetrap": "^1.6.5",
     "onsenui": "^2.11.2",
     "path-browserify": "^1.0.1",
     "pwa-install-handler": "^2.1.6",
@@ -83,6 +85,8 @@
     "@babel/preset-env": "^7.12.7",
     "@babel/preset-react": "^7.12.7",
     "@hot-loader/react-dom": "^17.0.1+4.13.0",
+    "@types/mousetrap": "^1.6.9",
+    "@types/webpack-dev-server": "^4.5.0",
     "babel-loader": "^8.2.2",
     "brotli-webpack-plugin": "^1.1.0",
     "compression-webpack-plugin": "^9.2.0",
@@ -95,10 +99,11 @@
     "sass-loader": "^11.1.1",
     "style-loader": "^2.0.0",
     "ts-loader": "^9.2.6",
+    "ts-node": "^10.4.0",
     "typescript": "^4.4.4",
     "url-loader": "^4.1.1",
     "webpack": "^5.65.0",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^3.11.3"
   }
 }

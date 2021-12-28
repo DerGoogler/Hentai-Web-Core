@@ -57,6 +57,16 @@ class Bootloader {
     );
   }
 
+  private electronInit() {
+    native.electron.addEventListener("devtools-opened", () => {
+      console.log("DevTools opened");
+    });
+
+    native.registerShortcut("s e t t i n g s", () => {
+      native.activity.load("settings");
+    });
+  }
+
   public init() {
     ons.ready(() => {
       const getDesignCookie = native.getPref("useIOSdesign");
@@ -65,6 +75,7 @@ class Bootloader {
       } else {
         ons.platform.select("android");
       }
+      this.electronInit();
       this.loadConsole();
       if (native.getPref("disableSplashscreen") === "true") {
         if (native.getPref("loggedIn") === "true") {
@@ -83,7 +94,7 @@ class Bootloader {
           this.loadActivity(<LoginActivity />);
         }
       } else {
-        switch (tools.getUrlParam("activity")) {
+        switch (native.activity.getCurrent()) {
           case "settings":
             this.loadActivity(<SettingsActivity />);
             break;

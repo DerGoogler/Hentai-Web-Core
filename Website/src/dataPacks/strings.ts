@@ -182,7 +182,7 @@ export default {
   },
 
   "electron-window-cange-size-screen-dialog-message": {
-    en: "You want change the screen size to {size}?",
+    en: "Do you want to change the screen size to {size}?",
     de: "Fenster größe auf {size} ändern?",
   },
 
