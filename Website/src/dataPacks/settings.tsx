@@ -103,6 +103,15 @@ const settings: SettingsInterface[] = [
           </>
         ),
       },
+      {
+        key: "erudaEnabled",
+        text: "erudaEnabled-string",
+        type: "switch",
+        style: {
+          display: tools.typeIF(native.userAgentEqualAndroid(false), "none", ""),
+        },
+        disabled: native.userAgentEqualAndroid(false),
+      },
     ],
   },
 
@@ -130,6 +139,7 @@ const settings: SettingsInterface[] = [
   {
     title: "Electron",
     className: "electron",
+    style: { display: tools.typeIF(native.userAgentEqualWindows(true), "", "none") },
     content: [
       {
         key: "electron.screenSizeInUse",
