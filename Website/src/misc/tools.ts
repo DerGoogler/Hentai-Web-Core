@@ -48,6 +48,14 @@ class tools {
     }
   }
 
+  public static if(item: { wenn: any; dann: any; fehler: any }) {
+    if (this.stringToBoolean(item.wenn)) {
+      return item.dann;
+    } else {
+      return item.fehler;
+    }
+  }
+
   public static typeCheck(_: any, __: any) {
     if (
       _ === undefined ||
@@ -62,6 +70,14 @@ class tools {
     } else {
       return _;
     }
+  }
+
+  public static getUrlParam(param: string) {
+    param = param.replace(/([\[\](){}*?+^$.\\|])/g, "\\$1");
+    var regex = new RegExp("[?&]" + param + "=([^&#]*)");
+    var url = decodeURIComponent(window.location.href);
+    var match = regex.exec(url);
+    return match ? match[1] : "";
   }
 
   public static settingsEfect(key: string, _element: string, callback: Function) {

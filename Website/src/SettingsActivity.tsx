@@ -60,6 +60,9 @@ class SettingsActivity extends React.Component {
             <SettingsBuilder type="switch" _key="hideSearchbar">
               hideSearchbar-string
             </SettingsBuilder>
+            <SettingsBuilder type="switch" _key="hideFAB">
+              hideFAB-string
+            </SettingsBuilder>
             <SettingsBuilder
               type="select"
               selectDefaultValue="en"

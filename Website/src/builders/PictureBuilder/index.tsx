@@ -12,7 +12,6 @@ class PictureBuilder extends React.Component<{
   source?: any;
   getId?: any;
   isNew?: any;
-  isHmtai?: boolean;
 }> {
   private element!: HTMLElement | null;
   private buttonDesign: string = tools.typeIF(
@@ -56,7 +55,7 @@ class PictureBuilder extends React.Component<{
   };
 
   public render() {
-    const { note, source, isNew, isHmtai } = this.props;
+    const { note, source, isNew } = this.props;
     return (
       <>
         <Translator>
@@ -162,7 +161,6 @@ class PictureBuilder extends React.Component<{
                           source={source}
                           note={note}
                           getId={this.getID}
-                          isHmtai={isHmtai}
                         />
                         <ActionSheetButton
                           onClick={this.handleCancel}

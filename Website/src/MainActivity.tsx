@@ -2,7 +2,17 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
-import { Page, Toolbar, Tabbar, ToolbarButton, Icon } from "react-onsenui";
+import {
+  Page,
+  Toolbar,
+  Tab,
+  Tabbar,
+  Fab,
+  SpeedDial,
+  SpeedDialItem,
+  ToolbarButton,
+  Icon,
+} from "react-onsenui";
 import config from "./misc/config";
 import native from "./native";
 import AnimeContent from "./builders/AnimeContent";
@@ -11,6 +21,7 @@ import { nsfwData, sfwData } from "./dataPacks/hmtai";
 import Bootloader from "./index";
 import LoginActivity from "./LoginActivity";
 import ToolbarBuilder from "./builders/ToolbarBuilder";
+import SpeedDialBuilder from "./builders/SpeedDialBuilder";
 import TabbarBuilder from "./builders/TabbarBuilder";
 
 class MainActivity extends React.Component<{ router?: any }> {
@@ -71,6 +82,22 @@ class MainActivity extends React.Component<{ router?: any }> {
     ]);
   }
 
+  private renderFixed() {
+    return (
+      <Translator>
+        {({ translate }: any) => (
+          // @ts-ignore
+          <SpeedDial id="fab-element" position="bottom right">
+            <Fab>
+              <Icon icon="md-more" />
+            </Fab>
+            {SpeedDialBuilder}
+          </SpeedDial>
+        )}
+      </Translator>
+    );
+  }
+
   private tabIndexChecker(): number {
     var get = native.getPref("tabIndex");
     if (get === undefined || get === null || get === "") {
@@ -86,10 +113,14 @@ class MainActivity extends React.Component<{ router?: any }> {
 
   public render() {
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+      <Page
+        modifier={native.checkPlatformForBorderStyle}
+        renderFixed={this.renderFixed}
+        renderToolbar={this.renderToolbar}
+      >
         <Tabbar
           // @ts-ignore
-          swipeable={false}
+          swipeable={tools.stringToBoolean(native.getPref("enableSwipeBetweenTabs"))}
           position="top"
           index={this.tabIndexChecker()}
           // @ts-ignore

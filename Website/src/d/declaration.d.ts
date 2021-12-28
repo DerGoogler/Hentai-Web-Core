@@ -12,3 +12,4 @@ declare module "*.json" {
   export default value;
 }
 declare module "hmfull";
+declare module "bota64";

@@ -13,18 +13,19 @@ import SplashActivity from "./SplashActivity";
 import { hot } from "react-hot-loader/root";
 import eruda from "eruda";
 import SettingsActivity from "./SettingsActivity";
+import tools from "./misc/tools";
+import Bota from "./misc/bota64";
+
+native.setPref(
+  "test",
+  new Bota().encode(
+    "sfhdfghstfdgdshsdghvfghgasdzgzdhdfjgdgjhshbsdgafgsdf sfgsd fsh  sfgsfg h sgnsgagty 56 u468476 454566 54y 46"
+  )
+);
 
 class Bootloader {
   private element!: HTMLElement | null;
   private mountNode: any = document.querySelector("app");
-
-  private getUrlParam(param: string) {
-    param = param.replace(/([\[\](){}*?+^$.\\|])/g, "\\$1");
-    var regex = new RegExp("[?&]" + param + "=([^&#]*)");
-    var url = decodeURIComponent(window.location.href);
-    var match = regex.exec(url);
-    return match ? match[1] : "";
-  }
 
   private checkLanguage() {
     var get = native.getPref("language");
@@ -66,7 +67,7 @@ class Bootloader {
         if (native.getPref("loggedIn") === "true") {
           // Removes the `loggedIn` key if always login is enabled
           if (native.getPref("alwaysLogin") === "true") return native.removePref("loggedIn");
-          switch (this.getUrlParam("activity")) {
+          switch (tools.getUrlParam("activity")) {
             case "settings":
               this.loadActivity(<SettingsActivity />);
               break;
@@ -79,7 +80,7 @@ class Bootloader {
           this.loadActivity(<LoginActivity />);
         }
       } else {
-        switch (this.getUrlParam("activity")) {
+        switch (tools.getUrlParam("activity")) {
           case "settings":
             this.loadActivity(<SettingsActivity />);
             break;

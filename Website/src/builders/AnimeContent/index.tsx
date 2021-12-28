@@ -42,7 +42,6 @@ class AnimeContent extends React.Component<{ data: any; name: string }> {
         source={item.source}
         note={item.name}
         isNew={item.isNew}
-        isHmtai={true}
       />
     ));
 
