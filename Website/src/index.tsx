@@ -5,6 +5,7 @@ import "onsenui/css/onsenui.css";
 import "./styles/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/default.scss";
+import { AppContainer } from "react-hot-loader";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
 import translation from "./dataPacks/strings";
@@ -47,9 +48,11 @@ class Bootloader {
 
   public loadActivity(node: JSX.Element) {
     ReactDOM.render(
-      <Provider language={this.checkLanguage()} translation={translation}>
-        {node}
-      </Provider>,
+      <AppContainer>
+        <Provider language={this.checkLanguage()} translation={translation}>
+          {node}
+        </Provider>
+      </AppContainer>,
       this.mountNode
     );
   }
