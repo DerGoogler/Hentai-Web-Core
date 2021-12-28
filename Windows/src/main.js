@@ -14,6 +14,8 @@ function createWindow() {
   const height = setting("electron.windowSize.height", 812);
   const devTools = Boolean(setting("electron.devTools", "false"));
   const alwaysOnTop = Boolean(setting("electron.alwaysOnTop", "false"));
+  const center = Boolean(setting("electron.centerOnOpen", "false"));
+  const fullscreenable = Boolean(setting("electron.enableFullscreen", "false"));
 
   const mainWindow = new BrowserWindow({
     width: width,
@@ -21,6 +23,8 @@ function createWindow() {
     frame: true,
     hasShadow: false,
     resizable: false,
+    center: center,
+    fullscreenable: fullscreenable,
     transparent: true,
     alwaysOnTop: alwaysOnTop,
     // backgroundColor: "#4a148c",
@@ -30,6 +34,7 @@ function createWindow() {
     title: "Hentai Web Windows",
     icon: path.join(app.getAppPath(), "ic_launcher.png"),
     webPreferences: {
+      nativeWindowOpen: true,
       devTools: devTools,
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js"),

@@ -70,7 +70,7 @@ class Bootloader {
         if (native.getPref("loggedIn") === "true") {
           // Removes the `loggedIn` key if always login is enabled
           if (native.getPref("alwaysLogin") === "true") return native.removePref("loggedIn");
-          switch (tools.getUrlParam("activity")) {
+          switch (native.activity.getCurrent()) {
             case "settings":
               this.loadActivity(<SettingsActivity />);
               break;

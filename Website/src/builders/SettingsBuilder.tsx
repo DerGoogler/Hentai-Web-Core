@@ -1,27 +1,35 @@
 import * as React from "react";
 import { hot } from "react-hot-loader/root";
-import { Icon, ListItem, Select, Switch } from "react-onsenui";
+import { Icon, ListItem, ListTitle, Select, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import tools from "../misc/tools";
 import native from "../native";
 
-/**
- * Create an precreated switch
- */
-class SettingsBuilder extends React.Component<{
-  _key?: string;
+export interface SettingsOptions {
+  key?: string;
   disabled?: boolean;
   id?: string;
   style?: React.CSSProperties;
   expandableContent?: JSX.Element | HTMLElement | string | undefined;
   expandable?: boolean;
   type: string;
+  text: string;
   selectValue?: JSX.Element | HTMLOptionElement;
   icon?: string;
   selectDefaultValue?: string;
   switchDefaultValue?: boolean;
   callback?: Function;
-}> {
+}
+
+export interface SettingsInterface {
+  title: string;
+  id?: string;
+  style?: React.CSSProperties;
+  className?: string;
+  content: SettingsOptions[];
+}
+
+class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
   private element!: HTMLElement | null;
 
   /**
@@ -38,7 +46,7 @@ class SettingsBuilder extends React.Component<{
     }
   }
 
-  private getSettingSelect(key: string): string {
+  private getSettingSelect(key: string): string | String {
     var get = native.getPref(key);
     if (get === undefined || get === null || get === "") {
       return "en";
@@ -60,86 +68,104 @@ class SettingsBuilder extends React.Component<{
   }
 
   public render() {
-    const {
-      _key,
-      id,
-      style,
-      children,
-      disabled,
-      expandable,
-      expandableContent,
-      type,
-      icon,
-      selectValue,
-      selectDefaultValue,
-      switchDefaultValue,
-      callback,
-    } = this.props;
-    return (
-      <ListItem expandable={tools.typeCheck(expandable, false)} id={id} style={style}>
-        {(() => {
-          if (icon === null || icon === undefined || icon === "") {
-            return;
-          } else {
-            return (
-              <div className="left">
-                <Icon icon={icon} className="list-item__icon"></Icon>
-              </div>
-            );
-          }
-        })()}
-        <div className="center">
-          <Translate text={children} />
-        </div>
-        <div className="right">
-          {(() => {
-            switch (type) {
-              case "switch":
-                return (
-                  <Switch
-                    checked={this.default(switchDefaultValue, this.getSettingSwitch(_key!), false)}
-                    disabled={disabled}
-                    onChange={(e: any) => {
-                      this.setSetting(_key!, e.target.checked);
-                    }}
-                  ></Switch>
-                );
-              case "select":
-                return (
-                  <Select
-                    id="choose-sel"
-                    value={tools.typeCheck(
-                      this.getSettingSelect(_key!),
-                      tools.typeCheck(selectDefaultValue, "")
-                    )}
-                    onChange={(e: any) => {
-                      if (typeof callback == "function") {
-                        callback(e, _key);
-                      } else {
-                        this.setSetting(_key!, e.target.value);
-                      }
-                    }}
+    const { data } = this.props;
+
+    const settings = data.map((header: SettingsInterface) => (
+      <Translator>
+        {({ translate }: any) => (
+          <>
+            <section id={header.id} className={header.className} style={header.style}>
+              <ListTitle>
+                <Translate text={header.title} />
+              </ListTitle>
+              {header.content.map((setting: SettingsOptions) => (
+                <>
+                  <ListItem
+                    expandable={tools.typeCheck(setting.expandable, false)}
+                    id={setting.id}
+                    style={setting.style}
                   >
-                    <option value="" selected disabled hidden>
-                      Choose
-                    </option>
-                    {selectValue}
-                  </Select>
-                );
-              default:
-                return;
-            }
-          })()}
-        </div>
-        {(() => {
-          if (expandable) {
-            return <div className="expandable-content">{expandableContent}</div>;
-          } else {
-            return;
-          }
-        })()}
-      </ListItem>
-    );
+                    {(() => {
+                      if (
+                        setting.icon === null ||
+                        setting.icon === undefined ||
+                        setting.icon === ""
+                      ) {
+                        return;
+                      } else {
+                        return (
+                          <div className="left">
+                            <Icon icon={setting.icon} className="list-item__icon"></Icon>
+                          </div>
+                        );
+                      }
+                    })()}
+                    <div className="center">
+                      <Translate text={setting.text} />
+                    </div>
+                    <div className="right">
+                      {(() => {
+                        switch (setting.type) {
+                          case "switch":
+                            return (
+                              <Switch
+                                checked={this.default(
+                                  setting.switchDefaultValue,
+                                  this.getSettingSwitch(setting.key!),
+                                  false
+                                )}
+                                disabled={setting.disabled}
+                                onChange={(e: any) => {
+                                  this.setSetting(setting.key!, e.target.checked);
+                                }}
+                              ></Switch>
+                            );
+                          case "select":
+                            return (
+                              <Select
+                                id="choose-sel"
+                                value={tools.typeCheck(
+                                  this.getSettingSelect(setting.key!),
+                                  tools.typeCheck(setting.selectDefaultValue, "")
+                                )}
+                                onChange={(e: any) => {
+                                  if (typeof setting.callback == "function") {
+                                    setting.callback(e, setting.key, translate);
+                                  } else {
+                                    this.setSetting(setting.key!, e.target.value);
+                                  }
+                                }}
+                              >
+                                <option value="" selected disabled hidden>
+                                  Choose
+                                </option>
+                                {setting.selectValue}
+                              </Select>
+                            );
+                          default:
+                            return;
+                        }
+                      })()}
+                    </div>
+                    {(() => {
+                      if (setting.expandable) {
+                        return (
+                          <div className="expandable-content">{setting.expandableContent}</div>
+                        );
+                      } else {
+                        return;
+                      }
+                    })()}
+                  </ListItem>
+                </>
+              ))}
+            </section>
+          </>
+        )}
+      </Translator>
+    ));
+
+    return settings;
   }
 }
 

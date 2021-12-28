@@ -12,6 +12,8 @@ import {
   SpeedDialItem,
   ToolbarButton,
   Icon,
+  ActionSheet,
+  ActionSheetButton,
 } from "react-onsenui";
 import config from "./misc/config";
 import native from "./native";
@@ -23,9 +25,14 @@ import LoginActivity from "./LoginActivity";
 import ToolbarBuilder from "./builders/ToolbarBuilder";
 import SpeedDialBuilder from "./builders/SpeedDialBuilder";
 import TabbarBuilder from "./builders/TabbarBuilder";
+import ActionSheetBuilder from "./builders/ActionScheetBuilder";
 
 class MainActivity extends React.Component<{ router?: any }> {
   private element!: HTMLElement | null;
+
+  public state = {
+    isContextOpen: false,
+  };
 
   public componentDidMount() {
     // To remvoe the button if is in app opened
@@ -42,7 +49,18 @@ class MainActivity extends React.Component<{ router?: any }> {
     if (native.getPref("loggedIn") === "false") {
       new Bootloader().loadActivity(<LoginActivity />);
     }
+    tools.getByElementId("menu-click", (e: HTMLElement) => {
+      e.addEventListener("click", this.handleClick);
+    });
   }
+
+  private handleClick = () => {
+    this.setState({ isContextOpen: true });
+  };
+
+  private handleCancel = () => {
+    this.setState({ isContextOpen: false });
+  };
 
   private renderToolbar() {
     return (
@@ -53,12 +71,8 @@ class MainActivity extends React.Component<{ router?: any }> {
           hasWindowsButtons={true}
           addToolbarButton={
             <>
-              <ToolbarButton
-                onClick={() => {
-                  window.location.search = "activity=settings";
-                }}
-              >
-                <Icon icon="md-settings"></Icon>
+              <ToolbarButton id="menu-click">
+                <Icon icon="md-menu"></Icon>
               </ToolbarButton>
             </>
           }
@@ -130,6 +144,30 @@ class MainActivity extends React.Component<{ router?: any }> {
             }
           }}
           renderTabs={this.renderTabs}
+        />
+
+        <ActionSheetBuilder
+          options={{
+            title: "Menu",
+            onCancel: this.handleCancel,
+            isOpen: this.state.isContextOpen,
+            modifier: native.checkPlatformForBorderStyle,
+          }}
+          data={[
+            {
+              text: "settings",
+              icon: "md-settings",
+              onClick: () => {
+                native.activity.load("settings");
+              },
+            },
+            {
+              text: "Cancel",
+              icon: "md-close",
+              modifier: native.checkPlatformForBorderStyle,
+              onClick: this.handleCancel,
+            },
+          ]}
         />
       </Page>
     );

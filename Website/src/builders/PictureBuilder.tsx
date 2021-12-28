@@ -2,10 +2,11 @@ import * as React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
-import native from "../../native";
-import ContextMenu from "./ContextMenu";
-import tools from "../../misc/tools";
+import native from "../native";
+import ActionSheetBuilder from "./ActionScheetBuilder";
+import tools from "../misc/tools";
 import { ActionSheet, ActionSheetButton, Icon } from "react-onsenui";
+import { modifier } from "onsenui";
 
 class PictureBuilder extends React.Component<{
   note?: any;
@@ -149,27 +150,65 @@ class PictureBuilder extends React.Component<{
                           ),
                         }}
                       />{" "}
-                      <ActionSheet
-                        isOpen={this.state.isContextOpen}
-                        animation="default"
-                        modifier={native.checkPlatformForBorderStyle}
-                        onCancel={this.handleCancel}
-                        isCancelable={true}
-                        title={this.getNote + "'s options"}
-                      >
-                        <ContextMenu
-                          source={source}
-                          note={note}
-                          getId={this.getID}
-                        />
-                        <ActionSheetButton
-                          onClick={this.handleCancel}
-                          modifier={native.checkPlatformForBorderStyle}
-                          icon={"md-close"}
-                        >
-                          Cancel
-                        </ActionSheetButton>
-                      </ActionSheet>
+                      <ActionSheetBuilder
+                        options={{
+                          title: this.getNote + "'s options",
+                          onCancel: this.handleCancel,
+                          isOpen: this.state.isContextOpen,
+                          modifier: native.checkPlatformForBorderStyle,
+                        }}
+                        data={[
+                          {
+                            text: "view-image",
+                            icon: "md-eye",
+                            onClick: () => {
+                              native.open(source);
+                            },
+                          },
+                          {
+                            text: "copy-link",
+                            icon: "md-copy",
+                            onClick: () => {
+                              native.copyClipborad(source);
+                            },
+                          },
+                          {
+                            text: "reload-image",
+                            icon: "md-refresh",
+                            style: { display: "none" },
+                            onClick: () => {
+                              tools.getByElementId(this.getID, (e: HTMLElement) => {
+                                e.setAttribute("src", source);
+                              });
+                            },
+                          },
+                          {
+                            text: "view-hmtai-image-source",
+                            icon: "md-link",
+                            onClick: () => {
+                              native.open(
+                                `https://github.com/DerGoogler/Hentai-Web/blob/master/Website/src/misc/hmtai/images/${note.replace(
+                                  / /g,
+                                  ""
+                                )}.json`
+                              );
+                            },
+                          },
+                          {
+                            text: "download-text",
+                            icon: "md-download",
+                            onClick: () => {
+                              native.downloadPicture(this.getID, source, this.getID);
+                            },
+                          },
+                          {
+                            text: "Cancel",
+                            icon: "md-close",
+                            modifier: native.checkPlatformForBorderStyle,
+                            onClick: this.handleCancel,
+                          },
+                        ]}
+                      />
                     </p>
                   </blockquote>
                 </Card.Body>

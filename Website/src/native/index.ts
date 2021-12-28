@@ -16,7 +16,7 @@ class native {
     ""
   );
 
-  public static userAgentEqualAndroid(state: boolean) {
+  public static userAgentEqualAndroid(state: boolean): boolean {
     if (state) {
       return window.navigator.userAgent === config.options.userAgent;
     } else {
@@ -24,7 +24,7 @@ class native {
     }
   }
 
-  public static userAgentEqualWindows(state: boolean) {
+  public static userAgentEqualWindows(state: boolean): boolean {
     if (state) {
       return window.navigator.userAgent === config.options.userAgentWindows;
     } else {
@@ -43,7 +43,7 @@ class native {
    * Get mobile phones build serial (Is pn every phone different)
    * @returns {String}
    */
-  public static getBuildMANUFACTURER(): string {
+  public static getBuildMANUFACTURER(): string | String {
     const appCodeName = window.navigator.appCodeName.toUpperCase();
     if (this.agent === this.userAgentAndroid) {
       return window.Android.BuildMANUFACTURER().toUpperCase();
@@ -58,7 +58,7 @@ class native {
    * Get mobile phones build model (Is pn every phone different)
    * @returns {String}
    */
-  public static getBuildMODEL(): string {
+  public static getBuildMODEL(): string | String {
     const platform = window.navigator.platform.toUpperCase();
     if (this.agent === this.userAgentAndroid) {
       return window.Android.BuildMODEL().toUpperCase();
@@ -142,7 +142,7 @@ class native {
    * @param key
    * @returns
    */
-  public static getPref(key: string): string {
+  public static getPref(key: string): string | String {
     if (this.agent === this.userAgentAndroid) {
       const get = window.Android.getPref(key);
       if (get === undefined || get === null || get === "") {
@@ -181,7 +181,7 @@ class native {
     }
   }
 
-  public static getAppManifest(state: string): string {
+  public static getAppManifest(state: string): string | String {
     if (this.agent === this.userAgentAndroid) {
       return window.Android.getAppManifest(state);
     } else if (this.agent === this.userAgentWindows) {
@@ -191,7 +191,7 @@ class native {
     }
   }
 
-  public static encodeAES(text: string, password?: string): string {
+  public static encodeAES(text: string, password?: string): string | String {
     const btoa = window.atob(text);
     if (this.agent === this.userAgentAndroid) {
       return window.Android.encryptAES(password, text);
@@ -202,7 +202,7 @@ class native {
     }
   }
 
-  public static decodeAES(text: string, password?: string): string {
+  public static decodeAES(text: string, password?: string): string | String {
     const atob = window.atob(text);
     if (this.agent === this.userAgentAndroid) {
       return window.Android.decryptAES(password, text);
@@ -227,12 +227,22 @@ class native {
     }
   }
 
+  public static activity = {
+    load(activityName: string): void | Location {
+      window.location.search = `activity=${activityName}`;
+    },
+
+    getCurrent(): string | String {
+      return window.location.search.replace("?activity=", "");
+    },
+  };
+
   public static globalShortcut = {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
 
-    registerShortcut(shortcut: string, callback?: Function) {
+    registerShortcut(shortcut: string, callback?: Function): void {
       if (this.agent === this.userAgentAndroid) {
         console.log("globalShortcut are not supported on Android");
       } else if (this.agent === this.userAgentWindows) {
@@ -242,7 +252,7 @@ class native {
       }
     },
 
-    isRegisteredShortcut(shortcut: string): boolean {
+    isRegisteredShortcut(shortcut: string): boolean | Boolean {
       if (this.agent === this.userAgentAndroid) {
         return false;
       } else if (this.agent === this.userAgentWindows) {
@@ -252,7 +262,7 @@ class native {
       }
     },
 
-    unregisterShortcut(shortcut: string) {
+    unregisterShortcut(shortcut: string): void {
       if (this.agent === this.userAgentAndroid) {
         console.log("globalShortcut are not supported on Android");
       } else if (this.agent === this.userAgentWindows) {

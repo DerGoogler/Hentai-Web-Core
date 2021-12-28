@@ -9,6 +9,9 @@ class ToolbarBuilder extends React.Component<{
   title: string | JSX.Element;
   hasBackButton: boolean;
   hasWindowsButtons: boolean;
+  /**
+   * Here are no setState or get state working | i trying to fix it
+   */
   addToolbarButton?: HTMLElement | JSX.Element | null;
   addToolbarButtonPosition?: string;
   /**
@@ -75,6 +78,21 @@ class ToolbarBuilder extends React.Component<{
                     }}
                   >
                     <Icon icon="md-minus"></Icon>
+                  </ToolbarButton>
+                  <ToolbarButton
+                    disabled={tools.typeIF(
+                      native.getPref("electron.enableFullscreen"),
+                      true,
+                      false
+                    )}
+                    style={{
+                      display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
+                    }}
+                    onClick={() => {
+                      window.Windows.maximize();
+                    }}
+                  >
+                    <Icon icon="md-crop"></Icon>
                   </ToolbarButton>
                   <ToolbarButton
                     style={{
