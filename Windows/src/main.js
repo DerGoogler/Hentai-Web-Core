@@ -10,8 +10,8 @@ function createWindow() {
   // Create the browser window.
   const store = new Store();
 
-  const width = Number(setting("electron.windowSize.width", 375));
-  const height = Number(setting("electron.windowSize.height", 812));
+  const width = setting("electron.windowSize.width", 375);
+  const height = setting("electron.windowSize.height", 812);
   const devTools = Boolean(setting("electron.devTools", "false"));
   const alwaysOnTop = Boolean(setting("electron.alwaysOnTop", "false"));
 

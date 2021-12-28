@@ -158,7 +158,7 @@ class SettingsActivity extends React.Component {
                 selectDefaultValue="<width>375</width><height>812</height>"
                 _key="electron.screenSizeInUse"
                 callback={(e: any, _key: string) => {
-                  const key = "electron.WindowSize";
+                  const key = "electron.windowSize";
                   const regex = /<width>(.*?)<\/width><height>(.*?)<\/height>/gm;
                   const width = Number(e.target.value.replace(regex, "$1"));
                   const height = Number(e.target.value.replace(regex, "$2"));
