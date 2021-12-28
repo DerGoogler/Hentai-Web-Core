@@ -89,7 +89,15 @@ class ToolbarBuilder extends React.Component<{
                       display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                     }}
                     onClick={() => {
-                      window.Windows.maximize();
+                      if (window.Windows.isMaximized()) {
+                        window.Windows.unmaximize();
+                        window.Windows.setWindowSize(
+                          Number(native.getPref("electron.windowSize.width")),
+                          Number(native.getPref("electron.windowSize.height"))
+                        );
+                      } else {
+                        window.Windows.maximize();
+                      }
                     }}
                   >
                     <Icon icon="md-crop"></Icon>

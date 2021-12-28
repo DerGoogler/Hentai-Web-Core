@@ -11,19 +11,33 @@ interface Windows {
   newWindow(width: number, height: number, uri: string): void;
 
   /**
-   * Closes the desktop app
+   * Try to close the window. This has the same effect as a user manually clicking
+   * the close button of the window. The web page may cancel the close though. See
+   * the close event.
    */
   close(): void;
 
   /**
-   * Minimizes thedesktop app
+   * Minimizes the window. On some platforms the minimized window will be shown in
+   * the Dock.
    */
   minimize(): void;
 
   /**
-   * Maximize the window
+   * Maximizes the window. This will also show (but not focus) the window if it isn't
+   * being displayed already.
    */
   maximize(): void;
+
+  /**
+   * Whether the window is maximized.
+   */
+  isMaximized(): boolean;
+
+  /**
+   * Unmaximizes the window.
+   */
+  unmaximize(): boolean;
 
   /**
    * Opens an link in browser
@@ -75,9 +89,8 @@ interface Windows {
   unregisterShortcut(shortcut: string): void;
 
   /**
-   *
-   * @param width
-   * @param height
+   * Resizes the window to `width` and `height`. If `width` or `height` are below any
+   * set minimum size constraints the window will snap to its minimum size.
    */
   setWindowSize(width: number, height: number): void;
 

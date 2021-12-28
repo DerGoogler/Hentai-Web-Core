@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 // preload.js
@@ -25,11 +24,19 @@ contextBridge.exposeInMainWorld("Windows", {
   },
 
   maximize: () => {
-    fenster.isMaximized() ? fenster.unmaximize() : fenster.maximize();
+    fenster.getCurrentWindow().maximize();
+  },
+
+  unmaximize: () => {
+    fenster.getCurrentWindow().unmaximize();
+  },
+
+  isMaximized: () => {
+    return fenster.getCurrentWindow().isMaximized();
   },
 
   setWindowSize: (width, height) => {
-    fenster.getCurrentWindow().setSize(width, height);
+    fenster.getCurrentWindow().setBounds({ width, height });
   },
 
   reload: () => {
