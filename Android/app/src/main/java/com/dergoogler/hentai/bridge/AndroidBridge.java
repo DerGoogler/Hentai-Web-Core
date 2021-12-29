@@ -17,6 +17,9 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import androidx.browser.customtabs.CustomTabColorSchemeParams;
+import androidx.browser.customtabs.CustomTabsIntent;
+
 import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.tools.AESCrypt;
 import com.dergoogler.hentai.activity.WebViewActivity;
@@ -258,8 +261,12 @@ public class AndroidBridge {
     @JavascriptInterface
     public void open(String link) {
         Uri uriUrl = Uri.parse(link);
-        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
-        webView.getContext().startActivity(launchBrowser);
+        CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+        CustomTabColorSchemeParams params = new CustomTabColorSchemeParams.Builder()
+                .setToolbarColor(0XFFFFFFFF)
+                .build();
+        CustomTabsIntent customTabsIntent = intentBuilder.build();
+        customTabsIntent.launchUrl(webView.getContext(), uriUrl);
     }
 
     @JavascriptInterface

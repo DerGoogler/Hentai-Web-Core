@@ -113,6 +113,12 @@ public class WebViewActivity extends BaseActivity {
             getWindow().setStatusBarColor(0xFF4A148C);
         }
 
+        if (nativaeLocalstorage.getString("useiOSdesign", "").equals("true")) {
+            getWindow().setStatusBarColor(0xFFFAFAFA);
+        } else {
+            getWindow().setStatusBarColor(0xFF4A148C);
+        }
+
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 

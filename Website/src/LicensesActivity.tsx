@@ -44,7 +44,13 @@ class LicensesActivity extends React.Component<{}, { data: string }> {
             "markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")
           }
         >
-          <Markdown>{data}</Markdown>
+          <div
+            style={{
+              padding: "16px",
+            }}
+          >
+            <Markdown>{data}</Markdown>
+          </div>
         </ContentBody>
       </Page>
     );
