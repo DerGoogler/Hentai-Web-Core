@@ -2,7 +2,17 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
-import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
+import {
+  Page,
+  Toolbar,
+  Tabbar,
+  Fab,
+  SpeedDial,
+  ToolbarButton,
+  Icon,
+  Popover,
+  Button,
+} from "react-onsenui";
 import config from "./misc/config";
 import native from "./native";
 import AnimeContent from "./builders/AnimeContent";
@@ -15,20 +25,20 @@ import SpeedDialBuilder from "./builders/SpeedDialBuilder";
 import TabbarBuilder from "./builders/TabbarBuilder";
 import ActionSheetBuilder from "./builders/ActionScheetBuilder";
 
-class MainActivity extends React.Component {
-  private element!: HTMLElement | null;
-
-  public state = {
-    isContextOpen: false,
-  };
+class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      isContextOpen: false,
+    };
+  }
 
   public componentDidMount() {
-    // To remvoe the button if is in app opened
-    if (window.navigator.userAgent === config.options.userAgent) {
-      if ((this.element = document.getElementById("download-app"))) {
-        this.element.style.display = "none";
-        this.element.setAttribute("title", `Download the last ${pkg.version} Hentai Web version!`);
-      }
+    if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
+      tools.getByElementId("download-app", (e: HTMLElement) => {
+        e.style.display = "none";
+        e.setAttribute("title", `Download the last ${pkg.version} Hentai Web version!`);
+      });
     }
     tools.settingsEfect("hideFAB", "#fab-element", (element: any) => {
       element.style.display = "none";

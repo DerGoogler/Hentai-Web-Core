@@ -13,3 +13,4 @@ declare module "*.json" {
 }
 declare module "hmfull";
 declare module "bota64";
+declare module "node-fetch";

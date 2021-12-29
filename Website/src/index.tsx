@@ -110,4 +110,4 @@ class Bootloader {
 
 new Bootloader().init();
 
-export default hot(Bootloader);
+export default Bootloader;
