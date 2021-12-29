@@ -35,7 +35,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
 
   public componentDidMount() {
     if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
-      tools.getByElementId("download-app", (e: HTMLElement) => {
+      tools.ref("download-app", (e: HTMLElement) => {
         e.style.display = "none";
         e.setAttribute("title", `Download the last ${pkg.version} Hentai Web version!`);
       });
@@ -44,10 +44,9 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
       element.style.display = "none";
     });
 
-    if (native.getPref("loggedIn") === "false") {
-      new Bootloader().loadActivity(<LoginActivity />);
-    }
-    tools.getByElementId("menu-click", (e: HTMLElement) => {
+    Bootloader.doLogin();
+
+    tools.ref("menu-click", (e: HTMLElement) => {
       e.addEventListener("click", this.handleClick);
     });
   }
@@ -69,7 +68,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
           hasWindowsButtons={true}
           addToolbarButton={
             <>
-              <ToolbarButton id="menu-click">
+              <ToolbarButton id="menu-click" onClick={this.handleClick}>
                 <Icon icon="md-menu"></Icon>
               </ToolbarButton>
             </>

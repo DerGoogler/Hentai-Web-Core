@@ -15,7 +15,6 @@ function createWindow() {
   const devTools = Boolean(setting("electron.devTools", "false"));
   const alwaysOnTop = Boolean(setting("electron.alwaysOnTop", "false"));
   const center = Boolean(setting("electron.centerOnOpen", "false"));
-  const fullscreenable = Boolean(setting("electron.enableFullscreen", "false"));
 
   const mainWindow = new BrowserWindow({
     width: width,
@@ -24,10 +23,8 @@ function createWindow() {
     hasShadow: false,
     resizable: false,
     center: center,
-    fullscreenable: fullscreenable,
     transparent: true,
     alwaysOnTop: alwaysOnTop,
-    // backgroundColor: "#4a148c",
     fullscreenable: true,
     titleBarStyle: "hidden",
     autoHideMenuBar: true,

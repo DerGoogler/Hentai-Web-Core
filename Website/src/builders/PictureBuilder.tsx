@@ -177,7 +177,7 @@ class PictureBuilder extends React.Component<{
                             icon: "md-refresh",
                             style: { display: "none" },
                             onClick: () => {
-                              tools.getByElementId(this.getID, (e: HTMLElement) => {
+                              tools.ref(this.getID, (e: HTMLElement) => {
                                 e.setAttribute("src", source);
                               });
                             },

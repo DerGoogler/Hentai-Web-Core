@@ -1,6 +1,6 @@
 import ons from "onsenui";
 import { List, ListItem } from "react-onsenui";
-import { SettingsInterface } from "../builders/SettingsBuilder";
+import { SettingsInterface } from "typings/SettingsBuilder";
 import tools from "../misc/tools";
 import native from "../native";
 

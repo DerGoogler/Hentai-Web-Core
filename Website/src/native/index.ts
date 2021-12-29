@@ -5,6 +5,9 @@ import { hot } from "react-hot-loader/root";
 import tools from "../misc/tools";
 import Mousetrap from "mousetrap";
 
+/**
+ * Native calls for Windows and Android
+ */
 class native {
   private static element: HTMLElement | null;
   private static userAgentAndroid = "HENTAI_WEB_AGENT";
@@ -319,7 +322,4 @@ class native {
   };
 }
 
-/**
- * Native calls for Windows and Android
- */
-export default hot(native);
+export default native;

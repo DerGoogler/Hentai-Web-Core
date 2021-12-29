@@ -57,6 +57,15 @@ class Bootloader {
     );
   }
 
+  /**
+   * Checks if the user is logged in
+   */
+  public static doLogin() {
+    if (native.getPref("loggedIn") === "false") {
+      new Bootloader().loadActivity(<LoginActivity />);
+    }
+  }
+
   private electronInit() {
     native.electron.addEventListener("devtools-opened", () => {
       console.log("DevTools opened");

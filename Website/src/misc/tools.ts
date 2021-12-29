@@ -1,3 +1,4 @@
+import React from "react";
 import { hot } from "react-hot-loader/root";
 import native from "../native";
 
@@ -27,15 +28,44 @@ class tools {
   }
 
   /**
-   * Simplfied
-   * @param id
-   * @param callback HTMLElement
+   * Returns a reference to the first object with the specified value of the ID attribute.
+   * @param id String that specifies the ID value.
+   * @deprecated
+   *
+   * Use
+   * ```ts
+   * tools.ref("element", (element: HTMLElement) => { element.style.display = "none" })
+   * ```
    */
-  public static getByElementId(id: string, callback: Function) {
+  public static getElementById(id: string, callback: Function) {
     var e: HTMLElement | null;
     if ((e = document.getElementById(id))) {
       if (typeof callback == "function") {
         callback(e);
+        name;
+      }
+    }
+  }
+
+  /**
+   * Simplfied
+   * @param id
+   * @param callback HTMLElement
+   */
+  public static ref(id: any | React.RefObject<HTMLElement>, callback: Function) {
+    if (typeof id == "string") {
+      var element: HTMLElement | null;
+      if ((element = document.getElementById(id))) {
+        if (typeof callback == "function") {
+          callback(element);
+        }
+      }
+    } else {
+      var ref: React.RefObject<HTMLElement>;
+      if ((ref = id)) {
+        if (typeof callback == "function") {
+          callback(ref);
+        }
       }
     }
   }
@@ -92,4 +122,4 @@ class tools {
   }
 }
 
-export default hot(tools);
+export default tools;

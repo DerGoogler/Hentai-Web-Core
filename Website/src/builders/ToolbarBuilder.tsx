@@ -4,21 +4,9 @@ import { hot } from "react-hot-loader/root";
 import ons from "onsenui";
 import tools from "../misc/tools";
 import native from "../native";
+import { ToolbarBuilderInterface } from "typings/ToolbarBuilder";
 
-class ToolbarBuilder extends React.Component<{
-  title: string | JSX.Element;
-  hasBackButton: boolean;
-  hasWindowsButtons: boolean;
-  /**
-   * Here are no setState or get state working | i trying to fix it
-   */
-  addToolbarButton?: HTMLElement | JSX.Element | null;
-  addToolbarButtonPosition?: string;
-  /**
-   * Enable dark mode for this activity that includes this Toolbar.
-   */
-  hasDarkMode?: boolean;
-}> {
+class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
   public componentDidMount() {
     const { hasDarkMode } = this.props;
     if (hasDarkMode) {

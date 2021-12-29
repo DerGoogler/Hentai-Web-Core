@@ -27,8 +27,6 @@ interface Options {
  * Creats an menu
  */
 class ActionSheetBuilder extends React.Component<{ data: MenuBuild[]; options: Options }> {
-  private element!: HTMLElement | null;
-
   public render() {
     const { data, options } = this.props;
 

@@ -2,32 +2,9 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { Icon, ListItem, ListTitle, Select, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
+import { SettingsInterface, SettingsOptions } from "typings/SettingsBuilder";
 import tools from "../misc/tools";
 import native from "../native";
-
-interface SettingsOptions {
-  key?: string;
-  disabled?: boolean | any;
-  id?: string;
-  style?: React.CSSProperties;
-  expandableContent?: JSX.Element | HTMLElement | string | undefined;
-  expandable?: boolean;
-  type: "switch" | "select";
-  text: string;
-  selectValue?: JSX.Element | HTMLOptionElement;
-  icon?: string;
-  selectDefaultValue?: string;
-  switchDefaultValue?: boolean;
-  callback?: Function;
-}
-
-export interface SettingsInterface {
-  title: string;
-  id?: string;
-  style?: React.CSSProperties;
-  className?: string;
-  content: SettingsOptions[];
-}
 
 class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
   private element!: HTMLElement | null;
@@ -86,11 +63,7 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                     style={setting.style}
                   >
                     {(() => {
-                      if (
-                        setting.icon === null ||
-                        setting.icon === undefined ||
-                        setting.icon === ""
-                      ) {
+                      if (setting.icon === null || setting.icon === undefined) {
                         return;
                       } else {
                         return (
@@ -170,4 +143,4 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
   }
 }
 
-export default hot(SettingsBuilder);
+export default SettingsBuilder;
