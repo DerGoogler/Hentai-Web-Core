@@ -1,6 +1,4 @@
 import React from "react";
-import { hot } from "react-hot-loader/root";
-import native from "../native";
 
 class tools {
   /**
@@ -108,17 +106,6 @@ class tools {
     var url = decodeURIComponent(window.location.href);
     var match = regex.exec(url);
     return match ? match[1] : "";
-  }
-
-  public static settingsEfect(key: string, _element: string, callback: Function) {
-    var element: HTMLElement | null;
-    if (native.getPref(key) === "true") {
-      if ((element = document.querySelector(_element))) {
-        if (typeof callback == "function") {
-          callback(element);
-        }
-      }
-    }
   }
 }
 

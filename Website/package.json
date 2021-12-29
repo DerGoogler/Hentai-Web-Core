@@ -57,6 +57,7 @@
     "hmfull": "^1.3.0",
     "html-to-image": "^1.9.0",
     "image-info": "^0.0.2",
+    "markdown-to-jsx": "^7.1.5",
     "module-alias": "^2.2.2",
     "mousetrap": "^1.6.5",
     "onsenui": "^2.11.2",

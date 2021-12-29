@@ -231,16 +231,6 @@ class native {
     }
   }
 
-  public static activity = {
-    load(activityName: string): void | Location {
-      window.location.search = `activity=${activityName}`;
-    },
-
-    getCurrent(): string | String {
-      return window.location.search.replace("?activity=", "");
-    },
-  };
-
   public static registerShortcut(shortcut: string, callback?: Function): any | void {
     if (this.agent === this.userAgentAndroid) {
       console.log("globalShortcut are not supported on Android");

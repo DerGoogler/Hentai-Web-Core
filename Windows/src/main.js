@@ -49,8 +49,8 @@ function createWindow() {
   fenster.initialize();
   fenster.enable(webContents);
 
-  const url = "https://www.dergoogler.com/hentai-web";
-  const url_ = "http://192.168.178.81:5500/";
+  const url = "https://www.dergoogler.com/hentai-web/?activity=main";
+  const url_ = "http://192.168.178.81:5500/?activity=main";
 
   mainWindow.loadURL(url_);
   mainWindow.on("page-title-updated", function (e) {

@@ -5,6 +5,7 @@ import ons from "onsenui";
 import tools from "../misc/tools";
 import native from "../native";
 import { ToolbarBuilderInterface } from "typings/ToolbarBuilder";
+import Bootloader from "./../index";
 
 class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
   public componentDidMount() {
@@ -32,7 +33,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
               <div className="left">
                 <BackButton
                   onClick={() => {
-                    window.location.search = "";
+                    new Bootloader().activity.load("main");
                   }}
                 >
                   Back

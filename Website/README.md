@@ -238,12 +238,10 @@ export default settings;
 
 ## Get an Setting
 
-If `loggedIn` is false it'll load the `<LoginActivity/>`
+Check if user is logged in
 
 ```tsx
-if (native.getPref("loggedIn") === "false") {
-  new Bootloader().loadActivity(<LoginActivity />);
-}
+new Bootloader().doLogin();
 ```
 
 Hide Elements with `tools.typeIF()` and `native.getPref()`
@@ -313,7 +311,8 @@ webView.addJavascriptInterface(new Object() {
 
 Then declare it in TypeScript
 
-`Android` is in `native/androidi.ts`
+`Android` is in `native/androidi.ts`  
+
 `Windows` is in `native/windows.i.ts`
 
 ```ts

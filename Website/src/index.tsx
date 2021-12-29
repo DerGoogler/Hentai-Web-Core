@@ -1,21 +1,16 @@
-import MainActivity from "./MainActivity";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import "onsenui/css/onsenui.css";
 import "./styles/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/default.scss";
-import { AppContainer } from "react-hot-loader";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
 import translation from "./dataPacks/strings";
 import native from "./native";
-import SplashActivity from "./SplashActivity";
-import { hot } from "react-hot-loader/root";
 import eruda from "eruda";
-import SettingsActivity from "./SettingsActivity";
-import tools from "./misc/tools";
 import Bota from "./misc/bota64";
+import mainfest from "./Manifest";
 
 native.setPref(
   "test",
@@ -46,13 +41,21 @@ class Bootloader {
     }
   }
 
+  public activity = {
+    load(activityName: string): void | Location {
+      window.location.search = `activity=${activityName}`;
+    },
+
+    getCurrent(): string | String {
+      return window.location.search.replace("?activity=", "");
+    },
+  };
+
   public loadActivity(node: JSX.Element) {
     ReactDOM.render(
-      <AppContainer>
-        <Provider language={this.checkLanguage()} translation={translation}>
-          {node}
-        </Provider>
-      </AppContainer>,
+      <Provider language={this.checkLanguage()} translation={translation}>
+        {node}
+      </Provider>,
       this.mountNode
     );
   }
@@ -60,9 +63,11 @@ class Bootloader {
   /**
    * Checks if the user is logged in
    */
-  public static doLogin() {
+  public doLogin() {
+    if (native.getPref("alwaysLogin") === "true") return native.removePref("loggedIn");
     if (native.getPref("loggedIn") === "false") {
-      new Bootloader().loadActivity(<LoginActivity />);
+      this.activity.load("login");
+      this.loadActivity(<LoginActivity />);
     }
   }
 
@@ -72,8 +77,26 @@ class Bootloader {
     });
 
     native.registerShortcut("s e t t i n g s", () => {
-      native.activity.load("settings");
+      this.activity.load("settings");
     });
+  }
+
+  private activitLoader(manifest: any) {
+    var url = window.location.search.replace("?activity=", "").replace("/", "");
+
+    if (manifest[url] !== undefined) {
+      this.loadActivity(manifest[url]);
+    } else {
+      ons.notification.alert({
+        message: `The "${url}" activity was not found.`,
+        title: "Activity not found",
+        buttonLabels: ["OK"],
+        animation: "default",
+        modifier: native.checkPlatformForBorderStyle,
+        cancelable: false,
+      });
+      this.loadActivity(manifest["main"]);
+    }
   }
 
   public init() {
@@ -86,33 +109,11 @@ class Bootloader {
       }
       this.electronInit();
       this.loadConsole();
-      if (native.getPref("disableSplashscreen") === "true") {
-        if (native.getPref("loggedIn") === "true") {
-          // Removes the `loggedIn` key if always login is enabled
-          if (native.getPref("alwaysLogin") === "true") return native.removePref("loggedIn");
-          switch (native.activity.getCurrent()) {
-            case "settings":
-              this.loadActivity(<SettingsActivity />);
-              break;
 
-            default:
-              this.loadActivity(<MainActivity />);
-              break;
-          }
-        } else {
-          this.loadActivity(<LoginActivity />);
-        }
-      } else {
-        switch (native.activity.getCurrent()) {
-          case "settings":
-            this.loadActivity(<SettingsActivity />);
-            break;
+      if (window.location.search === "") return this.activity.load("main");
+      if (window.location.search === "?activity=") return this.activity.load("main");
 
-          default:
-            this.loadActivity(<SplashActivity />);
-            break;
-        }
-      }
+      this.activitLoader(mainfest);
     });
   }
 }

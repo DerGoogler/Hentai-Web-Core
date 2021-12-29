@@ -36,4 +36,4 @@ class SettingsActivity extends React.Component {
   }
 }
 
-export default hot(SettingsActivity);
+export default SettingsActivity;

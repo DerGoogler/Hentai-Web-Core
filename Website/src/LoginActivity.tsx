@@ -1,3 +1,4 @@
+import Bootloader from "./index";
 import ons from "onsenui";
 import React from "react";
 import { hot } from "react-hot-loader/root";
@@ -11,6 +12,12 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };
+  }
+
+  public componentDidMount() {
+    if (native.getPref("loggedIn") === "true") {
+      new Bootloader().activity.load("main");
+    }
   }
 
   private renderToolbar() {
@@ -125,4 +132,4 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
   }
 }
 
-export default hot(LoginActivity);
+export default LoginActivity;

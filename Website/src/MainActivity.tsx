@@ -34,17 +34,20 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
   }
 
   public componentDidMount() {
+    new Bootloader().doLogin();
+
     if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
       tools.ref("download-app", (e: HTMLElement) => {
         e.style.display = "none";
         e.setAttribute("title", `Download the last ${pkg.version} Hentai Web version!`);
       });
-    }
-    tools.settingsEfect("hideFAB", "#fab-element", (element: any) => {
-      element.style.display = "none";
-    });
 
-    Bootloader.doLogin();
+      if (native.getPref("hideFAB") === "true") {
+        tools.ref("fab-element", (element: HTMLElement) => {
+          element.style.display = "none";
+        });
+      }
+    }
 
     tools.ref("menu-click", (e: HTMLElement) => {
       e.addEventListener("click", this.handleClick);
@@ -155,7 +158,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
               text: "settings",
               icon: "md-settings",
               onClick: () => {
-                native.activity.load("settings");
+                new Bootloader().activity.load("settings");
               },
             },
             {
@@ -179,4 +182,4 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
   }
 }
 
-export default hot(MainActivity);
+export default MainActivity;
