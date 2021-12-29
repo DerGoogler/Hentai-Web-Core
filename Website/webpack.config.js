@@ -57,6 +57,13 @@ const config = {
     extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
       "react-dom": "@hot-loader/react-dom",
+      "@Builders": path.resolve(__dirname, "src/builders"),
+      "@Native": path.resolve(__dirname, "src/native/index.ts"),
+      "@Types": path.resolve(__dirname, "src/typings"),
+      "@DataPacks": path.resolve(__dirname, "src/dataPacks"),
+      "@Misc": path.resolve(__dirname, "src/misc"),
+      "@Bootloader": path.resolve(__dirname, "src/index.tsx"),
+      "@Styles": path.resolve(__dirname, "src/styles"),
     },
     fallback: {
       path: require.resolve("path-browserify"),

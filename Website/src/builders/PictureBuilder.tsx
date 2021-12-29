@@ -2,11 +2,10 @@ import * as React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
-import native from "../native";
-import ActionSheetBuilder from "./ActionScheetBuilder";
-import tools from "../misc/tools";
-import { ActionSheet, ActionSheetButton, Icon } from "react-onsenui";
-import { modifier } from "onsenui";
+import native from "@Native";
+import { Icon } from "react-onsenui";
+import tools from "@Misc/tools";
+import ActionSheetBuilder from "./ActionSheetBuilder";
 
 class PictureBuilder extends React.Component<{
   note?: any;
@@ -163,6 +162,7 @@ class PictureBuilder extends React.Component<{
                             icon: "md-eye",
                             onClick: () => {
                               native.open(source);
+                              this.handleCancel();
                             },
                           },
                           {
@@ -170,6 +170,7 @@ class PictureBuilder extends React.Component<{
                             icon: "md-copy",
                             onClick: () => {
                               native.copyClipborad(source);
+                              this.handleCancel();
                             },
                           },
                           {
@@ -180,6 +181,7 @@ class PictureBuilder extends React.Component<{
                               tools.ref(this.getID, (e: HTMLElement) => {
                                 e.setAttribute("src", source);
                               });
+                              this.handleCancel();
                             },
                           },
                           {
@@ -192,6 +194,7 @@ class PictureBuilder extends React.Component<{
                                   ""
                                 )}.json`
                               );
+                              this.handleCancel();
                             },
                           },
                           {
@@ -199,6 +202,7 @@ class PictureBuilder extends React.Component<{
                             icon: "md-download",
                             onClick: () => {
                               native.downloadPicture(this.getID, source, this.getID);
+                              this.handleCancel();
                             },
                           },
                           {

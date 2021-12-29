@@ -1,8 +1,8 @@
 import ons from "onsenui";
 import { List, ListItem } from "react-onsenui";
-import { SettingsInterface } from "typings/SettingsBuilder";
-import tools from "../misc/tools";
-import native from "../native";
+import { SettingsInterface } from "@Types/SettingsBuilder";
+import native from "@Native";
+import tools from "@Misc/tools";
 
 const settings: SettingsInterface[] = [
   {
@@ -127,11 +127,6 @@ const settings: SettingsInterface[] = [
         key: "saveLastUsedTab",
         type: "switch",
         text: "saveLastUsedTab-string",
-      },
-      {
-        key: "disableSplashscreen",
-        type: "switch",
-        text: "disableSplashscreen-string",
       },
     ],
   },

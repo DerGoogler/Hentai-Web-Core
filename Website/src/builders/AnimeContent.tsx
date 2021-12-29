@@ -3,8 +3,8 @@ import * as React from "react";
 import { hot } from "react-hot-loader/root";
 import { List, SearchInput } from "react-onsenui";
 import ContentBody from "./ContentBody";
-import native from "../native";
-import tools from "../misc/tools";
+import native from "@Native";
+import tools from "@Misc/tools";
 
 class AnimeContent extends React.Component<{
   data: any;

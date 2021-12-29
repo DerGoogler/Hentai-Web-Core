@@ -1,5 +1,5 @@
-import Android from "../native/android.i";
-import Windows from "../native/window.i";
+import Android from "@Native/android.i";
+import Windows from "@Native/window.i";
 
 declare global {
   /**

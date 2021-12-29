@@ -1,10 +1,9 @@
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
 import { Icon, ListItem, ListTitle, Select, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import { SettingsInterface, SettingsOptions } from "typings/SettingsBuilder";
-import tools from "../misc/tools";
-import native from "../native";
+import { SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
+import tools from "@Misc/tools";
+import native from "@Native";
 
 class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
   private element!: HTMLElement | null;

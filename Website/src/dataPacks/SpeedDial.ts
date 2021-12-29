@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root";
-import native from "../native";
+import native from "@Native";
 import pkg from "../../package.json";
 
 const SpeedDial = [

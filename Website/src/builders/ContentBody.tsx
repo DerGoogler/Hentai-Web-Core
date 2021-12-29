@@ -1,8 +1,8 @@
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
+import { isMobile } from "react-device-detect";
 import config from "../misc/config";
 import tools from "../misc/tools";
-import native from "../native";
+import native from "@Native";
 
 class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element> {
   private stlye: any = {
@@ -13,7 +13,7 @@ class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element
     minWidth: "200px",
     maxWidth: "580px",
     margin: "0px auto",
-    padding: tools.typeIF(native.userAgentEqualWindows(true), "", "45px"),
+    padding: tools.typeIF(native.userAgentEqualWindows(true) || isMobile, "", "45px"),
   };
 
   private checkDevice(designWindows: any, designAndroid: any) {
@@ -30,7 +30,7 @@ class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element
       <div
         className={className}
         style={this.checkDevice(
-          { padding: tools.typeIF(native.userAgentEqualWindows(true), "", "16px") },
+          { padding: tools.typeIF(native.userAgentEqualWindows(true) || isMobile, "", "16px") },
           {}
         )}
       >
@@ -40,4 +40,4 @@ class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element
   }
 }
 
-export default hot(ContentBody);
+export default ContentBody;

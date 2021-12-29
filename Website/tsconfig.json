@@ -17,7 +17,13 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-      "@DerGoogler/native": ["./native/index.ts"],
+      "@Native": ["native/index.ts"],
+      "@Builders/*": ["builders/*"],
+      "@Types/*": ["typings/*"],
+      "@DataPacks/*": ["dataPacks/*"],
+      "@Misc/*": ["misc/*"],
+      "@Bootloader": ["index.tsx"],
+      "@Styles": ["styles/"]
     }
   },
   "include": ["./src/**/*"]

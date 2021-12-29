@@ -1,11 +1,11 @@
 import * as React from "react";
-import { BackButton, Icon, Page, ToolbarButton } from "react-onsenui";
+import { BackButton, Icon, ToolbarButton } from "react-onsenui";
 import { hot } from "react-hot-loader/root";
 import ons from "onsenui";
-import tools from "../misc/tools";
-import native from "../native";
-import { ToolbarBuilderInterface } from "typings/ToolbarBuilder";
-import Bootloader from "./../index";
+import native from "@Native";
+import Bootloader from "@Bootloader";
+import { ToolbarBuilderInterface } from "@Types/ToolbarBuilder";
+import tools from "@Misc/tools";
 
 class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
   public componentDidMount() {

@@ -1,16 +1,16 @@
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import "onsenui/css/onsenui.css";
-import "./styles/onsen-css-components.css";
+import "@Styles/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/default.scss";
+import "@Styles/default.scss";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
-import translation from "./dataPacks/strings";
-import native from "./native";
+import native from "@Native";
+import strings from "@DataPacks/strings";
 import eruda from "eruda";
-import Bota from "./misc/bota64";
 import mainfest from "./Manifest";
+import Bota from "@Misc/bota64";
 
 native.setPref(
   "test",
@@ -53,7 +53,7 @@ class Bootloader {
 
   public loadActivity(node: JSX.Element) {
     ReactDOM.render(
-      <Provider language={this.checkLanguage()} translation={translation}>
+      <Provider language={this.checkLanguage()} translation={strings}>
         {node}
       </Provider>,
       this.mountNode
@@ -102,6 +102,7 @@ class Bootloader {
   public init() {
     ons.ready(() => {
       const getDesignCookie = native.getPref("useIOSdesign");
+      const uri = window.location.search;
       if (getDesignCookie === "true") {
         ons.platform.select("ios");
       } else {
@@ -110,8 +111,7 @@ class Bootloader {
       this.electronInit();
       this.loadConsole();
 
-      if (window.location.search === "") return this.activity.load("main");
-      if (window.location.search === "?activity=") return this.activity.load("main");
+      if (uri === "" || uri === "?activity=") return this.activity.load("main");
 
       this.activitLoader(mainfest);
     });

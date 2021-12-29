@@ -1,13 +1,12 @@
 import * as React from "react";
 import { Page, Toolbar } from "react-onsenui";
-import { hot } from "react-hot-loader/root";
-import SettingsBuilder from "./builders/SettingsBuilder";
 import { List } from "react-onsenui";
-import ContentBody from "./builders/ContentBody";
 import { Provider, Translate, Translator } from "react-translated";
-import native from "./native";
-import ToolbarBuilder from "./builders/ToolbarBuilder";
-import settings from "./dataPacks/settings";
+import native from "@Native";
+import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import ContentBody from "@Builders/ContentBody";
+import SettingsBuilder from "@Builders/SettingsBuilder";
+import settings from "@DataPacks/settings";
 
 class SettingsActivity extends React.Component {
   private renderToolbar() {

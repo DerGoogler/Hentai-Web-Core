@@ -1,9 +1,13 @@
 import React from "react";
 import { Page, Toolbar } from "react-onsenui";
-import native from "./native";
+import native from "@Native";
 import axios from "axios";
 import Markdown from "markdown-to-jsx";
-import ToolbarBuilder from "./builders/ToolbarBuilder";
+import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import ContentBody from "@Builders/ContentBody";
+import "@Styles/github/markdown-dark.scss";
+import "@Styles/github/markdown-light.scss";
+import tools from "@Misc/tools";
 
 class LicensesActivity extends React.Component<{}, { data: string }> {
   public constructor(props: any) {
@@ -35,9 +39,13 @@ class LicensesActivity extends React.Component<{}, { data: string }> {
     const { data } = this.state;
     return (
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <section>
+        <ContentBody
+          className={
+            "markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")
+          }
+        >
           <Markdown>{data}</Markdown>
-        </section>
+        </ContentBody>
       </Page>
     );
   }

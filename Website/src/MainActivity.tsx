@@ -1,5 +1,4 @@
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
 import {
@@ -13,17 +12,15 @@ import {
   Popover,
   Button,
 } from "react-onsenui";
-import config from "./misc/config";
-import native from "./native";
-import AnimeContent from "./builders/AnimeContent";
-import tools from "./misc/tools";
-import { nsfwData, sfwData } from "./dataPacks/hmtai";
-import Bootloader from "./index";
-import LoginActivity from "./LoginActivity";
-import ToolbarBuilder from "./builders/ToolbarBuilder";
-import SpeedDialBuilder from "./builders/SpeedDialBuilder";
-import TabbarBuilder from "./builders/TabbarBuilder";
-import ActionSheetBuilder from "./builders/ActionScheetBuilder";
+import native from "@Native";
+import Bootloader from "@Bootloader";
+import tools from "@Misc/tools";
+import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import TabbarBuilder from "@Builders/TabbarBuilder";
+import AnimeContent from "@Builders/AnimeContent";
+import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
+import { nsfwData, sfwData } from "@DataPacks/hmtai";
+import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 
 class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
   constructor(props: any) {
@@ -159,11 +156,20 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
               icon: "md-settings",
               onClick: () => {
                 new Bootloader().activity.load("settings");
+                this.handleCancel();
+              },
+            },
+            {
+              text: "Licenses",
+              icon: "md-file",
+              onClick: () => {
+                new Bootloader().activity.load("licenses");
+                this.handleCancel();
               },
             },
             {
               text: "Open app path",
-              icon: "md-file",
+              icon: "md-android",
               style: { display: tools.typeIF(native.userAgentEqualWindows(true), "", "none") },
               onClick: () => {
                 window.Windows.openPath(window.Windows.appGetPath("userData"));
