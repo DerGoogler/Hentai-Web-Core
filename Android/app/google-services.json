@@ -1,0 +1,69 @@
+{
+    "project_info": {
+      "project_number": "314721935603",
+      "firebase_url": "https://hentai-web-default-rtdb.europe-west1.firebasedatabase.app",
+      "project_id": "hentai-web",
+      "storage_bucket": "hentai-web.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:314721935603:android:5808089b2b77e38c77d786",
+          "android_client_info": {
+            "package_name": "com.dergoogler.hentai"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "314721935603-nnclm8ntf0gscht3alu9n62jmlu3kv1a.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDGMzSNoC9GuQ42FVgHtIRnJ8C-F6D7dII"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "314721935603-nnclm8ntf0gscht3alu9n62jmlu3kv1a.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      },
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:314721935603:android:eb37ae7ea36d6eb377d786",
+          "android_client_info": {
+            "package_name": "com.dergoogler.hentaiweb"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "314721935603-nnclm8ntf0gscht3alu9n62jmlu3kv1a.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDGMzSNoC9GuQ42FVgHtIRnJ8C-F6D7dII"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "314721935603-nnclm8ntf0gscht3alu9n62jmlu3kv1a.apps.googleusercontent.com",
+                "client_type": 3
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
