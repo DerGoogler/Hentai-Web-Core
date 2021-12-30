@@ -1,59 +1,56 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Network Error</title>
-</head>
-<style>
-  html {
-    width: 100%;
-    height: 100%;
-    user-select: none;
-  }
+  </head>
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+      user-select: none;
+    }
 
-  body {
-    user-select: none;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    background-color: #4a148c;
-    color: white;
-    font-family: -apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif
-  }
+    body {
+      user-select: none;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background-color: #4a148c;
+      color: white;
+      font-family: -apple-system, "Helvetica Neue", "Helvetica", "Arial",
+        "Lucida Grande", sans-serif;
+    }
 
-  .container {
-    text-align: center;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-</style>
+    .container {
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
 
+  <body>
+    <div class="container">
+      <h1>Network Error</h1>
+      <p>Please check your network</p>
+      <p id="errorHolder">ERROR CODE: <span id="errorCode" /></p>
+    </div>
 
-<body>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const errorCode = document.getElementById("errorCode");
+      errorCode.innerHTML = decodeURI(params.get("code"));
 
-<div class="container">
-    <h1>Network Error</h1>
-    <p>Please check your network</p>
-    <p id="error-holder">ERROR CODE: <span id="error-code"/></p>
-</div>
+      const errorHolder = document.getElementById("errorHolder");
 
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const errorCode = document.getElementById("error-code");
-    errorCode.innerHTML = decodeURI(params.get('code'));
-
-    const errorHolder = document.getElementById("error-holder");
-
-    errorHolder.addEventListener("onclick", () => {
-      Android.open("")
-    })
-  </script>
-</body>
-
+      errorHolder.addEventListener("onclick", () => {
+        Android.open("https://google.com/search?q=" + params.get("code"));
+      });
+    </script>
+  </body>
 </html>
