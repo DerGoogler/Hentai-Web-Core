@@ -59,6 +59,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
               return (
                 <>
                   <ToolbarButton
+                    modifier="windowsNormal"
                     style={{
                       display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                     }}
@@ -69,6 +70,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                     <Icon icon="md-minus"></Icon>
                   </ToolbarButton>
                   <ToolbarButton
+                    modifier="windowsNormal"
                     disabled={tools.typeIF(
                       native.getPref("electron.enableFullscreen"),
                       true,
@@ -92,6 +94,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                     <Icon icon="md-crop"></Icon>
                   </ToolbarButton>
                   <ToolbarButton
+                    modifier="windowsClose"
                     style={{
                       display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                     }}
