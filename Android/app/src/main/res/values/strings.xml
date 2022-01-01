@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="app_name">Hentai Web</string>
+    <string name="node_process_name">node.service</string>
 </resources>

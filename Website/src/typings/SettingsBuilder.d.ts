@@ -7,8 +7,11 @@ interface SettingsOptions {
   style?: React.CSSProperties;
   expandableContent?: JSX.Element | HTMLElement | string | undefined;
   expandable?: boolean;
-  type: "switch" | "select";
+  tappable?: boolean;
+  modifier?: string;
+  type: "switch" | "select" | "";
   text: string;
+  onClick?: Function
   selectValue?: JSX.Element | HTMLOptionElement;
   icon?: Icon;
   selectDefaultValue?: string;

@@ -1,0 +1,18 @@
+{
+  "name": "hentai-web-discord-bot",
+  "version": "1.0.0",
+  "description": "An bot that's send Hentai images",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https:github.com/Hentai-Web"
+  },
+  "author": "Der_Googler",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "discord.js": "^13.5.0"
+  }
+}

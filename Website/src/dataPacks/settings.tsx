@@ -213,6 +213,20 @@ const settings: SettingsInterface[] = [
       },
     ],
   },
+  {
+    title: "Discord",
+    className: "discord",
+    content: [
+      {
+        key: "discord.enableBot",
+        type: "",
+        text: "Invite bot",
+        onClick: ()=>{
+          native.open("https://discord.com/api/oauth2/authorize?client_id=726837711851356242&permissions=8&scope=bot")
+        }
+      },
+    ],
+  },
 ];
 
 export default settings;

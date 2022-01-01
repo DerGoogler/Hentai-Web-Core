@@ -61,6 +61,11 @@ interface Android {
    * @Native
    */
   open(link: string): void;
+
+  /**
+   * @Native
+   */
+  nodeCommand(node: string, path?: string): void;
 }
 
 export default Android;

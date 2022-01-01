@@ -58,8 +58,15 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                 <>
                   <ListItem
                     expandable={tools.typeCheck(setting.expandable, false)}
+                    modifier={tools.typeCheck(setting.modifier, "")}
+                    tappable={tools.typeCheck(setting.tappable, false)}
                     id={setting.id}
                     style={setting.style}
+                    onClick={() => {
+                      if (typeof setting.onClick == "function") {
+                        setting.onClick();
+                      }
+                    }}
                   >
                     {(() => {
                       if (setting.icon === null || setting.icon === undefined) {

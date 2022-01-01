@@ -75,7 +75,6 @@
     "react-router": "^6.2.1",
     "react-router-dom": "^5.3.0",
     "react-translated": "^2.5.0",
-    "react-windows-ui": "^4.0.0",
     "something-random-on-discord": "^3.4.4",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.0"

@@ -20,19 +20,23 @@ android {
         versionCode 136
         versionName '1.3.6'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments "-DANDROID_TOOLCHAIN=clang",
+                        "-DANDROID_STL=c++_shared"
+                "-DANDROID_PLATFORM=android-19"
+                cppFlags "-std=c++11"
+            }
+        }
         multiDexEnabled true
-
-        //++ for Android 10 (API 29)
         buildConfigField "boolean", "FEATURE_EXTERNAL_STORAGE_DIR", "false"
-        //--
-
-        //++ for Android 11 (API 30)
         buildConfigField "boolean", "FEATURE_WEBVIEW_ASSET_LOADER", "true"
-
         buildConfigField "String", "ASSET_BASE_DOMAIN", "\"dergoogler.com\""
         buildConfigField "String", "ASSET_PATH", "\"/assets/\""
         buildConfigField "String", "RES_PATH", "\"/res/\""
-        //--
     }
 
     signingConfigs {
@@ -58,6 +62,12 @@ android {
         }
     }
 
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
     flavorDimensions "version"
     productFlavors {
         free {
@@ -69,6 +79,7 @@ android {
         main {
             res.srcDirs = ['src/main/res']
             assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDirs = ['libs']
         }
     }
     compileOptions {

@@ -15,8 +15,13 @@
 
     <!-- Camera -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
-    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
 
     <!-- Geolocation -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -27,32 +32,34 @@
     <uses-permission android:name="android.permission.MICROPHONE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
     <uses-feature android:name="android.hardware.audio.low_latency" />
     <uses-feature android:name="android.hardware.audio.pro" />
-    <uses-feature android:name="android.hardware.microphone"/>
+    <uses-feature android:name="android.hardware.microphone" />
 
     <!-- Get Package Info -->
-    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
 
     <!-- Screen -->
     <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
-        android:xlargeScreens="true"
+        android:normalScreens="true"
         android:resizeable="true"
-        android:anyDensity="true" />
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
+        android:allowBackup="true"
+        android:extractNativeLibs="false"
+        android:fullBackupContent="@xml/app_backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:allowBackup="true"
-        android:fullBackupContent="@xml/app_backup_rules"
-        android:largeHeap="true"
-        android:extractNativeLibs="false"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
@@ -64,9 +71,9 @@
 
         <activity
             android:name="com.dergoogler.hentai.activity.WebViewActivity"
-            android:launchMode="singleTop"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -86,6 +93,11 @@
                 android:resource="@xml/file_provider_paths" />
         </provider>
 
+        <service
+            android:name=".bridge.NodeService"
+            android:process="@string/node_process_name"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

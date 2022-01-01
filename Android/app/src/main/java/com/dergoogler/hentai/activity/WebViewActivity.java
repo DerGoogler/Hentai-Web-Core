@@ -2,7 +2,10 @@ package com.dergoogler.hentai.activity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -12,8 +15,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.R;
+import com.dergoogler.hentai.bridge.NodeService;
 import com.dergoogler.hentai.bridge.process.AndroidBridgeProcessActivityResult;
 import com.dergoogler.hentai.zero.activity.BaseActivity;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
@@ -29,6 +35,12 @@ import com.dergoogler.hentai.bridge.AndroidBridge;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.webview.WebViewHelper;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -38,11 +50,15 @@ import java.util.Objects;
  * @since 2018
  */
 public class WebViewActivity extends BaseActivity {
+    private NodeReceiver receiver;
     private static final String TAG = WebViewActivity.class.getSimpleName();
     private SharedPreferences nativaeLocalstorage;
     private WebView webview;
     private CSWebChromeClient webChromeClient;
     private CSFileChooserListener webviewFileChooser;
+    private String urlCore = "https://dergoogler.com/hentai-web/";
+    private String urlCore_ = "http://192.168.178.81:5500"; // For debugging
+    private String mainURL = urlCore_; // Main url
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +67,55 @@ public class WebViewActivity extends BaseActivity {
 
         init();
 
+
+        receiver = new NodeReceiver();
+        IntentFilter filter = new IntentFilter("com.dergoogler.hentai.ipc");
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
+
+        new Thread(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            ServerSocket server = new ServerSocket(0, 5, InetAddress.getByName(mainURL));
+
+                            Intent i = new Intent(WebViewActivity.this, NodeService.class);
+                            i.putExtra("ipc-port", "" + server.getLocalPort());
+                            startService(i);
+
+                            Socket socket = server.accept();
+                            BufferedInputStream inp = new BufferedInputStream(socket.getInputStream());
+                            BufferedOutputStream out = new BufferedOutputStream(socket.getOutputStream());
+
+                            byte[] buf = new byte[65536];
+
+                            while (true) {
+                                int read = inp.read(buf);
+                                String u = new String(Arrays.copyOfRange(buf, 0, read));
+                                Intent in = new Intent("com.dergoogler.hentai.ipc");
+                                in.putExtra("loadUrl", u);
+                                LocalBroadcastManager.getInstance(WebViewActivity.this).sendBroadcast(in);
+                            }
+                        } catch (Exception err) {
+                            err.printStackTrace();
+                        }
+                    }
+                }
+        ).start();
+
+
         if (BuildConfig.DEBUG) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                 WebView.setWebContentsDebuggingEnabled(true);
             }
+        }
+    }
+
+    private class NodeReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String loadUrl = intent.getStringExtra("loadUrl");
+            if (loadUrl != null) webview.loadUrl(mainURL);
         }
     }
 
@@ -123,10 +184,6 @@ public class WebViewActivity extends BaseActivity {
 
 
         Objects.requireNonNull(getSupportActionBar()).hide();
-
-        String urlCore = "https://dergoogler.com/hentai-web/";
-        String urlCore_ = "http://192.168.178.81:5500"; // For debugging
-        String mainURL = urlCore_; // Main url
 
         WebViewHelper.loadUrl(this.webview, mainURL);
         WebViewHelper.setUserAgentString(this.webview, "HENTAI_WEB_AGENT");
@@ -212,3 +269,4 @@ public class WebViewActivity extends BaseActivity {
     }
 
 }
+
