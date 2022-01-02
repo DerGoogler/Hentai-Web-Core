@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebView;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -53,7 +54,7 @@ public class WebViewActivity extends BaseActivity {
     private CSFileChooserListener webviewFileChooser;
     private String urlCore = Lib.getReleaseURl();
     private String urlCore_ = Lib.getDebugURl(); // For debugging
-    private String mainURL = urlCore_; // Main url
+    private String mainURL = urlCore; // Main url
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,15 +64,14 @@ public class WebViewActivity extends BaseActivity {
         init();
 
         if (BuildConfig.DEBUG) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                WebView.setWebContentsDebuggingEnabled(true);
-            }
+            WebView.setWebContentsDebuggingEnabled(true);
         }
     }
 
     @SuppressLint("AddJavascriptInterface")
     private void init() {
         ViewGroup contentView = findViewById(R.id.contentView);
+
         if (null == contentView) {
             DialogBuilder.with(getActivity())
                     .setMessage("The contentView does not exist.")

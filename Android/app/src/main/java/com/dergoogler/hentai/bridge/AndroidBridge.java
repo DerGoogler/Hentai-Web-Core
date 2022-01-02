@@ -25,6 +25,7 @@ import com.dergoogler.hentai.tools.AESCrypt;
 import com.dergoogler.hentai.activity.WebViewActivity;
 import com.dergoogler.hentai.bridge.process.AndroidBridgeProcess;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
+import com.dergoogler.hentai.zero.download.CSDownloadManager;
 import com.dergoogler.hentai.zero.json.JSONHelper;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.zero.reflect.ReflectHelper;
@@ -327,23 +328,14 @@ public class AndroidBridge {
     }
 
     @JavascriptInterface
-    public void downloadImage(String filename, String downloadUrlOfImage) {
+    public void downloadImage(String downloadUrlOfImage) {
         // Need to give permission to read an write external storage
         if (Build.VERSION.SDK_INT >= 23) {
             if (webView.getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 ((Activity) webView.getContext()).requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1000);
             } else {
                 try {
-                    DownloadManager dm = (DownloadManager) webView.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-                    Uri downloadUri = Uri.parse(downloadUrlOfImage);
-                    DownloadManager.Request request = new DownloadManager.Request(downloadUri);
-                    request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                            .setAllowedOverRoaming(false)
-                            .setTitle(filename)
-                            .setMimeType("image/jpeg") // Your file type. You can use this code to download other file types also.
-                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, File.separator + filename + ".jpg");
-                    dm.enqueue(request);
+                    new CSDownloadManager().download(webView.getContext(), downloadUrlOfImage);
                     Toast.makeText(webView.getContext(), "Image download started.", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Toast.makeText(webView.getContext(), "Image download failed." + e, Toast.LENGTH_SHORT).show();
@@ -351,16 +343,7 @@ public class AndroidBridge {
             }
         } else {
             try {
-                DownloadManager dm = (DownloadManager) webView.getContext().getSystemService(Context.DOWNLOAD_SERVICE);
-                Uri downloadUri = Uri.parse(downloadUrlOfImage);
-                DownloadManager.Request request = new DownloadManager.Request(downloadUri);
-                request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE)
-                        .setAllowedOverRoaming(false)
-                        .setTitle(filename)
-                        .setMimeType("image/jpeg") // Your file type. You can use this code to download other file types also.
-                        .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                        .setDestinationInExternalPublicDir(Environment.DIRECTORY_PICTURES, File.separator + filename + ".jpg");
-                dm.enqueue(request);
+                new CSDownloadManager().download(webView.getContext(), downloadUrlOfImage);
                 Toast.makeText(webView.getContext(), "Image download started.", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(webView.getContext(), "Image download failed." + e, Toast.LENGTH_SHORT).show();

@@ -109,7 +109,7 @@ class native {
    * @param downloadUrlOfImage
    * @param id
    */
-  public static downloadPicture(filename: string, downloadUrlOfImage: string, id?: any): void {
+  public static downloadPicture(downloadUrlOfImage: string, filename?: string, id?: any): void {
     const dwnl = () => {
       if ((this.element = document.getElementById(id))) {
         htmlToImage.toBlob(this.element).then((blob: any) => {
@@ -118,7 +118,7 @@ class native {
       }
     };
     if (this.agent === this.userAgentAndroid) {
-      window.Android.downloadImage(filename, downloadUrlOfImage);
+      window.Android.downloadImage(downloadUrlOfImage);
     } else if (this.agent === this.userAgentWindows) {
       return dwnl();
     } else {

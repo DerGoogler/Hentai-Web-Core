@@ -201,7 +201,7 @@ class PictureBuilder extends React.Component<{
                             text: "download-text",
                             icon: "md-download",
                             onClick: () => {
-                              native.downloadPicture(this.getID, source, this.getID);
+                              native.downloadPicture(source, this.getID, this.getID);
                               this.handleCancel();
                             },
                           },

@@ -10,8 +10,8 @@ import androidx.multidex.MultiDexApplication;
  * @author mcharima5@gmail.com
  * @since 2018
  */
-public class SNCApplication extends MultiDexApplication {
-    private static final String TAG = SNCApplication.class.getSimpleName();
+public class DGApplication extends MultiDexApplication {
+    private static final String TAG = DGApplication.class.getSimpleName();
 
     @Override
     public void onCreate() {

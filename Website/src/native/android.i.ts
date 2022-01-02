@@ -25,7 +25,7 @@ interface Android {
   /**
    * @Native
    */
-  downloadImage(filename: string, downloadUrlOfImage: string): void;
+  downloadImage(downloadUrlOfImage: string): void;
 
   /**
    * @Native
@@ -61,11 +61,6 @@ interface Android {
    * @Native
    */
   open(link: string): void;
-
-  /**
-   * @Native
-   */
-  nodeCommand(node: string, path?: string): void;
 }
 
 export default Android;
