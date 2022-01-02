@@ -168,6 +168,14 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
               },
             },
             {
+              text: "Issues",
+              icon: "md-file",
+              onClick: () => {
+                new Bootloader().activity.load("issues");
+                this.handleCancel();
+              },
+            },
+            {
               text: "Open app path",
               icon: "md-android",
               style: { display: tools.typeIF(native.userAgentEqualWindows(true), "", "none") },

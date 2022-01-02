@@ -6,7 +6,7 @@
 // https://discord.gg/Cak7GBJ //
 
 //===// Export Module //===//
-const hmtai = require("./HMproject")
+const hmtai = require("./HMproject");
 
-module.exports = hmtai
+module.exports = hmtai;
 // I hope you enjoy ! //

@@ -1,6 +1,8 @@
 // Load up the discord.js library
 const { Client, Intents } = require("discord.js");
-const data = require("./data");
+const hmtai = require("./hmtai");
+
+const h = hmtai;
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
@@ -13,19 +15,7 @@ client.on("ready", () => {
   console.log(
     `Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`
   );
-  client.user.setActivity(`Serving ${client.guilds.size} servers`);
-});
-
-client.on("guildCreate", (guild) => {
-  console.log(
-    `New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`
-  );
-  client.user.setActivity(`Serving ${client.guilds.size} servers`);
-});
-
-client.on("guildDelete", (guild) => {
-  console.log(`I have been removed from: ${guild.name} (id: ${guild.id})`);
-  client.user.setActivity(`Serving ${client.guilds.size} servers`);
+  client.user.setActivity("termux-desktop");
 });
 
 client.on("message", async (message) => {
@@ -53,17 +43,19 @@ client.on("message", async (message) => {
 
   if (command === "hm") {
     const hentaiImage = args.join(" ");
-    try {
-      if (message.channel.nsfw) {
-        message.delete().catch((O_o) => {});
-        message.channel.send(`${data[hentaiImage]}`);
-      } else {
-        message.delete().catch((O_o) => {});
-        message.channel.send("This channel is is not as NSFW marked.");
-      }
-    } catch (error) {
+    const data = require("./data");
+    if (message.channel.nsfw) {
       message.delete().catch((O_o) => {});
-      console.log(error);
+      try {
+        message.channel.send(`${h[hentaiImage]()}`);
+      } catch (error) {
+        message.delete().catch((O_o) => {});
+        message.channel.send(`Command not found!`);
+        console.log(error);
+      }
+    } else {
+      message.delete().catch((O_o) => {});
+      message.channel.send("This channel is is not as NSFW marked.");
     }
   }
 
@@ -84,4 +76,4 @@ client.on("message", async (message) => {
   }
 });
 
-client.login(process.env.BOT_TOKEN);
+client.login("ODM4MTE2MjEzODY2NzU4MjY1.YI2ajA.x5gtVRjdbLqe3VJHUosl8gPwrLk");
