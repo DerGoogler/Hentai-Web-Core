@@ -254,11 +254,6 @@ public class AndroidBridge {
     }
 
     @JavascriptInterface
-    public void nodeCommand(String node, String path) {
-        new NodeService().nodeCommand(node, path);
-    }
-
-    @JavascriptInterface
     public String decryptAES(String password, String text) throws GeneralSecurityException {
         return AESCrypt.decrypt(password, text);
     }

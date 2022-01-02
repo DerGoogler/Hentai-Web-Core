@@ -10,8 +10,8 @@ const Mousetrap = require("mousetrap");
 const store = new Store();
 
 contextBridge.exposeInMainWorld("Windows", {
-  newWindow: (width = 800, height = 600, uri) => {
-    const win = new BrowserWindow({ width: width, height: height });
+  newWindow: (uri, options) => {
+    const win = new BrowserWindow(options);
     win.loadURL(uri);
   },
 

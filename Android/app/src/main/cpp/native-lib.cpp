@@ -1,82 +1,34 @@
-#include "native-lib.h"
+#include <jni.h>
 #include <string>
-#include <thread>
-#include <vector>
-#include <node.h>
+#include <cstdlib>
+#include <pthread.h>
 #include <unistd.h>
-
-/*
- * Most of this is modified from https://github.com/sixo/node-example
- */
+#include <android/log.h>
 
 extern "C"
-JNIEXPORT void JNICALL
-Java_com_dergoogler_hentai_bridge_NodeService_startNode(JNIEnv *env, jobject instance, jobjectArray args) {
-
-    nodeonandroid::redirectStreamsToPipe();
-    nodeonandroid::startLoggingFromPipe();
-
-    auto continuousArray = nodeonandroid::makeContinuousArray(env, args);
-    auto argv = nodeonandroid::getArgv(continuousArray);
-
-    node::Start(argv.size() - 1, argv.data());
+JNIEXPORT jstring JNICALL
+Java_com_dergoogler_hentai_tools_Lib_getReleaseURl(JNIEnv *env, jclass clazz) {
+    std::string data = "https://www.dergoogler.com/hentai-web/?activity=main";
+    return env->NewStringUTF(data.c_str());
 }
 
-namespace nodeonandroid {
-    namespace {
-        std::thread logger;
-        static int pfd[2];
-    }
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_dergoogler_hentai_tools_Lib_getDebugURl(JNIEnv *env, jclass clazz) {
+    std::string data = "http://192.168.178.81:5500/?activity=main";
+    return env->NewStringUTF(data.c_str());
+}
 
-    std::vector<char> makeContinuousArray(JNIEnv *env, jobjectArray fromArgs) {
-        int count = env->GetArrayLength(fromArgs);
-        std::vector<char> buffer;
-        for (int i = 0; i < count; i++) {
-            jstring str = (jstring)env->GetObjectArrayElement(fromArgs, i);
-            const char* sptr = env->GetStringUTFChars(str, 0);
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_dergoogler_hentai_tools_Lib_getInterfaceName(JNIEnv *env, jclass clazz) {
+    std::string data = "Android";
+    return env->NewStringUTF(data.c_str());
+}
 
-            do {
-                buffer.push_back(*sptr);
-            }
-            while(*sptr++ != '\0');
-        }
-
-        return buffer;
-    }
-
-    std::vector<char*> getArgv(std::vector<char>& fromContinuousArray) {
-        std::vector<char*> argv;
-
-        argv.push_back(fromContinuousArray.data());
-        for (int i = 0; i < fromContinuousArray.size() - 1; i++) {
-            if (fromContinuousArray[i] == '\0') argv.push_back(&fromContinuousArray[i+1]);
-        }
-
-        argv.push_back(nullptr);
-
-        return argv;
-    }
-
-    void redirectStreamsToPipe() {
-        setvbuf(stdout, 0, _IOLBF, 0);
-        setvbuf(stderr, 0, _IONBF, 0);
-
-        pipe(pfd);
-        dup2(pfd[1], 1);
-        dup2(pfd[1], 2);
-    }
-
-    void startLoggingFromPipe() {
-        logger = std::thread([](int *pipefd) {
-            char buf[128];
-            std::size_t nBytes = 0;
-            while ((nBytes = read(pfd[0], buf, sizeof buf - 1)) > 0) {
-                if (buf[nBytes - 1] == '\n') --nBytes;
-                buf[nBytes] = 0;
-                LOGD("%s", buf);
-            }
-        }, pfd);
-
-        logger.detach();
-    }
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_dergoogler_hentai_tools_Lib_getUserAgent(JNIEnv *env, jclass clazz) {
+    std::string data = "HENTAI_WEB_AGENT";
+    return env->NewStringUTF(data.c_str());
 }

@@ -92,12 +92,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_provider_paths" />
         </provider>
-
-        <service
-            android:name=".bridge.NodeService"
-            android:process="@string/node_process_name"
-            android:enabled="true"
-            android:exported="false"/>
     </application>
 
 </manifest>
