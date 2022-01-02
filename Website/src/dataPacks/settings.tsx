@@ -214,16 +214,26 @@ const settings: SettingsInterface[] = [
     ],
   },
   {
-    title: "Discord",
+    title: "Bots",
     className: "discord",
     content: [
       {
-        key: "discord.enableBot",
+        key: "bots.discord",
         type: "",
-        text: "Invite bot",
-        onClick: ()=>{
-          native.open("https://discord.com/api/oauth2/authorize?client_id=726837711851356242&permissions=8&scope=bot")
-        }
+        text: "Invite Discord Bot",
+        onClick: () => {
+          native.open(
+            "https://discord.com/api/oauth2/authorize?client_id=726837711851356242&permissions=8&scope=bot"
+          );
+        },
+      },
+      {
+        key: "bots.telegram",
+        type: "",
+        text: "Use Telegram Bot",
+        onClick: () => {
+          native.open("https://t.me/HentaiWebRobot");
+        },
       },
     ],
   },

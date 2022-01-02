@@ -169,7 +169,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
             },
             {
               text: "Issues",
-              icon: "md-file",
+              icon: "md-bug",
               onClick: () => {
                 new Bootloader().activity.load("issues");
                 this.handleCancel();

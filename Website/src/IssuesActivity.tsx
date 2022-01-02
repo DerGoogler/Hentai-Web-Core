@@ -51,11 +51,7 @@ class IssuesActivity extends React.Component<{}, { data: GitHubIssuesInterface[]
             <span className="list-item__subtitle">{items.user?.login}</span>
           </div>
           <div className="expandable-content">
-            <div
-              className={
-                "markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")
-              }
-            >
+            <div>
               {/*
  // @ts-ignore */}
               <Markdown>{items.body}</Markdown>
@@ -71,6 +67,7 @@ class IssuesActivity extends React.Component<{}, { data: GitHubIssuesInterface[]
                   padding: ".35em .65em",
                   fontSize: ".75em",
                   fontWeight: "700",
+                  margin: "8px",
                   lineHeight: "1",
                   color: "#fff",
                   textAlign: "center",

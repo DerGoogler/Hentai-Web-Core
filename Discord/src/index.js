@@ -15,7 +15,7 @@ client.on("ready", () => {
   console.log(
     `Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`
   );
-  client.user.setActivity("termux-desktop");
+  client.user.setActivity("termux-desktop-lxqt");
 });
 
 client.on("message", async (message) => {
@@ -41,13 +41,24 @@ client.on("message", async (message) => {
     message.channel.send(sayMessage);
   }
 
-  if (command === "hm") {
+  if (command === "sfw") {
     const hentaiImage = args.join(" ");
-    const data = require("./data");
-    if (message.channel.nsfw) {
+    try {
       message.delete().catch((O_o) => {});
+      message.channel.send(`${h[hentaiImage]()}`);
+    } catch (error) {
+      message.delete().catch((O_o) => {});
+      message.channel.send(`Command not found!`);
+      console.log(error);
+    }
+  }
+
+  if (command === "nsfw") {
+    const hentaiImage = args.join(" ");
+    if (message.channel.nsfw) {
       try {
-        message.channel.send(`${h[hentaiImage]()}`);
+        message.delete().catch((O_o) => {});
+        message.channel.send(`${h.nsfw[hentaiImage]()}`);
       } catch (error) {
         message.delete().catch((O_o) => {});
         message.channel.send(`Command not found!`);
@@ -76,4 +87,4 @@ client.on("message", async (message) => {
   }
 });
 
-client.login("ODM4MTE2MjEzODY2NzU4MjY1.YI2ajA.x5gtVRjdbLqe3VJHUosl8gPwrLk");
+client.login(process.env.BOT_TOKEN_DEBUG);
