@@ -34,6 +34,12 @@ android {
         buildConfigField "String", "RES_PATH", "\"/res/\""
     }
 
+    dexOptions {
+        additionalParameters += '--minimal-main-dex'
+        // additionalParameters += '--main-dex-list=$projectDir/<filename>'.toString()
+        // additionalParameters += '--set-max-idx-number=55000'
+    }
+
     signingConfigs {
         storeFile {
             //storeFile file('./keystore/upload_keystore.jks')
@@ -48,12 +54,13 @@ android {
 
     buildTypes {
         release {
+            //signingConfig signingConfigs.storeFile
             minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            debuggable false
-            jniDebuggable false
-            renderscriptDebuggable false
-            multiDexEnabled true
+        }
+        debug {
+            //signingConfig signingConfigs.storeFile
         }
     }
 
