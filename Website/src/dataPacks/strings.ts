@@ -13,8 +13,8 @@ export default {
   },
 
   ok: {
-    en: "ok",
-    de: "ok",
+    en: "Ok",
+    de: "Ok",
   },
 
   yes: {
