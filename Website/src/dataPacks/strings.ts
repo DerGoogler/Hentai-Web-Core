@@ -9,12 +9,12 @@ export default {
 
   "close-windows-dialog-title-app-string": {
     en: "Close app?",
-    de: "App schließen",
+    de: "App schließen?",
   },
 
   ok: {
-    en: "ok",
-    de: "ok",
+    en: "Ok",
+    de: "Ok",
   },
 
   yes: {
