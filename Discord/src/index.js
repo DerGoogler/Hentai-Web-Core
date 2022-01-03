@@ -1,14 +1,18 @@
 // Load up the discord.js library
 const { Client, Intents } = require("discord.js");
 const hmtai = require("./hmtai");
+require("dotenv").config();
 
 const h = hmtai;
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
+let guild = client.guilds.cache.get('serverID');
+let member = guild.member(message.author);
+
 const config = {
-  prefix: "hw.",
+  prefix: member,
 };
 
 client.on("ready", () => {
