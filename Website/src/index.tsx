@@ -34,10 +34,7 @@ class Bootloader {
 
   private loadConsole() {
     if (native.getPref("erudaEnabled") === "true") {
-      eruda.init({
-        tool: ["console", "elements"],
-        plugins: ["fps", "timing", "memory", "benchmark"],
-      });
+      eruda.init();
     }
   }
 
