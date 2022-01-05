@@ -1,25 +1,19 @@
-// Load up the discord.js library
+require("dotenv").config();
 const { Client, Intents } = require("discord.js");
 const hmtai = require("./hmtai");
-require("dotenv").config();
 
 const h = hmtai;
-const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
-});
-
-let guild = client.guilds.cache.get('serverID');
-let member = guild.member(message.author);
+const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 
 const config = {
-  prefix: member,
+  prefix: "hw.",
 };
 
 client.on("ready", () => {
   console.log(
     `Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`
   );
-  client.user.setActivity("termux-desktop-lxqt");
+  client.user.setActivity("DerGoogler/Hentai-Web");
 });
 
 client.on("message", async (message) => {
@@ -73,22 +67,6 @@ client.on("message", async (message) => {
       message.channel.send("This channel is is not as NSFW marked.");
     }
   }
-
-  if (command === "purge") {
-    const deleteCount = parseInt(args[0], 10);
-
-    if (!deleteCount || deleteCount < 2 || deleteCount > 100)
-      return message.reply(
-        "Please provide a number between 2 and 100 for the number of messages to delete"
-      );
-
-    const fetched = await message.channel.fetchMessages({ count: deleteCount });
-    message.channel
-      .bulkDelete(fetched)
-      .catch((error) =>
-        message.reply(`Couldn't delete messages because of: ${error}`)
-      );
-  }
 });
 
-client.login(process.env.BOT_TOKEN_DEBUG);
+client.login(process.env.BOT_TOKEN);

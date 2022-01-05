@@ -11,6 +11,7 @@ const settings: SettingsInterface[] = [
       {
         key: "enableDarkmode",
         type: "switch",
+        icon: "dark_mode",
         text: "enableDarkmode-string",
         disabled: tools.typeIF(native.getPref("useIOSdesign"), true, false),
         expandable: tools.typeIF(native.getPref("useIOSdesign"), true, false),
@@ -23,6 +24,7 @@ const settings: SettingsInterface[] = [
       {
         key: "useIOSdesign",
         type: "switch",
+        icon: "star_rate",
         text: "useIOSdesign-string",
         disabled: tools.typeIF(native.getPref("enableDarkmode"), true, false),
         expandable: tools.typeIF(native.getPref("enableDarkmode"), true, false),
@@ -34,17 +36,20 @@ const settings: SettingsInterface[] = [
       },
       {
         key: "hideSearchbar",
+        icon: "search",
         type: "switch",
         text: "hideSearchbar-string",
       },
       {
         key: "hideFAB",
+        icon: "add",
         type: "switch",
         text: "hideFAB-string",
       },
 
       {
         key: "language",
+        icon: "language",
         type: "select",
         text: "language-string",
         selectDefaultValue: "en",
@@ -64,15 +69,18 @@ const settings: SettingsInterface[] = [
       {
         key: "fitImageToCard",
         type: "switch",
+        icon: "fit_screen",
         text: "fitImageToCard-string",
       },
       {
         key: "displayDownload",
+        icon: "file_download",
         type: "switch",
         text: "displayDownload-string",
       },
       {
         key: "removeTitle",
+        icon: "title",
         type: "switch",
         text: "removeTitle-string",
       },
@@ -85,6 +93,7 @@ const settings: SettingsInterface[] = [
       {
         key: "alwaysLogin",
         type: "switch",
+        icon: "login",
         text: "alwaysLogin-string",
         expandable: true,
         expandableContent: (
@@ -105,6 +114,7 @@ const settings: SettingsInterface[] = [
       },
       {
         key: "erudaEnabled",
+        icon: "logo_dev",
         text: "erudaEnabled-string",
         type: "switch",
         style: {
@@ -120,11 +130,13 @@ const settings: SettingsInterface[] = [
     content: [
       {
         key: "enableSwipeBetweenTabs",
+        icon: "swipe",
         type: "switch",
         text: "enableSwipeBetweenTabs-string",
       },
       {
         key: "saveLastUsedTab",
+        icon: "save",
         type: "switch",
         text: "saveLastUsedTab-string",
       },
@@ -139,6 +151,7 @@ const settings: SettingsInterface[] = [
       {
         key: "electron.screenSizeInUse",
         type: "select",
+        icon: "aspect_ratio",
         text: "Screen/Window Size",
         selectDefaultValue: "<width>375</width><height>812</height>",
         callback: (e: any, key: string, translate: any) => {
@@ -199,41 +212,20 @@ const settings: SettingsInterface[] = [
       {
         key: "electron.devTools",
         type: "switch",
+        icon: "dev_logo",
         text: "Enable DevTools",
       },
       {
         key: "electron.alwaysOnTop",
         type: "switch",
+        icon: "aod",
         text: "Always on top",
       },
       {
         key: "electron.centerOnOpen",
         type: "switch",
+        icon: "format_align_center",
         text: "Center window when app opened",
-      },
-    ],
-  },
-  {
-    title: "Bots",
-    className: "discord",
-    content: [
-      {
-        key: "bots.discord",
-        type: "",
-        text: "Invite Discord Bot",
-        onClick: () => {
-          native.open(
-            "https://discord.com/api/oauth2/authorize?client_id=726837711851356242&permissions=8&scope=bot"
-          );
-        },
-      },
-      {
-        key: "bots.telegram",
-        type: "",
-        text: "Use Telegram Bot",
-        onClick: () => {
-          native.open("https://t.me/HentaiWebRobot");
-        },
       },
     ],
   },

@@ -21,6 +21,7 @@ import AnimeContent from "@Builders/AnimeContent";
 import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import { nsfwData, sfwData } from "@DataPacks/hmtai";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
+import MDIcon from "@Builders/MDIcon";
 
 class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
   constructor(props: any) {
@@ -69,7 +70,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
           addToolbarButton={
             <>
               <ToolbarButton id="menu-click" onClick={this.handleClick}>
-                <Icon icon="md-menu"></Icon>
+                <MDIcon icon="menu" size="24"></MDIcon>
               </ToolbarButton>
             </>
           }

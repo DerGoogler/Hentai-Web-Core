@@ -3,6 +3,7 @@ import ons from "onsenui";
 import "onsenui/css/onsenui.css";
 import "@Styles/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
 import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
@@ -47,6 +48,13 @@ class Bootloader {
       return window.location.search.replace("?activity=", "");
     },
   };
+
+  private loadIcons() {
+    var favicon = document.createElement("link");
+    favicon.rel = "stylesheet";
+    favicon.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
+    document.head.appendChild(favicon);
+  }
 
   public loadActivity(node: JSX.Element) {
     ReactDOM.render(

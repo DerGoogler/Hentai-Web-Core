@@ -88,7 +88,7 @@ class PictureBuilder extends React.Component<{
                         if (isNew) {
                           return (
                             <>
-                              <Badge style={{ fontSize: "10px" }} bg={"primary"}>
+                              <Badge style={{ fontSize: "10px" }} bg={this.buttonDesign}>
                                 NEW
                               </Badge>
                               &nbsp;

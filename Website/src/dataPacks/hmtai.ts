@@ -1,6 +1,7 @@
+import { HMtaiDataPackTypes } from "@Types/HMtai-dataPack";
 import hmtai from "../misc/hmtai";
 
-export const sfwData = [
+export const sfwData: HMtaiDataPackTypes[] = [
   {
     name: "wallpaper",
     source: hmtai.wallpaper(),
@@ -32,16 +33,24 @@ export const sfwData = [
   {
     name: "legs",
     source: hmtai.legs(),
-    isNew: true,
   },
   {
     name: "christmas",
     source: hmtai.christmas(),
+  },
+  {
+    name: "Profile Picture",
+    source: hmtai.profilePicture(),
+    isNew: true,
+  },
+  {
+    name: "TASH GANG Art Club",
+    source: hmtai.tgac(),
     isNew: true,
   },
 ];
 
-export const nsfwData = [
+export const nsfwData: HMtaiDataPackTypes[] = [
   {
     name: "ass",
     source: hmtai.nsfw.ass(),

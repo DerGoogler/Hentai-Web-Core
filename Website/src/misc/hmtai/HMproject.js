@@ -45,6 +45,8 @@ const depressionImages = require("./images/depression.json");
 const christmasImages = require("./images/christmas.json");
 const christmasNsfw = require("./images/nSFWChristmas.json");
 const legsImages = require("./images/legs.json");
+const profil_picture = require("./images/profilePicture.json");
+const tgac = require("./images/trashgangartclub.json");
 
 function randomizer(images) {
   // Select Random Image from JSON //
@@ -87,6 +89,18 @@ module.exports = class HM {
   static legs() {
     // Returns Safe for Work Leg Images! //
     return randomizer(legsImages);
+  }
+  /**
+   * Images for TASH GANG Art Club
+   */
+  static tgac() {
+    return randomizer(tgac);
+  }
+  /**
+   * Images for Profile Pictures
+   */
+  static profilePicture() {
+    return randomizer(profil_picture);
   }
 
   static nsfw = {

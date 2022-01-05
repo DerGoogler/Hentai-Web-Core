@@ -4,6 +4,7 @@
   "description": "An bot that's send Hentai images",
   "main": "src/index.js",
   "scripts": {
+    "commit": "git add . && git commit -am \".\" && git push heroku master",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

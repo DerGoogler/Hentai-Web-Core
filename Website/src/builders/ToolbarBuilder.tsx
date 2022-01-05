@@ -6,6 +6,7 @@ import native from "@Native";
 import Bootloader from "@Bootloader";
 import { ToolbarBuilderInterface } from "@Types/ToolbarBuilder";
 import tools from "@Misc/tools";
+import MDIcon from "./MDIcon";
 
 class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
   public componentDidMount() {
@@ -67,7 +68,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       window.Windows.minimize();
                     }}
                   >
-                    <Icon icon="md-minus"></Icon>
+                    <MDIcon icon="remove" size="24"></MDIcon>
                   </ToolbarButton>
                   <ToolbarButton
                     modifier="windowsNormal"
@@ -91,7 +92,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       }
                     }}
                   >
-                    <Icon icon="md-crop"></Icon>
+                    <MDIcon icon="fullscreen" size="24"></MDIcon>
                   </ToolbarButton>
                   <ToolbarButton
                     modifier="windowsClose"
@@ -120,7 +121,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       });
                     }}
                   >
-                    <Icon icon="md-close"></Icon>
+                    <MDIcon icon="close" size="24"></MDIcon>
                   </ToolbarButton>
                 </>
               );

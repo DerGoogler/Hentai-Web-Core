@@ -4,6 +4,7 @@ import { Provider, Translate, Translator } from "react-translated";
 import { SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
 import tools from "@Misc/tools";
 import native from "@Native";
+import MDIcon from "./MDIcon";
 
 class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
   private element!: HTMLElement | null;
@@ -74,7 +75,7 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                       } else {
                         return (
                           <div className="left">
-                            <Icon icon={setting.icon} className="list-item__icon"></Icon>
+                            <MDIcon icon={setting.icon} size="24" isInList={true}></MDIcon>
                           </div>
                         );
                       }

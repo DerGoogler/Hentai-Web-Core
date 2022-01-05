@@ -1,4 +1,4 @@
-type Icon = `${string}-${string}`;
+// type Icon = `${string}-${string}`;
 
 interface SettingsOptions {
   key?: string;
@@ -11,9 +11,9 @@ interface SettingsOptions {
   modifier?: string;
   type: "switch" | "select" | "";
   text: string;
-  onClick?: Function
+  onClick?: Function;
   selectValue?: JSX.Element | HTMLOptionElement;
-  icon?: Icon;
+  icon?: /*Icon*/ string;
   selectDefaultValue?: string;
   switchDefaultValue?: boolean;
   callback?: Function;
