@@ -9,23 +9,33 @@ import tools from "@Misc/tools";
 import MDIcon from "./MDIcon";
 
 class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
+  public state = {
+    icon: "fullscreen",
+  };
+
   public componentDidMount() {
     const { hasDarkMode } = this.props;
     if (hasDarkMode) {
       if (native.getPref("enableDarkmode") === "true") {
-        var favicon = document.createElement("link");
-        favicon.rel = "stylesheet";
-        favicon.href =
+        var darkmode = document.createElement("link");
+        darkmode.rel = "stylesheet";
+        darkmode.href =
           "https://cdn.dergoogler.com/others/hentai-web/styles/dark-onsen-css-components.min.css";
 
-        document.head.appendChild(favicon);
+        document.head.appendChild(darkmode);
       }
     }
   }
 
   public render() {
-    const { title, hasBackButton, addToolbarButton, addToolbarButtonPosition, hasWindowsButtons } =
-      this.props;
+    const {
+      title,
+      hasDarkMode,
+      hasBackButton,
+      addToolbarButton,
+      addToolbarButtonPosition,
+      hasWindowsButtons,
+    } = this.props;
     return (
       <>
         {(() => {
@@ -60,7 +70,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
               return (
                 <>
                   <ToolbarButton
-                    modifier="windowsNormal"
+                    modifier="windowsNormal paddingFIX"
                     style={{
                       display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                     }}
@@ -68,10 +78,10 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       window.Windows.minimize();
                     }}
                   >
-                    <MDIcon icon="remove" size="24"></MDIcon>
+                    <MDIcon icon="remove" size="24" ignoreDarkmode={true}></MDIcon>
                   </ToolbarButton>
                   <ToolbarButton
-                    modifier="windowsNormal"
+                    modifier="windowsNormal paddingFIX"
                     disabled={tools.typeIF(
                       native.getPref("electron.enableFullscreen"),
                       true,
@@ -87,15 +97,17 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                           Number(native.getPref("electron.windowSize.width")),
                           Number(native.getPref("electron.windowSize.height"))
                         );
+                        this.setState({ icon: "fullscreen" });
                       } else {
                         window.Windows.maximize();
+                        this.setState({ icon: "close_fullscreen" });
                       }
                     }}
                   >
-                    <MDIcon icon="fullscreen" size="24"></MDIcon>
+                    <MDIcon icon={this.state.icon} size="24" ignoreDarkmode={true}></MDIcon>
                   </ToolbarButton>
                   <ToolbarButton
-                    modifier="windowsClose"
+                    modifier="windowsClose paddingFIX"
                     style={{
                       display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                     }}
@@ -121,7 +133,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       });
                     }}
                   >
-                    <MDIcon icon="close" size="24"></MDIcon>
+                    <MDIcon icon="close" size="24" ignoreDarkmode={true}></MDIcon>
                   </ToolbarButton>
                 </>
               );

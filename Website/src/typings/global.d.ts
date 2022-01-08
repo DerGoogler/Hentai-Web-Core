@@ -16,4 +16,6 @@ declare global {
      */
     Windows: Windows;
   }
+
+  var process: NodeJS.Process;
 }

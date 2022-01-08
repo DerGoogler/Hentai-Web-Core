@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
-import ons from "onsenui";
+import ons, { GestureDetector } from "onsenui";
 import "onsenui/css/onsenui.css";
-import "@Styles/onsen-css-components.css";
+import "@Styles/light/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
@@ -86,8 +86,28 @@ class Bootloader {
     });
   }
 
+  private statusbarColors() {
+    if (native.getPref("enableDarkmode")) {
+      native.android.setStatusbarColor("#ff1f1f1f");
+    } else if (native.getPref("useIOSdesign")) {
+      native.android.setStatusbarBackgroundWhite();
+      native.android.setStatusbarColor("#fffafafa");
+    } else {
+      native.android.setStatusbarColor("#ff4a148c");
+    }
+  }
+
+  private androidSettingsinit() {
+    if (native.getPref("enableKeepScreenOn") === "true") {
+      native.android.keepScreenOn();
+    }
+  }
+
   private activitLoader(manifest: any) {
     var url = window.location.search.replace("?activity=", "").replace("/", "");
+
+    this.statusbarColors();
+    this.androidSettingsinit();
 
     if (manifest[url] !== undefined) {
       this.loadActivity(manifest[url]);

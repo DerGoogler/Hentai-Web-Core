@@ -54,7 +54,7 @@ public class WebViewActivity extends BaseActivity {
     private CSFileChooserListener webviewFileChooser;
     private String urlCore = Lib.getReleaseURl();
     private String urlCore_ = Lib.getDebugURl(); // For debugging
-    private String mainURL = urlCore; // Main url
+    private String mainURL = urlCore_; // Main url
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,23 +117,10 @@ public class WebViewActivity extends BaseActivity {
 
         // add download listener
         this.webview.setDownloadListener(new CSDownloadListener(getActivity()));
-        nativaeLocalstorage = this.getSharedPreferences("localstorage", Activity.MODE_PRIVATE);
-
-        if (nativaeLocalstorage.getString("enableDarkmode", "").equals("true")) {
-            getWindow().setStatusBarColor(0xFF1f1f1f);
-        } else {
-            getWindow().setStatusBarColor(0xFF4A148C);
-        }
-
-        if (nativaeLocalstorage.getString("useIOSdesign", "").equals("true")) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-            getWindow().setStatusBarColor(0xFFFAFAFA);
-        } else {
-            getWindow().setStatusBarColor(0xFF4A148C);
-        }
-
 
         Objects.requireNonNull(getSupportActionBar()).hide();
+
+        // start_node(this);
 
         WebViewHelper.loadUrl(this.webview, mainURL);
         WebViewHelper.setUserAgentString(this.webview, Lib.getUserAgent());

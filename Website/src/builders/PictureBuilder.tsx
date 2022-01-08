@@ -128,6 +128,7 @@ class PictureBuilder extends React.Component<{
                         id={this.getID}
                         src={source}
                         alt={this.getNote}
+                        onDoubleClick={this.handleClick}
                         style={{
                           width: "100%",
                           borderRadius: tools.typeIF(

@@ -13,7 +13,6 @@ function createWindow() {
   const width = setting("electron.windowSize.width", 375);
   const height = setting("electron.windowSize.height", 812);
   const devTools = Boolean(setting("electron.devTools", "false"));
-  const alwaysOnTop = Boolean(setting("electron.alwaysOnTop", "false"));
   const center = Boolean(setting("electron.centerOnOpen", "false"));
 
   const mainWindow = new BrowserWindow({
@@ -24,7 +23,6 @@ function createWindow() {
     resizable: false,
     center: center,
     transparent: true,
-    alwaysOnTop: alwaysOnTop,
     fullscreenable: true,
     titleBarStyle: "hidden",
     autoHideMenuBar: true,

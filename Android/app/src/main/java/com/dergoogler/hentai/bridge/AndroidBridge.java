@@ -9,10 +9,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Base64;
+import android.view.View;
+import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -325,6 +328,33 @@ public class AndroidBridge {
     public void removePref(String key) {
         nativaeLocalstorage = webView.getContext().getSharedPreferences("localstorage", Activity.MODE_PRIVATE);
         nativaeLocalstorage.edit().remove(key).apply();
+    }
+
+    @JavascriptInterface
+    public void setStatusbarColor(String color) {
+        try {
+            ((Activity) webView.getContext()).getWindow().setStatusBarColor(Color.parseColor(color));
+        } catch (Exception e) {
+            Toast.makeText(webView.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @JavascriptInterface
+    public void setStatusbarBackgroundWhite() {
+        try {
+            ((Activity) webView.getContext()).getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        } catch (Exception e) {
+            Toast.makeText(webView.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @JavascriptInterface
+    public void keepScreenOn() {
+        try {
+            ((Activity) webView.getContext()).getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } catch (Exception e) {
+            Toast.makeText(webView.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @JavascriptInterface

@@ -61,6 +61,21 @@ interface Android {
    * @Native
    */
   open(link: string): void;
+
+  /**
+   * @Native
+   */
+  setStatusbarColor(color: string): void;
+
+  /**
+   * @Native
+   */
+  setStatusbarBackgroundWhite(): void;
+
+  /**
+   * @Native
+   */
+  keepScreenOn(): void;
 }
 
 export default Android;

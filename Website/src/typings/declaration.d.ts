@@ -14,3 +14,7 @@ declare module "*.json" {
 declare module "hmfull";
 declare module "bota64";
 declare module "node-fetch";
+declare module '*.css' {
+  const content: Record<string, string>;
+  export default content;
+}

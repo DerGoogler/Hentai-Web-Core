@@ -7,9 +7,10 @@ class MDIcon extends React.Component<{
   size: "18" | "24" | "36" | "48";
   disabled?: boolean;
   isInList?: boolean;
+  ignoreDarkmode?: boolean;
 }> {
   public render() {
-    const { icon, size, disabled, isInList } = this.props;
+    const { icon, size, disabled, isInList, ignoreDarkmode } = this.props;
     return (
       <span
         className={
@@ -18,8 +19,10 @@ class MDIcon extends React.Component<{
           " ons-icon " +
           "material-icons md-" +
           size +
-          " md-" +
-          tools.typeIF(native.getPref("enableDarkmode"), "light", "dark") +
+          tools.typeCheck(
+            ignoreDarkmode,
+            " md-" + tools.typeIF(native.getPref("enableDarkmode"), "light", "dark")
+          ) +
           " " +
           tools.typeIF(disabled, "md-inactive ", "")
         }

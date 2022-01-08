@@ -70,7 +70,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
           addToolbarButton={
             <>
               <ToolbarButton id="menu-click" onClick={this.handleClick}>
-                <MDIcon icon="menu" size="24"></MDIcon>
+                <MDIcon icon="menu" size="24" ignoreDarkmode={true}></MDIcon>
               </ToolbarButton>
             </>
           }

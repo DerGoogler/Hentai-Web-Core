@@ -1,7 +1,6 @@
 import config from "../misc/config";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
-import { hot } from "react-hot-loader/root";
 import tools from "../misc/tools";
 import Mousetrap from "mousetrap";
 
@@ -307,6 +306,37 @@ class native {
         window.Windows.closeDevTools();
       } else {
         console.log("DevTools close event listener are not supported on Browsers");
+      }
+    },
+  };
+
+  public static android = {
+    userAgentAndroid: "HENTAI_WEB_AGENT",
+    userAgentWindows: "HENTAI_WEB_WINDOWS",
+    agent: window.navigator.userAgent,
+
+    setStatusbarColor(color: string) {
+      if (this.agent === this.userAgentAndroid) {
+        window.Android.setStatusbarColor(color);
+      } else if (this.agent === this.userAgentWindows) {
+        console.log("Statusbar colors are not supported on electron");
+      } else {
+        console.log("Statusbar colors are not supported on browsers");
+      }
+    },
+    setStatusbarBackgroundWhite() {
+      if (this.agent === this.userAgentAndroid) {
+        window.Android.setStatusbarBackgroundWhite();
+      } else if (this.agent === this.userAgentWindows) {
+        console.log("Statusbar colors are not supported on electron");
+      } else {
+        console.log("Statusbar colors are not supported on browsers");
+      }
+    },
+
+    keepScreenOn() {
+      if (this.agent === this.userAgentAndroid) {
+        window.Android.keepScreenOn();
       }
     },
   };

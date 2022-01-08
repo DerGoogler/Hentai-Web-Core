@@ -13,26 +13,26 @@ const settings: SettingsInterface[] = [
         type: "switch",
         icon: "dark_mode",
         text: "enableDarkmode-string",
-        disabled: tools.typeIF(native.getPref("useIOSdesign"), true, false),
-        expandable: tools.typeIF(native.getPref("useIOSdesign"), true, false),
-        expandableContent: (
-          <>
-            <p>Dark mode isn't available while the iOS design is on</p>
-          </>
-        ),
+        // disabled: tools.typeIF(native.getPref("useIOSdesign"), true, false),
+        // expandable: tools.typeIF(native.getPref("useIOSdesign"), true, false),
+        // expandableContent: (
+        //   <>
+        //     <p>Dark mode isn't available while the iOS design is on</p>
+        //   </>
+        // ),
       },
       {
         key: "useIOSdesign",
         type: "switch",
         icon: "star_rate",
         text: "useIOSdesign-string",
-        disabled: tools.typeIF(native.getPref("enableDarkmode"), true, false),
-        expandable: tools.typeIF(native.getPref("enableDarkmode"), true, false),
-        expandableContent: (
-          <>
-            <p>iOS design isn't available while the dark mode is on</p>
-          </>
-        ),
+        // disabled: tools.typeIF(native.getPref("enableDarkmode"), true, false),
+        // expandable: tools.typeIF(native.getPref("enableDarkmode"), true, false),
+        // expandableContent: (
+        //   <>
+        //     <p>iOS design isn't available while the dark mode is on</p>
+        //   </>
+        // ),
       },
       {
         key: "hideSearchbar",
@@ -212,20 +212,27 @@ const settings: SettingsInterface[] = [
       {
         key: "electron.devTools",
         type: "switch",
-        icon: "dev_logo",
+        icon: "logo_dev",
         text: "Enable DevTools",
-      },
-      {
-        key: "electron.alwaysOnTop",
-        type: "switch",
-        icon: "aod",
-        text: "Always on top",
       },
       {
         key: "electron.centerOnOpen",
         type: "switch",
         icon: "format_align_center",
         text: "Center window when app opened",
+      },
+    ],
+  },
+  {
+    title: "Android",
+    className: "android",
+    style: { display: tools.typeIF(native.userAgentEqualAndroid(true), "", "none") },
+    content: [
+      {
+        key: "enableKeepScreenOn",
+        type: "switch",
+        icon: "visibility",
+        text: "enableKeepScreenOn--string",
       },
     ],
   },

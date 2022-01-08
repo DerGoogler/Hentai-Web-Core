@@ -176,16 +176,16 @@ body {
   border: 1px solid #00000000;
 }
 
-.toolbar-button--material {
+.toolbar-button--windowsClose {
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: red;
     border-radius: 8px;
   }
 }
 
-.toolbar-button--windowsClose {
+.toolbar-button--material {
   &:hover {
-    background-color: red;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
   }
 }

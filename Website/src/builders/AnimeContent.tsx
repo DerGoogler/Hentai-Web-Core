@@ -10,13 +10,23 @@ class AnimeContent extends React.Component<{
   data: any;
   name: string;
 }> {
-  private element!: HTMLElement | null;
+  private makeUUID(length: number) {
+    var result = "";
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  }
+
+  private uuid: string = this.makeUUID(26);
 
   private filter(e: any) {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
     filter = e.target.value.toUpperCase();
-    ul = document.getElementById("picture-list-sfw");
+    ul = document.getElementById(`picture-list-${this.uuid}`);
     // @ts-ignore
     li = ul.getElementsByTagName("card");
 
@@ -39,11 +49,9 @@ class AnimeContent extends React.Component<{
     /**
      * To load for every object an own AnimePicture from `data.ts`
      */
-    const listItems = this.props.data.map(
-      (item: { name: string; source: any; isNew: boolean }) => (
-        <PictureBuilder key={item.name} source={item.source} note={item.name} isNew={item.isNew} />
-      )
-    );
+    const listItems = this.props.data.map((item: { name: string; source: any; isNew: boolean }) => (
+      <PictureBuilder key={item.name} source={item.source} note={item.name} isNew={item.isNew} />
+    ));
 
     return (
       <ContentBody>
@@ -83,7 +91,7 @@ class AnimeContent extends React.Component<{
               onChange={this.filter}
             />
           </div>
-          <List id="picture-list-sfw">{listItems}</List>
+          <List id={`picture-list-${this.uuid}`}>{listItems}</List>
         </div>
       </ContentBody>
     );

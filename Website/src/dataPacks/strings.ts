@@ -181,6 +181,11 @@ export default {
     de: "Sprache",
   },
 
+  "enableKeepScreenOn--string": {
+    en: "Keep screen on",
+    de: "Bildschirm anbehalten",
+  },
+
   "electron-window-cange-size-screen-dialog-message": {
     en: "Do you want to change the screen size to {size}?",
     de: "Fenster größe auf {size} ändern?",
