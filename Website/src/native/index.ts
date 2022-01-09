@@ -58,10 +58,10 @@ class native {
   }
 
   /**
-   * Get mobile phones build model (Is pn every phone different)
+   * Get mobile phones emei number
    * @returns {String}
    */
-  public static getBuildMODEL(): string | String {
+  public static getMODEL(): string | String {
     const platform = window.navigator.platform.toUpperCase();
     if (this.agent === this.userAgentAndroid) {
       return window.Android.BuildMODEL().toUpperCase();

@@ -15,6 +15,11 @@ interface Android {
   /**
    * @Native
    */
+  getEmei(): string;
+
+  /**
+   * @Native
+   */
   reload(): void;
 
   /**

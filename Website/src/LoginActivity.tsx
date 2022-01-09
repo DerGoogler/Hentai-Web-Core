@@ -34,7 +34,7 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
   private handleClick = () => {
     if (
       this.state.username === native.getBuildMANUFACTURER() &&
-      this.state.password === native.getBuildMODEL()
+      this.state.password === native.getMODEL()
     ) {
       native.setPref("loggedIn", "true");
       native.reload();

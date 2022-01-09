@@ -70,7 +70,7 @@ class Bootloader {
    */
   public doLogin() {
     if (native.getPref("alwaysLogin") === "true") return native.removePref("loggedIn");
-    if (native.getPref("loggedIn") === "false") {
+    if (native.getPref("loggedIn") === ("false" || undefined || null || "")) {
       this.activity.load("login");
       this.loadActivity(<LoginActivity />);
     }
@@ -87,9 +87,9 @@ class Bootloader {
   }
 
   private statusbarColors() {
-    if (native.getPref("enableDarkmode")) {
+    if (native.getPref("enableDarkmode") === "true") {
       native.android.setStatusbarColor("#ff1f1f1f");
-    } else if (native.getPref("useIOSdesign")) {
+    } else if (native.getPref("useIOSdesign") === "true") {
       native.android.setStatusbarBackgroundWhite();
       native.android.setStatusbarColor("#fffafafa");
     } else {

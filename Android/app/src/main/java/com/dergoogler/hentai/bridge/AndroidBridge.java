@@ -1,6 +1,7 @@
 package com.dergoogler.hentai.bridge;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -11,6 +12,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
@@ -282,6 +284,18 @@ public class AndroidBridge {
     @JavascriptInterface
     public String BuildMODEL() {
         return Build.MODEL;
+    }
+
+    @SuppressLint("HardwareIds")
+    @JavascriptInterface
+    public String getEmei() {
+        try {
+            TelephonyManager telephonyManager = (TelephonyManager) ((Activity) webView.getContext()).getSystemService(Context.TELEPHONY_SERVICE);
+            return telephonyManager.getDeviceId();
+        } catch (Exception e) {
+            Logger.i(TAG, e);
+        }
+        return "";
     }
 
     @JavascriptInterface
