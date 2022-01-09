@@ -113,12 +113,24 @@ const settings: SettingsInterface[] = [
         ),
       },
       {
+        key: "useFingerPrintToLogin",
+        icon: "logo_dev",
+        text: "useFingerPrintToLogin-string",
+        type: "switch",
+        style: {
+          display: tools.typeIF(native.userAgentEqualAndroid(false), "none", ""),
+        },
+        disabled: native.userAgentEqualAndroid(false),
+      },
+      {
         key: "erudaEnabled",
         icon: "logo_dev",
         text: "erudaEnabled-string",
         type: "switch",
         style: {
-          display: tools.typeIF(native.userAgentEqualAndroid(false), "none", ""),
+          display:
+            tools.typeIF(native.userAgentEqualAndroid(false), "none", "") ||
+            tools.typeIF(Number(native.android.getAppManifest("sdk")) < 23, "none", ""),
         },
         disabled: native.userAgentEqualAndroid(false),
       },

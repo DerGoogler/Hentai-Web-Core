@@ -12,4 +12,6 @@ public class Lib {
     public static native String getInterfaceName();
 
     public static native String getUserAgent();
+
+    public static native String getStorageKey();
 }

@@ -32,3 +32,10 @@ Java_com_dergoogler_hentai_tools_Lib_getUserAgent(JNIEnv *env, jclass clazz) {
     std::string data = "HENTAI_WEB_AGENT";
     return env->NewStringUTF(data.c_str());
 }
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_dergoogler_hentai_tools_Lib_getStorageKey(JNIEnv *env, jclass clazz) {
+    std::string data = "localstorage";
+    return env->NewStringUTF(data.c_str());
+}

@@ -171,6 +171,11 @@ export default {
     de: "Konsole aktiviren",
   },
 
+  "useFingerPrintToLogin-string": {
+    en: "Use fingerprint to open app",
+    de: "Fingerabdruck zum öffnen der App benutzen",
+  },
+
   "disableSplashscreen-string": {
     en: "Disable splash screen",
     de: "Deaktivire Startbildschirm",

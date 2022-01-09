@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+
+import androidx.biometric.BiometricPrompt;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,7 +18,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.dergoogler.hentai.BuildConfig;
@@ -39,6 +46,7 @@ import com.dergoogler.hentai.webview.WebViewHelper;
 
 import java.io.File;
 import java.util.Objects;
+import java.util.concurrent.Executor;
 
 /**
  * WebView Activity
@@ -56,12 +64,53 @@ public class WebViewActivity extends BaseActivity {
     private String urlCore_ = Lib.getDebugURl(); // For debugging
     private String mainURL = urlCore_; // Main url
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        nativaeLocalstorage = this.getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
 
-        init();
+
+        Executor executor = ContextCompat.getMainExecutor(this);
+        BiometricPrompt biometricPrompt = new BiometricPrompt(WebViewActivity.this,
+                executor, new BiometricPrompt.AuthenticationCallback() {
+            @Override
+            public void onAuthenticationError(int errorCode,
+                                              @NonNull CharSequence errString) {
+                super.onAuthenticationError(errorCode, errString);
+                Toast.makeText(getApplicationContext(),
+                        "Authentication error: " + errString, Toast.LENGTH_SHORT)
+                        .show();
+            }
+
+            @Override
+            public void onAuthenticationSucceeded(
+                    @NonNull BiometricPrompt.AuthenticationResult result) {
+                super.onAuthenticationSucceeded(result);
+                init();
+            }
+
+            @Override
+            public void onAuthenticationFailed() {
+                super.onAuthenticationFailed();
+                Toast.makeText(getApplicationContext(), "Authentication failed",
+                        Toast.LENGTH_SHORT)
+                        .show();
+            }
+        });
+
+        BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Biometric login for Hentai Web")
+                .setSubtitle("Log in using your biometric credential")
+                .setNegativeButtonText("Use password")
+                .build();
+
+        if (nativaeLocalstorage.getString("useFingerPrintToLogin", "").equals("true")) {
+            biometricPrompt.authenticate(promptInfo);
+        } else {
+            init();
+        }
 
         if (BuildConfig.DEBUG) {
             WebView.setWebContentsDebuggingEnabled(true);

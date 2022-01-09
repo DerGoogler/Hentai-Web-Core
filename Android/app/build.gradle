@@ -125,6 +125,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-inappmessaging-display'
     implementation 'com.google.firebase:firebase-analytics'
+    //noinspection GradleDependency
+    implementation 'androidx.biometric:biometric:1.0.0-rc01'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
     implementation 'io.github.ParkSangGwon:tedpermission:3.2.3'

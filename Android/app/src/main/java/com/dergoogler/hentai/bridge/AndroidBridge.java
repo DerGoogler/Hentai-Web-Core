@@ -27,6 +27,7 @@ import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.activity.WebViewActivity;
 import com.dergoogler.hentai.bridge.process.AndroidBridgeProcess;
 import com.dergoogler.hentai.tools.AESCrypt;
+import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.download.CSDownloadManager;
 import com.dergoogler.hentai.zero.json.JSONHelper;
@@ -286,18 +287,6 @@ public class AndroidBridge {
         return Build.MODEL;
     }
 
-    @SuppressLint("HardwareIds")
-    @JavascriptInterface
-    public String getEmei() {
-        try {
-            TelephonyManager telephonyManager = (TelephonyManager) ((Activity) webView.getContext()).getSystemService(Context.TELEPHONY_SERVICE);
-            return telephonyManager.getDeviceId();
-        } catch (Exception e) {
-            Logger.i(TAG, e);
-        }
-        return "";
-    }
-
     @JavascriptInterface
     public String getAppManifest(String state) {
         switch (state) {
@@ -331,19 +320,19 @@ public class AndroidBridge {
 
     @JavascriptInterface
     public void setPref(String key, String content) {
-        nativaeLocalstorage = webView.getContext().getSharedPreferences("localstorage", Activity.MODE_PRIVATE);
+        nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
         nativaeLocalstorage.edit().putString(key, content).apply();
     }
 
     @JavascriptInterface
     public String getPref(String key) {
-        nativaeLocalstorage = webView.getContext().getSharedPreferences("localstorage", Activity.MODE_PRIVATE);
+        nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
         return nativaeLocalstorage.getString(key, "");
     }
 
     @JavascriptInterface
     public void removePref(String key) {
-        nativaeLocalstorage = webView.getContext().getSharedPreferences("localstorage", Activity.MODE_PRIVATE);
+        nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
         nativaeLocalstorage.edit().remove(key).apply();
     }
 

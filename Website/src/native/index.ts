@@ -184,16 +184,6 @@ class native {
     }
   }
 
-  public static getAppManifest(state: string): string | String {
-    if (this.agent === this.userAgentAndroid) {
-      return window.Android.getAppManifest(state);
-    } else if (this.agent === this.userAgentWindows) {
-      return "null";
-    } else {
-      return "null";
-    }
-  }
-
   public static encodeAES(text: string, password?: string): string | String {
     const btoa = window.atob(text);
     if (this.agent === this.userAgentAndroid) {
@@ -327,6 +317,14 @@ class native {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
+
+    getAppManifest(state: "versionName" | "versionCode" | "packageName" | "sdk"): string | String {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.getAppManifest(state);
+      } else {
+        return "";
+      }
+    },
 
     setStatusbarColor(color: string): void {
       if (this.agent === this.userAgentAndroid) {
