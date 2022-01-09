@@ -230,6 +230,19 @@ class native {
     }
   }
 
+  /**
+   * Closes the app
+   */
+  public static close(): void {
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.close();
+    } else if (this.agent === this.userAgentWindows) {
+      window.Windows.close();
+    } else {
+      window.close();
+    }
+  }
+
   public static registerShortcut(shortcut: string, callback?: Function): any | void {
     if (this.agent === this.userAgentAndroid) {
       console.log("globalShortcut are not supported on Android");
@@ -271,7 +284,7 @@ class native {
       }
     },
 
-    addEventListener(event: string, callback: Function) {
+    addEventListener(event: string, callback: Function): void {
       if (this.agent === this.userAgentAndroid) {
         console.log("Shortcut are not supported on Android");
       } else if (this.agent === this.userAgentWindows) {
@@ -287,7 +300,7 @@ class native {
      * When `contents` is a `<webview>` tag, the `mode` would be `detach` by default,
      * explicitly passing an empty `mode` can force using last used dock state.
      */
-    openDevTools() {
+    openDevTools(): void {
       if (this.agent === this.userAgentAndroid) {
         console.log("DevTools open event listener are not supported on Android");
       } else if (this.agent === this.userAgentWindows) {
@@ -299,7 +312,7 @@ class native {
     /**
      * Closes the devtools.
      */
-    closeDevTools() {
+    closeDevTools(): void {
       if (this.agent === this.userAgentAndroid) {
         console.log("DevTools close event listener are not supported on Android");
       } else if (this.agent === this.userAgentWindows) {
@@ -315,7 +328,7 @@ class native {
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
 
-    setStatusbarColor(color: string) {
+    setStatusbarColor(color: string): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.setStatusbarColor(color);
       } else if (this.agent === this.userAgentWindows) {
@@ -324,7 +337,7 @@ class native {
         console.log("Statusbar colors are not supported on browsers");
       }
     },
-    setStatusbarBackgroundWhite() {
+    setStatusbarBackgroundWhite(): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.setStatusbarBackgroundWhite();
       } else if (this.agent === this.userAgentWindows) {
@@ -334,10 +347,154 @@ class native {
       }
     },
 
-    keepScreenOn() {
+    keepScreenOn(): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.keepScreenOn();
       }
+    },
+
+    isAppInstalled(): boolean {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.isAppInstalled();
+      } else {
+        return false;
+      }
+    },
+
+    /**
+     *
+     * Example
+     * ```js
+     * if (native.android.isRooted()) {
+     *  return "Yes"
+     * } else {
+     *  return "No"
+     * }
+     * ```
+     * @returns {Boolean}
+     */
+    isRooted(): boolean {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.isRooted();
+      } else {
+        return false;
+      }
+    },
+
+    fs: {
+      userAgentAndroid: "HENTAI_WEB_AGENT",
+      userAgentWindows: "HENTAI_WEB_WINDOWS",
+      agent: window.navigator.userAgent,
+
+      readFile(path: string): string {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.readFile(path);
+        } else {
+          return "";
+        }
+      },
+
+      getFileLength(path: string): string {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.getFileLength(path);
+        } else {
+          return "";
+        }
+      },
+
+      getExternalStorageDir(): string {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.getExternalStorageDir();
+        } else {
+          return "";
+        }
+      },
+
+      getPackageDataDir(): string {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.getPackageDataDir();
+        } else {
+          return "";
+        }
+      },
+
+      getPublicDir(
+        type:
+          | "DIRECTORY_ALARMS"
+          | "DIRECTORY_AUDIOBOOKS"
+          | "DIRECTORY_DCIM"
+          | "DIRECTORY_DOWNLOADS"
+          | "DIRECTORY_MOVIES"
+          | "DIRECTORY_MUSIC"
+          | "DIRECTORY_NOTIFICATIONS"
+          | "DIRECTORY_PICTURES"
+          | "DIRECTORY_PODCASTS"
+          | "DIRECTORY_RECORDINGS"
+          | "DIRECTORY_RINGTONES"
+          | "DIRECTORY_SCREENSHOTS"
+      ): string {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.getPublicDir(type);
+        } else {
+          return "";
+        }
+      },
+
+      isFileExist(path: string): boolean {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.isFileExist(path);
+        } else {
+          return false;
+        }
+      },
+
+      isDirectory(path: string): boolean {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.isDirectory(path);
+        } else {
+          return false;
+        }
+      },
+
+      isFile(path: string): boolean {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.isFile(path);
+        } else {
+          return false;
+        }
+      },
+
+      writeFile(path: string, str: string): void {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.writeFile(path, str);
+        } else {
+          return;
+        }
+      },
+
+      copyFile(sourcePath: string, destPath: string): void {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.copyFile(sourcePath, destPath);
+        } else {
+          return;
+        }
+      },
+
+      moveFile(sourcePath: string, destPath: string): void {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.moveFile(sourcePath, destPath);
+        } else {
+          return;
+        }
+      },
+
+      deleteFile(path: string): void {
+        if (this.agent === this.userAgentAndroid) {
+          return window.Android.deleteFile(path);
+        } else {
+          return;
+        }
+      },
     },
   };
 }

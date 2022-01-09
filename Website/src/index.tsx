@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import ons, { GestureDetector } from "onsenui";
+import ons from "onsenui";
 import "onsenui/css/onsenui.css";
 import "@Styles/light/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";

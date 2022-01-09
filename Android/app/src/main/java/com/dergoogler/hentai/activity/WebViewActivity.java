@@ -120,8 +120,6 @@ public class WebViewActivity extends BaseActivity {
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
-        // start_node(this);
-
         WebViewHelper.loadUrl(this.webview, mainURL);
         WebViewHelper.setUserAgentString(this.webview, Lib.getUserAgent());
     }

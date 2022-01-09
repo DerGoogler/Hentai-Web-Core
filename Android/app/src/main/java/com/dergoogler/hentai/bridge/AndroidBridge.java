@@ -2,7 +2,6 @@ package com.dergoogler.hentai.bridge;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.DownloadManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -12,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
 import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
@@ -24,14 +22,16 @@ import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 
 import com.dergoogler.hentai.BuildConfig;
-import com.dergoogler.hentai.tools.AESCrypt;
 import com.dergoogler.hentai.activity.WebViewActivity;
 import com.dergoogler.hentai.bridge.process.AndroidBridgeProcess;
+import com.dergoogler.hentai.tools.AESCrypt;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.download.CSDownloadManager;
 import com.dergoogler.hentai.zero.json.JSONHelper;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.zero.reflect.ReflectHelper;
+import com.dergoogler.hentai.zero.util.FileUtil;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONObject;
 
@@ -42,6 +42,7 @@ import java.net.URLDecoder;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
 
 /**
  * WebView JavaScript Interface Bridge
@@ -54,6 +55,7 @@ public class AndroidBridge {
     private SharedPreferences nativaeLocalstorage;
 
     private static final String SCHEME_BRIDGE = "native";
+    private String FINGERPRINT_RESULT = "";
 
     private static final String HOST_COMMAND = "callNative";
     private static final String HOST_COMMAND2 = "callToNative";
@@ -69,7 +71,6 @@ public class AndroidBridge {
     public AndroidBridge(WebView webView) {
         this.webView = webView;
     }
-
 
     //++ [START] call Web --> Native
 
@@ -292,6 +293,8 @@ public class AndroidBridge {
                 return String.valueOf(BuildConfig.VERSION_CODE);
             case "packageName":
                 return BuildConfig.APPLICATION_ID;
+            case "sdk":
+                return String.valueOf(Build.VERSION.SDK_INT);
         }
         return state;
     }
@@ -379,6 +382,98 @@ public class AndroidBridge {
                 Toast.makeText(webView.getContext(), "Image download failed." + e, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @JavascriptInterface
+    public boolean isAppInstalled(String uri) {
+        android.content.pm.PackageManager pm = ((Activity) webView.getContext()).getPackageManager();
+        try {
+            pm.getPackageInfo(uri, PackageManager.GET_ACTIVITIES);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            Logger.i(TAG, e);
+        }
+        return false;
+    }
+
+    @JavascriptInterface
+    public static boolean isRooted() {
+        try {
+            return Runtime.getRuntime().exec("su").waitFor() == 10000;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @JavascriptInterface
+    public void close() {
+        ((Activity) webView.getContext()).finishAffinity();
+        int pid = android.os.Process.myPid();
+        android.os.Process.killProcess(pid);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        ((Activity) webView.getContext()).startActivity(intent);
+    }
+
+    @JavascriptInterface
+    public String readFile(String path) {
+        return FileUtil.readFile(path);
+    }
+
+    @JavascriptInterface
+    public void writeFile(String path, String str) {
+        FileUtil.writeFile(path, str);
+    }
+
+    @JavascriptInterface
+    public void copyFile(String sourcePath, String destPath) {
+        FileUtil.copyFile(sourcePath, destPath);
+    }
+
+    @JavascriptInterface
+    public void moveFile(String sourcePath, String destPath) {
+        FileUtil.moveFile(sourcePath, destPath);
+    }
+
+    @JavascriptInterface
+    public void deleteFile(String path) {
+        FileUtil.deleteFile(path);
+    }
+
+    @JavascriptInterface
+    public boolean isFileExist(String path) {
+        return FileUtil.isExistFile(path);
+    }
+
+    @JavascriptInterface
+    public boolean isDirectory(String path) {
+        return FileUtil.isDirectory(path);
+    }
+
+    @JavascriptInterface
+    public boolean isFile(String path) {
+        return FileUtil.isFile(path);
+    }
+
+    @JavascriptInterface
+    public String getFileLength(String path) {
+        return String.valueOf(FileUtil.getFileLength(path));
+    }
+
+    @JavascriptInterface
+    public String getExternalStorageDir() {
+        return FileUtil.getExternalStorageDir();
+    }
+
+    @JavascriptInterface
+    public String getPackageDataDir() {
+        return FileUtil.getPackageDataDir(webView.getContext());
+    }
+
+    @JavascriptInterface
+    public String getPublicDir(String type) {
+        return FileUtil.getPublicDir(type);
     }
 
     public static void setExtraOutput(File file) {

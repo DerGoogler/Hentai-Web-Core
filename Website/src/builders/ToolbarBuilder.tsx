@@ -123,7 +123,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                         callback: (index: number) => {
                           switch (index) {
                             case 0:
-                              window.Windows.close();
+                              native.close();
                               break;
 
                             default:
