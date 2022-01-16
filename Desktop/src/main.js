@@ -1,11 +1,13 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Tray, Menu, shell } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const fenster = require("@electron/remote/main");
 const setting = require("./defaultSettings");
 const pkg = require("./../package.json");
 const client = require("discord-rich-presence")("726837711851356242");
+
+const date = Date.now();
 
 function createWindow() {
   // Create the browser window.
@@ -28,7 +30,7 @@ function createWindow() {
     titleBarStyle: "hidden",
     autoHideMenuBar: true,
     title: "Hentai Web Windows",
-    icon: path.join(app.getAppPath(), "ic_launcher.png"),
+    icon: path.join(app.getAppPath(), "/build/ic_launcher.png"),
     webPreferences: {
       nativeWindowOpen: true,
       devTools: devTools,
@@ -80,7 +82,21 @@ function createWindow() {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+let tray = null;
 app.whenReady().then(() => {
+  tray = new Tray(path.join(app.getAppPath(), "/build/ic_launcher.png"));
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Plain Settings Edit",
+      type: "normal",
+      click: () => {
+        shell.openPath(app.getPath("userData") + "/config.json");
+      },
+    },
+  ]);
+  tray.setToolTip("Other settings/options");
+  tray.setContextMenu(contextMenu);
+
   createWindow();
 
   app.on("activate", function () {
