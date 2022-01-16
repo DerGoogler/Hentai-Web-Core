@@ -114,11 +114,13 @@ const settings: SettingsInterface[] = [
       },
       {
         key: "useFingerPrintToLogin",
-        icon: "logo_dev",
+        icon: "fingerprint",
         text: "useFingerPrintToLogin-string",
         type: "switch",
         style: {
-          display: tools.typeIF(native.userAgentEqualAndroid(false), "none", ""),
+          display:
+            tools.typeIF(native.userAgentEqualAndroid(false), "none", "") ||
+            tools.typeIF(Number(native.android.getAppManifest("sdk")) < 23, "none", ""),
         },
         disabled: native.userAgentEqualAndroid(false),
       },
@@ -128,9 +130,7 @@ const settings: SettingsInterface[] = [
         text: "erudaEnabled-string",
         type: "switch",
         style: {
-          display:
-            tools.typeIF(native.userAgentEqualAndroid(false), "none", "") ||
-            tools.typeIF(Number(native.android.getAppManifest("sdk")) < 23, "none", ""),
+          display: tools.typeIF(native.userAgentEqualAndroid(false), "none", ""),
         },
         disabled: native.userAgentEqualAndroid(false),
       },

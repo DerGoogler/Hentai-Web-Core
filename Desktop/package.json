@@ -41,6 +41,7 @@
     "@electron/get": "^1.13.1",
     "@electron/remote": "^2.0.1",
     "custom-electron-titlebar": "^3.2.10",
+    "discord-rich-presence": "^0.0.8",
     "dragscroll": "^0.0.8",
     "electron-google-analytics": "^1.0.2",
     "electron-preferences": "^2.5.0",

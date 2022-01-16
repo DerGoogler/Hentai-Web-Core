@@ -4,7 +4,7 @@ const path = require("path");
 const Store = require("electron-store");
 const fenster = require("@electron/remote/main");
 const setting = require("./defaultSettings");
-const Analytics = require("electron-google-analytics");
+const client = require("discord-rich-presence")("726837711851356242");
 
 function createWindow() {
   // Create the browser window.
@@ -56,6 +56,16 @@ function createWindow() {
   });
 
   webContents.setUserAgent("HENTAI_WEB_WINDOWS");
+
+  client.updatePresence({
+    state: "Viewing images",
+    details: "😎",
+    startTimestamp: Date.now(),
+    endTimestamp: Date.now() + 1337,
+    largeImageKey: "hentaiweb__",
+    smallImageKey: "googler",
+    instance: true,
+  });
 }
 
 // This method will be called when Electron has finished

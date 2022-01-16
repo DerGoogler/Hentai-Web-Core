@@ -60,6 +60,8 @@ public class AndroidBridge {
     private static final String SCHEME_BRIDGE = "native";
     private String FINGERPRINT_RESULT = "";
 
+    private FirebaseAuth auth;
+
     private static final String HOST_COMMAND = "callNative";
     private static final String HOST_COMMAND2 = "callToNative";
 
