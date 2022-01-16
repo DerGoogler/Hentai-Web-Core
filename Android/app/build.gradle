@@ -17,8 +17,8 @@ android {
         applicationId 'com.dergoogler.hentai'
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 136
-        versionName '1.3.6'
+        versionCode 137
+        versionName '1.3.7'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {

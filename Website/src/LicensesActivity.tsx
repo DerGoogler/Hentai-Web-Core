@@ -16,6 +16,7 @@ class LicensesActivity extends React.Component<{}, { data: string }> {
   }
 
   public componentDidMount = () => {
+    native.electron.discordRPC("Viewing Licenses");
     axios.get("https://cdn.dergoogler.com/others/hentai-web/bundle.js.LICENSE.txt").then((res) => {
       const data = res.data;
       this.setState({ data: data });

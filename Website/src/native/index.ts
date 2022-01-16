@@ -264,13 +264,17 @@ class native {
       }
     },
 
-    unregisterShortcut(shortcut: string): void {
-      if (this.agent === this.userAgentAndroid) {
-        console.log("globalShortcut are not supported on Android");
-      } else if (this.agent === this.userAgentWindows) {
-        window.Windows.unregisterShortcut(shortcut);
-      } else {
-        console.log("globalShortcut are not supported on Browsers");
+    /**
+     *
+     * @param state
+     */
+    discordRPC(state: string): void {
+      if (this.agent === this.userAgentWindows) {
+        if (native.getPref("electron.disableDiscordRPC") === "true") {
+          window.Windows.discordRPCdisconnect();
+        } else {
+          window.Windows.discordRPC(state);
+        }
       }
     },
 

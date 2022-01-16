@@ -45,6 +45,8 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
           element.style.display = "none";
         });
       }
+
+      native.electron.discordRPC("Viewing SFW Images");
     }
 
     tools.ref("menu-click", (e: HTMLElement) => {
@@ -139,6 +141,12 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
           onPreChange={(event: any) => {
             if (event.index != this.tabIndexChecker) {
               native.setPref("tabIndex", event.index);
+            }
+            if (event.index === 0) {
+              native.electron.discordRPC("Viewing SFW Images");
+            } else if (event.index === 1) {
+              native.electron.discordRPC("Viewing NSFW Images");
+            } else {
             }
           }}
           renderTabs={this.renderTabs}

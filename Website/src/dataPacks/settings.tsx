@@ -228,6 +228,14 @@ const settings: SettingsInterface[] = [
         text: "Enable DevTools",
       },
       {
+        key: "electron.disableDiscordRPC",
+        type: "switch",
+        icon: "discord",
+        text: "Disable Discord RPC",
+        expandable: true,
+        expandableContent: "You need to relaunch whole app!",
+      },
+      {
         key: "electron.centerOnOpen",
         type: "switch",
         icon: "format_align_center",

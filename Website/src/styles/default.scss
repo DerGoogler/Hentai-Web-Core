@@ -157,6 +157,10 @@ body {
   -webkit-app-region: drag;
 }
 
+.noDrag--windows {
+  -webkit-app-region: no-drag;
+}
+
 .page--windows {
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.125);
@@ -188,4 +192,17 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 8px;
   }
+}
+
+.alert-dialog--material {
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.list-item--material.list-item--expandable,
+.select-input--material,
+.action-sheet-button--material,
+.button--material,
+.switch--material {
+  cursor: pointer;
 }

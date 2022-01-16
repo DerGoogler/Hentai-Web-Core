@@ -13,6 +13,7 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
   }
 
   public componentDidMount() {
+    native.electron.discordRPC("Trying to login");
     native.android.setStatusbarColor("#ffffff");
     if (native.getPref("loggedIn") === "true") {
       new Bootloader().activity.load("main");
@@ -68,6 +69,7 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
             modifier={native.checkPlatformForBorderStyle} /*renderToolbar={this.renderToolbar}*/
           >
             <section
+              className="drag--windows"
               style={{
                 textAlign: "center",
                 height: "100%",
@@ -80,6 +82,7 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
               }}
             >
               <div
+                className="noDrag--windows"
                 style={{
                   backgroundColor: "white",
                   padding: "16px",

@@ -2,6 +2,7 @@
 // It has the same sandbox as a Chrome extension.
 // preload.js
 const { BrowserWindow, shell, Notification, app } = require("@electron/remote");
+const { ipcRenderer } = require("electron");
 const { contextBridge } = require("electron");
 const Store = require("electron-store");
 const fenster = require("@electron/remote");
@@ -80,11 +81,14 @@ contextBridge.exposeInMainWorld("Windows", {
       }
     });
   },
-  /*
-  unregisterShortcut: (shortcut) => {
-    unregister(shortcut);
+
+  discordRPC: (state) => {
+    ipcRenderer.send("dcrpc-state", state);
   },
-*/
+
+  discordRPCdisconnect() {
+    ipcRenderer.send("dcrpc-state-disconnect", true);
+  },
 
   webContentsAddEventListener: (event, callback) => {
     fenster.getCurrentWindow().webContents.on(event, () => {

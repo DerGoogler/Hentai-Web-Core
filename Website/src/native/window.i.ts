@@ -84,9 +84,14 @@ interface Windows {
 
   /**
    *
-   * @param shortcut
+   * @param state
    */
-  unregisterShortcut(shortcut: string): void;
+  discordRPC(state: string): void;
+
+  /**
+   *
+   */
+  discordRPCdisconnect(): void;
 
   /**
    * Resizes the window to `width` and `height`. If `width` or `height` are below any

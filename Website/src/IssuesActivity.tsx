@@ -18,6 +18,7 @@ class IssuesActivity extends React.Component<{}, { data: GitHubIssuesInterface[]
   }
 
   public componentDidMount = () => {
+    native.electron.discordRPC("Viewing Issues");
     axios.get("https://api.github.com/repos/DerGoogler/Hentai-Web/issues").then((res) => {
       const data = res.data;
       this.setState({ data: data });

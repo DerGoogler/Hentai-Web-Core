@@ -11,6 +11,7 @@ import Bootloader from "@Bootloader";
 
 class SettingsActivity extends React.Component {
   public componentDidMount() {
+    native.electron.discordRPC("Viewing Settings");
     new Bootloader().doLogin();
   }
 

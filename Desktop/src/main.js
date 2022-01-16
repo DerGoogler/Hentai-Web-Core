@@ -1,9 +1,10 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, globalShortcut } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const fenster = require("@electron/remote/main");
 const setting = require("./defaultSettings");
+const pkg = require("./../package.json");
 const client = require("discord-rich-presence")("726837711851356242");
 
 function createWindow() {
@@ -57,14 +58,22 @@ function createWindow() {
 
   webContents.setUserAgent("HENTAI_WEB_WINDOWS");
 
-  client.updatePresence({
-    state: "Viewing images",
-    details: "😎",
-    startTimestamp: Date.now(),
-    endTimestamp: Date.now() + 1337,
-    largeImageKey: "hentaiweb__",
-    smallImageKey: "googler",
-    instance: true,
+  const date = Date.now();
+
+  ipcMain.on("dcrpc-state", (event, arg) => {
+    client.updatePresence({
+      state: arg,
+      details: "Version " + pkg.version,
+      startTimestamp: date,
+      largeImageKey: "hentaiweb__",
+      instance: true,
+    });
+  });
+
+  ipcMain.on("dcrpc-state-disconnect", (event, arg) => {
+    if (arg) {
+      client.disconnect();
+    }
   });
 }
 
