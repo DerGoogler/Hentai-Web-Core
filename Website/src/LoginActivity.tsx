@@ -13,6 +13,7 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
   }
 
   public componentDidMount() {
+    native.android.setStatusbarColor("#ffffff");
     if (native.getPref("loggedIn") === "true") {
       new Bootloader().activity.load("main");
     }
@@ -63,7 +64,9 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
     return (
       <Translator>
         {({ translate }: any) => (
-          <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+          <Page
+            modifier={native.checkPlatformForBorderStyle} /*renderToolbar={this.renderToolbar}*/
+          >
             <section
               style={{
                 textAlign: "center",
@@ -73,9 +76,26 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                background: "linear-gradient(61deg, rgba(74,20,140,1) 0%, rgba(0,118,255,1) 100%)",
               }}
             >
-              <div>
+              <div
+                style={{
+                  backgroundColor: "white",
+                  padding: "16px",
+                  borderRadius: "8px",
+                  boxShadow:
+                    "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),0 3px 1px -2px rgba(0, 0, 0, 0.2)",
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: "xx-large",
+                    fontVariant: "all-small-caps",
+                  }}
+                >
+                  Login
+                </p>
                 <p>
                   <Input
                     value={this.state.username}

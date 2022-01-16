@@ -15,6 +15,7 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;

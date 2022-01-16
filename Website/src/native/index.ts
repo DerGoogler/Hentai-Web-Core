@@ -329,19 +329,12 @@ class native {
     setStatusbarColor(color: string): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.setStatusbarColor(color);
-      } else if (this.agent === this.userAgentWindows) {
-        console.log("Statusbar colors are not supported on electron");
-      } else {
-        console.log("Statusbar colors are not supported on browsers");
       }
     },
+
     setStatusbarBackgroundWhite(): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.setStatusbarBackgroundWhite();
-      } else if (this.agent === this.userAgentWindows) {
-        console.log("Statusbar colors are not supported on electron");
-      } else {
-        console.log("Statusbar colors are not supported on browsers");
       }
     },
 
