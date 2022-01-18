@@ -80,7 +80,7 @@ public class WebViewActivity extends BaseActivity {
                                               @NonNull CharSequence errString) {
                 super.onAuthenticationError(errorCode, errString);
                 Toast.makeText(getApplicationContext(),
-                        "Authentication error: " + errString, Toast.LENGTH_SHORT)
+                        "Authentication error: " + errString + "(" + errorCode + ")", Toast.LENGTH_SHORT)
                         .show();
             }
 

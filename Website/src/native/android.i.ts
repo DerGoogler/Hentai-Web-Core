@@ -174,6 +174,16 @@ interface Android {
       | "DIRECTORY_RINGTONES"
       | "DIRECTORY_SCREENSHOTS"
   ): string;
+
+  /**
+   * @Native
+   */
+  hasBiometricEnrolled(): boolean;
+
+  /**
+   * @Native
+   */
+  isHardwareAvailable(): boolean;
 }
 
 export default Android;

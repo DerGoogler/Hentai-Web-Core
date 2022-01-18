@@ -25,10 +25,12 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
         document.head.appendChild(darkmode);
       }
     }
-    if (window.Windows.isMaximized()) {
-      this.setState({ icon: "fullscreen" });
-    } else {
-      this.setState({ icon: "close_fullscreen" });
+    if (native.userAgentEqualWindows(true)) {
+      if (window.Windows.isMaximized()) {
+        this.setState({ icon: "fullscreen" });
+      } else {
+        this.setState({ icon: "close_fullscreen" });
+      }
     }
   }
 

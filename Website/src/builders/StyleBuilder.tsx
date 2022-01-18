@@ -15,13 +15,26 @@ class StyleBuilder extends React.Component {
           native.fs.getExternalStorageDir() + "/hentai-web/inject/custom.css"
         ),
       });
+      if (native.userAgentEqualAndroid(true)) {
+        native.android.setStatusbarColor(
+          native.fs.readFile(
+            native.fs.getExternalStorageDir() + "/hentai-web/inject/StatusbarColor"
+          )
+        );
+      }
     } else {
       console.log("Custom theming is disabled!");
     }
   };
 
   public render() {
-    return <style>{this.state.style}</style>;
+    return (
+      <div style={{ display: "none" }}>
+        DON'T REMOVE THIS!
+        <style>{this.state.style}</style>
+        <div className="StatusbarColor"></div>
+      </div>
+    );
   }
 }
 

@@ -1,7 +1,6 @@
 package com.dergoogler.hentai.bridge;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -12,15 +11,13 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
-import android.telephony.TelephonyManager;
-import android.util.Base64;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import androidx.biometric.BiometricManager;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
 
@@ -28,25 +25,16 @@ import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.activity.WebViewActivity;
 import com.dergoogler.hentai.tools.AESCrypt;
 import com.dergoogler.hentai.tools.Lib;
-import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.download.CSDownloadManager;
-import com.dergoogler.hentai.zero.json.JSONHelper;
 import com.dergoogler.hentai.zero.log.Logger;
-import com.dergoogler.hentai.zero.reflect.ReflectHelper;
 import com.dergoogler.hentai.zero.util.FileUtil;
 import com.dergoogler.hentai.zero.webview.CSWebView;
 import com.google.firebase.auth.FirebaseAuth;
 
-import org.json.JSONObject;
-
 import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Method;
-import java.net.URLDecoder;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.Executor;
 
 /**
  * WebView JavaScript Interface Bridge
@@ -236,6 +224,22 @@ public class AndroidBridge {
         } catch (Exception e) {
             Toast.makeText(webView.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @JavascriptInterface
+    public boolean isHardwareAvailable() {
+        BiometricManager bm = BiometricManager.from(webView.getContext());
+        int canAuthenticate = bm.canAuthenticate();
+        return !(canAuthenticate == BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE || canAuthenticate == BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE);
+
+    }
+
+    @JavascriptInterface
+    public boolean hasBiometricEnrolled() {
+        BiometricManager bm = BiometricManager.from(webView.getContext());
+        int canAuthenticate = bm.canAuthenticate();
+        return (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS);
+
     }
 
     @JavascriptInterface

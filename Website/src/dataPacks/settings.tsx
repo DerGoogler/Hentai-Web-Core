@@ -137,9 +137,9 @@ const settings: SettingsInterface[] = [
         style: {
           display:
             tools.typeIF(native.userAgentEqualAndroid(false), "none", "") ||
-            tools.typeIF(Number(native.android.getAppManifest("sdk")) < 23, "none", ""),
+            tools.typeIF(native.android.isHardwareAvailable(), "", "none"),
         },
-        disabled: native.userAgentEqualAndroid(false),
+        disabled: tools.typeIF(native.android.hasBiometricEnrolled(), false, true),
       },
       {
         key: "erudaEnabled",

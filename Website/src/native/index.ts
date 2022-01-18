@@ -354,6 +354,22 @@ class native {
       }
     },
 
+    hasBiometricEnrolled(): boolean {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.hasBiometricEnrolled();
+      } else {
+        return false;
+      }
+    },
+
+    isHardwareAvailable(): boolean {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.isHardwareAvailable();
+      } else {
+        return false;
+      }
+    },
+
     isAppInstalled(): boolean {
       if (this.agent === this.userAgentAndroid) {
         return window.Android.isAppInstalled();
