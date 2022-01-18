@@ -249,6 +249,9 @@ class native {
     }
   }
 
+  /**
+   * Methods that are here can only used on Windows
+   */
   public static electron = {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
@@ -317,6 +320,9 @@ class native {
     },
   };
 
+  /**
+   * Methods that are here can only used on Android
+   */
   public static android = {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
@@ -376,11 +382,20 @@ class native {
       }
     },
 
+    /**
+     * This has only to the Android system access
+     */
     fs: {
       userAgentAndroid: "HENTAI_WEB_AGENT",
       userAgentWindows: "HENTAI_WEB_WINDOWS",
       agent: window.navigator.userAgent,
 
+      /**
+       *
+       * @param path
+       * @returns
+       * @deprecated Please use `native.fs.readFile();`
+       */
       readFile(path: string): string {
         if (this.agent === this.userAgentAndroid) {
           return window.Android.readFile(path);
@@ -397,6 +412,11 @@ class native {
         }
       },
 
+      /**
+       *
+       * @returns
+       * @deprecated Please use `native.fs.getExternalStorageDir();`
+       */
       getExternalStorageDir(): string {
         if (this.agent === this.userAgentAndroid) {
           return window.Android.getExternalStorageDir();
@@ -435,6 +455,12 @@ class native {
         }
       },
 
+      /**
+       *
+       * @param path
+       * @returns
+       * @deprecated Please use `native.fs.isFileExist();`
+       */
       isFileExist(path: string): boolean {
         if (this.agent === this.userAgentAndroid) {
           return window.Android.isFileExist(path);
@@ -490,6 +516,45 @@ class native {
           return;
         }
       },
+    },
+  };
+
+  /**
+   * This class is for the file access on both platforms, Android and Windows.
+   */
+  public static fs = {
+    userAgentAndroid: "HENTAI_WEB_AGENT",
+    userAgentWindows: "HENTAI_WEB_WINDOWS",
+    agent: window.navigator.userAgent,
+
+    readFile(path: string): string {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.readFile(path);
+      } else if (this.agent === this.userAgentWindows) {
+        return window.Windows.readFile(path);
+      } else {
+        return "";
+      }
+    },
+
+    getExternalStorageDir(): string {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.getExternalStorageDir();
+      } else if (this.agent === this.userAgentWindows) {
+        return window.Windows.getExternalStorageDir();
+      } else {
+        return "";
+      }
+    },
+
+    isFileExist(path: string): boolean {
+      if (this.agent === this.userAgentAndroid) {
+        return window.Android.isFileExist(path);
+      } else if (this.agent === this.userAgentWindows) {
+        return window.Windows.isFileExist(path);
+      } else {
+        return false;
+      }
     },
   };
 }

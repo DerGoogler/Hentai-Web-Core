@@ -18,9 +18,13 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.dergoogler.hentai.zero.permission.RPermission;
 import com.dergoogler.hentai.zero.permission.RPermissionListener;
+import com.dergoogler.hentai.zero.util.FileUtil;
 import com.dergoogler.hentai.zero.webview.listener.FileChooserListener;
 import com.dergoogler.hentai.webview.WebViewHelper;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
@@ -84,7 +88,7 @@ public class CSWebChromeClient extends WebChromeClient {
     }
 
     // For Android 5.0+
-    public boolean onShowFileChooser(final WebView webView, final ValueCallback<Uri[]> filePathCallback, final WebChromeClient.FileChooserParams fileChooserParams) {
+    public boolean onShowFileChooser(final CSWebView webView, final ValueCallback<Uri[]> filePathCallback, final WebChromeClient.FileChooserParams fileChooserParams) {
         Logger.i(TAG, "[WEBVIEW] openFileChooser()  For Android 5.0+ \n:: filePathCallback[" + filePathCallback + "]  fileChooserParams[" + fileChooserParams + "]");
 
         List<String> permissions = new ArrayList<>();
@@ -100,8 +104,8 @@ public class CSWebChromeClient extends WebChromeClient {
                         String[] acceptType;
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                             acceptType = fileChooserParams.getAcceptTypes();
-                        } else  {
-                            acceptType = new String[] { "" };
+                        } else {
+                            acceptType = new String[]{""};
                         }
 
                         if (null != fileChooserListener) {
@@ -147,7 +151,7 @@ public class CSWebChromeClient extends WebChromeClient {
                                         request.deny();
                                     }
                                 })
-                                .setPermissions(new String[] {
+                                .setPermissions(new String[]{
                                         // Dangerous Permission
                                         Manifest.permission.RECORD_AUDIO,
                                 })
@@ -170,7 +174,7 @@ public class CSWebChromeClient extends WebChromeClient {
                                         request.deny();
                                     }
                                 })
-                                .setPermissions(new String[] {
+                                .setPermissions(new String[]{
                                         // Dangerous Permission
                                         Manifest.permission.CAMERA,
                                         Manifest.permission.RECORD_AUDIO,
@@ -217,7 +221,7 @@ public class CSWebChromeClient extends WebChromeClient {
                         callback.invoke(origin, false, false);
                     }
                 })
-                .setPermissions(new String[] {
+                .setPermissions(new String[]{
                         // Dangerous Permission
                         Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -230,8 +234,7 @@ public class CSWebChromeClient extends WebChromeClient {
 
 
     //++ [[START] Javascript Alert]
-    @Override
-    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+    public boolean onJsAlert(CSWebView view, String url, String message, JsResult result) {
         Logger.i(TAG, "[WEBVIEW] onJsAlert(): url[" + view.getUrl() + "], message[" + message + "], JsResult[" + result + "]");
 
         //++
@@ -337,8 +340,7 @@ public class CSWebChromeClient extends WebChromeClient {
         webView.scrollTo(scrollX, scrollY);
     }
 
-    @Override
-    public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+    public boolean onCreateWindow(CSWebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
         Logger.i(TAG, "[WEBVIEW] onCreateWindow():  view[" + view + "]  isDialog[" + isDialog + "]  isUserGesture[" + isUserGesture + "]  resultMsg[" + resultMsg + "]");
 
         this.newWebView = WebViewHelper.addWebView(view.getContext(), view);
@@ -362,8 +364,7 @@ public class CSWebChromeClient extends WebChromeClient {
         //return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
     }
 
-    @Override
-    public void onCloseWindow(WebView window) {
+    public void onCloseWindow(CSWebView window) {
         super.onCloseWindow(window);
         this.newWebView = null;
         Logger.i(TAG, "[WEBVIEW] onCloseWindow()");

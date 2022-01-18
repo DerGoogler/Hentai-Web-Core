@@ -54,7 +54,7 @@ class AnimeContent extends React.Component<{
     ));
 
     return (
-      <ContentBody>
+      <ContentBody className="Anime-Content">
         <div
           style={{
             textAlign: "center",

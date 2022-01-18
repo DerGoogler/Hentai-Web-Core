@@ -63,14 +63,14 @@ public class CSFileChooserListener implements FileChooserListener {
 
     @SuppressWarnings({"unused", "RedundantSuppression"})
     @Override
-    public void onOpenFileChooserNormal(WebView webView, ValueCallback<Uri> filePathCallback, String acceptType) {
+    public void onOpenFileChooserNormal(CSWebView webView, ValueCallback<Uri> filePathCallback, String acceptType) {
         this.filePathCallbackNormal = filePathCallback;
         openIntentChooser(acceptType);
     }
 
     @SuppressWarnings({"unused", "RedundantSuppression"})
     @Override
-    public void onOpenFileChooserLollipop(WebView webView, ValueCallback<Uri[]> filePathCallback, String[] acceptType) {
+    public void onOpenFileChooserLollipop(CSWebView webView, ValueCallback<Uri[]> filePathCallback, String[] acceptType) {
         this.filePathCallbackLollipop = filePathCallback;
         openIntentChooser(acceptType);
     }

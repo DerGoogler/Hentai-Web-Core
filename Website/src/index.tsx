@@ -12,6 +12,7 @@ import strings from "@DataPacks/strings";
 import eruda from "eruda";
 import mainfest from "./Manifest";
 import Bota from "@Misc/bota64";
+import StyleBuilder from "@Builders/StyleBuilder";
 
 native.setPref(
   "test",
@@ -45,7 +46,7 @@ class Bootloader {
     },
 
     getCurrent(): string | String {
-      return window.location.search.replace("?activity=", "");
+      return window.location.search.replace(/\?activity=(.*)&(.*)/gm, "");
     },
   };
 
@@ -60,6 +61,7 @@ class Bootloader {
     ReactDOM.render(
       <Provider language={this.checkLanguage()} translation={strings}>
         {node}
+        <StyleBuilder />
       </Provider>,
       this.mountNode
     );

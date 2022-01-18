@@ -2,6 +2,7 @@ import ons from "onsenui";
 import { List, ListItem } from "react-onsenui";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import native from "@Native";
+import { Provider, Translate, Translator } from "react-translated";
 import tools from "@Misc/tools";
 
 const settings: SettingsInterface[] = [
@@ -59,6 +60,22 @@ const settings: SettingsInterface[] = [
             <option value="de">German</option>
           </>
         ),
+      },
+      {
+        key: "enableCustomTheming",
+        icon: "water_drop",
+        style: {
+          display: tools.typeIF(
+            native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true),
+            "",
+            "none"
+          ),
+        },
+        type: "switch",
+        expandable: true,
+        expandableContent:
+          "Custom themes can break the general app experience and includes no official theme fixes from the developer. Use at your own risk!",
+        text: "Custom Theming",
       },
     ],
   },

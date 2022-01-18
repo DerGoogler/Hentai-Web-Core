@@ -5,6 +5,8 @@ const { BrowserWindow, shell, Notification, app } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
 const { contextBridge } = require("electron");
 const Store = require("electron-store");
+const fs = require("fs");
+const path = require("path");
 const fenster = require("@electron/remote");
 const Mousetrap = require("mousetrap");
 
@@ -108,5 +110,29 @@ contextBridge.exposeInMainWorld("Windows", {
 
   appGetPath: (path) => {
     return app.getPath(path);
+  },
+
+  /**
+   * @param {*} path
+   * @returns
+   */
+  readFile: (path) => {
+    try {
+      return fs.readFileSync(path).toString();
+    } catch (error) {
+      console.log("Custom theme was not found!");
+    }
+  },
+
+  isFileExist: (path) => {
+    try {
+      fs.existsSync(path);
+    } catch (error) {
+      console.log("Custom file not exist!");
+    }
+  },
+
+  getExternalStorageDir: () => {
+    return "C:";
   },
 });

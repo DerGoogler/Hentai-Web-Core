@@ -28,21 +28,23 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.R;
 import com.dergoogler.hentai.bridge.NodeBridge;
-import com.dergoogler.hentai.bridge.process.AndroidBridgeProcessActivityResult;
 import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.activity.BaseActivity;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.keyevent.BackKeyShutdown;
 import com.dergoogler.hentai.zero.requetcode.RequestCode;
+import com.dergoogler.hentai.zero.util.FileUtil;
 import com.dergoogler.hentai.zero.util.PackageUtil;
 import com.dergoogler.hentai.zero.util.StringUtil;
 import com.dergoogler.hentai.zero.webview.CSDownloadListener;
 import com.dergoogler.hentai.zero.webview.CSFileChooserListener;
 import com.dergoogler.hentai.zero.webview.CSWebChromeClient;
+import com.dergoogler.hentai.zero.webview.CSWebView;
 import com.dergoogler.hentai.zero.webview.CSWebViewClient;
 import com.dergoogler.hentai.bridge.AndroidBridge;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.webview.WebViewHelper;
+import com.dergoogler.hentai.zero.webview.CSWebViewInjector;
 
 import java.io.File;
 import java.util.Objects;
@@ -57,7 +59,7 @@ import java.util.concurrent.Executor;
 public class WebViewActivity extends BaseActivity {
     private static final String TAG = WebViewActivity.class.getSimpleName();
     private SharedPreferences nativaeLocalstorage;
-    private WebView webview;
+    private CSWebView webview;
     private CSWebChromeClient webChromeClient;
     private CSFileChooserListener webviewFileChooser;
     private String urlCore = Lib.getReleaseURl();
@@ -70,8 +72,6 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nativaeLocalstorage = this.getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
-
-
         Executor executor = ContextCompat.getMainExecutor(this);
         BiometricPrompt biometricPrompt = new BiometricPrompt(WebViewActivity.this,
                 executor, new BiometricPrompt.AuthenticationCallback() {
@@ -119,7 +119,7 @@ public class WebViewActivity extends BaseActivity {
 
     @SuppressLint("AddJavascriptInterface")
     private void init() {
-        ViewGroup contentView = findViewById(R.id.contentView);
+        CSWebView contentView = (CSWebView) findViewById(R.id.contentView);
 
         if (null == contentView) {
             DialogBuilder.with(getActivity())
@@ -129,29 +129,11 @@ public class WebViewActivity extends BaseActivity {
             return;
         }
 
-        // add webview
         this.webview = WebViewHelper.addWebView(getContext(), contentView);
-
-        // options
-        //this.webview.getSettings().setSupportMultipleWindows(true);
-
-        // set user-agent
-        try {
-            String ua = this.webview.getSettings().getUserAgentString();
-            if (!ua.endsWith(" ")) {
-                ua += " ";
-            }
-            ua += PackageUtil.getApplicationName(this);
-            ua += "/" + PackageUtil.getPackageVersionName(this);
-            ua += "." + PackageUtil.getPackageVersionCode(this);
-            this.webview.getSettings().setUserAgentString(ua);
-        } catch (PackageManager.NameNotFoundException e) {
-            Logger.e(TAG, e);
-        }
 
         // set webViewClient
         CSWebViewClient webviewClient = new CSWebViewClient(getContext());
-        this.webview.setWebViewClient(webviewClient);
+        this.webview.setCSWebViewClient(webviewClient);
 
         // set webChromeClient
         this.webChromeClient = new CSWebChromeClient(getContext());
@@ -240,13 +222,6 @@ public class WebViewActivity extends BaseActivity {
             this.webviewFileChooser.onActivityResultFileChooserLollipop(requestCode, resultCode, data);
         }
         //-- [[E N D] File Chooser]
-
-        //++ [[START] Take a picture]
-        if (RequestCode.REQUEST_TAKE_A_PICTURE == requestCode) {
-            Logger.i(TAG, "[ACTIVITY] onActivityResult(): REQUEST_TAKE_A_PICTURE");
-            AndroidBridgeProcessActivityResult.onActivityResultTakePicture(this.webview, requestCode, resultCode, data);
-        }
-        //++ [[E N D] Take a picture]
 
         super.onActivityResult(requestCode, resultCode, data);
     }

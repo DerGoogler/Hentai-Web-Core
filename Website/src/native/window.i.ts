@@ -138,6 +138,12 @@ interface Windows {
    * Closes the devtools.
    */
   closeDevTools(): void;
+
+  readFile(path: string): string;
+
+  getExternalStorageDir(): string;
+
+  isFileExist(path: string): boolean;
 }
 
 export default Windows;

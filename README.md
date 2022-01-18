@@ -21,12 +21,14 @@ The app includes some features :)
 - Option to keep the screen on
 - Option to inspect the app with an console
 - Option to login with an fingerprint
+- Option to use custom themes (Need to make self or download)
 
 ## Windows
 
 - Option to open the app path
 - Option to enable DevTools
 - Option to Resize the window to different phone sizes
+- Option to use custom themes (Need to make self or download)
 
 ## Global (All Platforms)
 

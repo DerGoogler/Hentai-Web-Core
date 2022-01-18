@@ -1,5 +1,6 @@
 package com.dergoogler.hentai.zero.webview;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -15,11 +16,15 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.dergoogler.hentai.BuildConfig;
+import com.dergoogler.hentai.R;
 import com.dergoogler.hentai.zero.log.Logger;
+import com.dergoogler.hentai.zero.util.FileUtil;
 import com.dergoogler.hentai.zero.util.IntentUtil;
 
 import java.net.URISyntaxException;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.webkit.WebViewAssetLoader;
 
@@ -29,10 +34,16 @@ import androidx.webkit.WebViewAssetLoader;
  * @author mcharima5@gmail.com
  * @since 2018
  */
-public class CSWebViewClient extends WebViewClient {
+public class CSWebViewClient extends WebViewClient implements CSWebViewClientCallbacks {
     private static final String TAG = CSWebViewClient.class.getSimpleName();
 
     private final WebViewAssetLoader assetLoader;
+
+    private CSWebViewInjector injector;
+
+    public void setInjector(CSWebViewInjector injector) {
+        this.injector = injector;
+    }
 
     public CSWebViewClient(Context context) {
         if (BuildConfig.FEATURE_WEBVIEW_ASSET_LOADER) {
@@ -44,10 +55,10 @@ public class CSWebViewClient extends WebViewClient {
         }
     }
 
-    @Override
     @Deprecated
-    @SuppressWarnings({"unused", "RedundantSuppression"})   // use the old one for compatibility with all API levels.
-    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+    @SuppressWarnings({"unused", "RedundantSuppression"})
+    // use the old one for compatibility with all API levels.
+    public WebResourceResponse shouldInterceptRequest(CSWebView view, String url) {
         Logger.d(TAG, "[WEBVIEW] shouldInterceptRequest(API 20 below):  url[" + url + "]");
 
         if (BuildConfig.FEATURE_WEBVIEW_ASSET_LOADER) {
@@ -56,9 +67,8 @@ public class CSWebViewClient extends WebViewClient {
         return super.shouldInterceptRequest(view, url);
     }
 
-    @Override
     @RequiresApi(21)
-    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+    public WebResourceResponse shouldInterceptRequest(CSWebView view, WebResourceRequest request) {
         Logger.d(TAG, "[WEBVIEW] shouldInterceptRequest(API 21 after):  url[" + request.getUrl() + "]");
 
         if (BuildConfig.FEATURE_WEBVIEW_ASSET_LOADER) {
@@ -67,15 +77,14 @@ public class CSWebViewClient extends WebViewClient {
         return null;    //return super.shouldInterceptRequest(view, request);
     }
 
-    @Override
-    public void onLoadResource(WebView view, final String url) {
+
+    public void onLoadResource(CSWebView view, final String url) {
         Logger.d(TAG, "[WEBVIEW] onLoadResource():  url[" + url + "]");
         super.onLoadResource(view, url);
     }
 
     @Deprecated
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+    public boolean shouldOverrideUrlLoading(CSWebView view, String url) {
         Logger.i(TAG, "[WEBVIEW] shouldOverrideUrlLoading() API 23 below: " + url);
 
         if (url.startsWith("http://") || url.startsWith("https://")) {
@@ -86,8 +95,7 @@ public class CSWebViewClient extends WebViewClient {
     }
 
     @TargetApi(Build.VERSION_CODES.N)
-    @Override
-    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+    public boolean shouldOverrideUrlLoading(CSWebView view, WebResourceRequest request) {
         Logger.i(TAG, "[WEBVIEW] shouldOverrideUrlLoading() API 24 after: " + request.getUrl());
 
         String url = Uri.decode(request.getUrl().toString());
@@ -103,7 +111,7 @@ public class CSWebViewClient extends WebViewClient {
         return true;
     }
 
-    private boolean intentProcessing(WebView view, String urlString) {
+    private boolean intentProcessing(CSWebView view, String urlString) {
         String url = Uri.decode(urlString);
 
         if (url.startsWith("intent:")) {
@@ -127,20 +135,22 @@ public class CSWebViewClient extends WebViewClient {
         return false;
     }
 
-    @Override
-    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+    public void onPageStarted(CSWebView view, String url, Bitmap favicon) {
         Logger.i(TAG, "[WEBVIEW] onPageStarted(): " + url);
         super.onPageStarted(view, url, favicon);
     }
 
+    @CallSuper
     @Override
-    public void onPageFinished(WebView view, String url) {
+    public void onPageFinished(CSWebView view, String url) {
+        if (injector != null) {
+            onReadyToInject(injector, url);
+        }
         Logger.i(TAG, "[WEBVIEW] onPageFinished(): " + url);
         super.onPageFinished(view, url);
     }
 
-    @Override
-    public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+    public void onReceivedSslError(CSWebView view, SslErrorHandler handler, SslError error) {
         Logger.e(TAG, "[WEBVIEW] onReceivedSslError(): url[" + view.getUrl() + "],  handler[" + handler + "],  error[" + error + "]");
 
         if (SslError.SSL_NOTYETVALID == error.getPrimaryError()) {
@@ -162,8 +172,7 @@ public class CSWebViewClient extends WebViewClient {
         //super.onReceivedSslError(view, handler, error);
     }
 
-    @Override
-    public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+    public void onReceivedHttpError(CSWebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
         String url = view.getUrl();
 
         StringBuilder buff = new StringBuilder();
@@ -184,8 +193,7 @@ public class CSWebViewClient extends WebViewClient {
     }
 
     @Deprecated
-    @Override
-    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+    public void onReceivedError(CSWebView view, int errorCode, String description, String failingUrl) {
         Logger.e(TAG, "[WEBVIEW] onReceivedError(): url[" + view.getUrl() + "],  errorCode[" + errorCode + "],  description[" + description + "],  failingUrl[" + failingUrl + "]");
 
         boolean forwardErrorPage = ERROR_BAD_URL == errorCode || ERROR_FILE == errorCode;
@@ -193,8 +201,7 @@ public class CSWebViewClient extends WebViewClient {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    @Override
-    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+    public void onReceivedError(CSWebView view, WebResourceRequest request, WebResourceError error) {
         Logger.e(TAG, "[WEBVIEW] onReceivedError(VERSION=M): url[" + view.getUrl() + "],  errorCode[" + error.getErrorCode() + "],  description[" + error.getDescription() + "]");
 
         int errorCode = error.getErrorCode();
@@ -203,7 +210,7 @@ public class CSWebViewClient extends WebViewClient {
         onReceivedError(view, errorCode, description, request.getUrl().toString(), forwardErrorPage);
     }
 
-    private void onReceivedError(WebView view, int errorCode, String description, String failingUrl, boolean forwardErrorPage) {
+    private void onReceivedError(CSWebView view, int errorCode, String description, String failingUrl, boolean forwardErrorPage) {
         if (WebViewClient.ERROR_UNSUPPORTED_SCHEME == errorCode) {
             if ("about:blank".equals(failingUrl)) {
                 return;
@@ -219,7 +226,7 @@ public class CSWebViewClient extends WebViewClient {
                 || WebViewClient.ERROR_TIMEOUT == errorCode
                 || WebViewClient.ERROR_UNKNOWN == errorCode
         ) {
-            final String[] except = new String[] {
+            final String[] except = new String[]{
                     ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tif", ".tiff", ".ico",
                     ".eot", ".ttf", ".otf", ".eot", ".woff", ".woff2",
                     ".pdf",
@@ -231,10 +238,14 @@ public class CSWebViewClient extends WebViewClient {
             }
         }
         if (forwardErrorPage) {
-            String errorPageUrl = "file:///android_asset/docs/error/net_error.html";
+            String errorPageUrl = "file:///android_asset/network_error.html";
             String qs = "errorCode=" + errorCode + "&description=" + description + "&failingUrl=" + failingUrl;
             view.loadUrl(errorPageUrl + "?" + qs);
         }
     }
 
+    @Override
+    public void onReadyToInject(@NonNull CSWebViewInjector injector, @NonNull String page) {
+        injector.injectCSS("img{display:none}");
+    }
 }

@@ -14,7 +14,7 @@ class MDIcon extends React.Component<{
     return (
       <span
         className={
-          "material-icons " +
+          "material-icons-round " +
           tools.typeIF(isInList, "list-item__icon", "") +
           " ons-icon " +
           "material-icons md-" +

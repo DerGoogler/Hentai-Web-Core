@@ -10,16 +10,19 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import com.dergoogler.hentai.BuildConfig;
+
 import com.dergoogler.hentai.zero.permission.RPermission;
 import com.dergoogler.hentai.zero.permission.RPermissionListener;
 import com.dergoogler.hentai.zero.util.PackageUtil;
-import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.zero.log.Logger;
+import com.dergoogler.hentai.zero.webview.CSWebView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 /**
  * WebView Helper
@@ -38,13 +41,13 @@ public class WebViewHelper {
     private static final String SCHEME_RES = "file:///android_res";
     private static final String SCHEME_RES_API30 = SCHEME_HTTPS + BuildConfig.ASSET_BASE_DOMAIN + BuildConfig.RES_PATH;
 
-    public static WebView addWebView(Context context, ViewGroup parentView) {
-        WebView webView = newWebView(context);
+    public static CSWebView addWebView(Context context, ViewGroup parentView) {
+        CSWebView webView = (CSWebView) newWebView(context);
         parentView.addView(webView);
         return webView;
     }
 
-    public static void removeWebView(WebView webView) {
+    public static void removeWebView(CSWebView webView) {
         if (null != webView) {
             webView.setWebChromeClient(null);
             webView.setWebViewClient(null);
@@ -52,8 +55,8 @@ public class WebViewHelper {
         }
     }
 
-    private static WebView newWebView(Context context) {
-        WebView webView = new WebView(context);
+    private static CSWebView newWebView(Context context) {
+        CSWebView webView = (CSWebView) new CSWebView(context);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
@@ -68,7 +71,7 @@ public class WebViewHelper {
     }
 
     @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface", "AddJavascriptInterface"})
-    private static void setup(WebView webView) {
+    private static void setup(CSWebView webView) {
         WebSettings settings = webView.getSettings();
 
         webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -108,12 +111,13 @@ public class WebViewHelper {
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         settings.setGeolocationEnabled(true);
+        settings.setLoadWithOverviewMode(true);
         settings.setMediaPlaybackRequiresUserGesture(true);    // The default is true. Added in API level 17
 
         settings.setUserAgentString(makeUserAgent(webView));
     }
 
-    public static String makeUserAgent(WebView webView) {
+    public static String makeUserAgent(CSWebView webView) {
         String ua = webView.getSettings().getUserAgentString();
         try {
             ua += !ua.endsWith(" ") ? " " : "";
@@ -127,7 +131,7 @@ public class WebViewHelper {
         return ua;
     }
 
-    public static void setUserAgentString(final WebView webView, final String ua) {
+    public static void setUserAgentString(final CSWebView webView, final String ua) {
         webView.getSettings().setUserAgentString(ua);
     }
 
@@ -137,8 +141,7 @@ public class WebViewHelper {
                 return SCHEME_ASSET_API30;
             }
             return SCHEME_ASSET;
-        }
-        else if ("res".equals(type)) {
+        } else if ("res".equals(type)) {
             if (BuildConfig.FEATURE_WEBVIEW_ASSET_LOADER) {
                 return SCHEME_RES_API30;
             }
@@ -147,17 +150,20 @@ public class WebViewHelper {
         return "";
     }
 
-    public static void loadUrl(final WebView webView, final String uriString) {
+    public static void loadHTML(final CSWebView webView, final String htmlString) {
+        webView.loadData(htmlString, "text/html", "UTF-8");
+    }
+
+    public static void loadUrl(final CSWebView webView, final String uriString) {
         final Map<String, String> extraHeaders = new HashMap<>();
         //extraHeaders.put("Platform", "A");
 
         if (uriString.startsWith(SCHEME_HTTP) || uriString.startsWith(SCHEME_HTTPS)
                 || uriString.startsWith(SCHEME_ASSET) || uriString.startsWith(SCHEME_ASSET_API30)) {
             webView.loadUrl(uriString, extraHeaders);
-        }
-        else if (uriString.startsWith(SCHEME_FILE)) {
+        } else if (uriString.startsWith(SCHEME_FILE)) {
             List<String> permissions = new ArrayList<>();
-            // Dangerous Permission
+            // Dangerous Permission (yeah i know lol)
             permissions.add(Manifest.permission.READ_EXTERNAL_STORAGE);
 
             RPermission.with(webView.getContext())
@@ -177,5 +183,4 @@ public class WebViewHelper {
                     .check();
         }
     }
-
 }

@@ -8,7 +8,7 @@
 extern "C"
 JNIEXPORT jstring JNICALL
 Java_com_dergoogler_hentai_tools_Lib_getReleaseURl(JNIEnv *env, jclass clazz) {
-    std::string data = "https://www.dergoogler.com/hentai-web/?activity=main";
+    std::string data = "https://www.service.dergoogler.com/hentai-web/?activity=main";
     return env->NewStringUTF(data.c_str());
 }
 
