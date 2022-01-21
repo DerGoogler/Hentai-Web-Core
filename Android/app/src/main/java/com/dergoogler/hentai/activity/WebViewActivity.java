@@ -64,7 +64,7 @@ public class WebViewActivity extends BaseActivity {
     private CSFileChooserListener webviewFileChooser;
     private String urlCore = Lib.getReleaseURl();
     private String urlCore_ = Lib.getDebugURl(); // For debugging
-    private String mainURL = urlCore_; // Main url
+    private String mainURL = urlCore; // Main url
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override

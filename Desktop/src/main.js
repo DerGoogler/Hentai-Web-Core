@@ -50,10 +50,10 @@ function createWindow() {
   fenster.initialize();
   fenster.enable(webContents);
 
-  const url = "https://www.dergoogler.com/hentai-web/?activity=main";
+  const url = "https://service.dergoogler.com/hentai-web/?activity=main";
   const url_ = "http://192.168.178.81:5500/?activity=main";
 
-  mainWindow.loadURL(url_);
+  mainWindow.loadURL(url);
   mainWindow.on("page-title-updated", function (e) {
     e.preventDefault();
   });
@@ -84,6 +84,8 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 let tray = null;
 app.whenReady().then(() => {
+  createWindow();
+
   tray = new Tray(path.join(app.getAppPath(), "/build/ic_launcher.png"));
   const contextMenu = Menu.buildFromTemplate([
     {
@@ -97,7 +99,6 @@ app.whenReady().then(() => {
   tray.setToolTip("Other settings/options");
   tray.setContextMenu(contextMenu);
 
-  createWindow();
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
