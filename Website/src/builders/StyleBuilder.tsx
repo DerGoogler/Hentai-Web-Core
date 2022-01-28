@@ -25,6 +25,16 @@ class StyleBuilder extends React.Component {
     } else {
       console.log("Custom theming is disabled!");
     }
+    /*
+    if (native.getPref("enableCustomScriptLoading") === "true") {
+      eval(
+        native.fs
+          .readFile(native.fs.getExternalStorageDir() + "/hentai-web/inject/custom.js")
+          .replace(/(window\.((A|a)ndroid|(W|w)indows)\.read(F|f)ile\((.*?)\)(;?))/gm, "")
+      );
+    } else {
+      console.log("Custom Scripts are disabled!");
+    }*/
   };
 
   public render() {

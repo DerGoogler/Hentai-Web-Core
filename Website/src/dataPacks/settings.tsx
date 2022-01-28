@@ -112,23 +112,24 @@ const settings: SettingsInterface[] = [
         type: "switch",
         icon: "login",
         text: "alwaysLogin-string",
-        expandable: true,
-        expandableContent: (
-          <>
-            <List>
-              <ListItem>
-                <div className="left">
-                  <img className="list-item__thumbnail" src="https://placekitten.com/g/40/40" />
-                </div>
-                <div className="center">
-                  <span className="list-item__title">Cutest kitty</span>
-                  <span className="list-item__subtitle">YOU found me, please protect me...</span>
-                </div>
-              </ListItem>
-            </List>
-          </>
-        ),
       },
+      /*
+      {
+        key: "enableCustomScriptLoading",
+        icon: "description",
+        style: {
+          display: tools.typeIF(
+            native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true),
+            "",
+            "none"
+          ),
+        },
+        type: "switch",
+        expandable: true,
+        expandableContent: "Danger by using this!",
+        text: "Custom Scripting",
+      },
+      */
       {
         key: "useFingerPrintToLogin",
         icon: "fingerprint",

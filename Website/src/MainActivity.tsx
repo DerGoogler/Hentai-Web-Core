@@ -22,8 +22,13 @@ import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import { nsfwData, sfwData } from "@DataPacks/hmtai";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 import MDIcon from "@Builders/MDIcon";
+import SettingsActivity from "./SettingsActivity";
+import LicensesActivity from "./LicensesActivity";
 
-class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
+class MainActivity extends React.Component<
+  { pushPage: any; popPage: any },
+  { isContextOpen: boolean }
+> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -32,8 +37,6 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
   }
 
   public componentDidMount() {
-    new Bootloader().doLogin();
-
     if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
       tools.ref("download-app", (e: HTMLElement) => {
         e.style.display = "none";
@@ -67,7 +70,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
       <Toolbar>
         <ToolbarBuilder
           title="Hentai Web"
-          hasBackButton={false}
+          onBackButton={false}
           hasWindowsButtons={true}
           addToolbarButton={
             <>
@@ -164,7 +167,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
               text: "settings",
               icon: "md-settings",
               onClick: () => {
-                new Bootloader().activity.load("settings");
+                this.props.pushPage(SettingsActivity, "settings");
                 this.handleCancel();
               },
             },
@@ -172,15 +175,7 @@ class MainActivity extends React.Component<{}, { isContextOpen: boolean }> {
               text: "Licenses",
               icon: "md-file",
               onClick: () => {
-                new Bootloader().activity.load("licenses");
-                this.handleCancel();
-              },
-            },
-            {
-              text: "Issues",
-              icon: "md-bug",
-              onClick: () => {
-                new Bootloader().activity.load("issues");
+                this.props.pushPage(LicensesActivity, "licenses");
                 this.handleCancel();
               },
             },

@@ -19,7 +19,7 @@ module.exports = class RandomColorCommand extends Command {
       .addField("Member", message.member, true)
       .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
       .setTimestamp();
-    const colors = message.guild.roles.cache.filter((c) => c.name.startsWith("#")).array();
+    let colors = message.guild.roles.cache.filter((c) => c.name.startsWith("#")).array();
     if (colors.length === 0)
       return this.sendErrorMessage(message, 1, "There are currently no colors set on this server");
     const color = colors[Math.floor(Math.random() * colors.length)];

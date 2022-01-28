@@ -38,30 +38,21 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
     const {
       title,
       hasDarkMode,
-      hasBackButton,
+      onBackButton,
       addToolbarButton,
       addToolbarButtonPosition,
       hasWindowsButtons,
     } = this.props;
     return (
       <>
-        {(() => {
-          if (hasBackButton) {
-            return (
-              <div className="left">
-                <BackButton
-                  onClick={() => {
-                    new Bootloader().activity.load("main");
-                  }}
-                >
-                  Back
-                </BackButton>
-              </div>
-            );
-          } else {
-            return;
-          }
-        })()}
+        {onBackButton ? (
+          <div className="left">
+            <BackButton
+              // @ts-ignore
+              onClick={onBackButton}
+            />
+          </div>
+        ) : null}
         <div className="center drag--windows">{title}</div>
 
         <div className="right">

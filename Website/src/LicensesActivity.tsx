@@ -9,7 +9,7 @@ import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";
 
-class LicensesActivity extends React.Component<{}, { data: string }> {
+class LicensesActivity extends React.Component<{ popPage: any }, { data: string }> {
   public constructor(props: any) {
     super(props);
     this.state = { data: "" };
@@ -23,18 +23,18 @@ class LicensesActivity extends React.Component<{}, { data: string }> {
     });
   };
 
-  private renderToolbar() {
+  private renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
           title={"Licenses"}
-          hasBackButton={true}
+          onBackButton={this.props.popPage}
           hasWindowsButtons={true}
           hasDarkMode={true}
         />
       </Toolbar>
     );
-  }
+  };
 
   public render() {
     const { data } = this.state;

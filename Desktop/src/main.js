@@ -8,6 +8,7 @@ const pkg = require("./../package.json");
 const client = require("discord-rich-presence")("726837711851356242");
 
 const date = Date.now();
+let tray = null;
 
 function createWindow() {
   // Create the browser window.
@@ -21,7 +22,7 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: width,
     height: height,
-    frame: true,
+    frame: false,
     hasShadow: false,
     resizable: false,
     center: center,
@@ -53,14 +54,12 @@ function createWindow() {
   const url = "https://service.dergoogler.com/hentai-web/?activity=main";
   const url_ = "http://192.168.178.81:5500/?activity=main";
 
-  mainWindow.loadURL(url);
+  mainWindow.loadURL(url_);
   mainWindow.on("page-title-updated", function (e) {
     e.preventDefault();
   });
 
   webContents.setUserAgent("HENTAI_WEB_WINDOWS");
-
-  const date = Date.now();
 
   ipcMain.on("dcrpc-state", (event, arg) => {
     client.updatePresence({
@@ -77,14 +76,6 @@ function createWindow() {
       client.disconnect();
     }
   });
-}
-
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-let tray = null;
-app.whenReady().then(() => {
-  createWindow();
 
   tray = new Tray(path.join(app.getAppPath(), "/build/ic_launcher.png"));
   const contextMenu = Menu.buildFromTemplate([
@@ -98,7 +89,13 @@ app.whenReady().then(() => {
   ]);
   tray.setToolTip("Other settings/options");
   tray.setContextMenu(contextMenu);
+}
 
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.whenReady().then(() => {
+  createWindow();
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the

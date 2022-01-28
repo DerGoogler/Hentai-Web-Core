@@ -6,7 +6,7 @@ import { Provider, Translate, Translator } from "react-translated";
 import native from "@Native";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 
-class LoginActivity extends React.Component<{}, { username: string; password: string }> {
+class LoginActivity extends React.Component<{popPage: any}, { username: string; password: string }> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };
@@ -14,10 +14,6 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
 
   public componentDidMount() {
     native.electron.discordRPC("Trying to login");
-    native.android.setStatusbarColor("#ffffff");
-    if (native.getPref("loggedIn") === "true") {
-      new Bootloader().activity.load("main");
-    }
   }
 
   private renderToolbar() {
@@ -25,7 +21,6 @@ class LoginActivity extends React.Component<{}, { username: string; password: st
       <Toolbar>
         <ToolbarBuilder
           title={<Translate text="sign-in" />}
-          hasBackButton={false}
           hasWindowsButtons={true}
           hasDarkMode={true}
         />

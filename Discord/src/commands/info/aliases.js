@@ -80,7 +80,7 @@ module.exports = class AliasesCommand extends Command {
       );
     } else {
       message.client.commands.forEach((command) => {
-        if (command.aliases && !disabledCommands.includes(command.name))
+        if (command.aliases && !disabledCommands.includes(command.name) && !command.hidden)
           aliases[command.type].push(
             `**${command.name}:** ${command.aliases.map((a) => `\`${a}\``).join(" ")}`
           );

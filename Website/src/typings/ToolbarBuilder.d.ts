@@ -2,7 +2,7 @@ type Position = "left" | "right";
 
 interface ToolbarBuilderInterface {
   title: string | JSX.Element;
-  hasBackButton: boolean;
+  onBackButton?: boolean;
   hasWindowsButtons: boolean;
   /**
    * Object

@@ -9,24 +9,23 @@ import SettingsBuilder from "@Builders/SettingsBuilder";
 import settings from "@DataPacks/settings";
 import Bootloader from "@Bootloader";
 
-class SettingsActivity extends React.Component {
+class SettingsActivity extends React.Component<{ popPage: any }, {}> {
   public componentDidMount() {
     native.electron.discordRPC("Viewing Settings");
-    new Bootloader().doLogin();
   }
 
-  private renderToolbar() {
+  private renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
           title={<Translate text="settings" />}
-          hasBackButton={true}
+          onBackButton={this.props.popPage}
           hasWindowsButtons={true}
           hasDarkMode={true}
         />
       </Toolbar>
     );
-  }
+  };
 
   public render() {
     return (
