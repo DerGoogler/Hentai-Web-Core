@@ -206,3 +206,11 @@ body {
 .switch--material {
   cursor: pointer;
 }
+
+a {
+  color: #4a148c;
+  text-decoration: underline;
+  &hover {
+    color: #4a148c;
+  }
+}

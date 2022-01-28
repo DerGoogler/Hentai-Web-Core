@@ -1,6 +1,5 @@
 import * as React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
-import { hot } from "react-hot-loader/root";
 import { Provider, Translate, Translator } from "react-translated";
 import native from "@Native";
 import { Icon } from "react-onsenui";
@@ -228,4 +227,4 @@ class PictureBuilder extends React.Component<{
   }
 }
 
-export default hot(PictureBuilder);
+export default PictureBuilder;

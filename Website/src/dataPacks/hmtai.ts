@@ -41,12 +41,10 @@ export const sfwData: HMtaiDataPackTypes[] = [
   {
     name: "Profile Picture",
     source: hmtai.profilePicture(),
-    isNew: true,
   },
   {
     name: "TASH GANG Art Club",
     source: hmtai.tgac(),
-    isNew: true,
   },
 ];
 

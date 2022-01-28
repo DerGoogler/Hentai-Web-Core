@@ -1,19 +1,8 @@
 import * as React from "react";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
-import {
-  Page,
-  Toolbar,
-  Tabbar,
-  Fab,
-  SpeedDial,
-  ToolbarButton,
-  Icon,
-  Popover,
-  Button,
-} from "react-onsenui";
+import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native";
-import Bootloader from "@Bootloader";
 import tools from "@Misc/tools";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import TabbarBuilder from "@Builders/TabbarBuilder";
@@ -24,6 +13,7 @@ import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 import MDIcon from "@Builders/MDIcon";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
+import NewsActivity from "./NewsActivity";
 
 class MainActivity extends React.Component<
   { pushPage: any; popPage: any },
@@ -95,6 +85,10 @@ class MainActivity extends React.Component<
       {
         label: "NSFW",
         content: <AnimeContent name="NSFW" data={nsfwData} />,
+      },
+      {
+        label: "NEWS",
+        content: <NewsActivity />,
       },
     ]);
   }
