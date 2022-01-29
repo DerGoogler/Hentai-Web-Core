@@ -1,6 +1,9 @@
-# Hentai Web
+![hw](https://cdn.discordapp.com/attachments/808975524386177034/937078712338374736/hw139.png)
 
-Get updates in the [Telegram](https://t.me/HentaiWebUpdates) channel.
+# The Hentai Web Project
+
+Get updates in the [Telegram](https://t.me/HentaiWebUpdates) channel.    
+Support this with a **Star**!
 
 Lets get started! The sources listed below:
 

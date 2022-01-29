@@ -111,7 +111,17 @@ class MainActivity extends React.Component<
       <Translator>
         {({ translate }: any) => (
           // @ts-ignore
-          <SpeedDial id="fab-element" position="bottom right">
+          <SpeedDial
+            style={{
+              bottom: tools.typeIF(
+                native.getPref("enableBottomTabbar") === "true",
+                "calc(20px + 49px)",
+                ""
+              ),
+            }}
+            id="fab-element"
+            position="bottom right"
+          >
             <Fab>
               <Icon icon="md-more" />
             </Fab>
@@ -145,7 +155,7 @@ class MainActivity extends React.Component<
         <Tabbar
           // @ts-ignore
           swipeable={tools.stringToBoolean(native.getPref("enableSwipeBetweenTabs"))}
-          position="top"
+          position={tools.typeIF(native.getPref("enableBottomTabbar") === "true", "bottom", "top")}
           index={this.tabIndexChecker()}
           // @ts-ignore
           onPreChange={(event: any) => {

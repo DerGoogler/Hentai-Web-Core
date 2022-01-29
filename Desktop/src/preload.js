@@ -118,7 +118,11 @@ contextBridge.exposeInMainWorld("Windows", {
    */
   readFile: (path) => {
     try {
-      return fs.readFileSync(path).toString();
+      if (new Error().stack.indexOf("at eval") > -1) {
+        return "SCRIPT FILE READ DETECTED!";
+      } else {
+        return fs.readFileSync(path).toString();
+      }
     } catch (error) {
       console.log("Custom theme was not found!");
     }

@@ -42,6 +42,12 @@ const settings: SettingsInterface[] = [
         text: "hideSearchbar-string",
       },
       {
+        key: "enableBottomTabbar",
+        icon: "table_chart",
+        type: "switch",
+        text: "Place Tabbar at bottom",
+      },
+      {
         key: "hideFAB",
         icon: "add",
         type: "switch",
@@ -113,7 +119,6 @@ const settings: SettingsInterface[] = [
         icon: "login",
         text: "alwaysLogin-string",
       },
-      /*
       {
         key: "enableCustomScriptLoading",
         icon: "description",
@@ -129,7 +134,6 @@ const settings: SettingsInterface[] = [
         expandableContent: "Danger by using this!",
         text: "Custom Scripting",
       },
-      */
       {
         key: "useFingerPrintToLogin",
         icon: "fingerprint",

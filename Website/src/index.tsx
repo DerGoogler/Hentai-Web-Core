@@ -5,7 +5,6 @@ import "@Styles/light/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
-import LoginActivity from "./LoginActivity";
 import { Provider } from "react-translated";
 import native from "@Native";
 import strings from "@DataPacks/strings";
