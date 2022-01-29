@@ -7,8 +7,6 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.webkit.WebView;
 
-import com.dergoogler.hentai.zero.webview.CSWebView;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -18,10 +16,10 @@ import java.security.AccessController;
 import java.util.Objects;
 
 public class NodeBridge {
-    private final CSWebView webView;
+    private final WebView webView;
 
 
-    public NodeBridge(CSWebView webView) {
+    public NodeBridge(WebView webView) {
         this.webView = webView;
     }
 

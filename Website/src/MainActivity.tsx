@@ -1,7 +1,20 @@
 import * as React from "react";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
-import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
+import {
+  Page,
+  Toolbar,
+  Tabbar,
+  Fab,
+  SpeedDial,
+  ToolbarButton,
+  Icon,
+  SplitterSide,
+  SplitterContent,
+  ListItem,
+  List,
+  Splitter,
+} from "react-onsenui";
 import native from "@Native";
 import tools from "@Misc/tools";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
@@ -14,6 +27,7 @@ import MDIcon from "@Builders/MDIcon";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import NewsActivity from "./NewsActivity";
+import SettingsBuilder from "@Builders/SettingsBuilder";
 
 class MainActivity extends React.Component<
   { pushPage: any; popPage: any },
@@ -60,7 +74,6 @@ class MainActivity extends React.Component<
       <Toolbar>
         <ToolbarBuilder
           title="Hentai Web"
-          onBackButton={false}
           hasWindowsButtons={true}
           addToolbarButton={
             <>
@@ -122,7 +135,7 @@ class MainActivity extends React.Component<
     }
   }
 
-  public render() {
+  public render = () => {
     return (
       <Page
         modifier={native.checkPlatformForBorderStyle}
@@ -150,6 +163,7 @@ class MainActivity extends React.Component<
         />
 
         <ActionSheetBuilder
+          // @ts-ignore
           options={{
             title: "Menu",
             onCancel: this.handleCancel,
@@ -191,7 +205,7 @@ class MainActivity extends React.Component<
         />
       </Page>
     );
-  }
+  };
 }
 
 export default MainActivity;

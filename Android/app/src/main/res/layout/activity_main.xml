@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.dergoogler.hentai.activity.WebViewActivity">
 
-    <com.dergoogler.hentai.zero.webview.CSWebView
+    <WebView
         android:id="@+id/contentView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

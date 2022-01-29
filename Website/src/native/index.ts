@@ -3,6 +3,7 @@ import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
 import tools from "../misc/tools";
 import Mousetrap from "mousetrap";
+import ons from "onsenui";
 
 /**
  * Native calls for Windows and Android
@@ -224,12 +225,34 @@ class native {
    * Closes the app
    */
   public static close(): void {
+    function clo(method: any) {
+      ons.notification.confirm({
+        message: "Do you want to close this app?",
+        title: "Close app?",
+        buttonLabels: ["Yes", "No"],
+        modifier: native.checkPlatformForBorderStyle,
+        animation: "default",
+        primaryButtonIndex: 1,
+        cancelable: true,
+        callback: (index: number) => {
+          switch (index) {
+            case 0:
+              method();
+              break;
+
+            default:
+              break;
+          }
+        },
+      });
+    }
+
     if (this.agent === this.userAgentAndroid) {
-      window.Android.close();
+      clo(() => window.Android.close());
     } else if (this.agent === this.userAgentWindows) {
-      window.Windows.close();
+      clo(() => window.Windows.close());
     } else {
-      window.close();
+      clo(() => window.close());
     }
   }
 

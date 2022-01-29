@@ -21,6 +21,7 @@ class PictureBuilder extends React.Component<{
 
   public state = {
     isContextOpen: false,
+    isImageError: false,
   };
 
   /**
@@ -127,6 +128,9 @@ class PictureBuilder extends React.Component<{
                         id={this.getID}
                         src={source}
                         alt={this.getNote}
+                        onError={() => {
+                          this.setState({ isImageError: true });
+                        }}
                         onDoubleClick={this.handleClick}
                         style={{
                           width: "100%",

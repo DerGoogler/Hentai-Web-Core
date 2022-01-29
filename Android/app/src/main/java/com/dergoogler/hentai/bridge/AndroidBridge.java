@@ -28,7 +28,6 @@ import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.download.CSDownloadManager;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.zero.util.FileUtil;
-import com.dergoogler.hentai.zero.webview.CSWebView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
@@ -62,7 +61,7 @@ public class AndroidBridge {
     private static File extraOutput;
 
     // constructor
-    public AndroidBridge(CSWebView webView) {
+    public AndroidBridge(WebView webView) {
         this.webView = webView;
     }
 
@@ -91,7 +90,7 @@ public class AndroidBridge {
         return buff.toString();
     }
 
-    private static void evaluateJavascript(final CSWebView webView, final String javascriptString) {
+    private static void evaluateJavascript(final WebView webView, final String javascriptString) {
         String jsString = javascriptString;
 
         if (jsString.startsWith(SCHEME_JAVASCRIPT)) {

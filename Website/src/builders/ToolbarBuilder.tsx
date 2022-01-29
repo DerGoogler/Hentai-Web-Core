@@ -45,19 +45,26 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
     } = this.props;
     return (
       <>
-        {onBackButton ? (
-          <div className="left">
+        <div className="left">
+          {onBackButton ? (
             <BackButton
               // @ts-ignore
               onClick={onBackButton}
             />
-          </div>
-        ) : null}
+          ) : null}
+          {(() => {
+            if (addToolbarButtonPosition === "left") {
+              return addToolbarButton;
+            } else {
+              return;
+            }
+          })()}
+        </div>
         <div className="center drag--windows">{title}</div>
 
         <div className="right">
           {(() => {
-            if (addToolbarButtonPosition === "left") {
+            if (addToolbarButtonPosition === "right") {
               return addToolbarButton;
             } else {
               return;
@@ -110,38 +117,13 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                     }}
                     onClick={() => {
-                      ons.notification.confirm({
-                        message: "Do you want to close this app?",
-                        title: "Close app?",
-                        buttonLabels: ["Yes", "No"],
-                        modifier: native.checkPlatformForBorderStyle,
-                        animation: "default",
-                        primaryButtonIndex: 1,
-                        cancelable: true,
-                        callback: (index: number) => {
-                          switch (index) {
-                            case 0:
-                              native.close();
-                              break;
-
-                            default:
-                              break;
-                          }
-                        },
-                      });
+                      native.close();
                     }}
                   >
                     <MDIcon icon="close" size="24" ignoreDarkmode={true}></MDIcon>
                   </ToolbarButton>
                 </>
               );
-            } else {
-              return;
-            }
-          })()}
-          {(() => {
-            if (addToolbarButtonPosition === "right") {
-              return addToolbarButton;
             } else {
               return;
             }

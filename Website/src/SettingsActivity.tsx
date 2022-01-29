@@ -7,7 +7,6 @@ import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Builders/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
 import settings from "@DataPacks/settings";
-import Bootloader from "@Bootloader";
 
 class SettingsActivity extends React.Component<{ popPage: any }, {}> {
   public componentDidMount() {

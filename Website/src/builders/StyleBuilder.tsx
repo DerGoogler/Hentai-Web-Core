@@ -1,6 +1,4 @@
-import tools from "@Misc/tools";
 import native from "@Native";
-import ons from "onsenui";
 import * as React from "react";
 
 class StyleBuilder extends React.Component {

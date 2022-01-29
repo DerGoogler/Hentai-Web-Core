@@ -22,6 +22,11 @@ export default {
     de: "Ja",
   },
 
+  general: {
+    en: "General",
+    de: "Allgemein",
+  },
+
   no: {
     en: "No",
     de: "Nein",

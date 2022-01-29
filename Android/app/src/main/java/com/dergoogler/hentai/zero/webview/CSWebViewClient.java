@@ -1,6 +1,5 @@
 package com.dergoogler.hentai.zero.webview;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -17,15 +16,16 @@ import android.webkit.WebViewClient;
 
 import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.R;
+import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.log.Logger;
-import com.dergoogler.hentai.zero.util.FileUtil;
 import com.dergoogler.hentai.zero.util.IntentUtil;
 
 import java.net.URISyntaxException;
 
-import androidx.annotation.CallSuper;
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.browser.customtabs.CustomTabColorSchemeParams;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
 import androidx.webkit.WebViewAssetLoader;
 
 /**
@@ -34,16 +34,10 @@ import androidx.webkit.WebViewAssetLoader;
  * @author mcharima5@gmail.com
  * @since 2018
  */
-public class CSWebViewClient extends WebViewClient implements CSWebViewClientCallbacks {
-    private static final String TAG = CSWebViewClient.class.getSimpleName();
+public class CSWebViewClient extends WebViewClient {
+    private static final String TAG = WebViewClient.class.getSimpleName();
 
     private final WebViewAssetLoader assetLoader;
-
-    private CSWebViewInjector injector;
-
-    public void setInjector(CSWebViewInjector injector) {
-        this.injector = injector;
-    }
 
     public CSWebViewClient(Context context) {
         if (BuildConfig.FEATURE_WEBVIEW_ASSET_LOADER) {
@@ -55,10 +49,11 @@ public class CSWebViewClient extends WebViewClient implements CSWebViewClientCal
         }
     }
 
+    @Override
     @Deprecated
     @SuppressWarnings({"unused", "RedundantSuppression"})
     // use the old one for compatibility with all API levels.
-    public WebResourceResponse shouldInterceptRequest(CSWebView view, String url) {
+    public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
         Logger.d(TAG, "[WEBVIEW] shouldInterceptRequest(API 20 below):  url[" + url + "]");
 
         if (BuildConfig.FEATURE_WEBVIEW_ASSET_LOADER) {
@@ -67,8 +62,9 @@ public class CSWebViewClient extends WebViewClient implements CSWebViewClientCal
         return super.shouldInterceptRequest(view, url);
     }
 
+    @Override
     @RequiresApi(21)
-    public WebResourceResponse shouldInterceptRequest(CSWebView view, WebResourceRequest request) {
+    public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
         Logger.d(TAG, "[WEBVIEW] shouldInterceptRequest(API 21 after):  url[" + request.getUrl() + "]");
 
         if (BuildConfig.FEATURE_WEBVIEW_ASSET_LOADER) {
@@ -78,79 +74,67 @@ public class CSWebViewClient extends WebViewClient implements CSWebViewClientCal
     }
 
 
-    public void onLoadResource(CSWebView view, final String url) {
+    @Override
+    public void onLoadResource(WebView view, final String url) {
         Logger.d(TAG, "[WEBVIEW] onLoadResource():  url[" + url + "]");
         super.onLoadResource(view, url);
     }
 
-    @Deprecated
-    public boolean shouldOverrideUrlLoading(CSWebView view, String url) {
-        Logger.i(TAG, "[WEBVIEW] shouldOverrideUrlLoading() API 23 below: " + url);
-
-        if (url.startsWith("http://") || url.startsWith("https://")) {
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+        if (url.contains(Lib.getReleaseURl()) || url.contains(Lib.getDebugURl())) {
             view.loadUrl(url);
-            return true;
+        } else {
+            Uri uri = Uri.parse(url);
+            CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+            CustomTabColorSchemeParams params = new CustomTabColorSchemeParams.Builder()
+                    .setToolbarColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary))
+                    .setSecondaryToolbarColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary))
+                    .build();
+            intentBuilder.setColorSchemeParams(CustomTabsIntent.COLOR_SCHEME_DARK, params);
+            CustomTabsIntent customTabsIntent = intentBuilder.build();
+            customTabsIntent.launchUrl(view.getContext(), uri);
         }
-        return intentProcessing(view, url);
+        return true;
     }
 
+    @Override
     @TargetApi(Build.VERSION_CODES.N)
-    public boolean shouldOverrideUrlLoading(CSWebView view, WebResourceRequest request) {
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
         Logger.i(TAG, "[WEBVIEW] shouldOverrideUrlLoading() API 24 after: " + request.getUrl());
 
         String url = Uri.decode(request.getUrl().toString());
 
-        if (url.startsWith("http://") || url.startsWith("https://")) {
-            if (request.isRedirect()) {
-                view.loadUrl(request.getUrl().toString());
-                return true;
-            }
-            return false;
+        if (url.contains(Lib.getReleaseURl()) || url.contains(Lib.getDebugURl())) {
+            view.loadUrl(url);
+        } else {
+            Uri uri = Uri.parse(url);
+            CustomTabsIntent.Builder intentBuilder = new CustomTabsIntent.Builder();
+            CustomTabColorSchemeParams params = new CustomTabColorSchemeParams.Builder()
+                    .setToolbarColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary))
+                    .setSecondaryToolbarColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimary))
+                    .build();
+            intentBuilder.setColorSchemeParams(CustomTabsIntent.COLOR_SCHEME_DARK, params);
+            CustomTabsIntent customTabsIntent = intentBuilder.build();
+            customTabsIntent.launchUrl(view.getContext(), uri);
         }
-        intentProcessing(view, request.getUrl().toString());
         return true;
     }
 
-    private boolean intentProcessing(CSWebView view, String urlString) {
-        String url = Uri.decode(urlString);
-
-        if (url.startsWith("intent:")) {
-            try {
-                IntentUtil.intentScheme(view.getContext(), url);
-                return true;
-            } catch (URISyntaxException e) {
-                Logger.e(TAG, e);
-            } catch (ActivityNotFoundException e) {
-                Logger.e(TAG, e);
-            }
-        }
-
-        try {
-            IntentUtil.view(view.getContext(), Uri.parse(url));
-            return true;
-        } catch (ActivityNotFoundException e) {
-            Logger.e(TAG, e);
-        }
-
-        return false;
-    }
-
-    public void onPageStarted(CSWebView view, String url, Bitmap favicon) {
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
         Logger.i(TAG, "[WEBVIEW] onPageStarted(): " + url);
         super.onPageStarted(view, url, favicon);
     }
 
-    @CallSuper
     @Override
-    public void onPageFinished(CSWebView view, String url) {
-        if (injector != null) {
-            onReadyToInject(injector, url);
-        }
+    public void onPageFinished(WebView view, String url) {
         Logger.i(TAG, "[WEBVIEW] onPageFinished(): " + url);
         super.onPageFinished(view, url);
     }
 
-    public void onReceivedSslError(CSWebView view, SslErrorHandler handler, SslError error) {
+    @Override
+    public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
         Logger.e(TAG, "[WEBVIEW] onReceivedSslError(): url[" + view.getUrl() + "],  handler[" + handler + "],  error[" + error + "]");
 
         if (SslError.SSL_NOTYETVALID == error.getPrimaryError()) {
@@ -172,7 +156,8 @@ public class CSWebViewClient extends WebViewClient implements CSWebViewClientCal
         //super.onReceivedSslError(view, handler, error);
     }
 
-    public void onReceivedHttpError(CSWebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
+    @Override
+    public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse errorResponse) {
         String url = view.getUrl();
 
         StringBuilder buff = new StringBuilder();
@@ -192,16 +177,18 @@ public class CSWebViewClient extends WebViewClient implements CSWebViewClientCal
         super.onReceivedHttpError(view, request, errorResponse);
     }
 
+    @Override
     @Deprecated
-    public void onReceivedError(CSWebView view, int errorCode, String description, String failingUrl) {
+    public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
         Logger.e(TAG, "[WEBVIEW] onReceivedError(): url[" + view.getUrl() + "],  errorCode[" + errorCode + "],  description[" + description + "],  failingUrl[" + failingUrl + "]");
 
         boolean forwardErrorPage = ERROR_BAD_URL == errorCode || ERROR_FILE == errorCode;
         onReceivedError(view, errorCode, description, failingUrl, forwardErrorPage);
     }
 
+    @Override
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void onReceivedError(CSWebView view, WebResourceRequest request, WebResourceError error) {
+    public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
         Logger.e(TAG, "[WEBVIEW] onReceivedError(VERSION=M): url[" + view.getUrl() + "],  errorCode[" + error.getErrorCode() + "],  description[" + error.getDescription() + "]");
 
         int errorCode = error.getErrorCode();
@@ -210,7 +197,7 @@ public class CSWebViewClient extends WebViewClient implements CSWebViewClientCal
         onReceivedError(view, errorCode, description, request.getUrl().toString(), forwardErrorPage);
     }
 
-    private void onReceivedError(CSWebView view, int errorCode, String description, String failingUrl, boolean forwardErrorPage) {
+    private void onReceivedError(WebView view, int errorCode, String description, String failingUrl, boolean forwardErrorPage) {
         if (WebViewClient.ERROR_UNSUPPORTED_SCHEME == errorCode) {
             if ("about:blank".equals(failingUrl)) {
                 return;
@@ -242,10 +229,5 @@ public class CSWebViewClient extends WebViewClient implements CSWebViewClientCal
             String qs = "errorCode=" + errorCode + "&description=" + description + "&failingUrl=" + failingUrl;
             view.loadUrl(errorPageUrl + "?" + qs);
         }
-    }
-
-    @Override
-    public void onReadyToInject(@NonNull CSWebViewInjector injector, @NonNull String page) {
-        injector.injectCSS("img{display:none}");
     }
 }

@@ -39,12 +39,10 @@ import com.dergoogler.hentai.zero.util.StringUtil;
 import com.dergoogler.hentai.zero.webview.CSDownloadListener;
 import com.dergoogler.hentai.zero.webview.CSFileChooserListener;
 import com.dergoogler.hentai.zero.webview.CSWebChromeClient;
-import com.dergoogler.hentai.zero.webview.CSWebView;
 import com.dergoogler.hentai.zero.webview.CSWebViewClient;
 import com.dergoogler.hentai.bridge.AndroidBridge;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.webview.WebViewHelper;
-import com.dergoogler.hentai.zero.webview.CSWebViewInjector;
 
 import java.io.File;
 import java.util.Objects;
@@ -59,12 +57,12 @@ import java.util.concurrent.Executor;
 public class WebViewActivity extends BaseActivity {
     private static final String TAG = WebViewActivity.class.getSimpleName();
     private SharedPreferences nativaeLocalstorage;
-    private CSWebView webview;
+    private WebView webview;
     private CSWebChromeClient webChromeClient;
     private CSFileChooserListener webviewFileChooser;
     private String urlCore = Lib.getReleaseURl();
     private String urlCore_ = Lib.getDebugURl(); // For debugging
-    private String mainURL = urlCore; // Main url
+    private String mainURL = urlCore_; // Main url
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     @Override
@@ -119,7 +117,7 @@ public class WebViewActivity extends BaseActivity {
 
     @SuppressLint("AddJavascriptInterface")
     private void init() {
-        CSWebView contentView = (CSWebView) findViewById(R.id.contentView);
+        WebView contentView = (WebView) findViewById(R.id.contentView);
 
         if (null == contentView) {
             DialogBuilder.with(getActivity())
@@ -133,7 +131,7 @@ public class WebViewActivity extends BaseActivity {
 
         // set webViewClient
         CSWebViewClient webviewClient = new CSWebViewClient(getContext());
-        this.webview.setCSWebViewClient(webviewClient);
+        this.webview.setWebViewClient(webviewClient);
 
         // set webChromeClient
         this.webChromeClient = new CSWebChromeClient(getContext());

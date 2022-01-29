@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Message;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions;
 import android.webkit.JsResult;
@@ -17,18 +16,12 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 
 import com.dergoogler.hentai.zero.permission.RPermission;
 import com.dergoogler.hentai.zero.permission.RPermissionListener;
-import com.dergoogler.hentai.zero.util.FileUtil;
 import com.dergoogler.hentai.zero.webview.listener.FileChooserListener;
 import com.dergoogler.hentai.webview.WebViewHelper;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
-import com.dergoogler.hentai.R;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.zero.util.StringUtil;
 
@@ -88,7 +81,7 @@ public class CSWebChromeClient extends WebChromeClient {
     }
 
     // For Android 5.0+
-    public boolean onShowFileChooser(final CSWebView webView, final ValueCallback<Uri[]> filePathCallback, final WebChromeClient.FileChooserParams fileChooserParams) {
+    public boolean onShowFileChooser(final WebView webView, final ValueCallback<Uri[]> filePathCallback, final WebChromeClient.FileChooserParams fileChooserParams) {
         Logger.i(TAG, "[WEBVIEW] openFileChooser()  For Android 5.0+ \n:: filePathCallback[" + filePathCallback + "]  fileChooserParams[" + fileChooserParams + "]");
 
         List<String> permissions = new ArrayList<>();
@@ -234,7 +227,7 @@ public class CSWebChromeClient extends WebChromeClient {
 
 
     //++ [[START] Javascript Alert]
-    public boolean onJsAlert(CSWebView view, String url, String message, JsResult result) {
+    public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
         Logger.i(TAG, "[WEBVIEW] onJsAlert(): url[" + view.getUrl() + "], message[" + message + "], JsResult[" + result + "]");
 
         //++
@@ -340,7 +333,7 @@ public class CSWebChromeClient extends WebChromeClient {
         webView.scrollTo(scrollX, scrollY);
     }
 
-    public boolean onCreateWindow(CSWebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
+    public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, Message resultMsg) {
         Logger.i(TAG, "[WEBVIEW] onCreateWindow():  view[" + view + "]  isDialog[" + isDialog + "]  isUserGesture[" + isUserGesture + "]  resultMsg[" + resultMsg + "]");
 
         this.newWebView = WebViewHelper.addWebView(view.getContext(), view);
@@ -364,7 +357,7 @@ public class CSWebChromeClient extends WebChromeClient {
         //return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
     }
 
-    public void onCloseWindow(CSWebView window) {
+    public void onCloseWindow(WebView window) {
         super.onCloseWindow(window);
         this.newWebView = null;
         Logger.i(TAG, "[WEBVIEW] onCloseWindow()");

@@ -4,7 +4,7 @@ import MainActivity from "./MainActivity";
 import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 
-class InitActivity extends React.Component<{}, { routeConfig: any }> {
+class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
   constructor(props: any) {
     super(props);
 
@@ -26,7 +26,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any }> {
       },
     ]);
 
-    this.state = { routeConfig };
+    this.state = { routeConfig, currentPage: "main" };
   }
 
   componentDidMount = () => {
@@ -42,7 +42,11 @@ class InitActivity extends React.Component<{}, { routeConfig: any }> {
       history.pushState("jibberish", "", null);
       window.onpopstate = () => {
         history.pushState("newjibberish", "", null);
-        this.popPage();
+        if (this.state.currentPage === "main") {
+          native.close();
+        } else {
+          this.popPage();
+        }
       };
     } else {
       var ignoreHashChange = true;
@@ -75,6 +79,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any }> {
     });
 
     this.setState({ routeConfig });
+    this.setState({ currentPage: key });
   };
 
   popPage = (options = {}) => {
