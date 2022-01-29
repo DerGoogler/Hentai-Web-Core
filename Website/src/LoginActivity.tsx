@@ -1,12 +1,15 @@
 import Bootloader from "@Bootloader";
 import ons from "onsenui";
 import React from "react";
-import { Toolbar, Page, Input, Button } from "react-onsenui";
+import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import native from "@Native";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 
-class LoginActivity extends React.Component<{popPage: any}, { username: string; password: string }> {
+class LoginActivity extends React.Component<
+  { popPage: any },
+  { username: string; password: string }
+> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };
@@ -14,6 +17,7 @@ class LoginActivity extends React.Component<{popPage: any}, { username: string; 
 
   public componentDidMount() {
     native.electron.discordRPC("Trying to login");
+    native.android.setStatusbarColor("#4a148c");
   }
 
   private renderToolbar() {
@@ -73,7 +77,7 @@ class LoginActivity extends React.Component<{popPage: any}, { username: string; 
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                background: "linear-gradient(61deg, rgba(74,20,140,1) 0%, rgba(0,118,255,1) 100%)",
+                backgroundColor: "#4a148c",
               }}
             >
               <div
