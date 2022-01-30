@@ -29,7 +29,6 @@ function createWindow() {
   const devTools = setting("electron.devTools", "false");
   const alwaysOnTop = setting("electron.alwaysOnTop", "false");
   const dcrpclogo = setting("electron.rpcLogo", "hentaiweb__");
-  setting("electron.hardDevice", "C");
 
   const appIcon = path.join(app.getAppPath(), "/build/ic_launcher.png");
 
@@ -75,7 +74,7 @@ function createWindow() {
 
   webContents.setUserAgent("HENTAI_WEB_WINDOWS");
 
-  ipcMain.on("dcrpc-state", (event, arg) => {
+  ipcMain.on("dcrpc-state", (arg) => {
     client.updatePresence({
       state: arg,
       details: "Version " + pkg.version,

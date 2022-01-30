@@ -9,17 +9,13 @@ import { Provider } from "react-translated";
 import native from "@Native";
 import strings from "@DataPacks/strings";
 import eruda from "eruda";
-import Bota from "@Misc/bota64";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./InitActivity";
 import CustomCursor from "@Builders/CustomCursor";
 
-native.setPref(
-  "test",
-  new Bota().encode(
-    "sfhdfghstfdgdshsdghvfghgasdzgzdhdfjgdgjhshbsdgafgsdf sfgsd fsh  sfgsfg h sgnsgagty 56 u468476 454566 54y 46"
-  )
-);
+if (native.getPref("electron.hardDevice") === ("" || null || undefined)) {
+  native.setPref("electron.hardDevice", "C");
+}
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");

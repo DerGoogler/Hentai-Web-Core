@@ -84,8 +84,8 @@ contextBridge.exposeInMainWorld("Windows", {
     });
   },
 
-  discordRPC: (state) => {
-    ipcRenderer.send("dcrpc-state", state);
+  discordRPC: (arg) => {
+    ipcRenderer.send("dcrpc-state", arg);
   },
 
   discordRPCdisconnect() {
@@ -112,23 +112,35 @@ contextBridge.exposeInMainWorld("Windows", {
    * @param {*} path
    * @returns
    */
-  readFile: (path) => {
+  readFile: (letter, path) => {
     try {
-      return fs.readFileSync(path).toString();
+      return fs.readFileSync(letter + ":".toUpperCase() + "/hentai-web/" + path).toString();
     } catch (error) {
-      console.log("Custom theme was not found!");
+      console.log(error);
     }
   },
 
-  isFileExist: (path) => {
+  mkDir: (letter, path) => {
     try {
-      fs.existsSync(path);
+      fs.mkdirSync(letter + ":".toUpperCase() + "/hentai-web/" + path);
     } catch (error) {
-      console.log("Custom file not exist!");
+      console.log(error);
     }
   },
 
-  getExternalStorageDir: (letter = "C") => {
-    return letter + ":".toUpperCase();
+  writeFile: (letter, path, content) => {
+    try {
+      fs.writeFileSync(letter + ":".toUpperCase() + "/hentai-web/" + path, content, "UTF-8");
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  isFileExist: (letter, path) => {
+    try {
+      fs.existsSync(letter + ":".toUpperCase() + "/hentai-web/" + path);
+    } catch (error) {
+      console.log(error);
+    }
   },
 });

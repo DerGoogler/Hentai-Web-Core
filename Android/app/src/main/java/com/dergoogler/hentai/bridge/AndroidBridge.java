@@ -317,62 +317,22 @@ public class AndroidBridge {
 
     @JavascriptInterface
     public String readFile(String path) {
-        return FileUtil.readFile(path);
+        return FileUtil.readFile(FileUtil.getExternalStorageDir() + "/hentai-web/" + path);
     }
 
     @JavascriptInterface
     public void writeFile(String path, String str) {
-        FileUtil.writeFile(path, str);
+        FileUtil.writeFile(FileUtil.getExternalStorageDir() + "/hentai-web/" + path, str);
     }
 
     @JavascriptInterface
-    public void copyFile(String sourcePath, String destPath) {
-        FileUtil.copyFile(sourcePath, destPath);
-    }
-
-    @JavascriptInterface
-    public void moveFile(String sourcePath, String destPath) {
-        FileUtil.moveFile(sourcePath, destPath);
-    }
-
-    @JavascriptInterface
-    public void deleteFile(String path) {
-        FileUtil.deleteFile(path);
+    public void mkDir(String path) {
+        FileUtil.makeDir(path);
     }
 
     @JavascriptInterface
     public boolean isFileExist(String path) {
-        return FileUtil.isExistFile(path);
-    }
-
-    @JavascriptInterface
-    public boolean isDirectory(String path) {
-        return FileUtil.isDirectory(path);
-    }
-
-    @JavascriptInterface
-    public boolean isFile(String path) {
-        return FileUtil.isFile(path);
-    }
-
-    @JavascriptInterface
-    public String getFileLength(String path) {
-        return String.valueOf(FileUtil.getFileLength(path));
-    }
-
-    @JavascriptInterface
-    public String getExternalStorageDir() {
-        return FileUtil.getExternalStorageDir();
-    }
-
-    @JavascriptInterface
-    public String getPackageDataDir() {
-        return FileUtil.getPackageDataDir(webView.getContext());
-    }
-
-    @JavascriptInterface
-    public String getPublicDir(String type) {
-        return FileUtil.getPublicDir(type);
+        return FileUtil.isExistFile(FileUtil.getExternalStorageDir() + "/hentai-web/" + path);
     }
 
     //-- [[E N D] for JS Callback]

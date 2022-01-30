@@ -6,17 +6,13 @@ const BrotliPlugin = require("brotli-webpack-plugin");
 const FsWebpackPlugin = require("fs-webpack-plugin");
 
 const config = {
-  entry: ["react-hot-loader/patch", "./src/index.tsx", "./src/native/index.ts"],
+  entry: ["react-hot-loader/patch", "./src/index.tsx", "./src/native/export.js"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     library: "native",
+    libraryTarget: "umd",
   },
-  plugins: [
-    /*new HtmlWebpackPlugin({
-      template: "src/templates/index.html",
-    }),*/
-  ],
   module: {
     rules: [
       {

@@ -139,11 +139,13 @@ interface Windows {
    */
   closeDevTools(): void;
 
-  readFile(path: string): string;
+  readFile(letter: string, path: string): string;
 
-  getExternalStorageDir(letter: string): string;
+  writeFile(letter: string, path: string, content: string): void;
 
-  isFileExist(path: string): boolean;
+  isFileExist(letter: string, path: string): boolean;
+
+  mkDir(letter: string, path: string): void;
 }
 
 export default Windows;

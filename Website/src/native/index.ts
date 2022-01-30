@@ -421,142 +421,6 @@ class native {
         return false;
       }
     },
-
-    /**
-     * This has only to the Android system access
-     */
-    fs: {
-      userAgentAndroid: "HENTAI_WEB_AGENT",
-      userAgentWindows: "HENTAI_WEB_WINDOWS",
-      agent: window.navigator.userAgent,
-
-      /**
-       *
-       * @param path
-       * @returns
-       * @deprecated Please use `native.fs.readFile();`
-       */
-      readFile(path: string): string {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.readFile(path);
-        } else {
-          return "";
-        }
-      },
-
-      getFileLength(path: string): string {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.getFileLength(path);
-        } else {
-          return "";
-        }
-      },
-
-      /**
-       *
-       * @returns
-       * @deprecated Please use `native.fs.getExternalStorageDir();`
-       */
-      getExternalStorageDir(): string {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.getExternalStorageDir("");
-        } else {
-          return "";
-        }
-      },
-
-      getPackageDataDir(): string {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.getPackageDataDir();
-        } else {
-          return "";
-        }
-      },
-
-      getPublicDir(
-        type:
-          | "DIRECTORY_ALARMS"
-          | "DIRECTORY_AUDIOBOOKS"
-          | "DIRECTORY_DCIM"
-          | "DIRECTORY_DOWNLOADS"
-          | "DIRECTORY_MOVIES"
-          | "DIRECTORY_MUSIC"
-          | "DIRECTORY_NOTIFICATIONS"
-          | "DIRECTORY_PICTURES"
-          | "DIRECTORY_PODCASTS"
-          | "DIRECTORY_RECORDINGS"
-          | "DIRECTORY_RINGTONES"
-          | "DIRECTORY_SCREENSHOTS"
-      ): string {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.getPublicDir(type);
-        } else {
-          return "";
-        }
-      },
-
-      /**
-       *
-       * @param path
-       * @returns
-       * @deprecated Please use `native.fs.isFileExist();`
-       */
-      isFileExist(path: string): boolean {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.isFileExist(path);
-        } else {
-          return false;
-        }
-      },
-
-      isDirectory(path: string): boolean {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.isDirectory(path);
-        } else {
-          return false;
-        }
-      },
-
-      isFile(path: string): boolean {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.isFile(path);
-        } else {
-          return false;
-        }
-      },
-
-      writeFile(path: string, str: string): void {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.writeFile(path, str);
-        } else {
-          return;
-        }
-      },
-
-      copyFile(sourcePath: string, destPath: string): void {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.copyFile(sourcePath, destPath);
-        } else {
-          return;
-        }
-      },
-
-      moveFile(sourcePath: string, destPath: string): void {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.moveFile(sourcePath, destPath);
-        } else {
-          return;
-        }
-      },
-
-      deleteFile(path: string): void {
-        if (this.agent === this.userAgentAndroid) {
-          return window.Android.deleteFile(path);
-        } else {
-          return;
-        }
-      },
-    },
   };
 
   /**
@@ -567,35 +431,41 @@ class native {
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
 
-    readFile(path: string): string {
+    readFile(letter = "C", path: string): string {
       if (this.agent === this.userAgentAndroid) {
         return window.Android.readFile(path);
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.readFile(path);
+        return window.Windows.readFile(letter, path);
       } else {
         return "";
       }
     },
 
-    /**
-     * @param letter Default is `C`
-     * @returns
-     */
-    getExternalStorageDir(letter = "C"): string {
+    mkDir(letter = "C", path: string): void {
       if (this.agent === this.userAgentAndroid) {
-        return window.Android.getExternalStorageDir(letter.replace(letter, ""));
+        window.Android.mkDir(path);
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.getExternalStorageDir(letter.toUpperCase());
+        window.Windows.mkDir(letter, path);
       } else {
-        return "";
+        return;
       }
     },
 
-    isFileExist(path: string): boolean {
+    writeFile(letter = "C", path: string, content: string): void {
+      if (this.agent === this.userAgentAndroid) {
+        window.Android.writeFile(path, content);
+      } else if (this.agent === this.userAgentWindows) {
+        window.Windows.writeFile(letter, path, content);
+      } else {
+        return;
+      }
+    },
+
+    isFileExist(letter = "C", path: string): boolean {
       if (this.agent === this.userAgentAndroid) {
         return window.Android.isFileExist(path);
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.isFileExist(path);
+        return window.Windows.isFileExist(letter, path);
       } else {
         return false;
       }
