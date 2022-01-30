@@ -110,6 +110,9 @@ class native {
    * @param id
    */
   public static downloadPicture(downloadUrlOfImage: string, filename?: string, id?: any): void {
+    /**
+     * @deprecated
+     */
     const dwnl = () => {
       if ((this.element = document.getElementById(id))) {
         htmlToImage.toBlob(this.element).then((blob: any) => {
@@ -117,12 +120,16 @@ class native {
         });
       }
     };
+
+    const a = () =>
+      ons.notification.alert("Make an right click on the picture you want an save it.");
+
     if (this.agent === this.userAgentAndroid) {
       window.Android.downloadImage(downloadUrlOfImage);
     } else if (this.agent === this.userAgentWindows) {
-      return dwnl();
+      a();
     } else {
-      return dwnl();
+      a();
     }
   }
 
@@ -146,7 +153,7 @@ class native {
    * @param key
    * @returns
    */
-  public static getPref(key: string): string | String {
+  public static getPref(key: string): string {
     if (this.agent === this.userAgentAndroid) {
       const get = window.Android.getPref(key);
       if (get === undefined || get === null || get === "") {
@@ -305,12 +312,8 @@ class native {
     },
 
     addEventListener(event: string, callback: Function): void {
-      if (this.agent === this.userAgentAndroid) {
-        console.log("Shortcut are not supported on Android");
-      } else if (this.agent === this.userAgentWindows) {
+      if (this.agent === this.userAgentWindows) {
         window.Windows.webContentsAddEventListener(event, callback);
-      } else {
-        console.log("Electrons event listener's are not supported on Browsers");
       }
     },
 
@@ -321,24 +324,22 @@ class native {
      * explicitly passing an empty `mode` can force using last used dock state.
      */
     openDevTools(): void {
-      if (this.agent === this.userAgentAndroid) {
-        console.log("DevTools open event listener are not supported on Android");
-      } else if (this.agent === this.userAgentWindows) {
+      if (this.agent === this.userAgentWindows) {
         window.Windows.openDevTools();
-      } else {
-        console.log("DevTools open event listener are not supported on Browsers");
       }
     },
     /**
      * Closes the devtools.
      */
     closeDevTools(): void {
-      if (this.agent === this.userAgentAndroid) {
-        console.log("DevTools close event listener are not supported on Android");
-      } else if (this.agent === this.userAgentWindows) {
+      if (this.agent === this.userAgentWindows) {
         window.Windows.closeDevTools();
-      } else {
-        console.log("DevTools close event listener are not supported on Browsers");
+      }
+    },
+
+    notification(title: string, body: string): void {
+      if (this.agent === this.userAgentWindows) {
+        window.Windows.notification(title, body);
       }
     },
   };
@@ -458,7 +459,7 @@ class native {
        */
       getExternalStorageDir(): string {
         if (this.agent === this.userAgentAndroid) {
-          return window.Android.getExternalStorageDir();
+          return window.Android.getExternalStorageDir("");
         } else {
           return "";
         }
@@ -576,11 +577,15 @@ class native {
       }
     },
 
-    getExternalStorageDir(): string {
+    /**
+     * @param letter Default is `C`
+     * @returns
+     */
+    getExternalStorageDir(letter = "C"): string {
       if (this.agent === this.userAgentAndroid) {
-        return window.Android.getExternalStorageDir();
+        return window.Android.getExternalStorageDir(letter.replace(letter, ""));
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.getExternalStorageDir();
+        return window.Windows.getExternalStorageDir(letter.toUpperCase());
       } else {
         return "";
       }

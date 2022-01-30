@@ -18,6 +18,9 @@ class LoginActivity extends React.Component<
   public componentDidMount() {
     native.electron.discordRPC("Trying to login");
     native.android.setStatusbarColor("#4a148c");
+    native.userAgentEqualWindows(true)
+      ? window.Windows.notification("Welcome to HW", "The app includes nsfw content.")
+      : null;
   }
 
   private renderToolbar() {

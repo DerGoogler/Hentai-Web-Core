@@ -149,7 +149,7 @@ interface Android {
   /**
    * @Native
    */
-  getExternalStorageDir(): string;
+  getExternalStorageDir(letter: string): string;
 
   /**
    * @Native

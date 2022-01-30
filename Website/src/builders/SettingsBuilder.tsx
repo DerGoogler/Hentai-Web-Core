@@ -96,7 +96,13 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                                 )}
                                 disabled={Boolean(setting.disabled)}
                                 onChange={(e: any) => {
-                                  this.setSetting(setting.key!, e.target.checked);
+                                  const keepDefaultFuntion = () =>
+                                    this.setSetting(setting.key!, e.target.checked);
+                                  if (typeof setting.callback == "function") {
+                                    setting.callback(e, setting.key, translate, keepDefaultFuntion());
+                                  } else {
+                                    keepDefaultFuntion();
+                                  }
                                 }}
                               ></Switch>
                             );
@@ -110,10 +116,12 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                                   tools.typeCheck(setting.selectDefaultValue, "")
                                 )}
                                 onChange={(e: any) => {
-                                  if (typeof setting.callback == "function") {
-                                    setting.callback(e, setting.key, translate);
-                                  } else {
+                                  const keepDefaultFuntion = () =>
                                     this.setSetting(setting.key!, e.target.value);
+                                  if (typeof setting.callback == "function") {
+                                    setting.callback(e, setting.key, translate, keepDefaultFuntion());
+                                  } else {
+                                    keepDefaultFuntion();
                                   }
                                 }}
                               >

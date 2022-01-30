@@ -1,23 +1,37 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, Tray, Menu, shell } = require("electron");
+const { app, BrowserWindow, ipcMain, Tray, Menu, shell, Notification } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const fenster = require("@electron/remote/main");
 const setting = require("./defaultSettings");
 const pkg = require("./../package.json");
 const client = require("discord-rich-presence")("726837711851356242");
+const contextMenu = require("electron-context-menu");
 
 const date = Date.now();
 let tray = null;
 
+contextMenu({
+  showLookUpSelection: false,
+  showSearchWithGoogle: false,
+  showCopyImage: false,
+  showCopyImageAddress: false,
+  showSaveImageAs: true,
+  showSaveLinkAs: false,
+  showInspectElement: false,
+  showServices: false,
+});
+
 function createWindow() {
   // Create the browser window.
-  const store = new Store();
-
   const width = setting("electron.windowSize.width", 375);
   const height = setting("electron.windowSize.height", 812);
-  const devTools = Boolean(setting("electron.devTools", "false"));
-  const center = Boolean(setting("electron.centerOnOpen", "false"));
+  const devTools = setting("electron.devTools", "false");
+  const alwaysOnTop = setting("electron.alwaysOnTop", "false");
+  const dcrpclogo = setting("electron.rpcLogo", "hentaiweb__");
+  setting("electron.hardDevice", "C");
+
+  const appIcon = path.join(app.getAppPath(), "/build/ic_launcher.png");
 
   const mainWindow = new BrowserWindow({
     width: width,
@@ -25,20 +39,20 @@ function createWindow() {
     frame: false,
     hasShadow: false,
     resizable: false,
-    center: center,
+    alwaysOnTop: alwaysOnTop === "true" ? true : false,
     transparent: true,
-    fullscreenable: true,
     titleBarStyle: "hidden",
     autoHideMenuBar: true,
     title: "Hentai Web Windows",
-    icon: path.join(app.getAppPath(), "/build/ic_launcher.png"),
+    icon: appIcon,
     webPreferences: {
       nativeWindowOpen: true,
-      devTools: devTools,
+      devTools: devTools === "true" ? true : false,
       nodeIntegration: true,
       preload: path.join(__dirname, "preload.js"),
       contextIsolation: true,
       enableRemoteModule: true,
+      spellcheck: true,
     },
   });
 
@@ -66,7 +80,7 @@ function createWindow() {
       state: arg,
       details: "Version " + pkg.version,
       startTimestamp: date,
-      largeImageKey: "hentaiweb__",
+      largeImageKey: dcrpclogo,
       instance: true,
     });
   });
@@ -77,7 +91,16 @@ function createWindow() {
     }
   });
 
-  tray = new Tray(path.join(app.getAppPath(), "/build/ic_launcher.png"));
+  ipcMain.on("notification-send", (event, title, body) => {
+    new Notification({
+      title: title,
+      body: body,
+      icon: appIcon,
+      silent: false,
+    }).show();
+  });
+
+  tray = new Tray(appIcon);
   const contextMenu = Menu.buildFromTemplate([
     {
       label: "Plain Settings Edit",
@@ -97,12 +120,26 @@ function createWindow() {
 app.whenReady().then(() => {
   createWindow();
 
+  app.setUserTasks([
+    {
+      program: process.execPath,
+      arguments: "--new-window",
+      iconPath: process.execPath,
+      iconIndex: 0,
+      title: "New Window",
+      description: "Create a new window",
+    },
+  ]);
+
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
 });
+
+// Set app name
+app.setAppUserModelId("Hentai Web Windows");
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

@@ -53,7 +53,6 @@ const settings: SettingsInterface[] = [
         type: "switch",
         text: "hideFAB-string",
       },
-
       {
         key: "language",
         icon: "language",
@@ -80,8 +79,14 @@ const settings: SettingsInterface[] = [
         type: "switch",
         expandable: true,
         expandableContent:
-          "Custom themes can break the general app experience and includes no official theme fixes from the developer. Use at your own risk!",
+          'Custom themes can break the general app experience and includes no official theme fixes from the developer. Use at your own risk!\r\n\r\nIf you want to load the custom theme from an different hard device, just open the "config.json" and change the letter at "hardDivice"',
         text: "Custom Theming",
+      },
+      {
+        key: "disableCustomCursor",
+        icon: "mouse",
+        type: "switch",
+        text: "Disable Custom Cursor",
       },
     ],
   },
@@ -250,6 +255,16 @@ const settings: SettingsInterface[] = [
         text: "Enable DevTools",
       },
       {
+        key: "electron.alwaysOnTop",
+        type: "switch",
+        icon: "pan_tool",
+        text: "Enable Always on top",
+        callback: (keepDefaultFuntion: any) => {
+          native.electron.notification("Restart", "Please restart the application");
+          keepDefaultFuntion();
+        },
+      },
+      {
         key: "electron.disableDiscordRPC",
         type: "switch",
         icon: "discord",
@@ -258,10 +273,19 @@ const settings: SettingsInterface[] = [
         expandableContent: "You need to relaunch whole app!",
       },
       {
-        key: "electron.centerOnOpen",
-        type: "switch",
-        icon: "format_align_center",
-        text: "Center window when app opened",
+        key: "electron.rpcLogo",
+        type: "select",
+        icon: "discord",
+        text: "Discord RPC Logo",
+        selectDefaultValue: "hentaiweb__",
+        selectValue: (
+          <>
+            <option value="hentaiweb__">Hentai Web</option>
+            <option value="bot_logo">Bot Logo</option>
+            <option value="googler">Googler</option>
+            <option value="ic_launcher">App Icon</option>
+          </>
+        ),
       },
     ],
   },

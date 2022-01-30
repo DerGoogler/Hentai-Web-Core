@@ -1,20 +1,7 @@
 import * as React from "react";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
-import {
-  Page,
-  Toolbar,
-  Tabbar,
-  Fab,
-  SpeedDial,
-  ToolbarButton,
-  Icon,
-  SplitterSide,
-  SplitterContent,
-  ListItem,
-  List,
-  Splitter,
-} from "react-onsenui";
+import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native";
 import tools from "@Misc/tools";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
@@ -27,7 +14,6 @@ import MDIcon from "@Builders/MDIcon";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import NewsActivity from "./NewsActivity";
-import SettingsBuilder from "@Builders/SettingsBuilder";
 
 class MainActivity extends React.Component<
   { pushPage: any; popPage: any },
@@ -166,7 +152,10 @@ class MainActivity extends React.Component<
               native.electron.discordRPC("Viewing SFW Images");
             } else if (event.index === 1) {
               native.electron.discordRPC("Viewing NSFW Images");
+            } else if (event.index === 2) {
+              native.electron.discordRPC("Viewing News");
             } else {
+              return;
             }
           }}
           renderTabs={this.renderTabs}
@@ -203,6 +192,18 @@ class MainActivity extends React.Component<
               style: { display: tools.typeIF(native.userAgentEqualWindows(true), "", "none") },
               onClick: () => {
                 window.Windows.openPath(window.Windows.appGetPath("userData"));
+              },
+            },
+            {
+              text: "Open DevTools",
+              icon: "logo_dev",
+              style: {
+                display:
+                  tools.typeIF(native.userAgentEqualWindows(true), "", "none") ||
+                  tools.typeIF(native.getPref("electron.devTools") === "true", "", "none"),
+              },
+              onClick: () => {
+                window.Windows.openDevTools();
               },
             },
             {

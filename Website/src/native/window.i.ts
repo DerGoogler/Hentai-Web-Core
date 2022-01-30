@@ -112,7 +112,7 @@ interface Windows {
    * @param body
    * @param callback
    */
-  notification(title: string, body: string, callback: Function): void;
+  notification(title: string, body: string): void;
 
   /**
    * Gets the userData from app path
@@ -141,7 +141,7 @@ interface Windows {
 
   readFile(path: string): string;
 
-  getExternalStorageDir(): string;
+  getExternalStorageDir(letter: string): string;
 
   isFileExist(path: string): boolean;
 }

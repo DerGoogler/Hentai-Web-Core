@@ -1,7 +1,7 @@
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 // preload.js
-const { BrowserWindow, shell, Notification, app } = require("@electron/remote");
+const { BrowserWindow, shell, app } = require("@electron/remote");
 const { ipcRenderer } = require("electron");
 const { contextBridge } = require("electron");
 const Store = require("electron-store");
@@ -100,12 +100,8 @@ contextBridge.exposeInMainWorld("Windows", {
     });
   },
 
-  notification: (title, body, callback) => {
-    new Notification(title, { body: body }).onclick = () => {
-      if (typeof callback) {
-        callback(title, body);
-      }
-    };
+  notification: (title, body) => {
+    ipcRenderer.send("notification-send", title, body);
   },
 
   appGetPath: (path) => {
@@ -118,11 +114,7 @@ contextBridge.exposeInMainWorld("Windows", {
    */
   readFile: (path) => {
     try {
-      if (new Error().stack.indexOf("at eval") > -1) {
-        return "SCRIPT FILE READ DETECTED!";
-      } else {
-        return fs.readFileSync(path).toString();
-      }
+      return fs.readFileSync(path).toString();
     } catch (error) {
       console.log("Custom theme was not found!");
     }
@@ -136,7 +128,7 @@ contextBridge.exposeInMainWorld("Windows", {
     }
   },
 
-  getExternalStorageDir: () => {
-    return "C:";
+  getExternalStorageDir: (letter = "C") => {
+    return letter + ":".toUpperCase();
   },
 });

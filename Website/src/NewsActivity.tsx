@@ -5,7 +5,7 @@ import ContentBody from "@Builders/ContentBody";
 import axios from "axios";
 import Markdown from "markdown-to-jsx";
 
-class AnimeContent extends React.Component {
+class NewsActivity extends React.Component {
   public state = {
     data: [],
   };
@@ -33,11 +33,11 @@ class AnimeContent extends React.Component {
     ));
 
     return (
-      <ContentBody className="Anime-Content">
+      <ContentBody>
         <List>{listItems}</List>
       </ContentBody>
     );
   }
 }
 
-export default hot(AnimeContent);
+export default NewsActivity;

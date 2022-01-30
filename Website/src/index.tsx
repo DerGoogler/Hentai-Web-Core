@@ -12,6 +12,7 @@ import eruda from "eruda";
 import Bota from "@Misc/bota64";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./InitActivity";
+import CustomCursor from "@Builders/CustomCursor";
 
 native.setPref(
   "test",
@@ -43,6 +44,7 @@ class Bootloader {
       <Provider language={this.checkLanguage()} translation={strings}>
         {node}
         <StyleBuilder />
+        <CustomCursor />
       </Provider>,
       this.mountNode
     );

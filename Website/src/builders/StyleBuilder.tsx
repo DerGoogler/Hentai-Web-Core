@@ -10,7 +10,8 @@ class StyleBuilder extends React.Component {
     if (native.getPref("enableCustomTheming") === "true") {
       this.setState({
         style: native.fs.readFile(
-          native.fs.getExternalStorageDir() + "/hentai-web/inject/custom.css"
+          native.fs.getExternalStorageDir(native.getPref("electron.hardDevice")) +
+            "/hentai-web/inject/custom.css"
         ),
       });
       if (native.userAgentEqualAndroid(true)) {

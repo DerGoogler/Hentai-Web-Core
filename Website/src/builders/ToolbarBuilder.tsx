@@ -25,13 +25,6 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
         document.head.appendChild(darkmode);
       }
     }
-    if (native.userAgentEqualWindows(true)) {
-      if (window.Windows.isMaximized()) {
-        this.setState({ icon: "fullscreen" });
-      } else {
-        this.setState({ icon: "close_fullscreen" });
-      }
-    }
   }
 
   public render() {
@@ -71,59 +64,63 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
             }
           })()}
           {(() => {
-            if (hasWindowsButtons) {
-              return (
-                <>
-                  <ToolbarButton
-                    modifier="windowsNormal paddingFIX"
-                    style={{
-                      display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
-                    }}
-                    onClick={() => {
-                      window.Windows.minimize();
-                    }}
-                  >
-                    <MDIcon icon="remove" size="24" ignoreDarkmode={true}></MDIcon>
-                  </ToolbarButton>
-                  <ToolbarButton
-                    modifier="windowsNormal paddingFIX"
-                    disabled={tools.typeIF(
-                      native.getPref("electron.enableFullscreen"),
-                      true,
-                      false
-                    )}
-                    style={{
-                      display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
-                    }}
-                    onClick={() => {
-                      if (window.Windows.isMaximized()) {
-                        window.Windows.unmaximize();
-                        window.Windows.setWindowSize(
-                          Number(native.getPref("electron.windowSize.width")),
-                          Number(native.getPref("electron.windowSize.height"))
-                        );
-                        this.setState({ icon: "fullscreen" });
-                      } else {
-                        window.Windows.maximize();
-                        this.setState({ icon: "close_fullscreen" });
-                      }
-                    }}
-                  >
-                    <MDIcon icon={this.state.icon} size="24" ignoreDarkmode={true}></MDIcon>
-                  </ToolbarButton>
-                  <ToolbarButton
-                    modifier="windowsClose paddingFIX"
-                    style={{
-                      display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
-                    }}
-                    onClick={() => {
-                      native.close();
-                    }}
-                  >
-                    <MDIcon icon="close" size="24" ignoreDarkmode={true}></MDIcon>
-                  </ToolbarButton>
-                </>
-              );
+            if (native.getPref("electron.enableFrame") === "false") {
+              if (hasWindowsButtons) {
+                return (
+                  <>
+                    <ToolbarButton
+                      modifier="windowsNormal paddingFIX"
+                      style={{
+                        display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
+                      }}
+                      onClick={() => {
+                        window.Windows.minimize();
+                      }}
+                    >
+                      <MDIcon icon="remove" size="24" ignoreDarkmode={true}></MDIcon>
+                    </ToolbarButton>
+                    <ToolbarButton
+                      modifier="windowsNormal paddingFIX"
+                      disabled={tools.typeIF(
+                        native.getPref("electron.enableFullscreen"),
+                        true,
+                        false
+                      )}
+                      style={{
+                        display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
+                      }}
+                      onClick={() => {
+                        if (window.Windows.isMaximized()) {
+                          window.Windows.unmaximize();
+                          window.Windows.setWindowSize(
+                            Number(native.getPref("electron.windowSize.width")),
+                            Number(native.getPref("electron.windowSize.height"))
+                          );
+                          this.setState({ icon: "fullscreen" });
+                        } else {
+                          window.Windows.maximize();
+                          this.setState({ icon: "close_fullscreen" });
+                        }
+                      }}
+                    >
+                      <MDIcon icon={this.state.icon} size="24" ignoreDarkmode={true}></MDIcon>
+                    </ToolbarButton>
+                    <ToolbarButton
+                      modifier="windowsClose paddingFIX"
+                      style={{
+                        display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
+                      }}
+                      onClick={() => {
+                        native.close();
+                      }}
+                    >
+                      <MDIcon icon="close" size="24" ignoreDarkmode={true}></MDIcon>
+                    </ToolbarButton>
+                  </>
+                );
+              } else {
+                return;
+              }
             } else {
               return;
             }
