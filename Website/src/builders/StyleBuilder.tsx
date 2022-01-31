@@ -1,3 +1,4 @@
+import app from "@Native/app";
 import native from "@Native/index";
 import * as React from "react";
 
@@ -27,6 +28,7 @@ class StyleBuilder extends React.Component<{ folder: string }, {}> {
         (null || "" || undefined)
       ) {
         console.log("An plugin for " + this.props.folder + " was not found!");
+        native.removePref("Plugin.Settings." + this.props.folder);
       } else {
         eval(native.fs.readFile(this.hardDevice, this.props.folder + "/index.js"));
       }

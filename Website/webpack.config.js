@@ -6,11 +6,11 @@ const BrotliPlugin = require("brotli-webpack-plugin");
 const FsWebpackPlugin = require("fs-webpack-plugin");
 
 const config = {
-  // entry: ["./src/index.tsx", "./src/native/export.js"],
   entry: {
     index: "./src/index.tsx",
     native: "./src/native/export.js",
     app: "./src/native/app/export.js",
+    ons: "./node_modules/onsenui/js/onsenui.js",
   },
   output: {
     filename: "bundles/[name].js",
@@ -18,27 +18,6 @@ const config = {
     library: "[name]",
     libraryTarget: "umd",
   },
-  /*entry: {
-    index: ["./src/index.tsx"],
-    native: {
-      import: "./src/native/export.js",
-      library: "native",
-      libraryTarget: "umd",
-      dependOn: "index",
-    },
-    app: {
-      import: "./src/native/app/export.js",
-      library: "app",
-      libraryTarget: "umd",
-      dependOn: "index",
-    },
-  },*/
-  /*output: {
-    path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
-    library: "native",
-    libraryTarget: "umd",
-  },*/
   module: {
     rules: [
       {

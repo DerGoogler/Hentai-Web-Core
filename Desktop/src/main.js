@@ -1,5 +1,14 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain, Tray, Menu, shell, Notification } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  Tray,
+  Menu,
+  shell,
+  Notification,
+  session,
+} = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const fenster = require("@electron/remote/main");
@@ -64,8 +73,8 @@ function createWindow() {
   fenster.initialize();
   fenster.enable(webContents);
 
-  const url = "https://service.dergoogler.com/hentai-web/?activity=main";
-  const url_ = "http://192.168.178.81:5500/?activity=main";
+  const url = "https://dergoogler.com/hentai-web/";
+  const url_ = "http://192.168.178.81:5500/";
 
   mainWindow.loadURL(url_);
   mainWindow.on("page-title-updated", function (e) {
@@ -129,6 +138,23 @@ app.whenReady().then(() => {
       description: "Create a new window",
     },
   ]);
+
+  // Modify the origin for all requests to the following urls.
+  const filter = {
+    urls: ["file:///A:/hentai-web/*"],
+  };
+
+  session.defaultSession.webRequest.onBeforeSendHeaders(filter, (details, callback) => {
+    console.log(details);
+    details.requestHeaders["Origin"] = "http://example.com";
+    callback({ requestHeaders: details.requestHeaders });
+  });
+
+  session.defaultSession.webRequest.onHeadersReceived(filter, (details, callback) => {
+    console.log(details);
+    details.responseHeaders["Access-Control-Allow-Origin"] = ["capacitor-electron://-"];
+    callback({ responseHeaders: details.responseHeaders });
+  });
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the

@@ -32,20 +32,22 @@ class Bootloader {
   }
 
   private loadActivity(node: JSX.Element) {
-    const pas: any = JSON.parse(
-      native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json")
-    );
-    const customPlugins = pas.map((item: string) => (
-      <>
-        {(() => {
-          if (native.getPref("Plugin.Settings." + item + ".name") === item) {
-            return <StyleBuilder folder={item} />;
-          } else {
-            return;
-          }
-        })()}
-      </>
-    ));
+    let pas,
+      customPlugins = null;
+    if (native.userAgentEqualWindows(true) || native.userAgentEqualAndroid(true)) {
+      pas = JSON.parse(native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json"));
+      customPlugins = pas.map((item: string) => (
+        <>
+          {(() => {
+            if (native.getPref("Plugin.Settings." + item + ".name") === item) {
+              return <StyleBuilder folder={item} />;
+            } else {
+              return;
+            }
+          })()}
+        </>
+      ));
+    }
 
     ReactDOM.render(
       <Provider language={this.checkLanguage()} translation={strings}>

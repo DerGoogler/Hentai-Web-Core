@@ -30,36 +30,39 @@ class SettingsActivity extends React.Component<{ popPage: any }, {}> {
   };
 
   public render() {
-    const pas: any = JSON.parse(
-      native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json")
-    );
-    const customPlugins = pas.map((item: string) => (
-      <>
-        {(() => {
-          if (this.customSettings === (null || "" || undefined)) {
-            return;
-          } else {
-            if (this.scriptLosding === "true") {
-              if (native.getPref("Plugin.Settings." + item + ".name") === item) {
-                return (
-                  <List>
-                    <SettingsBuilder
-                      isPlugin={true}
-                      pluginName={item}
-                      data={JSON.parse(native.getPref("Plugin.Settings." + item + ".settings"))}
-                    />
-                  </List>
-                );
+    let pas,
+      customPlugins = null;
+
+    if (native.userAgentEqualWindows(true) || native.userAgentEqualAndroid(true)) {
+      pas = JSON.parse(native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json"));
+      customPlugins = pas.map((item: string) => (
+        <>
+          {(() => {
+            if (this.customSettings === (null || "" || undefined)) {
+              return;
+            } else {
+              if (this.scriptLosding === "true") {
+                if (native.getPref("Plugin.Settings." + item + ".name") === item) {
+                  return (
+                    <List>
+                      <SettingsBuilder
+                        isPlugin={true}
+                        pluginName={item}
+                        data={JSON.parse(native.getPref("Plugin.Settings." + item + ".settings"))}
+                      />
+                    </List>
+                  );
+                } else {
+                  return;
+                }
               } else {
                 return;
               }
-            } else {
-              return;
             }
-          }
-        })()}
-      </>
-    ));
+          })()}
+        </>
+      ));
+    }
 
     return (
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>

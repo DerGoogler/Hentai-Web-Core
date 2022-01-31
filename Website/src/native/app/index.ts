@@ -29,12 +29,16 @@ class app {
     }
   }
 
-  public static getDefaultHardDevice(): string {
+  public static getSelectedHardDevice(): string {
     return native.getPref("electron.hardDevice");
   }
 
-  public static require(letter = "C", path: string): void {
-    eval(native.fs.readFile(letter, path));
+  public static require(letter = "C", path: any): void {
+    if (typeof path == "object") {
+      path.map((item: string) => eval(native.fs.readFile(letter, item)));
+    } else {
+      eval(native.fs.readFile(letter, path));
+    }
   }
 
   public static loadCSS(letter = "C", path: string): void {
