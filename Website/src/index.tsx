@@ -6,16 +6,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
 import { Provider } from "react-translated";
-import native from "@Native";
 import strings from "@DataPacks/strings";
 import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./InitActivity";
 import CustomCursor from "@Builders/CustomCursor";
-
-if (native.getPref("electron.hardDevice") === ("" || null || undefined)) {
-  native.setPref("electron.hardDevice", "C");
-}
+import native from "@Native";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");
@@ -71,6 +67,9 @@ class Bootloader {
 
   public init() {
     ons.ready(() => {
+      if (native.getPref("electron.hardDevice") === ("" || null || undefined)) {
+        native.setPref("electron.hardDevice", "C");
+      }
       const getDesignCookie = native.getPref("useIOSdesign");
       if (getDesignCookie === "true") {
         ons.platform.select("ios");

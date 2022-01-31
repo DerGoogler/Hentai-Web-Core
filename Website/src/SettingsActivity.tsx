@@ -2,13 +2,16 @@ import * as React from "react";
 import { Page, Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
+import settings from "@DataPacks/settings";
 import native from "@Native";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Builders/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
-import settings from "@DataPacks/settings";
 
 class SettingsActivity extends React.Component<{ popPage: any }, {}> {
+  private customSettings = native.getPref("PluginSettings");
+  private scriptLosding = native.getPref("enableCustomScriptLoading");
+
   public componentDidMount() {
     native.electron.discordRPC("Viewing Settings");
   }
@@ -33,6 +36,21 @@ class SettingsActivity extends React.Component<{ popPage: any }, {}> {
           <List>
             <SettingsBuilder data={settings} />
           </List>
+          {(() => {
+            if (this.customSettings === (null || "" || undefined)) {
+              return;
+            } else {
+              if (this.scriptLosding === "true") {
+                return (
+                  <List>
+                    <SettingsBuilder data={JSON.parse(this.customSettings)} />
+                  </List>
+                );
+              } else {
+                return;
+              }
+            }
+          })()}
         </ContentBody>
       </Page>
     );
