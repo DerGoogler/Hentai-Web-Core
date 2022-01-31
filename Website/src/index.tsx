@@ -11,7 +11,7 @@ import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./InitActivity";
 import CustomCursor from "@Builders/CustomCursor";
-import native from "@Native";
+import native from "@Native/index";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");
@@ -32,10 +32,25 @@ class Bootloader {
   }
 
   private loadActivity(node: JSX.Element) {
+    const pas: any = JSON.parse(
+      native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json")
+    );
+    const customPlugins = pas.map((item: string) => (
+      <>
+        {(() => {
+          if (native.getPref("Plugin.Settings." + item + ".name") === item) {
+            return <StyleBuilder folder={item} />;
+          } else {
+            return;
+          }
+        })()}
+      </>
+    ));
+
     ReactDOM.render(
       <Provider language={this.checkLanguage()} translation={strings}>
         {node}
-        <StyleBuilder />
+        {customPlugins}
         <CustomCursor />
       </Provider>,
       this.mountNode
@@ -70,12 +85,22 @@ class Bootloader {
       if (native.getPref("electron.hardDevice") === ("" || null || undefined)) {
         native.setPref("electron.hardDevice", "C");
       }
+
+      if (
+        native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json") ===
+        (null || "" || undefined)
+      ) {
+        native.fs.writeFile(native.getPref("electron.hardDevice"), "plugins.json", "");
+      }
+
       const getDesignCookie = native.getPref("useIOSdesign");
+
       if (getDesignCookie === "true") {
         ons.platform.select("ios");
       } else {
         ons.platform.select("android");
       }
+
       this.electronInit();
       this.loadConsole();
       this.statusbarColors();

@@ -1,7 +1,7 @@
-import native from "@Native";
+import native from "@Native/index";
 import * as React from "react";
 
-class StyleBuilder extends React.Component {
+class StyleBuilder extends React.Component<{ folder: string }, {}> {
   private hardDevice = native.getPref("electron.hardDevice");
 
   public state = {
@@ -22,7 +22,14 @@ class StyleBuilder extends React.Component {
       console.log("Custom theming is disabled!");
     }
     if (native.getPref("enableCustomScriptLoading") === "true") {
-      eval(native.fs.readFile(this.hardDevice, "inject/custom.js"));
+      if (
+        native.fs.readFile(this.hardDevice, this.props.folder + "/index.js") ===
+        (null || "" || undefined)
+      ) {
+        console.log("An plugin for " + this.props.folder + " was not found!");
+      } else {
+        eval(native.fs.readFile(this.hardDevice, this.props.folder + "/index.js"));
+      }
     } else {
       console.log("Custom Scripts are disabled!");
     }

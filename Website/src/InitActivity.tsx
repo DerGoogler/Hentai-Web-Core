@@ -1,4 +1,4 @@
-import native from "@Native";
+import native from "@Native/index";
 import LoginActivity from "./LoginActivity";
 import MainActivity from "./MainActivity";
 import * as React from "react";

@@ -320,7 +320,7 @@ export interface Android {
   // Some other funtions
 
   /**
-   * @Native
+   * @Native/index
    */
   open(link: string): void;
 

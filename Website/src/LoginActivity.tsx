@@ -1,9 +1,8 @@
-import Bootloader from "@Bootloader";
 import ons from "onsenui";
 import React from "react";
 import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import native from "@Native";
+import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 
 class LoginActivity extends React.Component<

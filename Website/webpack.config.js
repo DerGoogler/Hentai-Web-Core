@@ -6,13 +6,39 @@ const BrotliPlugin = require("brotli-webpack-plugin");
 const FsWebpackPlugin = require("fs-webpack-plugin");
 
 const config = {
-  entry: ["react-hot-loader/patch", "./src/index.tsx", "./src/native/export.js"],
+  // entry: ["./src/index.tsx", "./src/native/export.js"],
+  entry: {
+    index: "./src/index.tsx",
+    native: "./src/native/export.js",
+    app: "./src/native/app/export.js",
+  },
   output: {
+    filename: "bundles/[name].js",
+    path: path.resolve(__dirname, "dist"),
+    library: "[name]",
+    libraryTarget: "umd",
+  },
+  /*entry: {
+    index: ["./src/index.tsx"],
+    native: {
+      import: "./src/native/export.js",
+      library: "native",
+      libraryTarget: "umd",
+      dependOn: "index",
+    },
+    app: {
+      import: "./src/native/app/export.js",
+      library: "app",
+      libraryTarget: "umd",
+      dependOn: "index",
+    },
+  },*/
+  /*output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
     library: "native",
     libraryTarget: "umd",
-  },
+  },*/
   module: {
     rules: [
       {
@@ -54,7 +80,7 @@ const config = {
     alias: {
       "react-dom": "@hot-loader/react-dom",
       "@Builders": path.resolve(__dirname, "src/builders"),
-      "@Native": path.resolve(__dirname, "src/native/index.ts"),
+      "@Native": path.resolve(__dirname, "src/native"),
       "@Types": path.resolve(__dirname, "src/typings"),
       "@DataPacks": path.resolve(__dirname, "src/dataPacks"),
       "@Misc": path.resolve(__dirname, "src/misc"),
@@ -65,11 +91,6 @@ const config = {
       path: require.resolve("path-browserify"),
       fs: false,
     },
-  },
-  devServer: {
-    port: 9950,
-    contentBase: "./output",
-    writeToDisk: true,
   },
 };
 

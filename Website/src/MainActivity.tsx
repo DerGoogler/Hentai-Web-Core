@@ -2,7 +2,7 @@ import * as React from "react";
 import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../package.json";
 import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
-import native from "@Native";
+import native from "@Native/index";
 import tools from "@Misc/tools";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import TabbarBuilder from "@Builders/TabbarBuilder";

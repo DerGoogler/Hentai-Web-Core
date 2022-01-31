@@ -2,7 +2,7 @@ import * as React from "react";
 import { BackButton, Icon, ToolbarButton } from "react-onsenui";
 import { hot } from "react-hot-loader/root";
 import ons from "onsenui";
-import native from "@Native";
+import native from "@Native/index";
 import Bootloader from "@Bootloader";
 import { ToolbarBuilderInterface } from "@Types/ToolbarBuilder";
 import tools from "@Misc/tools";

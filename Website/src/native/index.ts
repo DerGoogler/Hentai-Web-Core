@@ -22,28 +22,11 @@ class native {
     console.log("Android JS Bridge statred");
   }
 
-  public static settings = {
-    add(items: SettingsInterface[]) {
-      native.setPref("PluginSettings", JSON.stringify(items));
-    },
-  };
-
-  public static require(letter = "C", path: string) {
-    eval(native.fs.readFile(letter, path));
-  }
-
   public static checkPlatformForBorderStyle = tools.typeIF(
     native.userAgentEqualWindows(true),
     "windows",
     ""
   );
-
-  public static loadCSS(letter = "C", path: string) {
-    var style = document.createElement("style");
-    style.type = "text/css";
-    document.getElementsByTagName("head")[0].appendChild(style);
-    style.innerHTML = native.fs.readFile(letter, path);
-  }
 
   public static userAgentEqualAndroid(state: boolean): boolean {
     if (state) {

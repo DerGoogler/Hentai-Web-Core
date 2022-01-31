@@ -1,4 +1,4 @@
-import native from "@Native";
+import native from "@Native/index";
 import * as React from "react";
 
 function Cursor() {

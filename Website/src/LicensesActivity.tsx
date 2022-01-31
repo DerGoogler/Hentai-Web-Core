@@ -1,6 +1,6 @@
 import React from "react";
 import { Page, Toolbar } from "react-onsenui";
-import native from "@Native";
+import native from "@Native/index";
 import axios from "axios";
 import Markdown from "markdown-to-jsx";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";

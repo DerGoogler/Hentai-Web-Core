@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
-      "@Native": ["native/index.ts"],
+      "@Native/*": ["native/*"],
       "@Builders/*": ["builders/*"],
       "@Types/*": ["typings/*"],
       "@DataPacks/*": ["dataPacks/*"],

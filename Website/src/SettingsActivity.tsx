@@ -3,7 +3,7 @@ import { Page, Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import settings from "@DataPacks/settings";
-import native from "@Native";
+import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Builders/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
@@ -30,28 +30,45 @@ class SettingsActivity extends React.Component<{ popPage: any }, {}> {
   };
 
   public render() {
-    return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody>
-          <List>
-            <SettingsBuilder data={settings} />
-          </List>
-          {(() => {
-            if (this.customSettings === (null || "" || undefined)) {
-              return;
-            } else {
-              if (this.scriptLosding === "true") {
+    const pas: any = JSON.parse(
+      native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json")
+    );
+    const customPlugins = pas.map((item: string) => (
+      <>
+        {(() => {
+          if (this.customSettings === (null || "" || undefined)) {
+            return;
+          } else {
+            if (this.scriptLosding === "true") {
+              if (native.getPref("Plugin.Settings." + item + ".name") === item) {
                 return (
                   <List>
-                    <SettingsBuilder data={JSON.parse(this.customSettings)} />
+                    <SettingsBuilder
+                      isPlugin={true}
+                      pluginName={item}
+                      data={JSON.parse(native.getPref("Plugin.Settings." + item + ".settings"))}
+                    />
                   </List>
                 );
               } else {
                 return;
               }
+            } else {
+              return;
             }
-          })()}
+          }
+        })()}
+      </>
+    ));
+
+    return (
+      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+        <ContentBody>
+          <List>
+            <SettingsBuilder isPlugin={false} pluginName="" data={settings} />
+          </List>
         </ContentBody>
+        {customPlugins}
       </Page>
     );
   }

@@ -1,5 +1,2 @@
-const native = require("@Native").default;
-/**
- * Native calls for Windows and Android
- */
+const native = require("@Native/index").default;
 module.exports = native;

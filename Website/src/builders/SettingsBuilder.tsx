@@ -3,19 +3,22 @@ import { Icon, ListItem, ListTitle, Select, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import { SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
 import tools from "@Misc/tools";
-import native from "@Native";
+import native from "@Native/index";
 import MDIcon from "./MDIcon";
+import app from "@Native/app";
 
-class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
-  private element!: HTMLElement | null;
-
+class SettingsBuilder extends React.Component<{
+  isPlugin: boolean;
+  pluginName: string;
+  data: SettingsInterface[];
+}> {
   /**
    * Check if an key is there
    * @param key
    * @returns {Boolean}
    */
   private getSettingSwitch(key: string): boolean {
-    var get = native.getPref(key);
+    var get = this.getPref(key);
     if (get === undefined || get === null || get === "" || get === "false") {
       return false;
     } else {
@@ -24,7 +27,7 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
   }
 
   private getSettingSelect(key: string): string | String {
-    var get = native.getPref(key);
+    var get = this.getPref(key);
     if (get === undefined || get === null || get === "") {
       return "en";
     } else {
@@ -32,8 +35,24 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
     }
   }
 
-  private setSetting(key: string, data: any) {
-    native.setPref(key, data);
+  private getPref(key: string): string {
+    if (this.props.isPlugin) {
+      return app.getPluginPref(this.props.pluginName, key);
+    } else {
+      return native.getPref(key);
+    }
+  }
+
+  private setPref(key: string, content: string): void {
+    if (this.props.isPlugin) {
+      app.setPluginPref(this.props.pluginName, key, content);
+    } else {
+      native.setPref(key, content);
+    }
+  }
+
+  private setSetting(key: string, data: any): void {
+    this.setPref(key, data);
   }
 
   private default(_: any, __: any, ___: any) {
@@ -99,7 +118,12 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                                   const keepDefaultFuntion = () =>
                                     this.setSetting(setting.key!, e.target.checked);
                                   if (typeof setting.callback == "function") {
-                                    setting.callback(e, setting.key, translate, keepDefaultFuntion());
+                                    setting.callback(
+                                      e,
+                                      setting.key,
+                                      translate,
+                                      keepDefaultFuntion()
+                                    );
                                   } else {
                                     keepDefaultFuntion();
                                   }
@@ -119,7 +143,12 @@ class SettingsBuilder extends React.Component<{ data: SettingsInterface[] }> {
                                   const keepDefaultFuntion = () =>
                                     this.setSetting(setting.key!, e.target.value);
                                   if (typeof setting.callback == "function") {
-                                    setting.callback(e, setting.key, translate, keepDefaultFuntion());
+                                    setting.callback(
+                                      e,
+                                      setting.key,
+                                      translate,
+                                      keepDefaultFuntion()
+                                    );
                                   } else {
                                     keepDefaultFuntion();
                                   }
