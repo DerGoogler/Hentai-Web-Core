@@ -1,4 +1,3 @@
-import app from "@Native/app";
 import native from "@Native/index";
 import * as React from "react";
 

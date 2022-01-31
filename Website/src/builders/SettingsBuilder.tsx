@@ -5,7 +5,7 @@ import { SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import MDIcon from "./MDIcon";
-import app from "@Native/app";
+import HWPlugin from "@Native/hwplugin";
 
 class SettingsBuilder extends React.Component<{
   isPlugin: boolean;
@@ -37,7 +37,7 @@ class SettingsBuilder extends React.Component<{
 
   private getPref(key: string): string {
     if (this.props.isPlugin) {
-      return app.getPluginPref(this.props.pluginName, key);
+      return new HWPlugin(this.props.pluginName).getPluginPref(key);
     } else {
       return native.getPref(key);
     }
@@ -45,7 +45,7 @@ class SettingsBuilder extends React.Component<{
 
   private setPref(key: string, content: string): void {
     if (this.props.isPlugin) {
-      app.setPluginPref(this.props.pluginName, key, content);
+      new HWPlugin(this.props.pluginName).setPluginPref(key, content);
     } else {
       native.setPref(key, content);
     }

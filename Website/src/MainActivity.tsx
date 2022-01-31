@@ -19,7 +19,7 @@ class MainActivity extends React.Component<
   { pushPage: any; popPage: any },
   { isContextOpen: boolean }
 > {
-  constructor(props: any) {
+  public constructor(props: any) {
     super(props);
     this.state = {
       isContextOpen: false,

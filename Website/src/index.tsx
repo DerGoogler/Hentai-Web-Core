@@ -10,7 +10,6 @@ import strings from "@DataPacks/strings";
 import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./InitActivity";
-import CustomCursor from "@Builders/CustomCursor";
 import native from "@Native/index";
 
 class Bootloader {
@@ -53,7 +52,6 @@ class Bootloader {
       <Provider language={this.checkLanguage()} translation={strings}>
         {node}
         {customPlugins}
-        <CustomCursor />
       </Provider>,
       this.mountNode
     );
@@ -97,11 +95,7 @@ class Bootloader {
 
       const getDesignCookie = native.getPref("useIOSdesign");
 
-      if (getDesignCookie === "true") {
-        ons.platform.select("ios");
-      } else {
-        ons.platform.select("android");
-      }
+      ons.platform.select("android");
 
       this.electronInit();
       this.loadConsole();

@@ -82,12 +82,6 @@ const settings: SettingsInterface[] = [
           'Custom themes can break the general app experience and includes no official theme fixes from the developer. Use at your own risk!\r\n\r\nIf you want to load the custom theme from an different hard device, just open the "config.json" and change the letter at "hardDivice"',
         text: "Custom Theming",
       },
-      {
-        key: "disableCustomCursor",
-        icon: "mouse",
-        type: "switch",
-        text: "Disable Custom Cursor",
-      },
     ],
   },
 

@@ -6,11 +6,23 @@ const BrotliPlugin = require("brotli-webpack-plugin");
 const FsWebpackPlugin = require("fs-webpack-plugin");
 
 const config = {
-  entry: {
+  /*entry: {
     index: "./src/index.tsx",
     native: "./src/native/export.js",
-    app: "./src/native/app/export.js",
-    ons: "./node_modules/onsenui/js/onsenui.js",
+    HWPlugin: "./src/native/hwplugin/export.js",
+   // ons: "./node_modules/onsenui/js/onsenui.js",
+  },*/
+
+  entry: {
+    index: ["./src/index.tsx"],
+    native: {
+      import: "./src/native/export.js",
+      dependOn: "index",
+    },
+    HWPlugin: {
+      import: "./src/native/hwplugin/export.js",
+      dependOn: "index",
+    },
   },
   output: {
     filename: "bundles/[name].js",
