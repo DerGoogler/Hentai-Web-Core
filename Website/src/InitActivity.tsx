@@ -5,7 +5,7 @@ import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 
 class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
-  constructor(props: any) {
+  public constructor(props: any) {
     super(props);
 
     const doLogin = () => {
@@ -29,15 +29,15 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     this.state = { routeConfig, currentPage: "main" };
   }
 
-  componentDidMount = () => {
+  public componentDidMount = () => {
     window.addEventListener("load", this.windowLoadPush);
   };
 
-  componentWillUnmount = () => {
+  public componentWillUnmount = () => {
     window.removeEventListener("load", this.windowLoadPush);
   };
 
-  windowLoadPush = () => {
+  private windowLoadPush = () => {
     if (typeof history.pushState === "function") {
       history.pushState("jibberish", "", null);
       window.onpopstate = () => {
@@ -61,7 +61,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     }
   };
 
-  pushPage = (page: any, key: any) => {
+  public pushPage = (page: any, key: any) => {
     const route = {
       component: page,
       props: {
@@ -82,7 +82,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     this.setState({ currentPage: key });
   };
 
-  popPage = (options = {}) => {
+  public popPage = (options = {}) => {
     let routeConfig = this.state.routeConfig;
 
     routeConfig = RouterUtil.pop({
@@ -100,22 +100,22 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     this.setState({ routeConfig });
   };
 
-  onPostPush = () => {
+  public onPostPush = () => {
     const routeConfig = RouterUtil.postPush(this.state.routeConfig);
     this.setState({ routeConfig });
   };
 
-  onPostPop = () => {
+  public onPostPop = () => {
     const routeConfig = RouterUtil.postPop(this.state.routeConfig);
     this.setState({ routeConfig });
   };
 
-  renderPage = (route: any) => {
+  public renderPage = (route: any) => {
     const props = route.props || {};
     return <route.component {...props} />;
   };
 
-  renderToolbar() {
+  public renderToolbar() {
     return (
       <Toolbar>
         <div className="left">
@@ -126,7 +126,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     );
   }
 
-  render() {
+  public render() {
     return (
       <Page>
         <RouterNavigator

@@ -34,11 +34,8 @@ class StyleBuilder extends React.Component<{ folder: string }, {}> {
 
   public render() {
     return (
-      <div style={{ display: "none" }}>
-        DON'T REMOVE THIS!
-        <style>{this.state.style}</style>
-        <div className="StatusbarColor"></div>
-      </div>
+      // @ts-ignore
+      <hw-plugin>{this.props.folder}</hw-plugin>
     );
   }
 }

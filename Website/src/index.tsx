@@ -35,12 +35,14 @@ class Bootloader {
   private loadActivity(node: JSX.Element) {
     let pas,
       customPlugins = null;
-    pas = JSON.parse(native.fs.readFile("plugins.json"));
-    customPlugins = pas.map((item: string) => (
-      <>
-        <StyleBuilder folder={item} />;
-      </>
-    ));
+    if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
+      pas = JSON.parse(native.fs.readFile("plugins.json"));
+      customPlugins = pas.map((item: string) => (
+        <>
+          <StyleBuilder folder={item} />;
+        </>
+      ));
+    }
 
     ReactDOM.render(
       <>
