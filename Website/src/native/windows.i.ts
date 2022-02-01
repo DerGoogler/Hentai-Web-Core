@@ -139,13 +139,13 @@ interface Windows {
    */
   closeDevTools(): void;
 
-  readFile(letter: string, path: string): string;
+  readFile(path: string): string;
 
-  writeFile(letter: string, path: string, content: string): void;
+  writeFile(path: string, content: string): void;
 
-  isFileExist(letter: string, path: string): boolean;
+  isFileExist(path: string): boolean;
 
-  mkDir(letter: string, path: string): void;
+  mkDir(path: string): void;
 
   /**
    * Evaluates JavaScript code and executes it.

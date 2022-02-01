@@ -112,33 +112,41 @@ contextBridge.exposeInMainWorld("Windows", {
    * @param {*} path
    * @returns
    */
-  readFile: (letter, path) => {
+  readFile: (path) => {
     try {
-      return fs.readFileSync(letter + ":".toUpperCase() + "/hentai-web/" + path).toString();
+      return fs
+        .readFileSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path)
+        .toString();
     } catch (error) {
       console.log(error);
     }
   },
 
-  mkDir: (letter, path) => {
+  mkDir: (path) => {
     try {
-      fs.mkdirSync(letter + ":".toUpperCase() + "/hentai-web/" + path);
+      fs.mkdirSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path);
     } catch (error) {
       console.log(error);
     }
   },
 
-  writeFile: (letter, path, content) => {
+  writeFile: (path, content) => {
     try {
-      fs.writeFileSync(letter + ":".toUpperCase() + "/hentai-web/" + path, content, "UTF-8");
+      fs.writeFileSync(
+        store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path,
+        content,
+        "UTF-8"
+      );
     } catch (error) {
       console.log(error);
     }
   },
 
-  isFileExist: (letter, path) => {
+  isFileExist: (path) => {
     try {
-      return fs.existsSync(letter + ":".toUpperCase() + "/hentai-web/" + path);
+      return fs.existsSync(
+        store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path
+      );
     } catch (error) {
       console.log(error);
     }

@@ -1,8 +1,9 @@
+import HWPlugin from "@Native/hwplugin";
 import native from "@Native/index";
 import * as React from "react";
 
 class StyleBuilder extends React.Component<{ folder: string }, {}> {
-  private hardDevice = native.getPref("electron.hardDevice");
+  private getPlugin = new HWPlugin(this.props.folder);
 
   public state = {
     style: "",
@@ -20,9 +21,9 @@ class StyleBuilder extends React.Component<{ folder: string }, {}> {
       console.log("Custom theming is disabled!");
     }
     if (native.getPref("enableCustomScriptLoading") === "true") {
-      if (native.fs.readFile(this.props.folder + "/index.js") === (null || "" || undefined)) {
+      if (!native.fs.isFileExist(this.props.folder + "/index.js")) {
         console.log("An plugin for " + this.props.folder + " was not found!");
-        native.removePref("Plugin.Settings." + this.props.folder);
+        native.setPref("Plugin.Settings." + this.props.folder, "null");
       } else {
         eval(native.fs.readFile(this.props.folder + "/index.js"));
       }

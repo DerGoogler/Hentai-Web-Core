@@ -9,6 +9,13 @@ const SpeedDial = [
       native.reload();
     },
   },
+
+  {
+    icon: "md-github",
+    onClick: () => {
+      native.open("https://github.com/DerGoogler/Hentai-Web/");
+    },
+  },
   {
     id: "download-app",
     icon: "md-download",
@@ -17,12 +24,6 @@ const SpeedDial = [
         // If the relase code/name is not the package version, it'll not finded
         `https://github.com/DerGoogler/Hentai-Web/releases/download/${pkg.version}/app-release.apk`
       );
-    },
-  },
-  {
-    icon: "md-github",
-    onClick: () => {
-      native.open("https://github.com/DerGoogler/Hentai-Web/");
     },
   },
 ];

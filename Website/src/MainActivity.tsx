@@ -47,6 +47,14 @@ class MainActivity extends React.Component<
     });
   }
 
+  public componentDidUpdate() {
+    if (this.state.isContextOpen) {
+      native.android.setStatusbarColor("#3b1070");
+    } else {
+      native.android.setStatusbarColor("#4a148c");
+    }
+  }
+
   private handleClick = () => {
     this.setState({ isContextOpen: true });
   };

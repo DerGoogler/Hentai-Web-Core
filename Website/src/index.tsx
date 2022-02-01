@@ -34,21 +34,13 @@ class Bootloader {
 
   private loadActivity(node: JSX.Element) {
     let pas,
-      customPlugins = <div style={{ display: "none" }}>LOL</div>;
-    if (native.userAgentEqualWindows(true) || native.userAgentEqualAndroid(true)) {
-      pas = JSON.parse(native.fs.readFile("plugins.json"));
-      customPlugins = pas.map((item: string) => (
-        <>
-          {(() => {
-            if (native.getPref("Plugin.Settings." + item + ".name") === item) {
-              return <StyleBuilder folder={item} />;
-            } else {
-              return;
-            }
-          })()}
-        </>
-      ));
-    }
+      customPlugins = null;
+    pas = JSON.parse(native.fs.readFile("plugins.json"));
+    customPlugins = pas.map((item: string) => (
+      <>
+        <StyleBuilder folder={item} />;
+      </>
+    ));
 
     ReactDOM.render(
       <>
@@ -82,10 +74,6 @@ class Bootloader {
   }
 
   public init() {
-    if (native.getPref("electron.hardDevice") === ("" || null || undefined)) {
-      native.setPref("electron.hardDevice", "C");
-    }
-
     if (!native.fs.isFileExist("plugins.json")) {
       native.fs.writeFile("plugins.json", '[""]');
     }

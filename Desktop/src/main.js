@@ -38,6 +38,8 @@ function createWindow() {
   const devTools = setting("electron.devTools", "false");
   const alwaysOnTop = setting("electron.alwaysOnTop", "false");
   const dcrpclogo = setting("electron.rpcLogo", "hentaiweb__");
+  // electron.hardDevice
+  setting("electron.hardDevice", "C");
 
   const appIcon = path.join(app.getAppPath(), "/build/ic_launcher.png");
 

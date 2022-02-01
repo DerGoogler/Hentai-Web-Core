@@ -10,7 +10,6 @@ import SettingsBuilder from "@Builders/SettingsBuilder";
 import MDIcon from "@Builders/MDIcon";
 
 class SettingsActivity extends React.Component<{ popPage: any }, { isAuthorDialogOpen: boolean }> {
-  private customSettings = native.getPref("PluginSettings");
   private scriptLosding = native.getPref("enableCustomScriptLoading");
 
   public constructor(props: any) {
@@ -22,6 +21,14 @@ class SettingsActivity extends React.Component<{ popPage: any }, { isAuthorDialo
 
   public componentDidMount() {
     native.electron.discordRPC("Viewing Settings");
+  }
+
+  public componentDidUpdate() {
+    if (this.state.isAuthorDialogOpen) {
+      native.android.setStatusbarColor("#240a45");
+    } else {
+      native.android.setStatusbarColor("#4a148c");
+    }
   }
 
   private renderToolbar = () => {
@@ -50,129 +57,116 @@ class SettingsActivity extends React.Component<{ popPage: any }, { isAuthorDialo
       customPlugins = null;
 
     if (native.getPref("enableCustomScriptLoading") === "true") {
-      if (native.userAgentEqualWindows(true) || native.userAgentEqualAndroid(true)) {
-        pas = JSON.parse(native.fs.readFile("plugins.json"));
-        customPlugins = pas.map((item: string) => (
-          <>
-            {(() => {
-              if (this.customSettings === (null || "" || undefined)) {
-                return;
+      pas = JSON.parse(native.fs.readFile("plugins.json"));
+      customPlugins = pas.map((item: string) => (
+        <>
+          {(() => {
+            if (this.scriptLosding === "true") {
+              if (native.getPref("Plugin.Settings." + item + ".name") === item) {
+                return (
+                  <>
+                    <div style={{ padding: "8px" }}></div>
+                    <List modifier="inset">
+                      <ListItem tappable onClick={this.handleClick}>
+                        <div className="left">
+                          <MDIcon icon="account_circle" size="24" />
+                        </div>
+                        <div className="center">Author</div>
+                      </ListItem>
+                      <SettingsBuilder
+                        isPlugin={true}
+                        pluginName={item}
+                        data={JSON.parse(native.getPref("Plugin.Settings." + item + ".settings"))}
+                      />
+                    </List>
+                    <Dialog
+                      key={item}
+                      onCancel={this.handleCancel}
+                      isOpen={this.state.isAuthorDialogOpen}
+                    >
+                      <List>
+                        {(() => {
+                          if (
+                            native.getPref(
+                              "Plugin.Settings." + item + ".pluginInformation.pluginAuthor"
+                            ) === (null || "" || undefined)
+                          ) {
+                            return;
+                          } else {
+                            return (
+                              <ListItem tappable onClick={this.handleClick}>
+                                <div className="left">
+                                  <MDIcon icon="account_circle" size="24" />
+                                </div>
+                                <div className="center">
+                                  Author:{" "}
+                                  {native.getPref(
+                                    "Plugin.Settings." + item + ".pluginInformation.pluginAuthor"
+                                  )}
+                                </div>
+                              </ListItem>
+                            );
+                          }
+                        })()}
+                        {(() => {
+                          if (
+                            native.getPref(
+                              "Plugin.Settings." + item + ".pluginInformation.pluginVersion"
+                            ) === (null || "" || undefined)
+                          ) {
+                            return;
+                          } else {
+                            return (
+                              <ListItem tappable onClick={this.handleClick}>
+                                <div className="left">
+                                  <MDIcon icon="fact_check" size="24" />
+                                </div>
+                                <div className="center">
+                                  Version:{" "}
+                                  {native.getPref(
+                                    "Plugin.Settings." + item + ".pluginInformation.pluginVersion"
+                                  )}
+                                </div>
+                              </ListItem>
+                            );
+                          }
+                        })()}
+                        {(() => {
+                          if (
+                            native.getPref(
+                              "Plugin.Settings." + item + ".pluginInformation.pluginLanguage"
+                            ) === (null || "" || undefined)
+                          ) {
+                            return;
+                          } else {
+                            return (
+                              <ListItem tappable onClick={this.handleClick}>
+                                <div className="left">
+                                  <MDIcon icon="language" size="24" />
+                                </div>
+                                <div className="center">
+                                  Language:{" "}
+                                  {native.getPref(
+                                    "Plugin.Settings." + item + ".pluginInformation.pluginLanguage"
+                                  )}
+                                </div>
+                              </ListItem>
+                            );
+                          }
+                        })()}
+                      </List>
+                    </Dialog>
+                  </>
+                );
               } else {
-                if (this.scriptLosding === "true") {
-                  if (native.getPref("Plugin.Settings." + item + ".name") === item) {
-                    return (
-                      <>
-                        <List modifier="inset">
-                          <ListItem tappable onClick={this.handleClick}>
-                            <div className="left">
-                              <MDIcon icon="account_circle" size="24" />
-                            </div>
-                            <div className="center">Author</div>
-                          </ListItem>
-                          <SettingsBuilder
-                            isPlugin={true}
-                            pluginName={item}
-                            data={JSON.parse(
-                              native.getPref("Plugin.Settings." + item + ".settings")
-                            )}
-                          />
-                        </List>
-                        <Dialog
-                          key={item}
-                          onCancel={this.handleCancel}
-                          isOpen={this.state.isAuthorDialogOpen}
-                        >
-                          <List>
-                            {(() => {
-                              if (
-                                native.getPref(
-                                  "Plugin.Settings." + item + ".pluginInformation.pluginAuthor"
-                                ) === (null || "" || undefined)
-                              ) {
-                                return;
-                              } else {
-                                return (
-                                  <ListItem tappable onClick={this.handleClick}>
-                                    <div className="left">
-                                      <MDIcon icon="account_circle" size="24" />
-                                    </div>
-                                    <div className="center">
-                                      Author:{" "}
-                                      {native.getPref(
-                                        "Plugin.Settings." +
-                                          item +
-                                          ".pluginInformation.pluginAuthor"
-                                      )}
-                                    </div>
-                                  </ListItem>
-                                );
-                              }
-                            })()}
-                            {(() => {
-                              if (
-                                native.getPref(
-                                  "Plugin.Settings." + item + ".pluginInformation.pluginVersion"
-                                ) === (null || "" || undefined)
-                              ) {
-                                return;
-                              } else {
-                                return (
-                                  <ListItem tappable onClick={this.handleClick}>
-                                    <div className="left">
-                                      <MDIcon icon="fact_check" size="24" />
-                                    </div>
-                                    <div className="center">
-                                      Version:{" "}
-                                      {native.getPref(
-                                        "Plugin.Settings." +
-                                          item +
-                                          ".pluginInformation.pluginVersion"
-                                      )}
-                                    </div>
-                                  </ListItem>
-                                );
-                              }
-                            })()}
-                            {(() => {
-                              if (
-                                native.getPref(
-                                  "Plugin.Settings." + item + ".pluginInformation.pluginLanguage"
-                                ) === (null || "" || undefined)
-                              ) {
-                                return;
-                              } else {
-                                return (
-                                  <ListItem tappable onClick={this.handleClick}>
-                                    <div className="left">
-                                      <MDIcon icon="language" size="24" />
-                                    </div>
-                                    <div className="center">
-                                      Language:{" "}
-                                      {native.getPref(
-                                        "Plugin.Settings." +
-                                          item +
-                                          ".pluginInformation.pluginLanguage"
-                                      )}
-                                    </div>
-                                  </ListItem>
-                                );
-                              }
-                            })()}
-                          </List>
-                        </Dialog>
-                      </>
-                    );
-                  } else {
-                    return;
-                  }
-                } else {
-                  return;
-                }
+                return;
               }
-            })()}
-          </>
-        ));
-      }
+            } else {
+              return;
+            }
+          })()}
+        </>
+      ));
     }
 
     return (

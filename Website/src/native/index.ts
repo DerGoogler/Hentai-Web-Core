@@ -287,7 +287,7 @@ class native {
     if (this.agent === this.userAgentAndroid) {
       window.Android.eval(javascriptString);
     } else if (this.agent === this.userAgentWindows) {
-      window.Windows.eval(javascriptString);
+      eval(javascriptString);
     } else {
       eval(javascriptString);
     }
@@ -449,7 +449,7 @@ class native {
       if (this.agent === this.userAgentAndroid) {
         return window.Android.readFile(path);
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.readFile(native.getPref("electron.hardDevice"), path);
+        return window.Windows.readFile(path);
       } else {
         return "";
       }
@@ -459,7 +459,7 @@ class native {
       if (this.agent === this.userAgentAndroid) {
         window.Android.mkDir(path);
       } else if (this.agent === this.userAgentWindows) {
-        window.Windows.mkDir(native.getPref("electron.hardDevice"), path);
+        window.Windows.mkDir(path);
       } else {
         return;
       }
@@ -469,7 +469,7 @@ class native {
       if (this.agent === this.userAgentAndroid) {
         window.Android.writeFile(path, content);
       } else if (this.agent === this.userAgentWindows) {
-        window.Windows.writeFile(native.getPref("electron.hardDevice"), path, content);
+        window.Windows.writeFile(path, content);
       } else {
         return;
       }
@@ -479,7 +479,7 @@ class native {
       if (this.agent === this.userAgentAndroid) {
         return window.Android.isFileExist(path);
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.isFileExist(native.getPref("electron.hardDevice"), path);
+        return window.Windows.isFileExist(path);
       } else {
         return false;
       }
