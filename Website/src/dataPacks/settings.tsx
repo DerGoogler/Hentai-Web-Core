@@ -14,26 +14,6 @@ const settings: SettingsInterface[] = [
         type: "switch",
         icon: "dark_mode",
         text: "enableDarkmode-string",
-        // disabled: tools.typeIF(native.getPref("useIOSdesign"), true, false),
-        // expandable: tools.typeIF(native.getPref("useIOSdesign"), true, false),
-        // expandableContent: (
-        //   <>
-        //     <p>Dark mode isn't available while the iOS design is on</p>
-        //   </>
-        // ),
-      },
-      {
-        key: "useIOSdesign",
-        type: "switch",
-        icon: "star_rate",
-        text: "useIOSdesign-string",
-        // disabled: tools.typeIF(native.getPref("enableDarkmode"), true, false),
-        // expandable: tools.typeIF(native.getPref("enableDarkmode"), true, false),
-        // expandableContent: (
-        //   <>
-        //     <p>iOS design isn't available while the dark mode is on</p>
-        //   </>
-        // ),
       },
       {
         key: "hideSearchbar",

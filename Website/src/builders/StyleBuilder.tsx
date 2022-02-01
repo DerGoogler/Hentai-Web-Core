@@ -11,25 +11,20 @@ class StyleBuilder extends React.Component<{ folder: string }, {}> {
   public componentDidMount = () => {
     if (native.getPref("enableCustomTheming") === "true") {
       this.setState({
-        style: native.fs.readFile(this.hardDevice, "inject/custom.css"),
+        style: native.fs.readFile("inject/custom.css"),
       });
       if (native.userAgentEqualAndroid(true)) {
-        native.android.setStatusbarColor(
-          native.fs.readFile(this.hardDevice, "inject/StatusbarColor")
-        );
+        native.android.setStatusbarColor(native.fs.readFile("inject/StatusbarColor"));
       }
     } else {
       console.log("Custom theming is disabled!");
     }
     if (native.getPref("enableCustomScriptLoading") === "true") {
-      if (
-        native.fs.readFile(this.hardDevice, this.props.folder + "/index.js") ===
-        (null || "" || undefined)
-      ) {
+      if (native.fs.readFile(this.props.folder + "/index.js") === (null || "" || undefined)) {
         console.log("An plugin for " + this.props.folder + " was not found!");
         native.removePref("Plugin.Settings." + this.props.folder);
       } else {
-        eval(native.fs.readFile(this.hardDevice, this.props.folder + "/index.js"));
+        eval(native.fs.readFile(this.props.folder + "/index.js"));
       }
     } else {
       console.log("Custom Scripts are disabled!");

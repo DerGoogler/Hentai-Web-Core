@@ -138,9 +138,13 @@ contextBridge.exposeInMainWorld("Windows", {
 
   isFileExist: (letter, path) => {
     try {
-      fs.existsSync(letter + ":".toUpperCase() + "/hentai-web/" + path);
+      return fs.existsSync(letter + ":".toUpperCase() + "/hentai-web/" + path);
     } catch (error) {
       console.log(error);
     }
+  },
+
+  eval: (javascriptString) => {
+    ipcRenderer.send("eval", javascriptString);
   },
 });

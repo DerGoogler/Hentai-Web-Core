@@ -108,6 +108,12 @@ function createWindow() {
     }).show();
   });
 
+  webContents.on("did-finish-load", function () {
+    ipcMain.on("eval", (javascriptString) => {
+      webContents.executeJavaScript(javascriptString);
+    });
+  });
+
   tray = new Tray(appIcon);
   const contextMenu = Menu.buildFromTemplate([
     {

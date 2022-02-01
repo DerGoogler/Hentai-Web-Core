@@ -4,7 +4,6 @@ import { saveAs } from "file-saver";
 import tools from "../misc/tools";
 import Mousetrap from "mousetrap";
 import ons from "onsenui";
-import { SettingsInterface } from "@Types/SettingsBuilder";
 
 /**
  * Native calls for Windows and Android
@@ -281,6 +280,20 @@ class native {
   }
 
   /**
+   * Evaluates JavaScript code and executes it.
+   * @param x A String value that contains valid JavaScript code.
+   */
+  public static eval(javascriptString: string) {
+    if (this.agent === this.userAgentAndroid) {
+      window.Android.eval(javascriptString);
+    } else if (this.agent === this.userAgentWindows) {
+      window.Windows.eval(javascriptString);
+    } else {
+      eval(javascriptString);
+    }
+  }
+
+  /**
    * Methods that are here can only used on Windows
    */
   public static electron = {
@@ -395,9 +408,9 @@ class native {
       }
     },
 
-    isAppInstalled(): boolean {
+    isAppInstalled(uri: string): boolean {
       if (this.agent === this.userAgentAndroid) {
-        return window.Android.isAppInstalled();
+        return window.Android.isAppInstalled(uri);
       } else {
         return false;
       }
@@ -432,41 +445,41 @@ class native {
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
 
-    readFile(letter = "C", path: string): string {
+    readFile(path: string): string {
       if (this.agent === this.userAgentAndroid) {
         return window.Android.readFile(path);
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.readFile(letter, path);
+        return window.Windows.readFile(native.getPref("electron.hardDevice"), path);
       } else {
         return "";
       }
     },
 
-    mkDir(letter = "C", path: string): void {
+    mkDir(path: string): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.mkDir(path);
       } else if (this.agent === this.userAgentWindows) {
-        window.Windows.mkDir(letter, path);
+        window.Windows.mkDir(native.getPref("electron.hardDevice"), path);
       } else {
         return;
       }
     },
 
-    writeFile(letter = "C", path: string, content: string): void {
+    writeFile(path: string, content: string): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.writeFile(path, content);
       } else if (this.agent === this.userAgentWindows) {
-        window.Windows.writeFile(letter, path, content);
+        window.Windows.writeFile(native.getPref("electron.hardDevice"), path, content);
       } else {
         return;
       }
     },
 
-    isFileExist(letter = "C", path: string): boolean {
+    isFileExist(path: string): boolean {
       if (this.agent === this.userAgentAndroid) {
         return window.Android.isFileExist(path);
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.isFileExist(letter, path);
+        return window.Windows.isFileExist(native.getPref("electron.hardDevice"), path);
       } else {
         return false;
       }

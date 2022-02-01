@@ -36,11 +36,11 @@ class HWPlugin {
     return native.getPref("electron.hardDevice");
   }
 
-  public require(letter = "C", path: any): void {
+  public require(path: any): void {
     if (typeof path == "object") {
-      path.map((item: string) => eval(native.fs.readFile(letter, this.pluginName + "/" + item)));
+      path.map((item: string) => eval(native.fs.readFile(this.pluginName + "/" + item)));
     } else {
-      eval(native.fs.readFile(letter, this.pluginName + "/" + path));
+      eval(native.fs.readFile(this.pluginName + "/" + path));
     }
   }
 
@@ -50,11 +50,11 @@ class HWPlugin {
     sheet.attach();
   }
 
-  public loadCSSfromFile(letter = "C", path: string): void {
+  public loadCSSfromFile(path: string): void {
     var style = document.createElement("style");
     style.type = "text/css";
     document.getElementsByTagName("head")[0].appendChild(style);
-    style.innerHTML = native.fs.readFile(letter, this.pluginName + "/" + path);
+    style.innerHTML = native.fs.readFile(this.pluginName + "/" + path);
   }
 
   public setPluginPackage(infos: {

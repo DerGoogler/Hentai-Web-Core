@@ -117,7 +117,7 @@ public class WebViewActivity extends BaseActivity {
 
     @SuppressLint("AddJavascriptInterface")
     private void init() {
-        WebView contentView = (WebView) findViewById(R.id.contentView);
+        WebView contentView = findViewById(R.id.contentView);
 
         if (null == contentView) {
             DialogBuilder.with(getActivity())

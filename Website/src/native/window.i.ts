@@ -146,6 +146,12 @@ interface Windows {
   isFileExist(letter: string, path: string): boolean;
 
   mkDir(letter: string, path: string): void;
+
+  /**
+   * Evaluates JavaScript code and executes it.
+   * @param x A String value that contains valid JavaScript code.
+   */
+  eval(javascriptString: string): void;
 }
 
 export default Windows;

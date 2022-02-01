@@ -17,37 +17,10 @@
         tools:ignore="ScopedStorage"
         tools:targetApi="q" />
 
-
-    <!-- Camera -->
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="false" />
-    <uses-feature
-        android:name="android.hardware.camera.autofocus"
-        android:required="false" />
-
-    <!-- Geolocation -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!-- RECORD AUDIO -->
-    <!-- The tablet device may not be supported when the permission is applied. -->
-    <uses-permission android:name="android.permission.MICROPHONE" />
-    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
-    <uses-feature android:name="android.hardware.audio.low_latency" />
-    <uses-feature android:name="android.hardware.audio.pro" />
-    <uses-feature android:name="android.hardware.microphone" />
-
     <!-- Get Package Info -->
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
-
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- Screen -->
     <supports-screens
@@ -61,6 +34,7 @@
     <application
         android:allowBackup="true"
         android:extractNativeLibs="false"
+        android:fitsSystemWindows="true"
         android:fullBackupContent="@xml/app_backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -68,7 +42,6 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="false"
-        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">

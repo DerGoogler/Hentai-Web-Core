@@ -90,7 +90,8 @@ public class AndroidBridge {
         return buff.toString();
     }
 
-    private static void evaluateJavascript(final WebView webView, final String javascriptString) {
+    @JavascriptInterface
+    public void eval(final String javascriptString) {
         String jsString = javascriptString;
 
         if (jsString.startsWith(SCHEME_JAVASCRIPT)) {
@@ -321,13 +322,13 @@ public class AndroidBridge {
     }
 
     @JavascriptInterface
-    public void writeFile(String path, String str) {
-        FileUtil.writeFile(FileUtil.getExternalStorageDir() + "/hentai-web/" + path, str);
+    public void writeFile(String path, String content) {
+        FileUtil.writeFile(FileUtil.getExternalStorageDir() + "/hentai-web/" + path, content);
     }
 
     @JavascriptInterface
     public void mkDir(String path) {
-        FileUtil.makeDir(path);
+        FileUtil.makeDir(FileUtil.getExternalStorageDir() + "/hentai-web/" + path);
     }
 
     @JavascriptInterface

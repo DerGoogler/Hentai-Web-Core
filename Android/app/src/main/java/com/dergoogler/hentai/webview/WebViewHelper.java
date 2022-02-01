@@ -41,7 +41,7 @@ public class WebViewHelper {
     private static final String SCHEME_RES_API30 = SCHEME_HTTPS + BuildConfig.ASSET_BASE_DOMAIN + BuildConfig.RES_PATH;
 
     public static WebView addWebView(Context context, ViewGroup parentView) {
-        WebView webView = (WebView) newWebView(context);
+        WebView webView = newWebView(context);
         parentView.addView(webView);
         return webView;
     }
@@ -55,7 +55,7 @@ public class WebViewHelper {
     }
 
     private static WebView newWebView(Context context) {
-        WebView webView = (WebView) new WebView(context);
+        WebView webView = new WebView(context);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);

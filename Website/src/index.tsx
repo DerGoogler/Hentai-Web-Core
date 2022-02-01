@@ -11,6 +11,7 @@ import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./InitActivity";
 import native from "@Native/index";
+import erudaDom from "eruda-dom";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");
@@ -27,14 +28,15 @@ class Bootloader {
   private loadConsole() {
     if (native.getPref("erudaEnabled") === "true") {
       eruda.init();
+      eruda.add(erudaDom);
     }
   }
 
   private loadActivity(node: JSX.Element) {
     let pas,
-      customPlugins = null;
+      customPlugins = <div style={{ display: "none" }}>LOL</div>;
     if (native.userAgentEqualWindows(true) || native.userAgentEqualAndroid(true)) {
-      pas = JSON.parse(native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json"));
+      pas = JSON.parse(native.fs.readFile("plugins.json"));
       customPlugins = pas.map((item: string) => (
         <>
           {(() => {
@@ -49,10 +51,12 @@ class Bootloader {
     }
 
     ReactDOM.render(
-      <Provider language={this.checkLanguage()} translation={strings}>
-        {node}
-        {customPlugins}
-      </Provider>,
+      <>
+        <Provider language={this.checkLanguage()} translation={strings}>
+          {node}
+          {customPlugins}
+        </Provider>
+      </>,
       this.mountNode
     );
   }
@@ -66,9 +70,6 @@ class Bootloader {
   private statusbarColors() {
     if (native.getPref("enableDarkmode") === "true") {
       native.android.setStatusbarColor("#ff1f1f1f");
-    } else if (native.getPref("useIOSdesign") === "true") {
-      native.android.setStatusbarBackgroundWhite();
-      native.android.setStatusbarColor("#fffafafa");
     } else {
       native.android.setStatusbarColor("#ff4a148c");
     }
@@ -81,22 +82,16 @@ class Bootloader {
   }
 
   public init() {
+    if (native.getPref("electron.hardDevice") === ("" || null || undefined)) {
+      native.setPref("electron.hardDevice", "C");
+    }
+
+    if (!native.fs.isFileExist("plugins.json")) {
+      native.fs.writeFile("plugins.json", '[""]');
+    }
+
     ons.ready(() => {
-      if (native.getPref("electron.hardDevice") === ("" || null || undefined)) {
-        native.setPref("electron.hardDevice", "C");
-      }
-
-      if (
-        native.fs.readFile(native.getPref("electron.hardDevice"), "plugins.json") ===
-        (null || "" || undefined)
-      ) {
-        native.fs.writeFile(native.getPref("electron.hardDevice"), "plugins.json", "");
-      }
-
-      const getDesignCookie = native.getPref("useIOSdesign");
-
       ons.platform.select("android");
-
       this.electronInit();
       this.loadConsole();
       this.statusbarColors();

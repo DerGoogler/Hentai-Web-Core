@@ -80,7 +80,7 @@ interface Android {
   /**
    * @Native
    */
-  isAppInstalled(): boolean;
+  isAppInstalled(uri: string): boolean;
 
   /**
    *
@@ -109,7 +109,7 @@ interface Android {
   /**
    * @Native
    */
-  writeFile(path: string, str: string): void;
+  writeFile(path: string, content: string): void;
 
   /**
    * @Native
@@ -130,6 +130,12 @@ interface Android {
    * @Native
    */
   isHardwareAvailable(): boolean;
+
+  /**
+   * Evaluates JavaScript code and executes it.
+   * @param x A String value that contains valid JavaScript code.
+   */
+  eval(javascriptString: string): void;
 }
 
 export default Android;
