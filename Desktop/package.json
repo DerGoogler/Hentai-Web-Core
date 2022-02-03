@@ -4,20 +4,39 @@
   "license": "MIT",
   "author": "Der_Googler",
   "main": "src/main.js",
+  "homepage": "https://github.com/DerGoogler/Hentai-Web#readme",
+  "repository": "https://github.com/DerGoogler/Hentai-Web/Windows",
   "build": {
     "appId": "com.dergoogler.hentaiweb.windows",
+    "artifactName": "HentaiWeb-${version}.${ext}",
     "asar": true,
     "npmRebuild": false,
     "compression": "maximum",
     "extends": null,
     "productName": "Hentai Web Windows",
     "copyright": "Copyright © 2022 ${author}",
+    "directories": {
+      "app": "./",
+      "output": "./dist",
+      "buildResources": "./build"
+    },
     "win": {
-      "icon": "/ic_launcher.png",
+      "icon": "./build/ic_launcher.ico",
+      "publisherName": "Der_Googler",
       "target": [
-        "NSIS",
-        "zip"
+        "nsis"
       ]
+    },
+    "nsis": {
+      "artifactName": "${productName} Setup ${version}",
+      "oneClick": false,
+      "shortcutName": "Hentai Web",
+      "createDesktopShortcut": true,
+      "installerIcon": "./build/ic_launcher.ico",
+      "uninstallerIcon": "./build/ic_launcher.ico",
+      "uninstallDisplayName": "Hentai Web Uninstaller",
+      "license": "./../LICENSE",
+      "allowToChangeInstallationDirectory": true
     }
   },
   "scripts": {
@@ -28,7 +47,6 @@
     "watch": "tsc -w",
     "lint": "eslint -c .eslintrc --ext .ts ./src"
   },
-  "repository": "https://github.com/DerGoogler/Hentai-Web/Windows",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
@@ -46,6 +64,7 @@
     "electron-context-menu": "^3.1.1",
     "electron-google-analytics": "^1.0.2",
     "electron-preferences": "^2.5.0",
+    "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.1",
     "electron-window-shortcut": "^1.0.3",
     "mousetrap": "^1.6.5"

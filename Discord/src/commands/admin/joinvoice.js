@@ -1,14 +1,13 @@
 const Command = require("../Command.js");
-const { MessageEmbed } = require("discord.js");
-const { success } = require("../../utils/emojis.json");
 
 module.exports = class JoinChannelCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "joinchannel",
-      usage: "joinchannel",
+      name: "joinvoice",
+      usage: "joinvoice",
       type: client.types.ADMIN,
-      examples: ["joinchannel"],
+      userPermissions: ["ADMINISTRATOR"],
+      examples: ["joinvocie"],
     });
   }
   run(message) {
