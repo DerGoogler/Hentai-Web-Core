@@ -39,12 +39,16 @@ const settings: SettingsInterface[] = [
         type: "select",
         text: "language-string",
         selectDefaultValue: "en",
-        selectValue: (
-          <>
-            <option value="en">English</option>
-            <option value="de">German</option>
-          </>
-        ),
+        selectValue: [
+          {
+            text: "English",
+            value: "en",
+          },
+          {
+            text: "German",
+            value: "de",
+          },
+        ],
       },
       {
         key: "enableCustomTheming",
@@ -209,18 +213,40 @@ const settings: SettingsInterface[] = [
             },
           });
         },
-        selectValue: (
-          <>
-            <option value="<width>375</width><height>812</height>">iPhone X</option>
-            <option value="<width>540</width><height>720</height>">Surface Duo</option>
-            <option value="<width>360</width><height>640</height>">Moto G4 / Galaxy S5</option>
-            <option value="<width>411</width><height>731</height>">Pixel 2</option>
-            <option value="<width>411</width><height>823</height>">Pixel 2 XL</option>
-            <option value="<width>280</width><height>653</height>">Galaxy Fold</option>
-            <option value="<width>1024</width><height>600</height>">Nest Hub</option>
-            <option value="<width>1280</width><height>800</height>">Nest Hub Max</option>
-          </>
-        ),
+        selectValue: [
+          {
+            text: "iPhone X",
+            value: "<width>375</width><height>812</height>",
+          },
+          {
+            text: "Surface Duo",
+            value: "<width>540</width><height>720</height>",
+          },
+          {
+            text: "Moto G4 / Galaxy S5",
+            value: "<width>360</width><height>640</height>",
+          },
+          {
+            text: "Pixel 2",
+            value: "<width>411</width><height>731</height>",
+          },
+          {
+            text: "Pixel 2 XL",
+            value: "<width>411</width><height>823</height>",
+          },
+          {
+            text: "Galaxy Fold",
+            value: "<width>280</width><height>653</height>",
+          },
+          {
+            text: "Nest Hub",
+            value: "<width>1024</width><height>600</height>",
+          },
+          {
+            text: "Nest Hub Max",
+            value: "<width>1280</width><height>800</height>",
+          },
+        ],
       },
       {
         key: "electron.devTools",
@@ -252,14 +278,24 @@ const settings: SettingsInterface[] = [
         icon: "discord",
         text: "Discord RPC Logo",
         selectDefaultValue: "hentaiweb__",
-        selectValue: (
-          <>
-            <option value="hentaiweb__">Hentai Web</option>
-            <option value="bot_logo">Bot Logo</option>
-            <option value="googler">Googler</option>
-            <option value="ic_launcher">App Icon</option>
-          </>
-        ),
+        selectValue: [
+          {
+            text: "Hentai Web",
+            value: "hentaiweb__",
+          },
+          {
+            text: "Bot Logo",
+            value: "bot_logo",
+          },
+          {
+            text: "Googler",
+            value: "googler",
+          },
+          {
+            text: "App Icon",
+            value: "ic_launcher",
+          },
+        ],
       },
     ],
   },

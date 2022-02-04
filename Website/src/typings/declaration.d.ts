@@ -1,6 +1,5 @@
 declare module "hmtai";
 declare module "react-dom";
-// Don't remove! if you remove it then 'll don't work the downloads anymore.
 declare module "file-saver";
 declare module "react-translated";
 declare module "eruda";
@@ -10,3 +9,6 @@ declare module "*.json" {
   export default value;
 }
 declare module "eruda-dom";
+declare module 'loader-utils' {
+  export function getOptions<T>(loaderContext: { query: string }): T;
+}

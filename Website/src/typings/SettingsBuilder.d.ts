@@ -12,11 +12,17 @@ interface SettingsOptions {
   type: "switch" | "select" | "";
   text: string;
   onClick?: Function;
-  selectValue?: JSX.Element | HTMLOptionElement;
+  selectValue?: SelectValue[];
   icon?: /*Icon*/ string;
   selectDefaultValue?: string;
   switchDefaultValue?: boolean;
   callback?: Function;
+}
+
+interface SelectValue {
+  text: string;
+  value: string;
+  disabled?: boolean;
 }
 
 interface SettingsInterface {
@@ -27,4 +33,4 @@ interface SettingsInterface {
   content: SettingsOptions[];
 }
 
-export { SettingsOptions, SettingsInterface };
+export { SettingsOptions, SettingsInterface, SelectValue };

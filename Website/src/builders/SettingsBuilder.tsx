@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Icon, ListItem, ListTitle, Select, Switch } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
-import { SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
+import { SelectValue, SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import MDIcon from "./MDIcon";
@@ -157,7 +157,13 @@ class SettingsBuilder extends React.Component<{
                                 <option value="" selected disabled hidden>
                                   Choose
                                 </option>
-                                {setting.selectValue}
+                                {setting.selectValue?.map((select: SelectValue) => (
+                                  <>
+                                    <option value={select.value} disabled={select.disabled}>
+                                      {select.text}
+                                    </option>
+                                  </>
+                                ))}
                               </Select>
                             );
                           default:

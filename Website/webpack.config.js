@@ -18,7 +18,7 @@ const config = {
     },
   },
   output: {
-    filename: "bundles/[name].js",
+    filename: "bundles/[name].goocode",
     path: path.resolve(__dirname, "dist"),
     library: "[name]",
     libraryTarget: "umd",
