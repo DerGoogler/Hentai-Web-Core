@@ -13,7 +13,7 @@ const path = require("path");
 const Store = require("electron-store");
 const fenster = require("@electron/remote/main");
 const setting = require("./defaultSettings");
-const pkg = require("./../package.json");
+const pkg = require("../package.json");
 const client = require("discord-rich-presence")("726837711851356242");
 const contextMenu = require("electron-context-menu");
 
@@ -31,17 +31,20 @@ contextMenu({
   showServices: false,
 });
 
+const appIcon = path.join(app.getAppPath(), "/build/ic_launcher.ico");
+
 function createWindow() {
   // Create the browser window.
   const width = setting("electron.windowSize.width", 375);
   const height = setting("electron.windowSize.height", 812);
+  const frame = setting("electron.devTools", "false");
   const devTools = setting("electron.devTools", "false");
   const alwaysOnTop = setting("electron.alwaysOnTop", "false");
   const dcrpclogo = setting("electron.rpcLogo", "hentaiweb__");
   // electron.hardDevice
   setting("electron.hardDevice", "C");
 
-  const appIcon = path.join(app.getAppPath(), "/build/ic_launcher.png");
+  
 
   const mainWindow = new BrowserWindow({
     width: width,
@@ -78,7 +81,7 @@ function createWindow() {
   const url = "https://dergoogler.com/hentai-web/";
   const url_ = "http://192.168.178.81:5500/";
 
-  mainWindow.loadURL(url);
+  mainWindow.loadURL(url_);
   mainWindow.on("page-title-updated", function (e) {
     e.preventDefault();
   });
@@ -140,29 +143,12 @@ app.whenReady().then(() => {
     {
       program: process.execPath,
       arguments: "--new-window",
-      iconPath: process.execPath,
+      iconPath: appIcon,
       iconIndex: 0,
       title: "New Window",
       description: "Create a new window",
     },
   ]);
-
-  // Modify the origin for all requests to the following urls.
-  const filter = {
-    urls: ["file:///A:/hentai-web/*"],
-  };
-
-  session.defaultSession.webRequest.onBeforeSendHeaders(filter, (details, callback) => {
-    console.log(details);
-    details.requestHeaders["Origin"] = "http://example.com";
-    callback({ requestHeaders: details.requestHeaders });
-  });
-
-  session.defaultSession.webRequest.onHeadersReceived(filter, (details, callback) => {
-    console.log(details);
-    details.responseHeaders["Access-Control-Allow-Origin"] = ["capacitor-electron://-"];
-    callback({ responseHeaders: details.responseHeaders });
-  });
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the

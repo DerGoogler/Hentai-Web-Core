@@ -17,7 +17,7 @@
     "copyright": "Copyright © 2022 ${author}",
     "directories": {
       "app": "./",
-      "output": "./dist",
+      "output": "./dist/build",
       "buildResources": "./build"
     },
     "win": {
@@ -25,6 +25,13 @@
       "publisherName": "Der_Googler",
       "target": [
         "nsis"
+      ]
+    },
+    "linux": {
+      "icon": "./build/ic_launcher.ico",
+      "target": [
+        "dpkg",
+        "deb"
       ]
     },
     "nsis": {
@@ -41,7 +48,7 @@
   },
   "scripts": {
     "build-dev": "electron .",
-    "pack": "electron-builder --dir",
+    "pack": "electron-builder -mwl",
     "build-prod": "electron-builder",
     "build-typescript": "tsc",
     "watch": "tsc -w",
@@ -52,8 +59,9 @@
     "@typescript-eslint/parser": "^5.8.0",
     "electron": "^16.0.5",
     "electron-builder": "^22.14.5",
+    "electron-webpack": "^2.8.2",
     "eslint": "^7.32.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.5"
   },
   "dependencies": {
     "@electron/get": "^1.13.1",
