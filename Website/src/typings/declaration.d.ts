@@ -8,7 +8,11 @@ declare module "*.json" {
   const value: any;
   export default value;
 }
+declare module "*.yaml" {
+  const value: any;
+  export default value;
+}
 declare module "eruda-dom";
-declare module 'loader-utils' {
+declare module "loader-utils" {
   export function getOptions<T>(loaderContext: { query: string }): T;
 }

@@ -115,7 +115,7 @@ const settings: SettingsInterface[] = [
         text: "useFingerPrintToLogin-string",
         type: "switch",
         style: {
-          display: !native.isWindows || native.android.isHardwareAvailable() ? "" : "none",
+          display: native.isWindows || !native.android.isHardwareAvailable() ? "none" : "",
         },
         disabled: tools.typeIF(native.android.hasBiometricEnrolled(), false, true),
       },
@@ -292,7 +292,7 @@ const settings: SettingsInterface[] = [
   {
     title: "Android",
     className: "android",
-    style: { display: native.isAndroid ? "" : "" },
+    style: { display: native.isAndroid ? "" : "none" },
     content: [
       {
         key: "enableKeepScreenOn",

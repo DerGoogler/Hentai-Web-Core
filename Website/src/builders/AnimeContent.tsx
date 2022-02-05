@@ -73,6 +73,7 @@ class AnimeContent extends React.Component<{
               padding: "8px",
               paddingBottom: "0px",
               flexDirection: "column",
+              backgroundColor: native.getPref("enableDarkmode") === "true" ? "#161b22" : "none",
             }}
           >
             <SearchInput
@@ -81,11 +82,7 @@ class AnimeContent extends React.Component<{
               style={{
                 display: tools.typeIF(native.getPref("hideSearchbar"), "none", ""),
                 borderRadius: "8px",
-                backgroundColor: tools.typeIF(
-                  native.getPref("enableDarkmode"),
-                  "#1F1F1F",
-                  "transparent"
-                ),
+                backgroundColor: tools.typeIF(native.getPref("enableDarkmode"), "#1F1F1F", "transparent"),
               }}
               modifier="custom"
               onChange={this.filter}

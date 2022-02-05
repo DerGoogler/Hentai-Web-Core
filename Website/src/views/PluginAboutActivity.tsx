@@ -8,7 +8,7 @@ import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import tools from "@Misc/tools";
 
 class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: any }, {}> {
-  private getPluginConfig = native.fs.readFile(this.props.pluginAbout.name + "/plugin.yaml", {
+  private getPluginConfig = native.fs.readFile("plugins/" + this.props.pluginAbout.name + "/plugin.yaml", {
     parse: { use: true, mode: "yaml" },
   });
 
@@ -43,25 +43,19 @@ class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: a
               <div className="left">
                 <MDIcon icon="account_circle" size="24" />
               </div>
-              <div className="center">
-                Author: {this.author === tools.undefined ? "None" : this.author}
-              </div>
+              <div className="center">Author: {this.author === tools.undefined ? "None" : this.author}</div>
             </ListItem>
             <ListItem tappable>
               <div className="left">
                 <MDIcon icon="fact_check" size="24" />
               </div>
-              <div className="center">
-                Version: {this.version === tools.undefined ? "None" : this.version}
-              </div>
+              <div className="center">Version: {this.version === tools.undefined ? "None" : this.version}</div>
             </ListItem>
             <ListItem tappable>
               <div className="left">
                 <MDIcon icon="language" size="24" />
               </div>
-              <div className="center">
-                Language: {this.language === tools.undefined ? "None" : this.language}
-              </div>
+              <div className="center">Language: {this.language === tools.undefined ? "None" : this.language}</div>
             </ListItem>
             <ListItem expandable tappable>
               <div className="left">
@@ -69,15 +63,8 @@ class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: a
               </div>
               <div className="center">Description</div>
               <div className="expandable-content">
-                <div
-                  className={
-                    "markdown-body-" +
-                    tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")
-                  }
-                >
-                  <Markdown>
-                    {this.description === tools.undefined ? "None" : this.description}
-                  </Markdown>
+                <div className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
+                  <Markdown>{this.description === tools.undefined ? "None" : this.description}</Markdown>
                 </div>
               </div>
             </ListItem>

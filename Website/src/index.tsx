@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import "onsenui/css/onsenui.css";
-import "@Styles/light/onsen-css-components.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
@@ -11,7 +10,13 @@ import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./views/InitActivity";
 import native from "@Native/index";
+import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
+import hmtai from "@Misc/HMproject";
+import jss from "jss";
+
+import lightMode from "@Styles/light/onsen-css-components.yaml";
+import darkMode from "@Styles/dark/onsen-css-components.yaml";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");
@@ -36,7 +41,7 @@ class Bootloader {
     let pas,
       customPlugins = null;
     if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
-      pas = JSON.parse(native.fs.readFile("plugins.json"));
+      pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
       customPlugins = pas.map((item: string) => (
         <>
           <StyleBuilder folder={item} />;
@@ -61,11 +66,14 @@ class Bootloader {
     });
   }
 
-  private statusbarColors() {
+  private styleInit() {
+    jss.setup(preset());
     if (native.getPref("enableDarkmode") === "true") {
       native.android.setStatusbarColor("#ff1f1f1f");
+      jss.createStyleSheet(darkMode).attach();
     } else {
       native.android.setStatusbarColor("#ff4a148c");
+      jss.createStyleSheet(lightMode).attach();
     }
   }
 
@@ -75,16 +83,25 @@ class Bootloader {
     }
   }
 
+  private makeExamplePlugin() {
+    native.fs.writeFile("plugins/example/plugin.yaml", "run: index.js");
+    native.fs.writeFile("plugins/example/index.js", "console.log('Example Plugin')");
+    native.fs.writeFile("plugins/example/note.txt", "THIS IS AN EXAMPLE PLUGIN AND CANNOT OVERRIDED");
+  }
+
   public init() {
     if (!native.fs.isFileExist("plugins.yaml")) {
-      native.fs.writeFile("plugins.yaml", '- ""');
+      native.fs.writeFile("plugins.yaml", "- example");
     }
+
+    this.makeExamplePlugin();
+
+    this.styleInit();
 
     ons.ready(() => {
       ons.platform.select("android");
       this.electronInit();
       this.loadConsole();
-      this.statusbarColors();
       this.androidSettingsinit();
       this.loadActivity(<InitActivity />);
     });

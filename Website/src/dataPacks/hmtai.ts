@@ -1,5 +1,5 @@
 import { HMtaiDataPackTypes } from "@Types/HMtai-dataPack";
-import hmtai from "../misc/hmtai";
+import hmtai from "../misc/HMproject";
 
 export const sfwData: HMtaiDataPackTypes[] = [
   {
@@ -43,7 +43,7 @@ export const sfwData: HMtaiDataPackTypes[] = [
     source: hmtai.profilePicture(),
   },
   {
-    name: "TASH GANG Art Club",
+    name: "TRASH GANG Art Club",
     source: hmtai.tgac(),
   },
 ];

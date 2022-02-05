@@ -6,7 +6,7 @@ import * as React from "react";
 
 class StyleBuilder extends React.Component<{ folder: string }, {}> {
   private getPlugin = new HWPlugin(this.props.folder);
-  private getPluginConfig = native.fs.readFile(this.props.folder + "/plugin.yaml", {
+  private getPluginConfig = native.fs.readFile("plugins/" + this.props.folder + "/plugin.yaml", {
     parse: { use: true, mode: "yaml" },
   });
 
@@ -26,25 +26,12 @@ class StyleBuilder extends React.Component<{ folder: string }, {}> {
       console.log("Custom theming is disabled!");
     }
     if (native.getPref("enableCustomScriptLoading") === "true") {
-      if (!native.fs.isFileExist(this.props.folder + "/plugin.yaml")) {
-        native.fs.writeFile(this.props.folder + "/plugin.yaml", '[""]');
-      }
-      if (!native.fs.isFileExist(this.props.folder + "/" + this.getPluginConfig.run)) {
-        console.log("An plugin for " + this.props.folder + " was not found!");
-        native.setPref("Plugin.Settings." + this.props.folder, "null");
-      } else {
-        switch (this.getPluginConfig.mode) {
-          case "local":
-            eval(native.fs.readFile(this.props.folder + "/" + this.getPluginConfig.run));
-            break;
-
-          case "online":
-            axios.get(this.getPluginConfig.run).then((res: { data: any }) => {
-              eval(res.data);
-            });
-          default:
-            eval(native.fs.readFile(this.props.folder + "/" + this.getPluginConfig.run));
-            break;
+      if (native.fs.isFileExist("plugins.yaml")) {
+        if (!native.fs.isFileExist("plugins/" + this.props.folder + "/" + this.getPluginConfig.run)) {
+          console.log("An plugin for " + this.props.folder + " was not found!");
+          native.setPref("Plugin.Settings." + this.props.folder, "null");
+        } else {
+          eval(native.fs.readFile("plugins/" + this.props.folder + "/" + this.getPluginConfig.run));
         }
       }
     } else {

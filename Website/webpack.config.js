@@ -36,6 +36,10 @@ const config = {
         exclude: /node_modules/,
       },
       {
+        test: /\.yaml$/,
+        use: "js-yaml-loader",
+      },
+      {
         test: /(\.css$)/,
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
@@ -50,16 +54,10 @@ const config = {
     ],
   },
   resolveLoader: {
-    modules: [
-      "node_modules",
-      path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules"),
-    ],
+    modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
   },
   resolve: {
-    modules: [
-      "node_modules",
-      path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules"),
-    ],
+    modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
     extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
       "react-dom": "@hot-loader/react-dom",

@@ -13,29 +13,8 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
     icon: "fullscreen",
   };
 
-  public componentDidMount() {
-    const { hasDarkMode } = this.props;
-    if (hasDarkMode) {
-      if (native.getPref("enableDarkmode") === "true") {
-        var darkmode = document.createElement("link");
-        darkmode.rel = "stylesheet";
-        darkmode.href =
-          "https://cdn.dergoogler.com/others/hentai-web/styles/dark-onsen-css-components.min.css";
-
-        document.head.appendChild(darkmode);
-      }
-    }
-  }
-
   public render() {
-    const {
-      title,
-      hasDarkMode,
-      onBackButton,
-      addToolbarButton,
-      addToolbarButtonPosition,
-      hasWindowsButtons,
-    } = this.props;
+    const { title, onBackButton, addToolbarButton, addToolbarButtonPosition, hasWindowsButtons } = this.props;
     return (
       <>
         <div className="left">
@@ -81,11 +60,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                     </ToolbarButton>
                     <ToolbarButton
                       modifier="windowsNormal paddingFIX"
-                      disabled={tools.typeIF(
-                        native.getPref("electron.enableFullscreen"),
-                        true,
-                        false
-                      )}
+                      disabled={tools.typeIF(native.getPref("electron.enableFullscreen"), true, false)}
                       style={{
                         display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
                       }}

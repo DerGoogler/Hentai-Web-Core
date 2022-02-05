@@ -1,4 +1,3 @@
-import tools from "@Misc/tools";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import jss, { Styles } from "jss";
 import preset from "jss-preset-default";
@@ -8,7 +7,7 @@ class HWPlugin {
   private pluginErrorString: string = "Please define an Plugin settings name";
   private pluginName: string = "";
 
-  private getPluginConfig = native.fs.readFile(this.pluginName + "/plugin.yaml", {
+  private getPluginConfig = native.fs.readFile("plugins/" + this.pluginName + "/plugin.yaml", {
     parse: { use: true, mode: "yaml" },
   });
 
@@ -52,9 +51,9 @@ class HWPlugin {
 
   public require(path: any): void {
     if (typeof path == "object") {
-      path.map((item: string) => eval(native.fs.readFile(this.pluginName + "/" + item)));
+      path.map((item: string) => eval(native.fs.readFile("plugins/" + this.pluginName + "/" + item)));
     } else {
-      eval(native.fs.readFile(this.pluginName + "/" + path));
+      eval(native.fs.readFile("plugins/" + this.pluginName + "/" + path));
     }
   }
 
@@ -73,7 +72,7 @@ class HWPlugin {
     var style = document.createElement("style");
     style.type = "text/css";
     document.getElementsByTagName("head")[0].appendChild(style);
-    style.innerHTML = native.fs.readFile(this.pluginName + "/" + path);
+    style.innerHTML = native.fs.readFile("plugins/" + this.pluginName + "/" + path);
   }
 }
 

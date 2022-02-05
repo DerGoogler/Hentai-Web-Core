@@ -14,6 +14,7 @@ interface ToolbarBuilderInterface {
   addToolbarButtonPosition?: "left" | "right";
   /**
    * Enable dark mode for this activity that includes this toolbar.
+   * @deprecated
    */
   hasDarkMode?: boolean;
 }
