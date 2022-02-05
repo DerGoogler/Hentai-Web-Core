@@ -54,11 +54,7 @@ const settings: SettingsInterface[] = [
         key: "enableCustomTheming",
         icon: "water_drop",
         style: {
-          display: tools.typeIF(
-            native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true),
-            "",
-            "none"
-          ),
+          display: native.isAndroid || native.isWindows ? "block" : "none",
         },
         type: "switch",
         expandable: true,
@@ -106,11 +102,7 @@ const settings: SettingsInterface[] = [
         key: "enableCustomScriptLoading",
         icon: "description",
         style: {
-          display: tools.typeIF(
-            native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true),
-            "",
-            "none"
-          ),
+          display: native.isAndroid || native.isWindows ? "" : "none",
         },
         type: "switch",
         expandable: true,
@@ -123,9 +115,7 @@ const settings: SettingsInterface[] = [
         text: "useFingerPrintToLogin-string",
         type: "switch",
         style: {
-          display:
-            tools.typeIF(native.userAgentEqualAndroid(false), "none", "") ||
-            tools.typeIF(native.android.isHardwareAvailable(), "", "none"),
+          display: !native.isWindows || native.android.isHardwareAvailable() ? "" : "none",
         },
         disabled: tools.typeIF(native.android.hasBiometricEnrolled(), false, true),
       },
@@ -135,9 +125,9 @@ const settings: SettingsInterface[] = [
         text: "erudaEnabled-string",
         type: "switch",
         style: {
-          display: tools.typeIF(native.userAgentEqualAndroid(false), "none", ""),
+          display: !native.isAndroid ? "" : "none",
         },
-        disabled: native.userAgentEqualAndroid(false),
+        disabled: !native.isAndroid,
       },
     ],
   },
@@ -163,7 +153,7 @@ const settings: SettingsInterface[] = [
   {
     title: "Electron",
     className: "electron",
-    style: { display: tools.typeIF(native.userAgentEqualWindows(true), "", "none") },
+    style: { display: native.isWindows ? "" : "none" },
     content: [
       {
         key: "electron.screenSizeInUse",
@@ -302,7 +292,7 @@ const settings: SettingsInterface[] = [
   {
     title: "Android",
     className: "android",
-    style: { display: tools.typeIF(native.userAgentEqualAndroid(true), "", "none") },
+    style: { display: native.isAndroid ? "" : "" },
     content: [
       {
         key: "enableKeepScreenOn",

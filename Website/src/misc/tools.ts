@@ -2,6 +2,11 @@ import React from "react";
 
 class tools {
   /**
+   * Easy use undefined
+   */
+  public static undefined = null || "" || undefined;
+
+  /**
    * Converts an string into boolean
    * @param string
    * @returns {Boolean}
@@ -68,6 +73,10 @@ class tools {
     }
   }
 
+  /**
+   * Inline IF statement
+   * @deprecated Use the normal inline if statement
+   */
   public static typeIF(_: any, __: any, ___: any) {
     if (this.stringToBoolean(_)) {
       return __;

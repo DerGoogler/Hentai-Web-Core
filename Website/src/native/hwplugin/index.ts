@@ -1,3 +1,4 @@
+import tools from "@Misc/tools";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import jss, { Styles } from "jss";
 import preset from "jss-preset-default";
@@ -18,6 +19,10 @@ class HWPlugin {
       native.setPref("Plugin.Settings." + this.pluginName + ".settings", JSON.stringify(items));
       native.setPref("Plugin.Settings." + this.pluginName + ".name", this.pluginName);
     }
+  }
+
+  public removeSettings(): void {
+    native.removePref("Plugin.Settings." + this.pluginName + ".settings");
   }
 
   public setPluginPref(key: string, content: string): void {
@@ -44,6 +49,11 @@ class HWPlugin {
     }
   }
 
+  public func(func: { name: string; args: string; callback: string; run: string }): void {
+    console.log(`function ${func.name}(${func.args}){${func.callback}}${func.name}(${func.run})`);
+    eval(`function ${func.name}(${func.args}){${func.callback}}${func.name}(${func.run})`);
+  }
+
   public loadCSS(x: Partial<Styles<keyof String, any, undefined>>): void {
     jss.setup(preset());
     const sheet = jss.createStyleSheet(x);
@@ -55,29 +65,6 @@ class HWPlugin {
     style.type = "text/css";
     document.getElementsByTagName("head")[0].appendChild(style);
     style.innerHTML = native.fs.readFile(this.pluginName + "/" + path);
-  }
-
-  public setPluginPackage(infos: {
-    pluginAuthor: string;
-    pluginVersion: string;
-    pluginLanguage: string;
-  }): void {
-    native.setPref(
-      "Plugin.Settings." + this.pluginName + ".pluginInformation.pluginAuthor",
-      infos.pluginAuthor
-    );
-    native.setPref(
-      "Plugin.Settings." + this.pluginName + ".pluginInformation.pluginVersion",
-      infos.pluginVersion
-    );
-    native.setPref(
-      "Plugin.Settings." + this.pluginName + ".pluginInformation.pluginLanguage",
-      infos.pluginLanguage
-    );
-  }
-
-  public getPluginPackage(type: "pluginAuthor" | "pluginVersion" | "pluginLanguage"): string {
-    return native.getPref("Plugin.Settings." + this.pluginName + ".pluginInformation." + type);
   }
 }
 

@@ -1,3 +1,4 @@
+import tools from "@Misc/tools";
 import native from "@Native/index";
 import { PluginAboutDialogTypes, PluginAboutDialogTypes_States } from "@Types/PluginAboutDialog";
 import * as React from "react";
@@ -8,6 +9,8 @@ class PluginAboutBuilder extends React.Component<
   PluginAboutDialogTypes,
   PluginAboutDialogTypes_States
 > {
+  private getPluginConfig = JSON.parse(native.fs.readFile(this.props.pluginName + "/plugin.json"));
+
   public constructor(props: any) {
     super(props);
     this.state = {
@@ -48,75 +51,24 @@ class PluginAboutBuilder extends React.Component<
           isOpen={this.state.isAuthorDialogOpen}
         >
           <List>
-            {(() => {
-              if (
-                native.getPref(
-                  "Plugin.Settings." + pluginName + ".pluginInformation.pluginAuthor"
-                ) === (null || "" || undefined)
-              ) {
-                return;
-              } else {
-                return (
-                  <ListItem tappable onClick={this.handleClick}>
-                    <div className="left">
-                      <MDIcon icon="account_circle" size="24" />
-                    </div>
-                    <div className="center">
-                      Author:{" "}
-                      {native.getPref(
-                        "Plugin.Settings." + pluginName + ".pluginInformation.pluginAuthor"
-                      )}
-                    </div>
-                  </ListItem>
-                );
-              }
-            })()}
-            {(() => {
-              if (
-                native.getPref(
-                  "Plugin.Settings." + pluginName + ".pluginInformation.pluginVersion"
-                ) === (null || "" || undefined)
-              ) {
-                return;
-              } else {
-                return (
-                  <ListItem tappable onClick={this.handleClick}>
-                    <div className="left">
-                      <MDIcon icon="fact_check" size="24" />
-                    </div>
-                    <div className="center">
-                      Version:{" "}
-                      {native.getPref(
-                        "Plugin.Settings." + pluginName + ".pluginInformation.pluginVersion"
-                      )}
-                    </div>
-                  </ListItem>
-                );
-              }
-            })()}
-            {(() => {
-              if (
-                native.getPref(
-                  "Plugin.Settings." + pluginName + ".pluginInformation.pluginLanguage"
-                ) === (null || "" || undefined)
-              ) {
-                return;
-              } else {
-                return (
-                  <ListItem tappable onClick={this.handleClick}>
-                    <div className="left">
-                      <MDIcon icon="language" size="24" />
-                    </div>
-                    <div className="center">
-                      Language:{" "}
-                      {native.getPref(
-                        "Plugin.Settings." + pluginName + ".pluginInformation.pluginLanguage"
-                      )}
-                    </div>
-                  </ListItem>
-                );
-              }
-            })()}
+            <ListItem tappable onClick={this.handleClick}>
+              <div className="left">
+                <MDIcon icon="account_circle" size="24" />
+              </div>
+              <div className="center">Author: {this.getPluginConfig?.package?.author}</div>
+            </ListItem>{" "}
+            <ListItem tappable onClick={this.handleClick}>
+              <div className="left">
+                <MDIcon icon="fact_check" size="24" />
+              </div>
+              <div className="center">Version: {this.getPluginConfig?.package?.version}</div>
+            </ListItem>
+            <ListItem tappable onClick={this.handleClick}>
+              <div className="left">
+                <MDIcon icon="language" size="24" />
+              </div>
+              <div className="center">Language: {this.getPluginConfig?.package?.language}</div>
+            </ListItem>
           </List>
         </Dialog>
       </>

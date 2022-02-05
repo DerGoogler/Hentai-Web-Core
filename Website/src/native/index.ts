@@ -12,7 +12,9 @@ class native {
   private static element: HTMLElement | null;
   private static userAgentAndroid = "HENTAI_WEB_AGENT";
   private static userAgentWindows = "HENTAI_WEB_WINDOWS";
-  private static agent = window.navigator.userAgent;
+  public static userAgent = window.navigator.userAgent;
+  public static isWindows = this.userAgentWindows === this.userAgent ? true : false;
+  public static isAndroid = this.userAgentAndroid === this.userAgent ? true : false;
 
   /**
    * Builds the basic constructor
@@ -21,12 +23,12 @@ class native {
     console.log("Android JS Bridge statred");
   }
 
-  public static checkPlatformForBorderStyle = tools.typeIF(
-    native.userAgentEqualWindows(true),
-    "windows",
-    ""
-  );
+  public static checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
 
+  /**
+   * Get the Android userAgent
+   * @deprecated Use `native.isAndroid`
+   */
   public static userAgentEqualAndroid(state: boolean): boolean {
     if (state) {
       return window.navigator.userAgent === config.options.userAgent;
@@ -35,6 +37,10 @@ class native {
     }
   }
 
+  /**
+   * Get the Windows userAgent
+   * @deprecated Use `native.isWindows`
+   */
   public static userAgentEqualWindows(state: boolean): boolean {
     if (state) {
       return window.navigator.userAgent === config.options.userAgentWindows;
@@ -49,9 +55,9 @@ class native {
    */
   public static getBuildMANUFACTURER(): string | String {
     const appCodeName = window.navigator.appCodeName.toUpperCase();
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMANUFACTURER().toUpperCase();
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       return appCodeName;
     } else {
       return appCodeName;
@@ -64,9 +70,9 @@ class native {
    */
   public static getMODEL(): string | String {
     const platform = window.navigator.platform.toUpperCase();
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMODEL().toUpperCase();
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       return platform;
     } else {
       return platform;
@@ -79,9 +85,9 @@ class native {
    */
   public static reload(): void {
     const reload = window.location.reload();
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       window.Android.reload();
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       window.Windows.reload();
     } else {
       return reload;
@@ -94,9 +100,9 @@ class native {
    */
   public static copyClipborad(content: string): void {
     const copy = window.navigator.clipboard.writeText(content);
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       window.Android.copyToClipboard(content);
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       copy;
     } else {
       copy;
@@ -124,9 +130,9 @@ class native {
     const a = () =>
       ons.notification.alert("Make an right click on the picture you want an save it.");
 
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       window.Android.downloadImage(downloadUrlOfImage);
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       a();
     } else {
       a();
@@ -139,9 +145,9 @@ class native {
    * @param content
    */
   public static setPref(key: string, content: string): void {
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       window.Android.setPref(key, content.toString());
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       window.Windows.setPref(key, content.toString());
     } else {
       localStorage.setItem(key, content.toString());
@@ -154,14 +160,14 @@ class native {
    * @returns
    */
   public static getPref(key: string): string {
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       const get = window.Android.getPref(key);
       if (get === undefined || get === null || get === "") {
         return "false";
       } else {
         return get;
       }
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       const get = window.Windows.getPref(key);
       if (get === undefined || get === null || get === "") {
         return "false";
@@ -183,9 +189,9 @@ class native {
    * @param key
    */
   public static removePref(key: string): void {
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       window.Android.removePref(key);
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       window.Windows.removePref(key);
     } else {
       localStorage.removeItem(key);
@@ -194,9 +200,9 @@ class native {
 
   public static encodeAES(text: string, password?: string): string | String {
     const btoa = window.atob(text);
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       return window.Android.encryptAES(password, text);
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       return btoa;
     } else {
       return btoa;
@@ -205,9 +211,9 @@ class native {
 
   public static decodeAES(text: string, password?: string): string | String {
     const atob = window.atob(text);
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       return window.Android.decryptAES(password, text);
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       return atob;
     } else {
       return atob;
@@ -219,9 +225,9 @@ class native {
    * @param link
    */
   public static open(link: string, target?: string): void {
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       window.Android.open(link);
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       window.Windows.open(link);
     } else {
       window.open(link, target);
@@ -254,9 +260,9 @@ class native {
       });
     }
 
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       clo(() => window.Android.close());
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       clo(() => window.Windows.close());
     } else {
       clo(() => window.close());
@@ -264,9 +270,9 @@ class native {
   }
 
   public static registerShortcut(shortcut: string, callback?: Function): any | void {
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       console.log("globalShortcut are not supported on Android");
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       window.Windows.registerShortcut(shortcut, callback);
     } else {
       Mousetrap.bind(shortcut, (e) => {
@@ -284,9 +290,9 @@ class native {
    * @param x A String value that contains valid JavaScript code.
    */
   public static eval(javascriptString: string) {
-    if (this.agent === this.userAgentAndroid) {
+    if (this.userAgent === this.userAgentAndroid) {
       window.Android.eval(javascriptString);
-    } else if (this.agent === this.userAgentWindows) {
+    } else if (this.userAgent === this.userAgentWindows) {
       eval(javascriptString);
     } else {
       eval(javascriptString);
