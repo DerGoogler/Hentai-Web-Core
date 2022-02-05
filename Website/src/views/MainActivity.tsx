@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Provider, Translate, Translator } from "react-translated";
-import pkg from "./../package.json";
+import pkg from "./../../package.json";
 import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native/index";
 import tools from "@Misc/tools";
@@ -182,7 +182,10 @@ class MainActivity extends React.Component<
               text: "settings",
               icon: "md-settings",
               onClick: () => {
-                this.props.pushPage(SettingsActivity, "settings");
+                this.props.pushPage({
+                  activity: SettingsActivity,
+                  key: "settings",
+                });
                 this.handleCancel();
               },
             },
@@ -190,7 +193,10 @@ class MainActivity extends React.Component<
               text: "Licenses",
               icon: "md-file",
               onClick: () => {
-                this.props.pushPage(LicensesActivity, "licenses");
+                this.props.pushPage({
+                  activity: LicensesActivity,
+                  key: "licenses",
+                });
                 this.handleCancel();
               },
             },

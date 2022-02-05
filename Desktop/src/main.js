@@ -44,8 +44,6 @@ function createWindow() {
   // electron.hardDevice
   setting("electron.hardDevice", "C");
 
-  
-
   const mainWindow = new BrowserWindow({
     width: width,
     height: height,
@@ -102,6 +100,10 @@ function createWindow() {
     if (arg) {
       client.disconnect();
     }
+  });
+
+  ipcMain.on("installreactdevtools", () => {
+    require("electron-react-devtools").install();
   });
 
   ipcMain.on("notification-send", (event, title, body) => {

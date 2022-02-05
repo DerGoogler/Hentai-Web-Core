@@ -3,6 +3,8 @@ import LoginActivity from "./LoginActivity";
 import MainActivity from "./MainActivity";
 import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
+import { PushPageProps } from "@Types/init";
+import tools from "@Misc/tools";
 
 class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
   public constructor(props: any) {
@@ -61,11 +63,12 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     }
   };
 
-  public pushPage = (page: any, key: any) => {
+  public pushPage = (props: PushPageProps) => {
     const route = {
-      component: page,
+      component: props.activity,
       props: {
-        key: key,
+        key: props.key,
+        pluginAbout: props.pluginAbout,
         popPage: () => this.popPage(),
         pushPage: (...args: any) => this.pushPage.apply(null, args),
       },
@@ -79,7 +82,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     });
 
     this.setState({ routeConfig });
-    this.setState({ currentPage: key });
+    this.setState({ currentPage: props.key });
   };
 
   public popPage = (options = {}) => {

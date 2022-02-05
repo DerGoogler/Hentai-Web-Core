@@ -6,7 +6,16 @@ import native from "..";
 
 class HWPlugin {
   private pluginErrorString: string = "Please define an Plugin settings name";
-  private pluginName: string;
+  private pluginName: string = "";
+
+  private getPluginConfig = native.fs.readFile(this.pluginName + "/plugin.yaml", {
+    parse: { use: true, mode: "yaml" },
+  });
+
+  public getAuthor = this.getPluginConfig?.package?.author;
+  public getVersion = this.getPluginConfig?.package?.version;
+  public getLanguage = this.getPluginConfig?.package?.language;
+  public getDescription = this.getPluginConfig?.package?.description;
 
   public constructor(pluginName: string) {
     this.pluginName = pluginName;

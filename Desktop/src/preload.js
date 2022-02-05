@@ -155,4 +155,8 @@ contextBridge.exposeInMainWorld("Windows", {
   eval: (javascriptString) => {
     ipcRenderer.send("eval", javascriptString);
   },
+
+  installReactDevTools: () => {
+    ipcRenderer.send("installreactdevtools");
+  },
 });

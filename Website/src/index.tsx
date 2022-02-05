@@ -9,7 +9,7 @@ import { Provider } from "react-translated";
 import strings from "@DataPacks/strings";
 import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
-import InitActivity from "./InitActivity";
+import InitActivity from "./views/InitActivity";
 import native from "@Native/index";
 import erudaDom from "eruda-dom";
 
@@ -76,8 +76,8 @@ class Bootloader {
   }
 
   public init() {
-    if (!native.fs.isFileExist("plugins.json")) {
-      native.fs.writeFile("plugins.json", '[""]');
+    if (!native.fs.isFileExist("plugins.yaml")) {
+      native.fs.writeFile("plugins.yaml", '- ""');
     }
 
     ons.ready(() => {

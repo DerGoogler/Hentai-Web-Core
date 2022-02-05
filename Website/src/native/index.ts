@@ -1,8 +1,8 @@
 import config from "../misc/config";
 import * as htmlToImage from "html-to-image";
 import { saveAs } from "file-saver";
-import tools from "../misc/tools";
 import Mousetrap from "mousetrap";
+import yaml from "js-yaml";
 import ons from "onsenui";
 
 /**
@@ -451,11 +451,54 @@ class native {
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
 
-    readFile(path: string): string {
+    readFile(
+      path: string,
+      options?: { parse: { use: boolean; mode: "json" | "yaml" } }
+    ): string | any {
       if (this.agent === this.userAgentAndroid) {
-        return window.Android.readFile(path);
+        if (options?.parse.use) {
+          switch (options?.parse.mode) {
+            case "json":
+              try {
+                return JSON.parse(window.Android.readFile(path));
+              } catch (error) {
+                console.log(error);
+              }
+            case "yaml":
+              try {
+                // @ts-ignore
+                return yaml.load(window.Android.readFile(path), { json: options?.parse.use });
+              } catch (error) {
+                console.log(error);
+              }
+            default:
+              return window.Android.readFile(path);
+          }
+        } else {
+          return window.Android.readFile(path);
+        }
       } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.readFile(path);
+        if (options?.parse.use) {
+          switch (options?.parse.mode) {
+            case "json":
+              try {
+                return JSON.parse(window.Windows.readFile(path));
+              } catch (error) {
+                console.log(error);
+              }
+            case "yaml":
+              try {
+                // @ts-ignore
+                return yaml.load(window.Windows.readFile(path), { json: options?.parse.use });
+              } catch (error) {
+                console.log(error);
+              }
+            default:
+              return window.Windows.readFile(path);
+          }
+        } else {
+          return window.Windows.readFile(path);
+        }
       } else {
         return "";
       }

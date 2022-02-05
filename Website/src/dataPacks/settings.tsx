@@ -125,7 +125,7 @@ const settings: SettingsInterface[] = [
         text: "erudaEnabled-string",
         type: "switch",
         style: {
-          display: !native.isAndroid ? "" : "none",
+          display: native.isAndroid ? "" : "none",
         },
         disabled: !native.isAndroid,
       },
