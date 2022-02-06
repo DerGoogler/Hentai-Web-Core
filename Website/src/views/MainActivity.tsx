@@ -14,6 +14,8 @@ import MDIcon from "@Builders/MDIcon";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import NewsActivity from "./NewsActivity";
+import BuildPluginActivity from "./BuildPluginActivity";
+import Bootloader from "@Bootloader";
 
 class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { isContextOpen: boolean }> {
   public constructor(props: any) {
@@ -45,11 +47,7 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
   }
 
   public componentDidUpdate() {
-    if (this.state.isContextOpen) {
-      native.android.setStatusbarColor("#3b1070");
-    } else {
-      native.android.setStatusbarColor("#4a148c");
-    }
+    new Bootloader().styleInit();
   }
 
   private handleClick = () => {
@@ -189,6 +187,17 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
                 this.props.pushPage({
                   activity: LicensesActivity,
                   key: "licenses",
+                });
+                this.handleCancel();
+              },
+            },
+            {
+              text: "Make HWPlugin",
+              icon: "md-code",
+              onClick: () => {
+                this.props.pushPage({
+                  activity: BuildPluginActivity,
+                  key: "makehwplugin",
                 });
                 this.handleCancel();
               },

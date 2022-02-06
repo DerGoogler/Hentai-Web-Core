@@ -73,7 +73,6 @@ class AnimeContent extends React.Component<{
               padding: "8px",
               paddingBottom: "0px",
               flexDirection: "column",
-              backgroundColor: native.getPref("enableDarkmode") === "true" ? "#161b22" : "none",
             }}
           >
             <SearchInput

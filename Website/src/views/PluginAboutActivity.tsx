@@ -6,6 +6,8 @@ import MDIcon from "@Builders/MDIcon";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import tools from "@Misc/tools";
+import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
+import Bootloader from "@Bootloader";
 
 class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: any }, {}> {
   private getPluginConfig = native.fs.readFile("plugins/" + this.props.pluginAbout.name + "/plugin.yaml", {
@@ -17,6 +19,10 @@ class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: a
   private language = this.getPluginConfig?.package?.language;
   private description = this.getPluginConfig?.package?.description;
 
+  public componentDidUpdate() {
+    new Bootloader().styleInit();
+  }
+  
   private renderToolbar = () => {
     return (
       <Toolbar>
@@ -64,7 +70,7 @@ class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: a
               <div className="center">Description</div>
               <div className="expandable-content">
                 <div className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
-                  <Markdown>{this.description === tools.undefined ? "None" : this.description}</Markdown>
+                  <HighlightedMarkdown>{this.description === tools.undefined ? "None" : this.description}</HighlightedMarkdown>
                 </div>
               </div>
             </ListItem>

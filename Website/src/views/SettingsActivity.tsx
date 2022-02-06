@@ -9,12 +9,17 @@ import ContentBody from "@Builders/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
 import MDIcon from "@Builders/MDIcon";
 import PluginAboutActivity from "./PluginAboutActivity";
+import Bootloader from "@Bootloader";
 
 class SettingsActivity extends React.Component<{ pushPage: any; popPage: any }, {}> {
   private scriptLosding = native.getPref("enableCustomScriptLoading");
 
   public componentDidMount() {
     native.electron.discordRPC("Viewing Settings");
+  }
+
+  public componentDidUpdate() {
+    new Bootloader().styleInit();
   }
 
   private renderToolbar = () => {

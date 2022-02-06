@@ -8,6 +8,8 @@ import ContentBody from "@Builders/ContentBody";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";
+import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
+import Bootloader from "@Bootloader";
 
 class LicensesActivity extends React.Component<{ popPage: any }, { data: string }> {
   public constructor(props: any) {
@@ -22,6 +24,10 @@ class LicensesActivity extends React.Component<{ popPage: any }, { data: string 
       this.setState({ data: data });
     });
   };
+
+  public componentDidUpdate() {
+    new Bootloader().styleInit();
+  }
 
   private renderToolbar = () => {
     return (
@@ -46,7 +52,7 @@ class LicensesActivity extends React.Component<{ popPage: any }, { data: string 
               padding: "16px",
             }}
           >
-            <Markdown>{data}</Markdown>
+            <HighlightedMarkdown>{data}</HighlightedMarkdown>
           </div>
         </ContentBody>
       </Page>

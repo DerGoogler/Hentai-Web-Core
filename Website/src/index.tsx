@@ -66,7 +66,10 @@ class Bootloader {
     });
   }
 
-  private styleInit() {
+  /**
+   * Loads styles dynamically
+   */
+  public styleInit() {
     jss.setup(preset());
     if (native.getPref("enableDarkmode") === "true") {
       native.android.setStatusbarColor("#ff1f1f1f");

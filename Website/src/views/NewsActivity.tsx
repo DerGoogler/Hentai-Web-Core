@@ -5,6 +5,10 @@ import ContentBody from "@Builders/ContentBody";
 import axios from "axios";
 import Markdown from "markdown-to-jsx";
 import yaml from "js-yaml";
+import tools from "@Misc/tools";
+import native from "@Native/index";
+import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
+import Bootloader from "@Bootloader";
 
 class NewsActivity extends React.Component {
   public state = {
@@ -18,6 +22,10 @@ class NewsActivity extends React.Component {
     });
   }
 
+  public componentDidUpdate() {
+    new Bootloader().styleInit();
+  }
+
   public render() {
     /**
      * To load for every object an own AnimePicture from `data.ts`
@@ -26,7 +34,9 @@ class NewsActivity extends React.Component {
       <ListItem expandable>
         {item.title}
         <div className="expandable-content">
-          <Markdown>{item.msg}</Markdown>
+          <div className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
+            <HighlightedMarkdown>{item.msg}</HighlightedMarkdown>
+          </div>
         </div>
       </ListItem>
     ));
