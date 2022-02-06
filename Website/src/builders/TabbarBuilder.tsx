@@ -1,6 +1,5 @@
-import { hot } from "react-hot-loader/root";
 import { Tab } from "react-onsenui";
-import AnimeTab from "./AnimeTab";
+import AnimeTab from "@Components/AnimeTab";
 
 /**
  * Builds an Onsen UI Tabbbar in JSON format
@@ -16,4 +15,4 @@ function TabbbarBuilder(sections: any) {
   });
 }
 
-export default hot(TabbbarBuilder);
+export default TabbbarBuilder;

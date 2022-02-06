@@ -5,9 +5,9 @@ import { Provider, Translate, Translator } from "react-translated";
 import settings from "@DataPacks/settings";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
-import ContentBody from "@Builders/ContentBody";
+import ContentBody from "@Components/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
-import MDIcon from "@Builders/MDIcon";
+import MDIcon from "@Components/MDIcon";
 import PluginAboutActivity from "./PluginAboutActivity";
 import Bootloader from "@Bootloader";
 

@@ -1,4 +1,3 @@
-import { hot } from "react-hot-loader/root";
 import native from "@Native/index";
 import pkg from "../../package.json";
 
@@ -28,4 +27,4 @@ const SpeedDial = [
   },
 ];
 
-export default hot(SpeedDial);
+export default SpeedDial;

@@ -1,8 +1,8 @@
 import * as React from "react";
 import { List, ListItem, Page, Toolbar } from "react-onsenui";
-import ContentBody from "@Builders/ContentBody";
+import ContentBody from "@Components/ContentBody";
 import Markdown from "markdown-to-jsx";
-import MDIcon from "@Builders/MDIcon";
+import MDIcon from "@Components/MDIcon";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import tools from "@Misc/tools";

@@ -4,7 +4,7 @@ import { Provider, Translate, Translator } from "react-translated";
 import { SelectValue, SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
 import tools from "@Misc/tools";
 import native from "@Native/index";
-import MDIcon from "./MDIcon";
+import MDIcon from "@Components/MDIcon";
 import HWPlugin from "@Native/hwplugin";
 
 class SettingsBuilder extends React.Component<{

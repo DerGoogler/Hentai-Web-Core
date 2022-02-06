@@ -1,15 +1,14 @@
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
 import { List, ListItem, SearchInput } from "react-onsenui";
-import ContentBody from "@Builders/ContentBody";
+import ContentBody from "./ContentBody";
 import axios from "axios";
 import yaml from "js-yaml";
 import tools from "@Misc/tools";
 import native from "@Native/index";
-import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
+import { HighlightedMarkdown } from "./HighlightMarkdown";
 import Bootloader from "@Bootloader";
 
-class NewsActivity extends React.Component {
+class News extends React.Component {
   public state = {
     data: [],
   };
@@ -48,4 +47,4 @@ class NewsActivity extends React.Component {
   }
 }
 
-export default NewsActivity;
+export default News;

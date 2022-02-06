@@ -1,5 +1,3 @@
-import { hot } from "react-hot-loader/root";
-
 const config = {
   base: {
     title: "Hentai Web",
@@ -11,4 +9,4 @@ const config = {
   },
 };
 
-export default hot(config);
+export default config;

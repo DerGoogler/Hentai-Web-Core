@@ -19,6 +19,7 @@
     "paths": {
       "@Native/*": ["native/*"],
       "@Builders/*": ["builders/*"],
+      "@Components/*": ["components/*"],
       "@Types/*": ["typings/*"],
       "@DataPacks/*": ["dataPacks/*"],
       "@Misc/*": ["misc/*"],

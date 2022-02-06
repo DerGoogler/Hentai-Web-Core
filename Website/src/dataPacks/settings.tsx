@@ -1,8 +1,6 @@
 import ons from "onsenui";
-import { List, ListItem } from "react-onsenui";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import native from "@Native/index";
-import { Provider, Translate, Translator } from "react-translated";
 import tools from "@Misc/tools";
 
 const settings: SettingsInterface[] = [

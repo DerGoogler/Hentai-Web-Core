@@ -1,6 +1,5 @@
-import PictureBuilder from "./PictureBuilder";
+import PictureBuilder from "@Builders/PictureBuilder";
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
 import { List, SearchInput } from "react-onsenui";
 import ContentBody from "./ContentBody";
 import native from "@Native/index";
@@ -94,4 +93,4 @@ class AnimeContent extends React.Component<{
   }
 }
 
-export default hot(AnimeContent);
+export default AnimeContent;

@@ -1,5 +1,4 @@
 import * as React from "react";
-import { hot } from "react-hot-loader/root";
 import { ActionSheet, ActionSheetButton } from "react-onsenui";
 import { Provider, Translate, Translator } from "react-translated";
 import tools from "../misc/tools";
@@ -74,4 +73,4 @@ class ActionSheetBuilder extends React.Component<{ data: MenuBuild[]; options: O
   }
 }
 
-export default hot(ActionSheetBuilder);
+export default ActionSheetBuilder;

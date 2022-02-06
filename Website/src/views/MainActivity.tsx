@@ -6,15 +6,15 @@ import native from "@Native/index";
 import tools from "@Misc/tools";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import TabbarBuilder from "@Builders/TabbarBuilder";
-import AnimeContent from "@Builders/AnimeContent";
+import AnimeContent from "@Components/AnimeContent";
 import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import { nsfwData, sfwData } from "@DataPacks/hmtai";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
-import MDIcon from "@Builders/MDIcon";
+import MDIcon from "@Components/MDIcon";
 import yaml from "js-yaml";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
-import NewsActivity from "./NewsActivity";
+import News from "@Components/News";
 import BuildPluginActivity from "./BuildPluginActivity";
 import Bootloader from "@Bootloader";
 import axios from "axios";
@@ -117,7 +117,7 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
       },
       {
         label: "NEWS",
-        content: <NewsActivity />,
+        content: <News />,
       },
     ]);
   }

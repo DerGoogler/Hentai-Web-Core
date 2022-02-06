@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Page, Toolbar } from "react-onsenui";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
-import ContentBody from "@Builders/ContentBody";
+import ContentBody from "@Components/ContentBody";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";

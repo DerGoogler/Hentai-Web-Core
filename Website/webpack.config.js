@@ -60,8 +60,8 @@ const config = {
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
     extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
-      "react-dom": "@hot-loader/react-dom",
       "@Builders": path.resolve(__dirname, "src/builders"),
+      "@Components": path.resolve(__dirname, "src/components"),
       "@Native": path.resolve(__dirname, "src/native"),
       "@Types": path.resolve(__dirname, "src/typings"),
       "@DataPacks": path.resolve(__dirname, "src/dataPacks"),
