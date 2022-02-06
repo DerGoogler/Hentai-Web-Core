@@ -48,16 +48,30 @@ const files = [
 
 function randomizer(image: string): string {
   try {
-    axios.get("https://cdn.dergoogler.com/others/hentai-web/images/" + image + ".json").then((res) => {
-      try {
-        const data = res.data;
-        native.fs.writeFile("images/" + image + ".json", JSON.stringify(data));
-      } catch (error) {
-        console.log(error);
-      }
-    });
-
-    const data = native.fs.readFile("images/" + image + ".json", { parse: { use: true, mode: "json" } });
+    if (native.isAndroid || native.isWindows) {
+      axios.get("https://cdn.dergoogler.com/others/hentai-web/images/" + image + ".json").then((res) => {
+        try {
+          const data = res.data;
+          native.fs.writeFile("images/" + image + ".json", JSON.stringify(data));
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    } else {
+      axios.get("https://cdn.dergoogler.com/others/hentai-web/images/" + image + ".json").then((res) => {
+        try {
+          const data = res.data;
+          native.setPref(image + ".json", JSON.stringify(data));
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    }
+    const data =
+      native.isAndroid || native.isWindows
+        ? native.fs.readFile("images/" + image + ".json", { parse: { use: true, mode: "json" } })
+        : // @ts-ignore
+          JSON.parse(native.getPref(image + ".json"));
     return data[Math.floor(Math.random() * data.length)];
   } catch (error) {
     return "error";

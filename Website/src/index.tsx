@@ -95,8 +95,12 @@ class Bootloader {
     }
 
     this.makeExamplePlugin();
-
     this.styleInit();
+
+    // This is required for saving the HM Image files on the device
+    if (!native.android.hasStoragePermission()) {
+      native.android.requestPermission();
+    }
 
     ons.ready(() => {
       ons.platform.select("android");

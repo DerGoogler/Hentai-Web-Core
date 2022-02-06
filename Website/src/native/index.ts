@@ -127,8 +127,7 @@ class native {
       }
     };
 
-    const a = () =>
-      ons.notification.alert("Make an right click on the picture you want an save it.");
+    const a = () => ons.notification.alert("Make an right click on the picture you want an save it.");
 
     if (this.userAgent === this.userAgentAndroid) {
       window.Android.downloadImage(downloadUrlOfImage);
@@ -441,6 +440,26 @@ class native {
         return false;
       }
     },
+    /**
+     * Check if has write permission
+     * @returns {boolean}
+     */
+    hasStoragePermission(): boolean {
+      if (native.isAndroid) {
+        return window.Android.hasStoragePermission();
+      } else {
+        return false;
+      }
+    },
+
+    /**
+     * request permission
+     */
+    requestPermission(): void {
+      if (native.isAndroid) {
+        window.Android.requestPermission();
+      }
+    },
   };
 
   /**
@@ -451,10 +470,7 @@ class native {
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
 
-    readFile(
-      path: string,
-      options?: { parse: { use: boolean; mode: "json" | "yaml" } }
-    ): string | any {
+    readFile(path: string, options?: { parse: { use: boolean; mode: "json" | "yaml" } }): string | any {
       if (this.agent === this.userAgentAndroid) {
         if (options?.parse.use) {
           switch (options?.parse.mode) {

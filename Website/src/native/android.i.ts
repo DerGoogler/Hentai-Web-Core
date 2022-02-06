@@ -136,6 +136,16 @@ interface Android {
    * @param x A String value that contains valid JavaScript code.
    */
   eval(javascriptString: string): void;
+
+  /**
+   * @Native
+   */
+  hasStoragePermission(): boolean;
+
+  /**
+   * @Native
+   */
+  requestPermission(): void;
 }
 
 export default Android;

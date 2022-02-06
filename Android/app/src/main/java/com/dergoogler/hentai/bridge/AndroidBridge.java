@@ -1,5 +1,7 @@
 package com.dergoogler.hentai.bridge;
 
+import static androidx.core.app.ActivityCompat.requestPermissions;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.ClipData;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 import androidx.biometric.BiometricManager;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.app.ActivityCompat;
 
 import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.activity.WebViewActivity;
@@ -282,6 +285,16 @@ public class AndroidBridge {
                 Toast.makeText(webView.getContext(), "Image download failed." + e, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @JavascriptInterface
+    public boolean hasStoragePermission() {
+        return webView.getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED;
+    }
+
+    @JavascriptInterface
+    public void requestPermission() {
+        ((Activity) webView.getContext()).requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
     }
 
     @JavascriptInterface
