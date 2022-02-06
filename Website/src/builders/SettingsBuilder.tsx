@@ -115,15 +115,9 @@ class SettingsBuilder extends React.Component<{
                                 )}
                                 disabled={Boolean(setting.disabled)}
                                 onChange={(e: any) => {
-                                  const keepDefaultFuntion = () =>
-                                    this.setSetting(setting.key!, e.target.checked);
+                                  const keepDefaultFuntion = () => this.setSetting(setting.key!, e.target.checked);
                                   if (typeof setting.callback == "function") {
-                                    setting.callback(
-                                      e,
-                                      setting.key,
-                                      translate,
-                                      keepDefaultFuntion()
-                                    );
+                                    setting.callback(e, setting.key, translate, keepDefaultFuntion());
                                   } else {
                                     keepDefaultFuntion();
                                   }
@@ -140,15 +134,9 @@ class SettingsBuilder extends React.Component<{
                                   tools.typeCheck(setting.selectDefaultValue, "")
                                 )}
                                 onChange={(e: any) => {
-                                  const keepDefaultFuntion = () =>
-                                    this.setSetting(setting.key!, e.target.value);
+                                  const keepDefaultFuntion = () => this.setSetting(setting.key!, e.target.value);
                                   if (typeof setting.callback == "function") {
-                                    setting.callback(
-                                      e,
-                                      setting.key,
-                                      translate,
-                                      keepDefaultFuntion()
-                                    );
+                                    setting.callback(e, setting.key, translate, keepDefaultFuntion());
                                   } else {
                                     keepDefaultFuntion();
                                   }
@@ -173,9 +161,7 @@ class SettingsBuilder extends React.Component<{
                     </div>
                     {(() => {
                       if (setting.expandable) {
-                        return (
-                          <div className="expandable-content">{setting.expandableContent}</div>
-                        );
+                        return <div className="expandable-content">{setting.expandableContent}</div>;
                       } else {
                         return;
                       }

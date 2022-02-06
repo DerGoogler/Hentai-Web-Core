@@ -15,10 +15,7 @@ import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import NewsActivity from "./NewsActivity";
 
-class MainActivity extends React.Component<
-  { pushPage: any; popPage: any },
-  { isContextOpen: boolean }
-> {
+class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { isContextOpen: boolean }> {
   public constructor(props: any) {
     super(props);
     this.state = {
@@ -107,11 +104,7 @@ class MainActivity extends React.Component<
           // @ts-ignore
           <SpeedDial
             style={{
-              bottom: tools.typeIF(
-                native.getPref("enableBottomTabbar") === "true",
-                "calc(20px + 49px)",
-                ""
-              ),
+              bottom: tools.typeIF(native.getPref("enableBottomTabbar") === "true", "calc(20px + 49px)", ""),
             }}
             id="fab-element"
             position="bottom right"

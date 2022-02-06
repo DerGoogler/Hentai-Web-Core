@@ -21,10 +21,7 @@ class MDIcon extends React.Component<{
             " ons-icon " +
             "material-icons md-" +
             size +
-            tools.typeCheck(
-              ignoreDarkmode,
-              " md-" + tools.typeIF(native.getPref("enableDarkmode"), "light", "dark")
-            ) +
+            tools.typeCheck(ignoreDarkmode, " md-" + tools.typeIF(native.getPref("enableDarkmode"), "light", "dark")) +
             " " +
             tools.typeIF(disabled, "md-inactive ", "")
           }

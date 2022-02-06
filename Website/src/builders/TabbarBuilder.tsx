@@ -4,7 +4,7 @@ import AnimeTab from "./AnimeTab";
 
 /**
  * Builds an Onsen UI Tabbbar in JSON format
- * @param sections 
+ * @param sections
  * @returns {Object}
  */
 function TabbbarBuilder(sections: any) {
@@ -15,6 +15,5 @@ function TabbbarBuilder(sections: any) {
     };
   });
 }
-
 
 export default hot(TabbbarBuilder);

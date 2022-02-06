@@ -5,10 +5,7 @@ import { Provider, Translate, Translator } from "react-translated";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 
-class LoginActivity extends React.Component<
-  { popPage: any },
-  { username: string; password: string }
-> {
+class LoginActivity extends React.Component<{ popPage: any }, { username: string; password: string }> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };
@@ -25,20 +22,13 @@ class LoginActivity extends React.Component<
   private renderToolbar() {
     return (
       <Toolbar>
-        <ToolbarBuilder
-          title={<Translate text="sign-in" />}
-          hasWindowsButtons={true}
-          hasDarkMode={true}
-        />
+        <ToolbarBuilder title={<Translate text="sign-in" />} hasWindowsButtons={true} hasDarkMode={true} />
       </Toolbar>
     );
   }
 
   private handleClick = () => {
-    if (
-      this.state.username === native.getBuildMANUFACTURER() &&
-      this.state.password === native.getMODEL()
-    ) {
+    if (this.state.username === native.getBuildMANUFACTURER() && this.state.password === native.getMODEL()) {
       native.setPref("loggedIn", "true");
       native.reload();
     } else {
@@ -66,9 +56,7 @@ class LoginActivity extends React.Component<
     return (
       <Translator>
         {({ translate }: any) => (
-          <Page
-            modifier={native.checkPlatformForBorderStyle} /*renderToolbar={this.renderToolbar}*/
-          >
+          <Page modifier={native.checkPlatformForBorderStyle} /*renderToolbar={this.renderToolbar}*/>
             <section
               className="drag--windows"
               style={{

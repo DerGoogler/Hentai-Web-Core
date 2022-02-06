@@ -40,11 +40,7 @@ class LicensesActivity extends React.Component<{ popPage: any }, { data: string 
     const { data } = this.state;
     return (
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody
-          className={
-            "markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")
-          }
-        >
+        <ContentBody className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
           <div
             style={{
               padding: "16px",

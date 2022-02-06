@@ -10,13 +10,7 @@ const SpeedDialBuilder = SpeedDial.map(
     onClick?(e?: React.MouseEvent<HTMLElement>): void;
     icon?: string;
   }) => (
-    <SpeedDialItem
-      key={item.id}
-      id={item.id}
-      className={item.className}
-      style={item.style}
-      onClick={item.onClick}
-    >
+    <SpeedDialItem key={item.id} id={item.id} className={item.className} style={item.style} onClick={item.onClick}>
       <Icon icon={item.icon} />
     </SpeedDialItem>
   )

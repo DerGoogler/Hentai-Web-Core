@@ -13,11 +13,9 @@ class NewsActivity extends React.Component {
 
   public componentDidMount() {
     // Use no slash at the start
-    axios
-      .get(window.location.href.replace(/(\?(.*?)=(.*)|\?)/gm, "") + "misc/news.yaml")
-      .then((res: { data: any }) => {
-        this.setState({ data: yaml.load(res.data, { json: true }) });
-      });
+    axios.get(window.location.href.replace(/(\?(.*?)=(.*)|\?)/gm, "") + "misc/news.yaml").then((res: { data: any }) => {
+      this.setState({ data: yaml.load(res.data, { json: true }) });
+    });
   }
 
   public render() {
