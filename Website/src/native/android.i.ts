@@ -146,6 +146,11 @@ interface Android {
    * @Native
    */
   requestPermission(): void;
+
+  /**
+   * @Native
+   */
+  getVersion(): string;
 }
 
 export default Android;

@@ -12,9 +12,7 @@ import InitActivity from "./views/InitActivity";
 import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
-import hmtai from "@Misc/HMproject";
 import jss from "jss";
-
 import lightMode from "@Styles/light/onsen-css-components.yaml";
 import darkMode from "@Styles/dark/onsen-css-components.yaml";
 

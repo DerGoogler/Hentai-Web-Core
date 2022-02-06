@@ -48,8 +48,8 @@ const config = {
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
-        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-        use: "url-loader?limit=100000",
+        test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
+        use: "url-loader?limit=100000&name=files/[name].[ext]",
       },
     ],
   },

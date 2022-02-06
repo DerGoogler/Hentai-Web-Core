@@ -1,3 +1,5 @@
+import { BrowserWindowConstructorOptions } from "@Types/newWindow";
+
 /**
  * @Native
  */
@@ -152,6 +154,10 @@ interface Windows {
    * @param x A String value that contains valid JavaScript code.
    */
   eval(javascriptString: string): void;
+
+  newWindow(url: string, options: BrowserWindowConstructorOptions): void;
+
+  getVersion(): string;
 }
 
 export default Windows;

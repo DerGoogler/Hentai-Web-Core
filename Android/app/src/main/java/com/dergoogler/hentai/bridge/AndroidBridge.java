@@ -31,6 +31,7 @@ import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.download.CSDownloadManager;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.zero.util.FileUtil;
+import com.dergoogler.hentai.zero.util.PackageUtil;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.File;
@@ -326,7 +327,7 @@ public class AndroidBridge {
         android.os.Process.killProcess(pid);
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
-        ((Activity) webView.getContext()).startActivity(intent);
+        webView.getContext().startActivity(intent);
     }
 
     @JavascriptInterface
@@ -342,6 +343,11 @@ public class AndroidBridge {
     @JavascriptInterface
     public void mkDir(String path) {
         FileUtil.makeDir(FileUtil.getExternalStorageDir() + "/hentai-web/" + path);
+    }
+
+    @JavascriptInterface
+    public String getVersion() throws PackageManager.NameNotFoundException {
+        return PackageUtil.getPackageVersionName(webView.getContext());
     }
 
     @JavascriptInterface

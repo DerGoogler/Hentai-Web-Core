@@ -4,6 +4,7 @@ import { saveAs } from "file-saver";
 import Mousetrap from "mousetrap";
 import yaml from "js-yaml";
 import ons from "onsenui";
+import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 
 /**
  * Native calls for Windows and Android
@@ -298,6 +299,16 @@ class native {
     }
   }
 
+  public static getVersion(): string {
+    if (this.isAndroid) {
+      return window.Android.getVersion();
+    } else if (this.isWindows) {
+      return window.Windows.getVersion();
+    } else {
+      return "";
+    }
+  }
+
   /**
    * Methods that are here can only used on Windows
    */
@@ -305,6 +316,12 @@ class native {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
+
+    newWindow: (url: string, options: BrowserWindowConstructorOptions) => {
+      if (native.isWindows) {
+        window.Windows.newWindow(url, options);
+      }
+    },
 
     isRegisteredShortcut(shortcut: string): boolean | Boolean {
       if (this.agent === this.userAgentAndroid) {

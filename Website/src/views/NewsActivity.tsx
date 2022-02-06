@@ -3,7 +3,6 @@ import { hot } from "react-hot-loader/root";
 import { List, ListItem, SearchInput } from "react-onsenui";
 import ContentBody from "@Builders/ContentBody";
 import axios from "axios";
-import Markdown from "markdown-to-jsx";
 import yaml from "js-yaml";
 import tools from "@Misc/tools";
 import native from "@Native/index";

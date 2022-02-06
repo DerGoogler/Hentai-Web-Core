@@ -11,11 +11,14 @@ import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import { nsfwData, sfwData } from "@DataPacks/hmtai";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 import MDIcon from "@Builders/MDIcon";
+import yaml from "js-yaml";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import NewsActivity from "./NewsActivity";
 import BuildPluginActivity from "./BuildPluginActivity";
 import Bootloader from "@Bootloader";
+import axios from "axios";
+import ChangelogActivity from "./ChangelogActivity";
 
 class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { isContextOpen: boolean }> {
   public constructor(props: any) {
@@ -44,6 +47,30 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
     tools.ref("menu-click", (e: HTMLElement) => {
       e.addEventListener("click", this.handleClick);
     });
+
+    axios
+      .get(window.location.href.replace(/(\?(.*?)=(.*)|\?)/gm, "") + "misc/changelog.yaml")
+      .then((res: { data: any }) => {
+        const data: any = yaml.load(res.data, { json: true });
+        if (native.isAndroid || native.isWindows) {
+          if (data.version.toString() === native.getVersion()) {
+            console.log("Newst version installed");
+          } else {
+            this.props.pushPage({
+              activity: ChangelogActivity,
+              key: "changelog",
+              changelog: {
+                version: data.version,
+                changes: data.changes,
+                package: {
+                  android: data.packages.android,
+                  windows: data.packages.windows,
+                },
+              },
+            });
+          }
+        }
+      });
   }
 
   public componentDidUpdate() {

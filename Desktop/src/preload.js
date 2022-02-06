@@ -15,7 +15,15 @@ const store = new Store();
 contextBridge.exposeInMainWorld("Windows", {
   newWindow: (uri, options) => {
     const win = new BrowserWindow(options);
-    win.loadURL(uri);
+    if (options.loadLocal) {
+      win.loadFile(path.join(__dirname, uri));
+    } else {
+      win.loadURL(uri);
+    }
+  },
+
+  getVersion: () => {
+    return app.getVersion();
   },
 
   close: () => {
