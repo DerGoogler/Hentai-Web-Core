@@ -145,6 +145,12 @@ const settings: SettingsInterface[] = [
         type: "switch",
         text: "saveLastUsedTab-string",
       },
+      {
+        key: "disableNSFW",
+        icon: "accessible_forward",
+        type: "switch",
+        text: "Disable NSFW content",
+      },
     ],
   },
 

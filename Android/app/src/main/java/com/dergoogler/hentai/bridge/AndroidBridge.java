@@ -105,13 +105,12 @@ public class AndroidBridge {
         jsString = jsString.replaceAll("\t", "    ");
 
         // Android 4.4 (KitKat, 19) or higher
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        try {
             webView.evaluateJavascript(jsString, value -> Logger.i(TAG, "[WEBVIEW] onReceiveValue: " + value));
+        } catch (Exception e) {
+            Toast.makeText(webView.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
-        // Android 4.3 or lower (Jelly Bean, 18)
-        else {
-            webView.loadUrl(SCHEME_JAVASCRIPT + jsString);
-        }
+
     }
 
     //-- [E N D] call Native --> Web

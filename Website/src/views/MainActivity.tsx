@@ -106,20 +106,33 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
   }
 
   private renderTabs() {
-    return TabbarBuilder([
-      {
-        label: "SFW",
-        content: <AnimeContent name="SFW" data={sfwData} />,
-      },
-      {
-        label: "NSFW",
-        content: <AnimeContent name="NSFW" data={nsfwData} />,
-      },
-      {
-        label: "NEWS",
-        content: <News />,
-      },
-    ]);
+    if (native.getPref("disableNSFW") === "true") {
+      return TabbarBuilder([
+        {
+          label: "SFW",
+          content: <AnimeContent name="SFW" data={sfwData} />,
+        },
+        {
+          label: "NEWS",
+          content: <News />,
+        },
+      ]);
+    } else {
+      return TabbarBuilder([
+        {
+          label: "SFW",
+          content: <AnimeContent name="SFW" data={sfwData} />,
+        },
+        {
+          label: "NSFW",
+          content: <AnimeContent name="NSFW" data={nsfwData} />,
+        },
+        {
+          label: "NEWS",
+          content: <News />,
+        },
+      ]);
+    }
   }
 
   private renderFixed() {

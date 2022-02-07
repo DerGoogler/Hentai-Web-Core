@@ -74,6 +74,26 @@ class HWPlugin {
     document.getElementsByTagName("head")[0].appendChild(style);
     style.innerHTML = native.fs.readFile("plugins/" + this.pluginName + "/" + path);
   }
+
+  public fs = {
+    pluginName: this.pluginName,
+
+    readFile(path: string, options?: { parse: { use: boolean; mode: "json" | "yaml" } }): string | any {
+      return native.fs.readFile(this.pluginName + "/" + path, options);
+    },
+
+    mkDir(path: string): void {
+      native.fs.mkDir(this.pluginName + "/" + path);
+    },
+
+    writeFile(path: string, content: string): void {
+      native.fs.writeFile(this.pluginName + "/" + path, content);
+    },
+
+    isFileExist(path: string): boolean {
+      return native.fs.isFileExist(this.pluginName + "/" + path);
+    },
+  };
 }
 
 export default HWPlugin;
