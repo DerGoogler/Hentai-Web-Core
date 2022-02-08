@@ -13,8 +13,8 @@ import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
 import jss from "jss";
-import lightMode from "@Styles/light/onsen-css-components.yaml";
-import darkMode from "@Styles/dark/onsen-css-components.yaml";
+import darkMode from "@Styles/dark";
+import lightMode from "@Styles/light";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");

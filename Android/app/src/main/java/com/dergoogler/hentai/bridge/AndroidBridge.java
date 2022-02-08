@@ -1,7 +1,5 @@
 package com.dergoogler.hentai.bridge;
 
-import static androidx.core.app.ActivityCompat.requestPermissions;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.ClipData;
@@ -13,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.JavascriptInterface;
@@ -22,19 +21,25 @@ import android.widget.Toast;
 import androidx.biometric.BiometricManager;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
-import androidx.core.app.ActivityCompat;
 
 import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.activity.WebViewActivity;
+import com.dergoogler.hentai.bridge.plugin.AndroidBridgePlugin;
 import com.dergoogler.hentai.tools.AESCrypt;
 import com.dergoogler.hentai.tools.Lib;
+import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.download.CSDownloadManager;
+import com.dergoogler.hentai.zero.json.JSONHelper;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.zero.util.FileUtil;
 import com.dergoogler.hentai.zero.util.PackageUtil;
-import com.google.firebase.auth.FirebaseAuth;
+import com.dergoogler.hentai.zero.util.StringUtil;
+
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URLDecoder;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
 import java.util.Map;
@@ -47,15 +52,11 @@ import java.util.Map;
  */
 public class AndroidBridge {
     private static final String TAG = AndroidBridge.class.getSimpleName();
-    private SharedPreferences nativaeLocalstorage;
 
     private static final String SCHEME_BRIDGE = "native";
-    private String FINGERPRINT_RESULT = "";
 
-    private FirebaseAuth auth;
-
-    private static final String HOST_COMMAND = "callNative";
-    private static final String HOST_COMMAND2 = "callToNative";
+    // Web -> Native
+    private static final String HOST_COMMAND = "callToNative";
 
     private static final String SCHEME_JAVASCRIPT = "javascript:";
 
@@ -69,7 +70,96 @@ public class AndroidBridge {
         this.webView = webView;
     }
 
+
     //++ [START] call Web --> Native
+
+    // ex) "native://callToNative?" + btoa(encodeURIComponent(JSON.stringify({ command:\"apiSample\", args{max:1,min:1}, callback:\"callbackNativeResponse\" })))
+    @JavascriptInterface
+    public boolean callNativeMethod(String urlString) {
+        Logger.i(TAG, "[WEBVIEW] callNativeMethod: " + urlString);
+        try {
+            Uri uri = Uri.parse(urlString);
+            JSONObject jsonObject = parse(uri);
+            //jsonObject.put("hostCommand", uri.getHost());
+
+            String pluginName = JSONHelper.getString(jsonObject, "plugin", "");
+
+            if (StringUtil.isEmpty(pluginName)) {
+                DialogBuilder.with(webView.getContext())
+                        .setMessage("Plugin not exist")
+                        .show();
+                return false;
+            }
+
+            return AndroidBridgePlugin.execute(this.webView, jsonObject);
+
+        } catch (Exception e) {
+            Logger.e(TAG, e);
+
+            DialogBuilder.with(webView.getContext())
+                    .setMessage(e.toString())
+                    .show();
+        }
+        return false;
+    }
+
+    private JSONObject parse(Uri uri) throws IOException {
+        Logger.i(TAG, "[WEBVIEW] callNativeMethod: parse() : uri = " + uri);
+
+        if (!SCHEME_BRIDGE.equals(uri.getScheme())) {
+            throw new IOException("\"" + uri.getScheme() + "\" scheme is not supported.");
+        }
+        if (!HOST_COMMAND.equals(uri.getHost())) {
+            throw new IOException("\"" + uri.getHost() + "\" host is not supported.");
+        }
+
+        String query = uri.getEncodedQuery();
+        try {
+            query = new String(Base64.decode(query, Base64.DEFAULT));
+            query = URLDecoder.decode(query, "utf-8");
+
+            return new JSONObject(query);
+        } catch (Exception e) {
+            throw new IOException("\"" + query + "\" is not JSONObject.");
+        }
+    }
+    //-- [E N D] call Web --> Native
+
+
+    //++ [START] call Native --> Web
+
+    public static void callFromNative(WebView webView, String cbId, String resultCode, String jsonString) {
+        String param = "'" + cbId + "', '" + resultCode + "', '" + jsonString + "'";
+
+        String buff = "!(function() {\n" +
+                "  try {\n" +
+                "    NativeBridge.callFromNative(" + param + ");\n" +
+                "  } catch(e) {\n" +
+                "    return '[JS Error] ' + e.message;\n" +
+                "  }\n" +
+                "})(window);";
+        webView.post(() -> evaluateJavascript(webView, buff));
+    }
+
+    public static void callJSFunction(final WebView webView, String functionName, String... params) {
+        if (functionName.startsWith("function")
+                || functionName.startsWith("(")) {
+            String buff = "!(\n" +
+                    functionName +
+                    ")(" + makeParam(params) + ");";
+            webView.post(() -> evaluateJavascript(webView, buff));
+        } else {
+            String js = makeJavascript(functionName, params);
+            String buff = "!(function() {\n" +
+                    "  try {\n" +
+                    "    " + js + "\n" +
+                    "  } catch(e) {\n" +
+                    "    return '[JS Error] ' + e.message;\n" +
+                    "  }\n" +
+                    "})(window);";
+            webView.post(() -> evaluateJavascript(webView, buff));
+        }
+    }
 
     public static String makeJavascript(String functionName, String... params) {
         return functionName + "(" + makeParam(params) + ");";
@@ -94,8 +184,7 @@ public class AndroidBridge {
         return buff.toString();
     }
 
-    @JavascriptInterface
-    public void eval(final String javascriptString) {
+    private static void evaluateJavascript(final WebView webView, final String javascriptString) {
         String jsString = javascriptString;
 
         if (jsString.startsWith(SCHEME_JAVASCRIPT)) {
@@ -105,12 +194,13 @@ public class AndroidBridge {
         jsString = jsString.replaceAll("\t", "    ");
 
         // Android 4.4 (KitKat, 19) or higher
-        try {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webView.evaluateJavascript(jsString, value -> Logger.i(TAG, "[WEBVIEW] onReceiveValue: " + value));
-        } catch (Exception e) {
-            Toast.makeText(webView.getContext(), e.toString(), Toast.LENGTH_SHORT).show();
         }
-
+        // Android 4.3 or lower (Jelly Bean, 18)
+        else {
+            webView.loadUrl(SCHEME_JAVASCRIPT + jsString);
+        }
     }
 
     //-- [E N D] call Native --> Web
@@ -134,6 +224,13 @@ public class AndroidBridge {
         }
         return extraOutput;
     }
+
+    public static void setExtraOutput(File file) {
+        extraOutput = file;
+    }
+    //-- [[E N D] for JS Callback]
+
+    //-- [[S T A R T] Custom]
 
     @JavascriptInterface
     public void showMessage(String content) {
@@ -204,19 +301,19 @@ public class AndroidBridge {
 
     @JavascriptInterface
     public void setPref(String key, String content) {
-        nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
+        SharedPreferences nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
         nativaeLocalstorage.edit().putString(key, content).apply();
     }
 
     @JavascriptInterface
     public String getPref(String key) {
-        nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
+        SharedPreferences nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
         return nativaeLocalstorage.getString(key, "");
     }
 
     @JavascriptInterface
     public void removePref(String key) {
-        nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
+        SharedPreferences nativaeLocalstorage = webView.getContext().getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
         nativaeLocalstorage.edit().remove(key).apply();
     }
 
@@ -354,6 +451,5 @@ public class AndroidBridge {
         return FileUtil.isExistFile(FileUtil.getExternalStorageDir() + "/hentai-web/" + path);
     }
 
-    //-- [[E N D] for JS Callback]
-
+    //-- [[E N D] Custom]
 }

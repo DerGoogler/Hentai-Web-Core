@@ -5,6 +5,7 @@ import Mousetrap from "mousetrap";
 import yaml from "js-yaml";
 import ons from "onsenui";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
+import ChangelogActivity from "./../views/ChangelogActivity";
 
 /**
  * Native calls for Windows and Android
@@ -16,13 +17,6 @@ class native {
   public static userAgent = window.navigator.userAgent;
   public static isWindows = this.userAgentWindows === this.userAgent ? true : false;
   public static isAndroid = this.userAgentAndroid === this.userAgent ? true : false;
-
-  /**
-   * Builds the basic constructor
-   */
-  public constructor() {
-    console.log("Android JS Bridge statred");
-  }
 
   public static checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
 

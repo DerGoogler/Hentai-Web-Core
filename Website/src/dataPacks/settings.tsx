@@ -259,6 +259,120 @@ const settings: SettingsInterface[] = [
         },
       },
       {
+        key: "electron.hardDevice",
+        icon: "desktop_windows",
+        type: "select",
+        text: "Hard device",
+        selectDefaultValue: "C",
+        selectValue: [
+          {
+            text: "A",
+            value: "A",
+          },
+
+          {
+            text: "B",
+            value: "B",
+          },
+          {
+            text: "C",
+            value: "C",
+          },
+          {
+            text: "D",
+            value: "D",
+          },
+          {
+            text: "E",
+            value: "E",
+          },
+          {
+            text: "F",
+            value: "F",
+          },
+          {
+            text: "G",
+            value: "G",
+          },
+          {
+            text: "H",
+            value: "H",
+          },
+          {
+            text: "I",
+            value: "I",
+          },
+          {
+            text: "J",
+            value: "J",
+          },
+          {
+            text: "K",
+            value: "K",
+          },
+          {
+            text: "L",
+            value: "L",
+          },
+          {
+            text: "M",
+            value: "M",
+          },
+          {
+            text: "N",
+            value: "N",
+          },
+          {
+            text: "O",
+            value: "O",
+          },
+          {
+            text: "P",
+            value: "P",
+          },
+          {
+            text: "Q",
+            value: "Q",
+          },
+          {
+            text: "R",
+            value: "R",
+          },
+          {
+            text: "S",
+            value: "S",
+          },
+          {
+            text: "T",
+            value: "T",
+          },
+          {
+            text: "U",
+            value: "U",
+          },
+          {
+            text: "V",
+            value: "V",
+          },
+          {
+            text: "W",
+            value: "W",
+          },
+          {
+            text: "X",
+            value: "X",
+          },
+          {
+            text: "Y",
+            value: "Y",
+          },
+          {
+            text: "Z",
+            value: "Z",
+          },
+        ],
+      },
+      {
         key: "electron.disableDiscordRPC",
         type: "switch",
         icon: "discord",

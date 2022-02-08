@@ -2,13 +2,6 @@
 * This is the default style file from across the app
 */
 
-:root {
-  --color-cursor: 73, 20, 138;
-  --cursor-outline-shade: 0.3;
-  --cursor-size: 10px;
-  --cursor-outline-size: 12px;
-}
-
 /* Rules for sizing the icon. */
 .material-icons.md-18 {
   font-size: 18px;
@@ -213,32 +206,4 @@ a {
   &hover {
     color: #4a148c;
   }
-}
-
-#cursor-dot,
-#cursor-dot-outline {
-  z-index: 99999999;
-  pointer-events: none;
-  cursor: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 50%;
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out;
-}
-
-#cursor-dot {
-  width: var(--cursor-size);
-  height: var(--cursor-size);
-  cursor: none;
-  background-color: rgba(var(--color-cursor), 1);
-}
-
-#cursor-dot-outline {
-  cursor: none;
-  width: var(--cursor-outline-size);
-  height: var(--cursor-outline-size);
-  background-color: rgba(var(--color-cursor), var(--cursor-outline-shade));
 }

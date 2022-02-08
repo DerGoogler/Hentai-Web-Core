@@ -47,6 +47,7 @@ const files = [
 ];
 
 function randomizer(image: string): string {
+  native.fs.mkDir("images");
   try {
     if (native.isAndroid || native.isWindows) {
       axios.get("https://cdn.dergoogler.com/others/hentai-web/images/" + image + ".json").then((res) => {

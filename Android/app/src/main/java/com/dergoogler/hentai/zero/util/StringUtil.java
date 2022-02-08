@@ -35,6 +35,10 @@ public class StringUtil {
         return false;
     }
 
+    public static boolean isNotEmpty(Object obj) {
+        return !isEmpty(obj);
+    }
+
     public static String toString(Bundle bundle) {
         if (null == bundle) {
             return "";

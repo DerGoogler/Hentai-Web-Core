@@ -1,5 +1,5 @@
-import Android from "./../native/android.i";
-import Windows from "./../native/windows.i";
+import Android from "@Native/android.i";
+import Windows from "@Native/windows.i";
 
 declare global {
   /**
@@ -15,5 +15,10 @@ declare global {
      * Declare the custom window event (`Windows`) for the WebView
      */
     Windows: Windows;
+
+    /**
+     *
+     */
+    webkit: any;
   }
 }

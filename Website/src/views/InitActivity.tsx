@@ -4,7 +4,6 @@ import MainActivity from "./MainActivity";
 import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
-import tools from "@Misc/tools";
 
 class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
   public constructor(props: any) {
@@ -96,7 +95,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
         animationOptions: {
           duration: 0.2,
           timing: "ease-in",
-          animation: "fade-md",
+          animation: "fade-ios",
         },
       },
     });
