@@ -24,7 +24,7 @@
       "@DataPacks/*": ["dataPacks/*"],
       "@Misc/*": ["misc/*"],
       "@Bootloader": ["index.tsx"],
-      "@Styles": ["styles/"]
+      "@Styles/*": ["styles/*"]
     }
   },
   "include": ["./src/**/*"]

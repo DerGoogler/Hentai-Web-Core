@@ -5960,3 +5960,5 @@ const darkMode: JssStyle = {
     },
   },
 };
+
+export default darkMode;
