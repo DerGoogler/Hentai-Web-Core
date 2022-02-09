@@ -2,6 +2,7 @@ package com.dergoogler.hentai.bridge;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Application;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -11,6 +12,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.Settings;
 import android.util.Base64;
 import android.view.View;
 import android.view.WindowManager;
@@ -18,6 +21,7 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.biometric.BiometricManager;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
 import androidx.browser.customtabs.CustomTabsIntent;
@@ -389,9 +393,18 @@ public class AndroidBridge {
         return webView.getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @JavascriptInterface
-    public void requestPermission() {
-        ((Activity) webView.getContext()).requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+    public void requestStoargePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            Uri uri = Uri.fromParts("package", ((Activity) webView.getContext()).getPackageName(), null);
+            intent.setData(uri);
+            ((Activity) webView.getContext()).startActivity(intent);
+        } else {
+            //below android 11=======
+            ((Activity) webView.getContext()).requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE}, 1000);
+        }
     }
 
     @JavascriptInterface

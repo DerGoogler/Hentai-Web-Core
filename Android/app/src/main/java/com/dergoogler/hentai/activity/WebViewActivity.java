@@ -1,40 +1,37 @@
 package com.dergoogler.hentai.activity;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 
 import androidx.biometric.BiometricPrompt;
 
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.Settings;
 import android.view.KeyEvent;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.R;
-import com.dergoogler.hentai.bridge.NodeBridge;
 import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.activity.BaseActivity;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.keyevent.BackKeyShutdown;
+import com.dergoogler.hentai.zero.permission.RPermissionListener;
 import com.dergoogler.hentai.zero.requetcode.RequestCode;
 import com.dergoogler.hentai.zero.util.FileUtil;
-import com.dergoogler.hentai.zero.util.PackageUtil;
+import com.dergoogler.hentai.zero.permission.RPermission;
 import com.dergoogler.hentai.zero.util.StringUtil;
 import com.dergoogler.hentai.zero.webview.CSDownloadListener;
 import com.dergoogler.hentai.zero.webview.CSFileChooserListener;
@@ -44,7 +41,8 @@ import com.dergoogler.hentai.bridge.AndroidBridge;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.webview.WebViewHelper;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
@@ -64,12 +62,29 @@ public class WebViewActivity extends BaseActivity {
     private String urlCore_ = Lib.getDebugURl(); // For debugging
     private String mainURL = urlCore_; // Main url
 
-    @RequiresApi(api = Build.VERSION_CODES.P)
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nativaeLocalstorage = this.getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
+        if (getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+                Uri uri = Uri.fromParts("package", ((Activity) getContext()).getPackageName(), null);
+                intent.setData(uri);
+                ((Activity) getContext()).startActivity(intent);
+            } else {
+                //below android 11=======
+                ((Activity) getContext()).requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE}, 1000);
+            }
+        }
+
+        login();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    private void login() {
         Executor executor = ContextCompat.getMainExecutor(this);
         BiometricPrompt biometricPrompt = new BiometricPrompt(WebViewActivity.this,
                 executor, new BiometricPrompt.AuthenticationCallback() {
@@ -115,6 +130,7 @@ public class WebViewActivity extends BaseActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @SuppressLint("AddJavascriptInterface")
     private void init() {
         WebView contentView = findViewById(R.id.contentView);
@@ -149,8 +165,12 @@ public class WebViewActivity extends BaseActivity {
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+        FileUtil.makeDir(Environment.getExternalStorageDirectory() + "/hentai-web/");
+
         WebViewHelper.loadUrl(this.webview, mainURL);
         WebViewHelper.setUserAgentString(this.webview, Lib.getUserAgent());
+
+
     }
 
     @Override

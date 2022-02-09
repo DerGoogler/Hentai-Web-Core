@@ -145,7 +145,7 @@ interface Android {
   /**
    * @Native
    */
-  requestPermission(): void;
+   requestStoargePermission(): void;
 
   /**
    * @Native

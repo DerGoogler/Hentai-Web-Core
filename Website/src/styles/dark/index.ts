@@ -1,6 +1,4 @@
-import { JssStyle } from "jss";
-
-const darkMode: JssStyle = {
+const darkMode: any = {
   "@global": {
     ":root": {},
     html: {

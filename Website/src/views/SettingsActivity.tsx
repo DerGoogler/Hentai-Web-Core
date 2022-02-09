@@ -40,52 +40,54 @@ class SettingsActivity extends React.Component<{ pushPage: any; popPage: any }, 
       customPlugins = null;
     if (native.isAndroid || native.isWindows) {
       if (native.getPref("enableCustomScriptLoading") === "true") {
-        pas = native.fs.readFile("/plugins.yaml", {
-          parse: { use: true, mode: "yaml" },
-        });
-        customPlugins = pas.map((item: string) => (
-          <>
-            {(() => {
-              if (this.scriptLosding === "true") {
-                if (native.getPref("Plugin.Settings." + item + ".name") === item) {
-                  return (
-                    <>
-                      <div style={{ padding: "8px" }}></div>
-                      <List modifier="inset">
-                        <ListItem
-                          tappable
-                          onClick={() => {
-                            this.props.pushPage({
-                              activity: PluginAboutActivity,
-                              key: item + "-plugin-about",
-                              pluginAbout: {
-                                name: item,
-                              },
-                            });
-                          }}
-                        >
-                          <div className="left">
-                            <MDIcon icon="account_circle" size="24" />
-                          </div>
-                          <div className="center">Author</div>
-                        </ListItem>
-                        <SettingsBuilder
-                          isPlugin={true}
-                          pluginName={item}
-                          data={JSON.parse(native.getPref("Plugin.Settings." + item + ".settings"))}
-                        />
-                      </List>
-                    </>
-                  );
+        if (native.fs.isFileExist("plugins.yaml")) {
+          pas = native.fs.readFile("/plugins.yaml", {
+            parse: { use: true, mode: "yaml" },
+          });
+          customPlugins = pas.map((item: string) => (
+            <>
+              {(() => {
+                if (this.scriptLosding === "true") {
+                  if (native.getPref("Plugin.Settings." + item + ".name") === item) {
+                    return (
+                      <>
+                        <div style={{ padding: "8px" }}></div>
+                        <List modifier="inset">
+                          <ListItem
+                            tappable
+                            onClick={() => {
+                              this.props.pushPage({
+                                activity: PluginAboutActivity,
+                                key: item + "-plugin-about",
+                                pluginAbout: {
+                                  name: item,
+                                },
+                              });
+                            }}
+                          >
+                            <div className="left">
+                              <MDIcon icon="account_circle" size="24" />
+                            </div>
+                            <div className="center">Author</div>
+                          </ListItem>
+                          <SettingsBuilder
+                            isPlugin={true}
+                            pluginName={item}
+                            data={JSON.parse(native.getPref("Plugin.Settings." + item + ".settings"))}
+                          />
+                        </List>
+                      </>
+                    );
+                  } else {
+                    return;
+                  }
                 } else {
                   return;
                 }
-              } else {
-                return;
-              }
-            })()}
-          </>
-        ));
+              })()}
+            </>
+          ));
+        }
       }
     }
 

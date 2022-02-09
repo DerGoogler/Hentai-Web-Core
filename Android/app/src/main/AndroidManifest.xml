@@ -55,6 +55,7 @@
             android:name="com.dergoogler.hentai.activity.WebViewActivity"
             android:configChanges="keyboardHidden|orientation|screenLayout|screenSize"
             android:exported="true"
+            android:requestLegacyExternalStorage="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

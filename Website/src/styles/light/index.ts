@@ -1,7 +1,4 @@
-import native from "@Native/index";
-import { JssStyle } from "jss";
-
-const lightMode: JssStyle = {
+const lightMode: any = {
   "@global": {
     ":root": {},
     html: {

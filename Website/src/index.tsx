@@ -39,12 +39,14 @@ class Bootloader {
     let pas,
       customPlugins = null;
     if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
-      pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
-      customPlugins = pas.map((item: string) => (
-        <>
-          <StyleBuilder folder={item} />;
-        </>
-      ));
+      if (native.fs.isFileExist("plugins.yaml")) {
+        pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
+        customPlugins = pas.map((item: string) => (
+          <>
+            <StyleBuilder folder={item} />;
+          </>
+        ));
+      }
     }
 
     ReactDOM.render(
@@ -90,18 +92,16 @@ class Bootloader {
     native.fs.writeFile("plugins/example/note.txt", "THIS IS AN EXAMPLE PLUGIN AND CANNOT OVERRIDED");
   }
 
-  public init() {
+  private folderInit() {
     if (!native.fs.isFileExist("plugins.yaml")) {
       native.fs.writeFile("plugins.yaml", "- example");
     }
+  }
 
+  public init() {
+    this.folderInit();
     this.makeExamplePlugin();
     this.styleInit();
-
-    // This is required for saving the HM Image files on the device
-    if (!native.android.hasStoragePermission()) {
-      native.android.requestPermission();
-    }
 
     ons.ready(() => {
       ons.platform.select("android");

@@ -11,12 +11,14 @@ const {
 } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
+const fs = require("fs");
 const fenster = require("@electron/remote/main");
 const setting = require("./defaultSettings");
 const pkg = require("../package.json");
 const client = require("discord-rich-presence")("726837711851356242");
 const contextMenu = require("electron-context-menu");
 
+const store = new Store();
 const date = Date.now();
 let tray = null;
 
@@ -41,8 +43,16 @@ function createWindow() {
   const devTools = setting("electron.devTools", "false");
   const alwaysOnTop = setting("electron.alwaysOnTop", "false");
   const dcrpclogo = setting("electron.rpcLogo", "hentaiweb__");
-  // electron.hardDevice
+
   setting("electron.hardDevice", "C");
+
+  if (!fs.existsSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/")) {
+    try {
+      fs.mkdirSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const mainWindow = new BrowserWindow({
     width: width,

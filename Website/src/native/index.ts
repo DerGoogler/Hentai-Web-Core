@@ -468,7 +468,7 @@ class native {
      */
     requestPermission(): void {
       if (native.isAndroid) {
-        window.Android.requestPermission();
+        window.Android.requestStoargePermission();
       }
     },
   };
