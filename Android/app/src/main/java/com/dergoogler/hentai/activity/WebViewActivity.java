@@ -58,9 +58,9 @@ public class WebViewActivity extends BaseActivity {
     private WebView webview;
     private CSWebChromeClient webChromeClient;
     private CSFileChooserListener webviewFileChooser;
-    private String urlCore = Lib.getReleaseURl();
-    private String urlCore_ = Lib.getDebugURl(); // For debugging
-    private String mainURL = urlCore_; // Main url
+ //   private String urlCore = Lib.getReleaseURl();
+   // private String urlCore_ = Lib.getDebugURl(); // For debugging
+    //private String mainURL = urlCore_; // Main url
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -68,17 +68,20 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         nativaeLocalstorage = this.getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
-        if (getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (getContext().checkSelfPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", ((Activity) getContext()).getPackageName(), null);
+                Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
                 intent.setData(uri);
-                ((Activity) getContext()).startActivity(intent);
-            } else {
-                //below android 11=======
+                getContext().startActivity(intent);
+            }
+        } else {
+            if (getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 ((Activity) getContext()).requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE}, 1000);
             }
         }
+
 
         login();
     }
@@ -167,7 +170,11 @@ public class WebViewActivity extends BaseActivity {
 
         FileUtil.makeDir(Environment.getExternalStorageDirectory() + "/hentai-web/");
 
-        WebViewHelper.loadUrl(this.webview, mainURL);
+        if (FileUtil.readFile(FileUtil.getExternalStorageDir() + "/hentai-web/debug.txt").equals("true")) {
+            WebViewHelper.loadUrl(this.webview, Lib.getDebugURl());
+        } else {
+            WebViewHelper.loadUrl(this.webview, Lib.getReleaseURl());
+        }
         WebViewHelper.setUserAgentString(this.webview, Lib.getUserAgent());
 
 

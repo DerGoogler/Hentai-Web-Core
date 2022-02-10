@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import yaml from "js-yaml";
 
 class tools {
   /**
@@ -83,6 +85,15 @@ class tools {
     } else {
       return ___;
     }
+  }
+
+  public static getMisc(url: string, callback: Function) {
+    axios.get(window.location.href.replace(/(\?(.*?)=(.*)|\?)/gm, "") + `misc/${url}`).then((res: { data: any }) => {
+      const data: any = yaml.load(res.data, { json: true });
+      if (typeof callback === "function") {
+        callback(data);
+      }
+    });
   }
 
   public static if(item: { wenn: any; dann: any; fehler: any }) {

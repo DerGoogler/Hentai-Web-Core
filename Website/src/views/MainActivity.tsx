@@ -8,7 +8,6 @@ import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import TabbarBuilder from "@Builders/TabbarBuilder";
 import AnimeContent from "@Components/AnimeContent";
 import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
-import { nsfwData, sfwData } from "@DataPacks/hmtai";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 import MDIcon from "@Components/MDIcon";
 import yaml from "js-yaml";
@@ -20,16 +19,21 @@ import Bootloader from "@Bootloader";
 import axios from "axios";
 import ChangelogActivity from "./ChangelogActivity";
 
-class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { isContextOpen: boolean }> {
+class MainActivity extends React.Component<
+  { pushPage: any; popPage: any },
+  { isContextOpen: boolean; sfw: any; nsfw: any }
+> {
   static props: any;
   public constructor(props: any) {
     super(props);
     this.state = {
       isContextOpen: false,
+      nsfw: [],
+      sfw: [],
     };
   }
 
-  public componentDidMount() {
+  public componentDidMount = () => {
     if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
       tools.ref("download-app", (e: HTMLElement) => {
         e.style.display = "none";
@@ -49,30 +53,38 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
       e.addEventListener("click", this.handleClick);
     });
 
-    axios
-      .get(window.location.href.replace(/(\?(.*?)=(.*)|\?)/gm, "") + "misc/changelog.yaml")
-      .then((res: { data: any }) => {
-        const data: any = yaml.load(res.data, { json: true });
-        if (native.isAndroid || native.isWindows) {
-          if (data.version.toString() === native.getVersion()) {
-            console.log("Newst version installed");
-          } else {
-            this.props.pushPage({
-              activity: ChangelogActivity,
-              key: "changelog",
-              changelog: {
-                version: data.version,
-                changes: data.changes,
-                package: {
-                  android: data.packages.android,
-                  windows: data.packages.windows,
-                },
+    // Get changelog
+    tools.getMisc("changelog.yaml", (data: any) => {
+      if (native.isAndroid || native.isWindows) {
+        if (data.version.toString() === native.getVersion()) {
+          console.log("Newst version installed");
+        } else {
+          this.props.pushPage({
+            activity: ChangelogActivity,
+            key: "changelog",
+            changelog: {
+              version: data.version,
+              changes: data.changes,
+              package: {
+                android: data.packages.android,
+                windows: data.packages.windows,
               },
-            });
-          }
+            },
+          });
         }
-      });
-  }
+      }
+    });
+
+    // SFW
+    tools.getMisc("images.yaml", (data: any) => {
+      this.setState({ sfw: data.sfw });
+    });
+
+    // NSFW
+    tools.getMisc("images.yaml", (data: any) => {
+      this.setState({ nsfw: data.nsfw });
+    });
+  };
 
   public componentDidUpdate() {
     new Bootloader().styleInit();
@@ -106,12 +118,12 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
     );
   }
 
-  private renderTabs() {
+  private renderTabs = () => {
     if (native.getPref("disableNSFW") === "true") {
       return TabbarBuilder([
         {
           label: "SFW",
-          content: <AnimeContent name="SFW" data={sfwData} />,
+          content: <AnimeContent name="SFW" data={this.state.sfw} />,
         },
         {
           label: "NEWS",
@@ -122,11 +134,11 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
       return TabbarBuilder([
         {
           label: "SFW",
-          content: <AnimeContent name="SFW" data={sfwData} />,
+          content: <AnimeContent name="SFW" data={this.state.sfw} />,
         },
         {
           label: "NSFW",
-          content: <AnimeContent name="NSFW" data={nsfwData} />,
+          content: <AnimeContent name="NSFW" data={this.state.nsfw} />,
         },
         {
           label: "NEWS",
@@ -134,7 +146,7 @@ class MainActivity extends React.Component<{ pushPage: any; popPage: any }, { is
         },
       ]);
     }
-  }
+  };
 
   private renderFixed() {
     return (

@@ -45,12 +45,7 @@ class AnimeContent extends React.Component<{
   }
 
   public render() {
-    /**
-     * To load for every object an own AnimePicture from `data.ts`
-     */
-    const listItems = this.props.data.map((item: { name: string; source: any; isNew: boolean }) => (
-      <PictureBuilder key={item.name} source={item.source} note={item.name} isNew={item.isNew} />
-    ));
+    const listItems = this.props.data.map((item: any) => <PictureBuilder key={item} source={item} note={item} />);
 
     return (
       <ContentBody className="Anime-Content">

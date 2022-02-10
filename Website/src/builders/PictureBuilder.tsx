@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import { Card as Kard } from "react-onsenui";
+import axios from "axios";
 import { Provider, Translate, Translator } from "react-translated";
 import native from "@Native/index";
 import { Icon } from "react-onsenui";
@@ -26,6 +27,7 @@ class PictureBuilder extends React.Component<{
    */
   private getID = this.props.note.replace(/ /g, "") + this.id();
   private getNote = this.props.note.charAt(0).toUpperCase() + this.props.note.slice(1);
+  private images = this.randomizer(this.props.note);
 
   private id() {
     const { note } = this.props;
@@ -41,6 +43,49 @@ class PictureBuilder extends React.Component<{
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
+  }
+
+  private randomizer(image: string): string {
+    native.fs.mkDir("images");
+    try {
+      if (native.isAndroid || native.isWindows) {
+        axios
+          .get(
+            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/ /gm, "").toLowerCase() + ".json"
+          )
+          .then((res) => {
+            try {
+              const data = res.data;
+              native.fs.writeFile("images/" + image.replace(/ /gm, "").toLowerCase() + ".json", JSON.stringify(data));
+            } catch (error) {
+              console.log(error);
+            }
+          });
+      } else {
+        axios
+          .get(
+            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/ /gm, "").toLowerCase() + ".json"
+          )
+          .then((res) => {
+            try {
+              const data = res.data;
+              native.setPref(image.replace(/ /gm, "").toLowerCase() + ".json", JSON.stringify(data));
+            } catch (error) {
+              console.log(error);
+            }
+          });
+      }
+      const data =
+        native.isAndroid || native.isWindows
+          ? native.fs.readFile("images/" + image.replace(/ /gm, "").toLowerCase() + ".json", {
+              parse: { use: true, mode: "json" },
+            })
+          : // @ts-ignore
+            JSON.parse(native.getPref(image.replace(/ /gm, "").toLowerCase() + ".json"));
+      return data[Math.floor(Math.random() * data.length)];
+    } catch (error) {
+      return "error";
+    }
   }
 
   private handleClick = () => {
@@ -124,7 +169,7 @@ class PictureBuilder extends React.Component<{
                         {" "}
                         <img
                           id={this.getID}
-                          src={source}
+                          src={this.images}
                           alt={this.getNote}
                           onError={() => {
                             this.setState({ isImageError: true });
