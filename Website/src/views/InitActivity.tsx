@@ -101,6 +101,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     });
 
     this.setState({ routeConfig });
+    this.setState({ currentPage: "main" });
   };
 
   public onPostPush = () => {
