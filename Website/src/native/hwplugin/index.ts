@@ -1,20 +1,19 @@
+import { PluginAboutTypes } from "@Types/pluginAbout";
 import { SettingsInterface } from "@Types/SettingsBuilder";
+import axios from "axios";
 import jss, { Styles } from "jss";
 import preset from "jss-preset-default";
 import native from "..";
 
-class HWPlugin {
-  private pluginErrorString: string = "Please define an Plugin settings name";
-  private pluginName: string = "";
-
-  private getPluginConfig = native.fs.readFile("plugins/" + this.pluginName + "/plugin.yaml", {
+const getPluginConfig = (name: string): PluginAboutTypes => {
+  return native.fs.readFile("/plugins/" + name + "/plugin.yaml", {
     parse: { use: true, mode: "yaml" },
   });
+};
 
-  public getAuthor = this.getPluginConfig?.package?.author;
-  public getVersion = this.getPluginConfig?.package?.version;
-  public getLanguage = this.getPluginConfig?.package?.language;
-  public getDescription = this.getPluginConfig?.package?.description;
+class HWPlugin {
+  private pluginErrorString: string = "Please define an plugin name";
+  private pluginName: string;
 
   public constructor(pluginName: string) {
     this.pluginName = pluginName;
@@ -57,6 +56,16 @@ class HWPlugin {
     }
   }
 
+  public library(url: string) {
+    axios.get(url).then((res: any) => {
+      if (res.status === 200) {
+        eval(res.data);
+      } else {
+        console.log("Can't find library");
+      }
+    });
+  }
+
   public func(func: { name: string; args: string; callback: string; run: string }): void {
     console.log(`function ${func.name}(${func.args}){${func.callback}}${func.name}(${func.run})`);
     eval(`function ${func.name}(${func.args}){${func.callback}}${func.name}(${func.run})`);
@@ -75,25 +84,37 @@ class HWPlugin {
     style.innerHTML = native.fs.readFile("plugins/" + this.pluginName + "/" + path);
   }
 
-  public fs = {
-    pluginName: this.pluginName,
+  public readFile(path: string, options?: { parse: { use: boolean; mode: "json" | "yaml" } }): string | any {
+    return native.fs.readFile(this.pluginName + "/" + path, options);
+  }
 
-    readFile(path: string, options?: { parse: { use: boolean; mode: "json" | "yaml" } }): string | any {
-      return native.fs.readFile(this.pluginName + "/" + path, options);
-    },
+  public mkDir(path: string): void {
+    native.fs.mkDir(this.pluginName + "/" + path);
+  }
 
-    mkDir(path: string): void {
-      native.fs.mkDir(this.pluginName + "/" + path);
-    },
+  public writeFile(path: string, content: string): void {
+    native.fs.writeFile(this.pluginName + "/" + path, content);
+  }
 
-    writeFile(path: string, content: string): void {
-      native.fs.writeFile(this.pluginName + "/" + path, content);
-    },
+  public isFileExist(path: string): boolean {
+    return native.fs.isFileExist(this.pluginName + "/" + path);
+  }
 
-    isFileExist(path: string): boolean {
-      return native.fs.isFileExist(this.pluginName + "/" + path);
-    },
-  };
+  public getAuthor() {
+    getPluginConfig(this.pluginName).package?.author;
+  }
+
+  public getVersion() {
+    getPluginConfig(this.pluginName).package?.version;
+  }
+
+  public getLanguage() {
+    getPluginConfig(this.pluginName).package?.language;
+  }
+
+  public getDescription() {
+    getPluginConfig(this.pluginName).package?.description;
+  }
 }
 
 export default HWPlugin;

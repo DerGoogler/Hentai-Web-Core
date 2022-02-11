@@ -10,13 +10,11 @@ import AnimeContent from "@Components/AnimeContent";
 import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 import MDIcon from "@Components/MDIcon";
-import yaml from "js-yaml";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import News from "@Components/News";
 import BuildPluginActivity from "./BuildPluginActivity";
 import Bootloader from "@Bootloader";
-import axios from "axios";
 import ChangelogActivity from "./ChangelogActivity";
 
 class MainActivity extends React.Component<

@@ -1,6 +1,5 @@
 const darkMode: any = {
   "@global": {
-    ":root": {},
     html: {
       height: "100%",
       width: "100%",
@@ -17,7 +16,7 @@ const darkMode: any = {
       webkitTextSizeAdjust: "100%",
       touchAction: "manipulation",
     },
-    "html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video":
+    "a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video":
       {
         webkitUserSelect: "none",
         mozUserSelect: "none",
@@ -26,18 +25,18 @@ const darkMode: any = {
         webkitTapHighlightColor: "transparent",
         webkitTouchCallout: "none",
       },
-    "input, textarea, select": {
+    "input, select, textarea": {
       webkitUserSelect: "auto",
       msUserSelect: "auto",
       userSelect: "auto",
       mozUserSelect: "text",
       webkitTouchCallout: "none",
     },
-    "a, button, input, textarea, select": {
+    "a, button, input, select, textarea": {
       touchAction: "manipulation",
     },
-    "input:active, input:focus, textarea:active, textarea:focus, select:active, select:focus": {
-      outline: "none",
+    "input:active, input:focus, select:active, select:focus, textarea:active, textarea:focus": {
+      outline: "0",
     },
     h1: {
       fontSize: "36px",
@@ -52,20 +51,11 @@ const darkMode: any = {
       fontSize: "18px",
     },
     ".page": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
-      backgroundColor: "rgba(255, 255, 255, 1)",
-      fallbacks: [
-        {
-          // @ts-ignore
-          webkitFontSmoothing: "antialiased",
-        },
-        {
-          backgroundColor: "#ffffff",
-        },
-      ],
+      backgroundColor: "#121212",
       position: "absolute",
       top: "0",
       left: "0",
@@ -73,14 +63,28 @@ const darkMode: any = {
       bottom: "0",
       overflowX: "visible",
       overflowY: "hidden",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
+      fallbacks: [
+        {
+          webkitFontSmoothing: "antialiased",
+        },
+        {
+          color: "#fff",
+        },
+      ],
       msOverflowStyle: "none",
     },
     ".page::-webkit-scrollbar": {
       display: "none",
     },
     ".page__content": {
-      backgroundColor: "rgba(255, 255, 255, 1)",
+      backgroundColor: "#121212",
+      position: "absolute",
+      top: "0",
+      left: "0",
+      right: "0",
+      bottom: "0",
+      boxSizing: "border-box",
       fallbacks: [
         {
           bottom: "0",
@@ -88,25 +92,11 @@ const darkMode: any = {
         {
           top: "0",
         },
-        {
-          backgroundColor: "#ffffff",
-        },
       ],
-      position: "absolute",
-      top: "0",
-      left: "0",
-      right: "0",
-      bottom: "0",
-      boxSizing: "border-box",
       paddingTop: "0",
     },
     ".page__background": {
-      backgroundColor: "rgba(255, 255, 255, 1)",
-      fallbacks: [
-        {
-          backgroundColor: "#ffffff",
-        },
-      ],
+      backgroundColor: "#121212",
       position: "absolute",
       top: "0",
       left: "0",
@@ -115,18 +105,13 @@ const darkMode: any = {
       boxSizing: "border-box",
     },
     ".page--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
-      backgroundColor: "rgba(255, 255, 255, 1)",
-      fallbacks: [
-        {
-          backgroundColor: "#ffffff",
-        },
-      ],
+      backgroundColor: "#121212",
     },
     ".page--material__content": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       fallbacks: [
@@ -136,7 +121,7 @@ const darkMode: any = {
       ],
     },
     ".page__content h1, .page__content h2, .page__content h3, .page__content h4, .page__content h5": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
       fallbacks: [
@@ -158,7 +143,7 @@ const darkMode: any = {
     },
     ".page--material__content h1, .page--material__content h2, .page--material__content h3, .page--material__content h4, .page--material__content h5":
       {
-        fontFamily: '"Roboto", "Noto", sans-serif',
+        fontFamily: "Roboto, Noto, sans-serif",
         webkitFontSmoothing: "antialiased",
         fontWeight: "500",
         fallbacks: [
@@ -179,12 +164,7 @@ const darkMode: any = {
       fontSize: "20px",
     },
     ".page--material__background": {
-      backgroundColor: "rgba(255, 255, 255, 1)",
-      fallbacks: [
-        {
-          backgroundColor: "#ffffff",
-        },
-      ],
+      backgroundColor: "#121212",
     },
     ".switch": {
       display: "inline-block",
@@ -213,7 +193,7 @@ const darkMode: any = {
       backgroundColor: "transparent",
       zIndex: "0",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       width: "100%",
       height: "100%",
       margin: "0",
@@ -227,7 +207,7 @@ const darkMode: any = {
       ],
     },
     ".switch__toggle": {
-      backgroundColor: "white",
+      backgroundColor: "#fff",
       position: "absolute",
       top: "0",
       left: "0",
@@ -247,7 +227,7 @@ const darkMode: any = {
       borderRadius: "28px",
       height: "28px",
       width: "28px",
-      backgroundColor: "white",
+      backgroundColor: "#fff",
       left: "1px",
       top: "2px",
       transitionProperty: "all",
@@ -268,6 +248,7 @@ const darkMode: any = {
     },
     ":disabled + .switch__toggle": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".switch__touch": {
@@ -300,7 +281,7 @@ const darkMode: any = {
       backgroundColor: "transparent",
       zIndex: "0",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       width: "100%",
       height: "100%",
       margin: "0",
@@ -328,16 +309,17 @@ const darkMode: any = {
     },
     ":checked + .switch--material__toggle > .switch--material__handle": {
       left: "16px",
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       boxShadow:
         "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),\r\n    0 3px 1px -2px rgba(0, 0, 0, 0.2)",
     },
     ":disabled + .switch--material__toggle": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".switch--material__handle:before": {
-      background: "transparent",
+      background: "0 0",
       content: '""',
       display: "block",
       width: "100%",
@@ -351,7 +333,7 @@ const darkMode: any = {
       boxShadow: "0 0 0 14px rgba(0, 0, 0, 0.12)",
     },
     ":checked + .switch--material__toggle > .switch--active__handle:before": {
-      boxShadow: "0 0 0 14px color-mod(#4a148c alpha(20%))",
+      boxShadow: "0 0 0 14px color-mod(#bb86fc alpha(20%))",
     },
     ".switch--material__touch": {
       position: "absolute",
@@ -380,17 +362,17 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       lineHeight: "1",
       webkitAppearance: "none",
       mozAppearance: "none",
       appearance: "none",
       backgroundImage: "linear-gradient(#4a148c, #4a148c)",
       backgroundPosition: "left center",
-      backgroundSize: "0% 2px",
+      backgroundSize: "0 2px",
       backgroundRepeat: "no-repeat",
       height: "30px",
       position: "relative",
@@ -400,7 +382,7 @@ const darkMode: any = {
     ".range__input::-moz-range-track": {
       position: "relative",
       border: "none",
-      background: "none",
+      background: "0 0",
       boxShadow: "none",
       top: "0",
       margin: "0",
@@ -414,6 +396,7 @@ const darkMode: any = {
       borderRadius: "50%",
     },
     ".range__input::-webkit-slider-thumb": {
+      cursor: "pointer",
       position: "relative",
       height: "28px",
       width: "28px",
@@ -430,6 +413,7 @@ const darkMode: any = {
       zIndex: "1",
     },
     ".range__input::-moz-range-thumb": {
+      cursor: "pointer",
       position: "relative",
       height: "28px",
       width: "28px",
@@ -441,6 +425,7 @@ const darkMode: any = {
       padding: "0",
     },
     ".range__input::-ms-thumb": {
+      cursor: "pointer",
       position: "relative",
       height: "28px",
       width: "28px",
@@ -474,17 +459,17 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "none",
+      background: "0 0",
       border: "none",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       lineHeight: "1",
       webkitAppearance: "none",
       mozAppearance: "none",
       appearance: "none",
       fallbacks: [
         {
-          background: "transparent",
+          background: "0 0",
         },
       ],
       height: "30px",
@@ -494,6 +479,7 @@ const darkMode: any = {
     },
     ".range--disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
       fallbacks: [
         {
@@ -506,9 +492,9 @@ const darkMode: any = {
       backgroundImage: "linear-gradient(#bdbdbd, #bdbdbd)",
     },
     ".range--material__input": {
-      backgroundImage: "linear-gradient(#4a148c, #4a148c)",
+      backgroundImage: "linear-gradient(#bb86fc, #bb86fc)",
       backgroundPosition: "center left",
-      backgroundSize: "0% 2px",
+      backgroundSize: "0 2px",
     },
     ".range--material__focus-ring": {
       display: "block",
@@ -519,11 +505,11 @@ const darkMode: any = {
       width: "14px",
       height: "14px",
       border: "none",
-      boxShadow: "0 0 0 9px #4a148c",
-      backgroundColor: "#4a148c",
+      boxShadow: "0 0 0 9px #bb86fc",
+      backgroundColor: "#bb86fc",
       borderRadius: "50%",
       opacity: "0",
-      transition: "opacity 0.25s ease-out, transform 0.25s ease-out, -webkit-transform 0.25s ease-out",
+      transition: "opacity 0.25s ease-out, transform 0.25s ease-out,\r\n    -webkit-transform 0.25s ease-out",
       fallbacks: [
         {
           transition: "opacity 0.25s ease-out, transform 0.25s ease-out",
@@ -533,7 +519,7 @@ const darkMode: any = {
         },
       ],
     },
-    ".range--material__input.range__input--active + .range--material__focus-ring::-webkit-slider-thumb": {
+    ".range--material__input.range__input--active\r\n  + .range--material__focus-ring::-webkit-slider-thumb": {
       opacity: "0.2",
       webkitTransform: "scale(1.5, 1.5, 1.5)",
       transform: "scale(1.5, 1.5, 1.5)",
@@ -548,7 +534,7 @@ const darkMode: any = {
       borderRadius: "0",
       boxShadow: "none",
       backgroundImage:
-        "radial-gradient(\r\n    circle farthest-corner,\r\n    #4a148c 0%,\r\n    #4a148c 6.6px,\r\n    transparent 7px\r\n  )",
+        "radial-gradient(\r\n    circle farthest-corner,\r\n    #bb86fc 0,\r\n    #bb86fc 6.6px,\r\n    transparent 7px\r\n  )",
       transition: "transform 0.1s linear, -webkit-transform 0.1s linear",
       fallbacks: [
         {
@@ -562,13 +548,13 @@ const darkMode: any = {
     },
     ".range--material__input[_zero]::-webkit-slider-thumb": {
       backgroundImage:
-        "radial-gradient(\r\n    circle farthest-corner,\r\n    #f2f2f2 0%,\r\n    #f2f2f2 4px,\r\n    #bdbdbd 4px,\r\n    #bdbdbd 6.4px,\r\n    transparent 7px\r\n  )",
+        "radial-gradient(\r\n    circle farthest-corner,\r\n    #f2f2f2 0,\r\n    #f2f2f2 4px,\r\n    #bdbdbd 4px,\r\n    #bdbdbd 6.4px,\r\n    transparent 7px\r\n  )",
     },
-    ".range--material__input[_zero] + .range--material__focus-ring::-webkit-slider-thumb": {
+    ".range--material__input[_zero]\r\n  + .range--material__focus-ring::-webkit-slider-thumb": {
       boxShadow: "0 0 0 9px #bdbdbd",
     },
     ".range--material__input::-moz-range-track": {
-      background: "none",
+      background: "0 0",
     },
     ".range--material__input::-moz-range-thumb, .range--material__input:focus::-moz-range-thumb": {
       boxSizing: "border-box",
@@ -578,10 +564,10 @@ const darkMode: any = {
       borderRadius: "0",
       backgroundColor: "transparent",
       backgroundImage:
-        "-moz-radial-gradient(\r\n    circle farthest-corner,\r\n    #4a148c 0%,\r\n    #4a148c 6.6px,\r\n    transparent 7px\r\n  )",
+        "-moz-radial-gradient(\r\n    circle farthest-corner,\r\n    #bb86fc 0,\r\n    #bb86fc 6.6px,\r\n    transparent 7px\r\n  )",
       boxShadow: "none",
     },
-    ".range--material__input:active::-webkit-slider-thumb, .range--material__input.range__input--active::-webkit-slider-thumb":
+    ".range--material__input.range__input--active::-webkit-slider-thumb, .range--material__input:active::-webkit-slider-thumb":
       {
         webkitTransform: "scale(1.5)",
         transform: "scale(1.5)",
@@ -603,12 +589,12 @@ const darkMode: any = {
     },
     ".range--material__input:disabled::-webkit-slider-thumb": {
       backgroundImage:
-        "radial-gradient(\r\n    circle farthest-corner,\r\n    #b0b0b0 0%,\r\n    #b0b0b0 4px,\r\n    #eeeeee 4.4px,\r\n    #eeeeee 7.6px,\r\n    transparent 7.6px\r\n  )",
+        "radial-gradient(\r\n    circle farthest-corner,\r\n    #b0b0b0 0,\r\n    #b0b0b0 4px,\r\n    #eee 4.4px,\r\n    #eee 7.6px,\r\n    transparent 7.6px\r\n  )",
       transition: "none",
     },
     ".range--material__input:disabled::-moz-range-thumb": {
       backgroundImage:
-        "-moz-radial-gradient(\r\n    circle farthest-corner,\r\n    #b0b0b0 0%,\r\n    #b0b0b0 4px,\r\n    #eeeeee 4.4px,\r\n    #eeeeee 7.6px,\r\n    transparent 7.6px\r\n  )",
+        "-moz-radial-gradient(\r\n    circle farthest-corner,\r\n    #b0b0b0 0,\r\n    #b0b0b0 4px,\r\n    #eee 4.4px,\r\n    #eee 7.6px,\r\n    transparent 7.6px\r\n  )",
       transition: "none",
     },
     ".notification": {
@@ -644,13 +630,14 @@ const darkMode: any = {
           font: "inherit",
         },
       ],
-      color: "white",
-      background: "transparent",
+      color: "#fff",
+      background: "0 0",
       lineHeight: "19px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -671,20 +658,20 @@ const darkMode: any = {
       display: "none",
     },
     ".notification--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       fontSize: "16px",
       fallbacks: [
         {
           fontWeight: "400",
         },
       ],
-      color: "white",
+      color: "#fff",
     },
     ".toolbar": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -700,6 +687,7 @@ const darkMode: any = {
       background: "#fafafa",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -720,7 +708,7 @@ const darkMode: any = {
           color: "inherit",
         },
         {
-          background: "transparent",
+          background: "0 0",
         },
         {
           display: "-webkit-flex",
@@ -747,12 +735,14 @@ const darkMode: any = {
       top: "0",
       paddingTop: "0",
     },
-    "@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx)": {
+    "@media (-webkit-min-device-pixel-ratio: 2),\r\n  (min-resolution: 192dpi),\r\n  (min-resolution: 2dppx)": {
       ".toolbar": {
-        backgroundImage: "linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%)",
+        backgroundImage:
+          "linear-gradient(\r\n      0deg,\r\n      #b2b2b2,\r\n      #b2b2b2 50%,\r\n      transparent 50%\r\n    )",
       },
       ".bottom-bar": {
-        backgroundImage: "linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%)",
+        backgroundImage:
+          "linear-gradient(\r\n      180deg,\r\n      #b2b2b2,\r\n      #b2b2b2 50%,\r\n      transparent 50%\r\n    )",
       },
       ".tabbar": {
         borderTop: "none",
@@ -787,21 +777,26 @@ const darkMode: any = {
       ".list-header": {
         backgroundImage: "linear-gradient(180deg, #ccc, #ccc 50%, transparent 50%)",
       },
-      ".list-item--material__left:empty, .list-item--material__center": {
-        backgroundImage: "linear-gradient(0deg, #eee, #eee 50%, transparent 50%)",
+      ".list-item--material__center, .list-item--material__left:empty": {
+        backgroundImage:
+          "linear-gradient(\r\n      0deg,\r\n      #1f1f1f,\r\n      #1f1f1f 50%,\r\n      transparent 50%\r\n    )",
       },
       ".list-item--material__right": {
-        backgroundImage: "linear-gradient(0deg, #eee, #eee 50%, transparent 50%)",
+        backgroundImage:
+          "linear-gradient(\r\n      0deg,\r\n      #1f1f1f,\r\n      #1f1f1f 50%,\r\n      transparent 50%\r\n    )",
       },
       ".list-item--material.list-item--expandable": {
-        backgroundImage: "linear-gradient(0deg, #eee, #eee 50%, transparent 50%)",
+        backgroundImage:
+          "linear-gradient(\r\n      0deg,\r\n      #1f1f1f,\r\n      #1f1f1f 50%,\r\n      transparent 50%\r\n    )",
       },
-      ".list-item--material.list-item--longdivider, .list-item--material.list-item--expandable.list-item--longdivider":
+      ".list-item--material.list-item--expandable.list-item--longdivider, .list-item--material.list-item--longdivider":
         {
-          backgroundImage: "linear-gradient(0deg, #eee, #eee 50%, transparent 50%)",
+          backgroundImage:
+            "linear-gradient(\r\n      0deg,\r\n      #1f1f1f,\r\n      #1f1f1f 50%,\r\n      transparent 50%\r\n    )",
         },
       ".list-header--material:not(:first-of-type)": {
-        backgroundImage: "linear-gradient(180deg, #eee, #eee 50%, transparent 50%)",
+        backgroundImage:
+          "linear-gradient(\r\n      180deg,\r\n      #1f1f1f,\r\n      #1f1f1f 50%,\r\n      transparent 50%\r\n    )",
       },
       ".list-item--longdivider": {
         backgroundImage: "linear-gradient(0deg, #ccc, #ccc 50%, transparent 50%)",
@@ -820,23 +815,24 @@ const darkMode: any = {
         backgroundRepeat: "no-repeat",
         backgroundPosition: "top, left",
         backgroundImage:
-          "linear-gradient(0deg, transparent, transparent 50%, #ddd 50%),\r\n      linear-gradient(90deg, transparent, transparent 50%, #ddd 50%)",
+          "linear-gradient(\r\n        0deg,\r\n        transparent,\r\n        transparent 50%,\r\n        #ddd 50%\r\n      ),\r\n      linear-gradient(90deg, transparent, transparent 50%, #ddd 50%)",
       },
       ".alert-dialog-button--rowfooter:first-child": {
         borderTop: "none",
         backgroundSize: "100% 1px",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "top, left",
-        backgroundImage: "linear-gradient(0deg, transparent, transparent 50%, #ddd 50%)",
+        backgroundImage:
+          "linear-gradient(\r\n      0deg,\r\n      transparent,\r\n      transparent 50%,\r\n      #ddd 50%\r\n    )",
       },
       ".alert-dialog-button--material": {
-        background: "none",
+        background: "0 0",
       },
       ".alert-dialog-button--rowfooter--material, .alert-dialog-button--rowfooter--material:first-child": {
-        background: "none",
+        background: "0 0",
       },
       ".alert-dialog-button--primal--material": {
-        background: "none",
+        background: "0 0",
       },
       ".action-sheet-button": {
         backgroundImage:
@@ -857,7 +853,7 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
       height: "44px",
@@ -872,7 +868,7 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "44px",
       maxWidth: "50%",
@@ -891,7 +887,7 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "44px",
       maxWidth: "50%",
@@ -910,7 +906,7 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#1f1f21",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "44px",
       width: "46%",
@@ -939,7 +935,7 @@ const darkMode: any = {
       width: "100%",
     },
     ".bottom-bar": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -955,6 +951,7 @@ const darkMode: any = {
       background: "#fafafa",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -981,7 +978,7 @@ const darkMode: any = {
           color: "inherit",
         },
         {
-          background: "transparent",
+          background: "0 0",
         },
       ],
       boxShadow: "none",
@@ -1040,7 +1037,7 @@ const darkMode: any = {
       borderBottom: "0",
       boxShadow: "0 1px 5px rgba(0, 0, 0, 0.3)",
       padding: "0",
-      backgroundColor: "#4a148c",
+      backgroundColor: "#1f1f1f",
       backgroundSize: "0",
     },
     ".toolbar--noshadow": {
@@ -1049,13 +1046,13 @@ const darkMode: any = {
       borderBottom: "none",
     },
     ".toolbar--material__left, .toolbar--material__right": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
       fontSize: "20px",
       fallbacks: [
         {
-          color: "#ffffff",
+          color: "#fff",
         },
         {
           fontWeight: "400",
@@ -1068,13 +1065,13 @@ const darkMode: any = {
       lineHeight: "56px",
     },
     ".toolbar--material__center": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
       fontSize: "20px",
       fallbacks: [
         {
-          color: "#ffffff",
+          color: "#fff",
         },
         {
           fontWeight: "400",
@@ -1114,14 +1111,15 @@ const darkMode: any = {
       padding: "4px 10px",
       margin: "0",
       font: "inherit",
-      color: "white",
-      background: "transparent",
+      color: "#fff",
+      background: "0 0",
       border: "0 solid currentColor",
       lineHeight: "32px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -1168,6 +1166,7 @@ const darkMode: any = {
     },
     ".button:disabled, .button[disabled]": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".button--outline": {
@@ -1205,13 +1204,14 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#4a148c",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "32px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -1226,16 +1226,16 @@ const darkMode: any = {
           border: "1px solid transparent",
         },
         {
-          color: "white",
+          color: "#fff",
         },
         {
-          background: "transparent",
+          background: "0 0",
         },
         {
           border: "0 solid currentColor",
         },
         {
-          background: "transparent",
+          background: "0 0",
         },
         {
           border: "none",
@@ -1260,6 +1260,7 @@ const darkMode: any = {
     },
     ".button--quiet:disabled, .button--quiet[disabled]": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
       border: "none",
     },
@@ -1284,14 +1285,15 @@ const darkMode: any = {
       padding: "4px 10px",
       margin: "0",
       font: "inherit",
-      color: "white",
-      background: "transparent",
+      color: "#fff",
+      background: "0 0",
       border: "none",
       lineHeight: "32px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -1303,7 +1305,7 @@ const darkMode: any = {
       textDecoration: "none",
       fallbacks: [
         {
-          color: "white",
+          color: "#fff",
         },
         {
           backgroundColor: "#4a148c",
@@ -1338,13 +1340,14 @@ const darkMode: any = {
       outline: "0",
     },
     ".button--cta:active": {
-      color: "white",
+      color: "#fff",
       backgroundColor: "#7c43bd",
       transition: "none",
       opacity: "0.2",
     },
     ".button--cta:disabled, .button--cta[disabled]": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".button--large": {
@@ -1368,6 +1371,7 @@ const darkMode: any = {
     },
     ".button--large:disabled, .button--large[disabled]": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".button--large:hover": {
@@ -1385,13 +1389,14 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#4a148c",
-      background: "transparent",
+      background: "0 0",
       border: "1px solid transparent",
       lineHeight: "36px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "500",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -1403,13 +1408,13 @@ const darkMode: any = {
       textDecoration: "none",
       fallbacks: [
         {
-          color: "white",
+          color: "#fff",
         },
         {
           border: "0 solid currentColor",
         },
         {
-          background: "transparent",
+          background: "0 0",
         },
         {
           display: "inline-block",
@@ -1453,12 +1458,13 @@ const darkMode: any = {
       transition: "none",
       opacity: "0.2",
       color: "#4a148c",
-      background: "transparent",
+      background: "0 0",
       border: "1px solid transparent",
       boxShadow: "none",
     },
     ".button--large--quiet:disabled, .button--large--quiet[disabled]": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".button--large--quiet:hover": {
@@ -1475,14 +1481,15 @@ const darkMode: any = {
       padding: "4px 12px",
       margin: "0",
       font: "inherit",
-      color: "white",
-      background: "transparent",
+      color: "#fff",
+      background: "0 0",
       border: "none",
       lineHeight: "36px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "500",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -1509,7 +1516,7 @@ const darkMode: any = {
           fontSize: "17px",
         },
         {
-          color: "white",
+          color: "#fff",
         },
         {
           backgroundColor: "#4a148c",
@@ -1546,13 +1553,14 @@ const darkMode: any = {
       outline: "0",
     },
     ".button--large--cta:active": {
-      color: "white",
+      color: "#fff",
       backgroundColor: "#7c43bd",
       transition: "none",
       opacity: "0.2",
     },
     ".button--large--cta:disabled, .button--large--cta[disabled]": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".button--material": {
@@ -1563,14 +1571,15 @@ const darkMode: any = {
       padding: "0 16px",
       margin: "0",
       font: "inherit",
-      color: "#ffffff",
-      background: "transparent",
+      color: "#fff",
+      background: "0 0",
       border: "0 solid currentColor",
       lineHeight: "36px",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "500",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -1591,7 +1600,7 @@ const darkMode: any = {
           fontWeight: "400",
         },
         {
-          color: "white",
+          color: "#fff",
         },
         {
           backgroundColor: "#4a148c",
@@ -1612,7 +1621,7 @@ const darkMode: any = {
           webkitFontSmoothing: "antialiased",
         },
         {
-          fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+          fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
         },
         {
           border: "none",
@@ -1630,7 +1639,7 @@ const darkMode: any = {
       fontSize: "14px",
       letterSpacing: "0",
       verticalAlign: "middle",
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       borderRadius: "3px",
       transition: "all 0.25s linear",
       boxShadow:
@@ -1648,7 +1657,7 @@ const darkMode: any = {
     ".button--material:active": {
       boxShadow:
         "0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12),\r\n    0 3px 5px -1px rgba(0, 0, 0, 0.4)",
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       opacity: "0.9",
       transition: "all 0.25s linear",
     },
@@ -1670,14 +1679,15 @@ const darkMode: any = {
       padding: "0 16px",
       margin: "0",
       font: "inherit",
-      color: "#4a148c",
-      background: "transparent",
+      color: "#bb86fc",
+      background: "0 0",
       border: "0 solid currentColor",
       lineHeight: "36px",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "500",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -1692,10 +1702,10 @@ const darkMode: any = {
           transition: "background-color 0.25s linear",
         },
         {
-          color: "#ffffff",
+          color: "#fff",
         },
         {
-          backgroundColor: "#4a148c",
+          backgroundColor: "#bb86fc",
         },
         {
           boxShadow:
@@ -1708,7 +1718,7 @@ const darkMode: any = {
           fontWeight: "400",
         },
         {
-          color: "white",
+          color: "#fff",
         },
         {
           backgroundColor: "#4a148c",
@@ -1729,7 +1739,7 @@ const darkMode: any = {
           webkitFontSmoothing: "antialiased",
         },
         {
-          fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+          fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
         },
         {
           border: "none",
@@ -1763,7 +1773,7 @@ const darkMode: any = {
     ".button--material--flat:focus": {
       boxShadow: "none",
       backgroundColor: "transparent",
-      color: "#4a148c",
+      color: "#bb86fc",
       outline: "0",
       opacity: "1",
       border: "none",
@@ -1774,7 +1784,7 @@ const darkMode: any = {
       opacity: "1",
       border: "none",
       backgroundColor: "color-mod(#999 a(20%))",
-      color: "#4a148c",
+      color: "#bb86fc",
       transition: "all 0.25s linear",
     },
     ".button--material--flat:disabled, .button--material--flat[disabled]": {
@@ -1785,7 +1795,7 @@ const darkMode: any = {
       color: "color-mod(black a(26%))",
     },
     ".button-bar": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -1810,7 +1820,7 @@ const darkMode: any = {
       border: "none",
     },
     ".button-bar__item": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -1823,7 +1833,7 @@ const darkMode: any = {
       boxSizing: "border-box",
     },
     ".button-bar__button": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -1850,6 +1860,7 @@ const darkMode: any = {
     },
     ".button-bar__button:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".button-bar__button:hover": {
@@ -1882,7 +1893,7 @@ const darkMode: any = {
       borderRadius: "0 4px 4px 0",
     },
     ".segment": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -1907,7 +1918,7 @@ const darkMode: any = {
       border: "none",
     },
     ".segment__item": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -1933,7 +1944,7 @@ const darkMode: any = {
       backgroundColor: "transparent",
       zIndex: "1",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       width: "100%",
       height: "100%",
       margin: "0",
@@ -1942,7 +1953,7 @@ const darkMode: any = {
       appearance: "none",
     },
     ".segment__button": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -1970,6 +1981,7 @@ const darkMode: any = {
     },
     ".segment__item:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".segment__button:hover": {
@@ -2007,7 +2019,7 @@ const darkMode: any = {
       boxShadow: "0 0 2px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24)",
     },
     ".segment--material__button": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       fontSize: "14px",
@@ -2038,7 +2050,7 @@ const darkMode: any = {
         borderWidth: "0",
       },
     ".tabbar": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2060,11 +2072,11 @@ const darkMode: any = {
       padding: "0",
       height: "49px",
       backgroundColor: "#fafafa",
-      borderTop: "none",
+      borderTop: "0px solid #ccc",
       width: "100%",
     },
     ".tabbar__item": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2088,7 +2100,7 @@ const darkMode: any = {
       backgroundColor: "transparent",
       zIndex: "1",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       width: "100%",
       height: "100%",
       margin: "0",
@@ -2097,7 +2109,7 @@ const darkMode: any = {
       appearance: "none",
     },
     ".tabbar__button": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2107,9 +2119,10 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#999",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "49px",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -2150,7 +2163,7 @@ const darkMode: any = {
       height: "28px",
     },
     ".tabbar__label": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2193,6 +2206,7 @@ const darkMode: any = {
     },
     ".tabbar__button:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".tabbar__button:focus": {
@@ -2247,11 +2261,11 @@ const darkMode: any = {
       backgroundColor: "#4a148c",
     },
     ".tabbar--material": {
-      background: "none",
-      backgroundColor: "#4a148c",
+      background: "0 0",
+      backgroundColor: "#1f1f1f",
       borderBottomWidth: "0",
       boxShadow:
-        "0 4px 2px -2px rgba(0, 0, 0, 0.14), 0 3px 5px -2px rgba(0, 0, 0, 0.12),\r\n    0 5px 1px -4px rgba(0, 0, 0, 0.2)",
+        "0 4px 2px -2px rgba(0, 0, 0, 0.14),\r\n    0 3px 5px -2px rgba(0, 0, 0, 0.12), 0 5px 1px -4px rgba(0, 0, 0, 0.2)",
     },
     ".tabbar--material__button": {
       backgroundColor: "transparent",
@@ -2261,13 +2275,13 @@ const darkMode: any = {
           fontWeight: "500",
         },
         {
-          color: "#ffffff",
+          color: "#fff",
         },
       ],
       textTransform: "uppercase",
       fontSize: "14px",
       fontWeight: "400",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
     },
     ".tabbar--material__button:after": {
@@ -2281,7 +2295,7 @@ const darkMode: any = {
       backgroundColor: "rgba(255, 255, 255, 1)",
       fallbacks: [
         {
-          backgroundColor: "#ffffff",
+          backgroundColor: "#fff",
         },
       ],
     },
@@ -2294,7 +2308,7 @@ const darkMode: any = {
       color: "rgba(255, 255, 255, 1)",
       fallbacks: [
         {
-          color: "#ffffff",
+          color: "#fff",
         },
       ],
     },
@@ -2311,7 +2325,7 @@ const darkMode: any = {
       backgroundColor: "rgba(255, 255, 255, 1)",
       fallbacks: [
         {
-          backgroundColor: "#ffffff",
+          backgroundColor: "#fff",
         },
       ],
     },
@@ -2320,12 +2334,12 @@ const darkMode: any = {
       lineHeight: "36px",
     },
     ".tabbar--material__label": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
     },
     ".tabbar--material__label:first-child": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
       letterSpacing: "0.015em",
@@ -2340,7 +2354,7 @@ const darkMode: any = {
       fontSize: "10px",
     },
     ".toolbar-button": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2353,7 +2367,7 @@ const darkMode: any = {
           fontWeight: "400",
         },
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
       borderRadius: "2px",
@@ -2365,7 +2379,7 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
       transition: "none",
@@ -2373,6 +2387,7 @@ const darkMode: any = {
     },
     ".toolbar-button:disabled, .toolbar-button[disabled]": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".toolbar-button:focus": {
@@ -2396,10 +2411,11 @@ const darkMode: any = {
           verticalAlign: "baseline",
         },
         {
-          color: "#ffffff",
+          color: "#fff",
         },
       ],
       display: "inline-block",
+      padding: "0 12px",
       height: "100%",
       margin: "0",
       border: "none",
@@ -2425,7 +2441,7 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
       display: "inline-block",
@@ -2466,7 +2482,7 @@ const darkMode: any = {
           verticalAlign: "baseline",
         },
         {
-          color: "#ffffff",
+          color: "#fff",
         },
       ],
       display: "inline-block",
@@ -2505,11 +2521,12 @@ const darkMode: any = {
       position: "relative",
       display: "inline-block",
       verticalAlign: "top",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2521,11 +2538,12 @@ const darkMode: any = {
       position: "relative",
       display: "inline-block",
       verticalAlign: "top",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2549,7 +2567,7 @@ const darkMode: any = {
       backgroundColor: "transparent",
       zIndex: "1",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       width: "100%",
       height: "100%",
       margin: "0",
@@ -2564,7 +2582,7 @@ const darkMode: any = {
       backgroundClip: "padding-box",
       width: "22px",
       height: "22px",
-      background: "transparent",
+      background: "0 0",
       border: "1px solid #c7c7cd",
       borderRadius: "22px",
       left: "0",
@@ -2576,7 +2594,7 @@ const darkMode: any = {
       left: "5px",
       width: "11px",
       height: "5px",
-      background: "transparent",
+      background: "0 0",
       border: "2px solid #fff",
       borderWidth: "1px",
       borderTop: "none",
@@ -2595,20 +2613,22 @@ const darkMode: any = {
     },
     ":disabled + .checkbox__checkmark": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ":disabled:active + .checkbox__checkmark:before": {
-      background: "transparent",
+      background: "0 0",
     },
     ".checkbox--noborder": {
       position: "relative",
       display: "inline-block",
       verticalAlign: "top",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2630,7 +2650,7 @@ const darkMode: any = {
       backgroundColor: "transparent",
       zIndex: "1",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       width: "100%",
       height: "100%",
       margin: "0",
@@ -2642,6 +2662,7 @@ const darkMode: any = {
       position: "relative",
       display: "inline-block",
       verticalAlign: "top",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -2650,7 +2671,7 @@ const darkMode: any = {
       backgroundClip: "padding-box",
       width: "22px",
       height: "22px",
-      background: "transparent",
+      background: "0 0",
       border: "none",
     },
     ".checkbox--noborder__checkmark:before": {
@@ -2658,7 +2679,7 @@ const darkMode: any = {
       position: "absolute",
       width: "22px",
       height: "22px",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       borderRadius: "22px",
       left: "0",
@@ -2671,7 +2692,7 @@ const darkMode: any = {
       opacity: "0",
       width: "11px",
       height: "4px",
-      background: "transparent",
+      background: "0 0",
       border: "2px solid #4a148c",
       borderTop: "none",
       borderRight: "none",
@@ -2680,7 +2701,7 @@ const darkMode: any = {
       transform: "rotate(-45deg)",
     },
     ":checked + .checkbox--noborder__checkmark:before": {
-      background: "transparent",
+      background: "0 0",
       border: "none",
     },
     ":checked + .checkbox--noborder__checkmark:after": {
@@ -2691,15 +2712,16 @@ const darkMode: any = {
     },
     ":disabled + .checkbox--noborder__checkmark": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ":disabled:active + .checkbox--noborder__checkmark:before": {
-      background: "transparent",
+      background: "0 0",
       border: "none",
     },
     ".checkbox--material": {
       lineHeight: "18px",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       overflow: "visible",
@@ -2717,12 +2739,12 @@ const darkMode: any = {
       backgroundColor: "transparent",
     },
     ":checked + .checkbox--material__checkmark:before": {
-      border: "2px solid #4a148c",
-      backgroundColor: "#4a148c",
+      border: "2px solid #bb86fc",
+      backgroundColor: "#bb86fc",
       transition: "background-color 0.1s linear, border-color 0.1s linear",
     },
     ".checkbox--material__checkmark:after": {
-      borderColor: "#ffffff",
+      borderColor: "#fff",
       transition: "transform 0.2s ease 0, -webkit-transform 0.2s ease 0",
       fallbacks: [
         {
@@ -2774,7 +2796,7 @@ const darkMode: any = {
       display: "block",
       webkitTransform: "scale3d(0.2, 0.2, 0.2)",
       transform: "scale3d(0.2, 0.2, 0.2)",
-      transition: "opacity 0.25s ease-out, transform 0.1s ease-out, -webkit-transform 0.1s ease-out",
+      transition: "opacity 0.25s ease-out, transform 0.1s ease-out,\r\n    -webkit-transform 0.1s ease-out",
       fallbacks: [
         {
           transition: "opacity 0.25s ease-out, transform 0.1s ease-out",
@@ -2785,8 +2807,8 @@ const darkMode: any = {
       ],
     },
     ".checkbox--material__input:checked:before": {
-      boxShadow: "0 0 0 11px #4a148c",
-      backgroundColor: "#4a148c",
+      boxShadow: "0 0 0 11px #bb86fc",
+      backgroundColor: "#bb86fc",
     },
     ".checkbox--material__input:active:before": {
       opacity: "0.15",
@@ -2803,7 +2825,7 @@ const darkMode: any = {
       backgroundColor: "#afafaf",
     },
     ":disabled:checked + .checkbox--material__checkmark:after": {
-      borderColor: "#ffffff",
+      borderColor: "#fff",
     },
     ".radio-button__input": {
       position: "absolute",
@@ -2816,7 +2838,7 @@ const darkMode: any = {
       backgroundColor: "transparent",
       zIndex: "1",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       width: "100%",
       height: "100%",
       margin: "0",
@@ -2826,12 +2848,13 @@ const darkMode: any = {
     },
     ".radio-button__input:active, .radio-button__input:focus": {
       outline: "0",
-      webkitTapHighlightColor: "rgba(0, 0, 0, 0)",
+      webkitTapHighlightColor: "transparent",
     },
     ".radio-button": {
       position: "relative",
       display: "inline-block",
       verticalAlign: "top",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -2852,7 +2875,7 @@ const darkMode: any = {
       backgroundClip: "padding-box",
       width: "22px",
       height: "22px",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       fallbacks: [
         {
@@ -2867,11 +2890,12 @@ const darkMode: any = {
       position: "relative",
       display: "inline-block",
       verticalAlign: "top",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -2885,7 +2909,7 @@ const darkMode: any = {
       ],
       width: "24px",
       height: "24px",
-      background: "transparent",
+      background: "0 0",
       pointerEvents: "none",
     },
     ".radio-button__checkmark:after": {
@@ -2896,7 +2920,7 @@ const darkMode: any = {
       opacity: "0",
       width: "11px",
       height: "4px",
-      background: "transparent",
+      background: "0 0",
       border: "2px solid #4a148c",
       borderTop: "none",
       borderRight: "none",
@@ -2908,7 +2932,7 @@ const darkMode: any = {
       background: "rgba(0, 0, 0, 0)",
       fallbacks: [
         {
-          background: "#000000",
+          background: "#000",
         },
       ],
     },
@@ -2916,16 +2940,17 @@ const darkMode: any = {
       opacity: "1",
     },
     ":checked + .radio-button__checkmark:before": {
-      background: "transparent",
+      background: "0 0",
       border: "none",
     },
     ":disabled + .radio-button__checkmark": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".radio-button--material": {
       lineHeight: "22px",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
     },
@@ -2937,16 +2962,11 @@ const darkMode: any = {
       opacity: "0",
       width: "20px",
       height: "20px",
-      boxShadow: "0 0 0 14px #717171",
+      boxShadow: "0 0 0 14px rgba(123, 123, 123, 1)",
       border: "none",
       boxSizing: "border-box",
       borderRadius: "50%",
-      backgroundColor: "#717171",
-      pointerEvents: "none",
-      display: "block",
-      webkitTransform: "scale3d(0.2, 0.2, 0.2)",
-      transform: "scale3d(0.2, 0.2, 0.2)",
-      transition: "opacity 0.25s ease-out, transform 0.1s ease-out, -webkit-transform 0.1s ease-out",
+      backgroundColor: "rgba(123, 123, 123, 1)",
       fallbacks: [
         {
           transition: "opacity 0.25s ease-out, transform 0.1s ease-out",
@@ -2954,11 +2974,19 @@ const darkMode: any = {
         {
           transition: "opacity 0.25s ease-out, -webkit-transform 0.1s ease-out",
         },
+        {
+          backgroundColor: "#7b7b7b",
+        },
       ],
+      pointerEvents: "none",
+      display: "block",
+      webkitTransform: "scale3d(0.2, 0.2, 0.2)",
+      transform: "scale3d(0.2, 0.2, 0.2)",
+      transition: "opacity 0.25s ease-out, transform 0.1s ease-out,\r\n    -webkit-transform 0.1s ease-out",
     },
     ".radio-button--material__input:checked:before": {
-      boxShadow: "0 0 0 14px #4a148c",
-      backgroundColor: "#4a148c",
+      boxShadow: "0 0 0 14px #bb86fc",
+      backgroundColor: "#bb86fc",
     },
     ".radio-button--material__input:active:before": {
       opacity: "0.15",
@@ -2971,8 +2999,13 @@ const darkMode: any = {
       overflow: "visible",
     },
     ".radio-button--material__checkmark:before": {
-      background: "transparent",
-      border: "2px solid #717171",
+      background: "0 0",
+      border: "2px solid rgba(123, 123, 123, 1)",
+      fallbacks: [
+        {
+          border: "2px solid #7b7b7b",
+        },
+      ],
       boxSizing: "border-box",
       borderRadius: "50%",
       width: "20px",
@@ -2980,7 +3013,7 @@ const darkMode: any = {
       transition: "border 0.2s ease",
     },
     ".radio-button--material__checkmark:after": {
-      transition: "background 0.2s ease, transform 0.2s ease, -webkit-transform 0.2s ease",
+      transition: "background 0.2s ease, transform 0.2s ease,\r\n    -webkit-transform 0.2s ease",
       fallbacks: [
         {
           transition: "background 0.2s ease, transform 0.2s ease",
@@ -2999,18 +3032,23 @@ const darkMode: any = {
       transform: "scale(0)",
     },
     ":checked + .radio-button--material__checkmark:before": {
-      background: "transparent",
-      border: "2px solid #4a148c",
+      background: "0 0",
+      border: "2px solid #bb86fc",
     },
     ".radio-button--material__input + .radio-button__checkmark:after": {
-      background: "#717171",
+      background: "rgba(123, 123, 123, 1)",
+      fallbacks: [
+        {
+          background: "#7b7b7b",
+        },
+      ],
       opacity: "1",
       webkitTransform: "scale(0)",
       transform: "scale(0)",
     },
     ":checked + .radio-button--material__checkmark:after": {
       opacity: "1",
-      background: "#4a148c",
+      background: "#bb86fc",
       webkitTransform: "scale(1)",
       transform: "scale(1)",
     },
@@ -3029,14 +3067,15 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -3064,6 +3103,9 @@ const darkMode: any = {
       display: "flex",
       fallbacks: [
         {
+          color: "#fff",
+        },
+        {
           display: "-webkit-flex",
         },
         {
@@ -3082,7 +3124,7 @@ const darkMode: any = {
       alignItems: "center",
       padding: "0 0 0 14px",
       margin: "0 0 -1px 0",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
       transition: "background-color 0.2s linear",
     },
     ".list-item__top": {
@@ -3251,7 +3293,12 @@ const darkMode: any = {
       padding: "0 0 0 15px",
       fontSize: "12px",
       fontWeight: "500",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
+      fallbacks: [
+        {
+          color: "#fff",
+        },
+      ],
       minHeight: "24px",
       lineHeight: "25px",
       textTransform: "uppercase",
@@ -3314,11 +3361,11 @@ const darkMode: any = {
       padding: "0 6px",
     },
     ".list--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       backgroundImage: "none",
-      backgroundColor: "#fff",
+      backgroundColor: "#121212",
     },
     ".list-item--material": {
       border: "0",
@@ -3337,51 +3384,51 @@ const darkMode: any = {
       lineHeight: "1",
       minHeight: "48px",
     },
-    ".list-item--material__left:empty, .list-item--material__center": {
+    ".list-item--material__center, .list-item--material__left:empty": {
       padding: "14px 6px 14px 0",
-      borderColor: "#eee",
+      borderColor: "#1f1f1f",
       borderBottom: "none",
       backgroundSize: "100% 1px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "bottom",
-      backgroundImage: "linear-gradient(0deg, #eee, #eee 100%)",
+      backgroundImage: "linear-gradient(0deg, #1f1f1f, #1f1f1f 100%)",
       minHeight: "48px",
     },
     ".list-item--material__right": {
       padding: "14px 16px 14px 0",
       lineHeight: "1",
-      borderColor: "#eee",
+      borderColor: "#1f1f1f",
       borderBottom: "none",
       backgroundSize: "100% 1px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "bottom",
-      backgroundImage: "linear-gradient(0deg, #eee, #eee 100%)",
+      backgroundImage: "linear-gradient(0deg, #1f1f1f, #1f1f1f 100%)",
       minHeight: "48px",
     },
     ".list-item--material.list-item--expandable": {
       borderBottom: "none",
       fallbacks: [
         {
-          borderBottom: "1px solid #eee",
+          borderBottom: "1px solid #1f1f1f",
         },
       ],
       backgroundSize: "100% 1px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "bottom",
-      backgroundImage: "linear-gradient(0deg, #eee, #eee 100%)",
+      backgroundImage: "linear-gradient(0deg, #1f1f1f, #1f1f1f 100%)",
       backgroundPositionX: "16px",
     },
-    ".list-item--material.list-item--longdivider, .list-item--material.list-item--expandable.list-item--longdivider": {
+    ".list-item--material.list-item--expandable.list-item--longdivider, .list-item--material.list-item--longdivider": {
       borderBottom: "none",
       fallbacks: [
         {
-          borderBottom: "1px solid #eee",
+          borderBottom: "1px solid #1f1f1f",
         },
       ],
       backgroundSize: "100% 1px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "bottom",
-      backgroundImage: "linear-gradient(0deg, #eee, #eee 100%)",
+      backgroundImage: "linear-gradient(0deg, #1f1f1f, #1f1f1f 100%)",
     },
     ".list-header--material": {
       background: "#fff",
@@ -3389,7 +3436,7 @@ const darkMode: any = {
       fontSize: "14px",
       textTransform: "none",
       margin: "-1px 0 0 0",
-      color: "#757575",
+      color: "#121212",
       fontWeight: "500",
       padding: "8px 16px",
     },
@@ -3398,7 +3445,7 @@ const darkMode: any = {
       backgroundSize: "100% 1px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "top",
-      backgroundImage: "linear-gradient(180deg, #eee, #eee 100%)",
+      backgroundImage: "linear-gradient(180deg, #1f1f1f, #1f1f1f 100%)",
       paddingTop: "16px",
     },
     ".list-item--material__thumbnail": {
@@ -3438,7 +3485,7 @@ const darkMode: any = {
     ".list-item--chevron__right": {
       paddingRight: "30px",
     },
-    ".list-item--nodivider__center, .list-item--nodivider__right, .list-item--nodivider.list-item--expandable, .list-item--expandable .list-item__center, .list-item--expandable .list-item__right":
+    ".list-item--expandable .list-item__center, .list-item--expandable .list-item__right, .list-item--nodivider.list-item--expandable, .list-item--nodivider__center, .list-item--nodivider__right":
       {
         border: "none",
         backgroundImage: "none",
@@ -3472,14 +3519,15 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#6d6d72",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "24px",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "500",
@@ -3508,7 +3556,7 @@ const darkMode: any = {
       letterSpacing: "0.04em",
     },
     ".list-title--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
       color: "#757575",
@@ -3527,15 +3575,14 @@ const darkMode: any = {
       backgroundClip: "padding-box",
       padding: "0 8px 0 28px",
       margin: "0",
-      "border-radius": "8px",
       font: "inherit",
-      color: "#1f1f21",
-      background: "transparent",
+      color: "rgba(255, 255, 255, 1)",
+      background: "0 0",
       border: "none",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       lineHeight: "1.3",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -3556,6 +3603,9 @@ const darkMode: any = {
           lineHeight: "1",
         },
         {
+          color: "#fff",
+        },
+        {
           color: "inherit",
         },
         {
@@ -3571,7 +3621,7 @@ const darkMode: any = {
       boxShadow: "none",
       borderRadius: "5.5px",
       backgroundImage:
-        'url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTNweCIgaGVpZ2h0PSIxNHB4IiB2aWV3Qm94PSIwIDAgMTMgMTQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQyICgzNjc4MSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+aW9zLXNlYXJjaC1pbnB1dC1pY29uPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9ImNvbXBvbmVudHMiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJpb3Mtc2VhcmNoLWlucHV0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDguMDAwMDAwLCAtNDMuMDAwMDAwKSIgZmlsbD0iIzdBNzk3QiI+CiAgICAgICAgICAgIDxnIGlkPSJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDAuMDAwMDAwLCAzNi4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xNi45OTcyNDgyLDE1LjUwNDE0NjYgQzE3LjA3NzM2NTcsMTUuNTQwNTkzOCAxNy4xNTIyNzMxLDE1LjU5MTYxMjkgMTcuMjE3NzUxNiwxNS42NTcwOTE0IEwyMC42NDk5OTEsMTkuMDg5MzMwOCBDMjAuOTQ0ODQ0OSwxOS4zODQxODQ3IDIwLjk0ODQ3NjQsMTkuODU4NjA2IDIwLjY1MzU0MTIsMjAuMTUzNTQxMiBDMjAuMzYwNjQ4LDIwLjQ0NjQzNDQgMTkuODgxMjcxNiwyMC40NDE5MzE3IDE5LjU4OTMzMDgsMjAuMTQ5OTkxIEwxNi4xNTcwOTE0LDE2LjcxNzc1MTYgQzE2LjA5MTM3LDE2LjY1MjAzMDEgMTYuMDQwMTE3MSwxNi41NzczODc0IDE2LjAwMzQxNDEsMTYuNDk3Nzk5NSBDMTUuMTY3MTY5NCwxNy4xMjcwNDExIDE0LjEyNzEzOTMsMTcuNSAxMywxNy41IEMxMC4yMzg1NzYzLDE3LjUgOCwxNS4yNjE0MjM3IDgsMTIuNSBDOCw5LjczODU3NjI1IDEwLjIzODU3NjMsNy41IDEzLDcuNSBDMTUuNzYxNDIzNyw3LjUgMTgsOS43Mzg1NzYyNSAxOCwxMi41IEMxOCwxMy42Mjc0Njg1IDE3LjYyNjgyMzIsMTQuNjY3Nzc2OCAxNi45OTcyNDgyLDE1LjUwNDE0NjYgWiBNMTMsMTYuNSBDMTUuMjA5MTM5LDE2LjUgMTcsMTQuNzA5MTM5IDE3LDEyLjUgQzE3LDEwLjI5MDg2MSAxNS4yMDkxMzksOC41IDEzLDguNSBDMTAuNzkwODYxLDguNSA5LDEwLjI5MDg2MSA5LDEyLjUgQzksMTQuNzA5MTM5IDEwLjc5MDg2MSwxNi41IDEzLDE2LjUgWiIgaWQ9Imlvcy1zZWFyY2gtaW5wdXQtaWNvbiI+PC9wYXRoPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=")',
+        "url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTNweCIgaGVpZ2h0PSIxNHB4IiB2aWV3Qm94PSIwIDAgMTMgMTQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQyICgzNjc4MSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+aW9zLXNlYXJjaC1pbnB1dC1pY29uPC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9ImNvbXBvbmVudHMiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJpb3Mtc2VhcmNoLWlucHV0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDguMDAwMDAwLCAtNDMuMDAwMDAwKSIgZmlsbD0iIzdBNzk3QiI+CiAgICAgICAgICAgIDxnIGlkPSJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDAuMDAwMDAwLCAzNi4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik0xNi45OTcyNDgyLDE1LjUwNDE0NjYgQzE3LjA3NzM2NTcsMTUuNTQwNTkzOCAxNy4xNTIyNzMxLDE1LjU5MTYxMjkgMTcuMjE3NzUxNiwxNS42NTcwOTE0IEwyMC42NDk5OTEsMTkuMDg5MzMwOCBDMjAuOTQ0ODQ0OSwxOS4zODQxODQ3IDIwLjk0ODQ3NjQsMTkuODU4NjA2IDIwLjY1MzU0MTIsMjAuMTUzNTQxMiBDMjAuMzYwNjQ4LDIwLjQ0NjQzNDQgMTkuODgxMjcxNiwyMC40NDE5MzE3IDE5LjU4OTMzMDgsMjAuMTQ5OTkxIEwxNi4xNTcwOTE0LDE2LjcxNzc1MTYgQzE2LjA5MTM3LDE2LjY1MjAzMDEgMTYuMDQwMTE3MSwxNi41NzczODc0IDE2LjAwMzQxNDEsMTYuNDk3Nzk5NSBDMTUuMTY3MTY5NCwxNy4xMjcwNDExIDE0LjEyNzEzOTMsMTcuNSAxMywxNy41IEMxMC4yMzg1NzYzLDE3LjUgOCwxNS4yNjE0MjM3IDgsMTIuNSBDOCw5LjczODU3NjI1IDEwLjIzODU3NjMsNy41IDEzLDcuNSBDMTUuNzYxNDIzNyw3LjUgMTgsOS43Mzg1NzYyNSAxOCwxMi41IEMxOCwxMy42Mjc0Njg1IDE3LjYyNjgyMzIsMTQuNjY3Nzc2OCAxNi45OTcyNDgyLDE1LjUwNDE0NjYgWiBNMTMsMTYuNSBDMTUuMjA5MTM5LDE2LjUgMTcsMTQuNzA5MTM5IDE3LDEyLjUgQzE3LDEwLjI5MDg2MSAxNS4yMDkxMzksOC41IDEzLDguNSBDMTAuNzkwODYxLDguNSA5LDEwLjI5MDg2MSA5LDEyLjUgQzksMTQuNzA5MTM5IDEwLjc5MDg2MSwxNi41IDEzLDE2LjUgWiIgaWQ9Imlvcy1zZWFyY2gtaW5wdXQtaWNvbiI+PC9wYXRoPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=)",
       backgroundPosition: "8px center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "13px",
@@ -3587,7 +3637,7 @@ const darkMode: any = {
       display: "none",
     },
     ".search-input:focus": {
-      outline: "none",
+      outline: "0",
     },
     ".search-input::-webkit-input-placeholder": {
       color: "#7a797b",
@@ -3609,20 +3659,25 @@ const darkMode: any = {
       fontSize: "14px",
       textIndent: "0",
     },
-    ".search-input:placeholder-shown": {},
     ".search-input:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".search-input--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
-      borderRadius: "8px",
+      borderRadius: "2px",
       height: "48px",
-      backgroundColor: "#fafafa",
+      backgroundColor: "rgba(250, 250, 250, 0)",
+      fallbacks: [
+        {
+          backgroundColor: "#fafafa",
+        },
+      ],
       backgroundImage:
-        'url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQzLjIgKDM5MDY5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5TaGFwZTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJhbmRyb2lkLXNlYXJjaC1pbnB1dC1pY29uIiBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9IiM4OTg5ODkiPgogICAgICAgICAgICA8ZyBpZD0iY29tcG9uZW50cyI+CiAgICAgICAgICAgICAgICA8ZyBpZD0ibWF0ZXJpYWwtc2VhcmNoIj4KICAgICAgICAgICAgICAgICAgICA8ZyBpZD0ic2VhcmNoIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGcgaWQ9Ik1hdGVyaWFsL0ljb25zLWJsYWNrL3NlYXJjaCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTIuNTAyLDYuNDkxIEwxMS43MDgsNi40OTEgTDExLjQzMiw2Ljc2NSBDMTIuNDA3LDcuOTAyIDEzLDkuMzc2IDEzLDEwLjk5MSBDMTMsMTQuNTgxIDEwLjA5LDE3LjQ5MSA2LjUsMTcuNDkxIEMyLjkxLDE3LjQ5MSAwLDE0LjU4MSAwLDEwLjk5MSBDMCw3LjQwMSAyLjkxLDQuNDkxIDYuNSw0LjQ5MSBDOC4xMTUsNC40OTEgOS41ODgsNS4wODMgMTAuNzI1LDYuMDU3IEwxMS4wMDEsNS43ODMgTDExLjAwMSw0Ljk5MSBMMTUuOTk5LDAgTDE3LjQ5LDEuNDkxIEwxMi41MDIsNi40OTEgTDEyLjUwMiw2LjQ5MSBaIE02LjUsNi40OTEgQzQuMDE0LDYuNDkxIDIsOC41MDUgMiwxMC45OTEgQzIsMTMuNDc2IDQuMDE0LDE1LjQ5MSA2LjUsMTUuNDkxIEM4Ljk4NSwxNS40OTEgMTEsMTMuNDc2IDExLDEwLjk5MSBDMTEsOC41MDUgOC45ODUsNi40OTEgNi41LDYuNDkxIEw2LjUsNi40OTEgWiIgaWQ9IlNoYXBlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4Ljc0NTAwMCwgOC43NDU1MDApIHNjYWxlKC0xLCAxKSByb3RhdGUoLTE4MC4wMDAwMDApIHRyYW5zbGF0ZSgtOC43NDUwMDAsIC04Ljc0NTUwMCkgIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==")',
+        "url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMThweCIgaGVpZ2h0PSIxOHB4IiB2aWV3Qm94PSIwIDAgMTggMTgiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQzLjIgKDM5MDY5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5TaGFwZTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJhbmRyb2lkLXNlYXJjaC1pbnB1dC1pY29uIiBmaWxsLXJ1bGU9Im5vbnplcm8iIGZpbGw9IiM4OTg5ODkiPgogICAgICAgICAgICA8ZyBpZD0iY29tcG9uZW50cyI+CiAgICAgICAgICAgICAgICA8ZyBpZD0ibWF0ZXJpYWwtc2VhcmNoIj4KICAgICAgICAgICAgICAgICAgICA8ZyBpZD0ic2VhcmNoIj4KICAgICAgICAgICAgICAgICAgICAgICAgPGcgaWQ9Ik1hdGVyaWFsL0ljb25zLWJsYWNrL3NlYXJjaCI+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMTIuNTAyLDYuNDkxIEwxMS43MDgsNi40OTEgTDExLjQzMiw2Ljc2NSBDMTIuNDA3LDcuOTAyIDEzLDkuMzc2IDEzLDEwLjk5MSBDMTMsMTQuNTgxIDEwLjA5LDE3LjQ5MSA2LjUsMTcuNDkxIEMyLjkxLDE3LjQ5MSAwLDE0LjU4MSAwLDEwLjk5MSBDMCw3LjQwMSAyLjkxLDQuNDkxIDYuNSw0LjQ5MSBDOC4xMTUsNC40OTEgOS41ODgsNS4wODMgMTAuNzI1LDYuMDU3IEwxMS4wMDEsNS43ODMgTDExLjAwMSw0Ljk5MSBMMTUuOTk5LDAgTDE3LjQ5LDEuNDkxIEwxMi41MDIsNi40OTEgTDEyLjUwMiw2LjQ5MSBaIE02LjUsNi40OTEgQzQuMDE0LDYuNDkxIDIsOC41MDUgMiwxMC45OTEgQzIsMTMuNDc2IDQuMDE0LDE1LjQ5MSA2LjUsMTUuNDkxIEM4Ljk4NSwxNS40OTEgMTEsMTMuNDc2IDExLDEwLjk5MSBDMTEsOC41MDUgOC45ODUsNi40OTEgNi41LDYuNDkxIEw2LjUsNi40OTEgWiIgaWQ9IlNoYXBlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4Ljc0NTAwMCwgOC43NDU1MDApIHNjYWxlKC0xLCAxKSByb3RhdGUoLTE4MC4wMDAwMDApIHRyYW5zbGF0ZSgtOC43NDUwMDAsIC04Ljc0NTUwMCkgIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==)",
       backgroundSize: "18px",
       backgroundPosition: "18px center",
       fontSize: "14px",
@@ -3636,13 +3691,13 @@ const darkMode: any = {
       padding: "0",
       margin: "0",
       font: "inherit",
-      color: "#1f1f21",
-      background: "transparent",
+      color: "rgba(255, 255, 255, 1)",
+      background: "0 0",
       border: "none",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       lineHeight: "1",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -3658,6 +3713,9 @@ const darkMode: any = {
         },
         {
           padding: "0",
+        },
+        {
+          color: "#fff",
         },
         {
           color: "inherit",
@@ -3678,44 +3736,90 @@ const darkMode: any = {
     },
     ".text-input:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".text-input::-webkit-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input:-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input::-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input::placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input:disabled::-webkit-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input:disabled:-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input:disabled::-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input:disabled::placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".text-input:invalid": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
+      fallbacks: [
+        {
+          color: "#fff",
+        },
+      ],
     },
     ".text-input--underbar": {
       boxSizing: "border-box",
@@ -3723,13 +3827,13 @@ const darkMode: any = {
       padding: "0",
       margin: "0",
       font: "inherit",
-      color: "#1f1f21",
-      background: "transparent",
+      color: "rgba(255, 255, 255, 1)",
+      background: "0 0",
       border: "none",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       lineHeight: "1",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -3753,6 +3857,9 @@ const darkMode: any = {
           padding: "0",
         },
         {
+          color: "#fff",
+        },
+        {
           color: "inherit",
         },
         {
@@ -3770,6 +3877,7 @@ const darkMode: any = {
     },
     ".text-input--underbar:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
       border: "none",
       backgroundColor: "transparent",
@@ -3778,65 +3886,80 @@ const darkMode: any = {
     ".text-input--underbar:disabled::-webkit-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".text-input--underbar:disabled:-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".text-input--underbar:disabled::-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".text-input--underbar:disabled::placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".text-input--underbar:invalid": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#fff",
         },
       ],
       borderBottom: "1px solid #ccc",
@@ -3848,12 +3971,12 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#212121",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       verticalAlign: "middle",
-      outline: "none",
+      outline: "0",
       lineHeight: "1",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -3877,7 +4000,7 @@ const darkMode: any = {
           webkitFontSmoothing: "antialiased",
         },
         {
-          fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+          fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
         },
       ],
       backgroundImage: "linear-gradient(to top, transparent 1px, #afafaf 1px)",
@@ -3892,7 +4015,7 @@ const darkMode: any = {
       webkitTransform: "translate3d(0, 0, 0)",
     },
     ".text-input--material__label": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       color: "#afafaf",
@@ -3913,7 +4036,7 @@ const darkMode: any = {
       transform: "translate(0, -75%) scale(0.75)",
       webkitTransformOrigin: "left top",
       transformOrigin: "left top",
-      transition: "transform 0.1s ease-in, color 0.1s ease-in, -webkit-transform 0.1s ease-in",
+      transition: "transform 0.1s ease-in, color 0.1s ease-in,\r\n    -webkit-transform 0.1s ease-in",
       fallbacks: [
         {
           transition: "transform 0.1s ease-in, color 0.1s ease-in",
@@ -3947,7 +4070,7 @@ const darkMode: any = {
     },
     "@keyframes material-text-input-animate": {
       "0%": {
-        backgroundSize: "0% 2px, 100% 2px",
+        backgroundSize: "0 2px, 100% 2px",
       },
       "100%": {
         backgroundSize: "100% 2px, 100% 2px",
@@ -3959,23 +4082,23 @@ const darkMode: any = {
       padding: "5px 5px 5px 5px",
       margin: "0",
       font: "inherit",
-      color: "#1f1f21",
-      background: "transparent",
+      color: "rgba(255, 255, 255, 1)",
+      background: "0 0",
       border: "1px solid #ccc",
       lineHeight: "normal",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
       verticalAlign: "top",
       resize: "none",
-      outline: "none",
+      outline: "0",
       fallbacks: [
         {
-          color: "inherit",
+          color: "#fff",
         },
         {
-          backgroundColor: "#ffffff",
+          color: "inherit",
         },
         {
           border: "none",
@@ -3989,7 +4112,7 @@ const darkMode: any = {
       ],
       fontSize: "16px",
       borderRadius: "4px",
-      backgroundColor: "rgba(255, 255, 255, 1)",
+      backgroundColor: "#121212",
       letterSpacing: "0",
       boxShadow: "none",
       webkitAppearance: "none",
@@ -3999,19 +4122,40 @@ const darkMode: any = {
     },
     ".textarea:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".textarea::-webkit-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".textarea:-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".textarea::-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".textarea::placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".textarea--transparent": {
       boxSizing: "border-box",
@@ -4019,18 +4163,21 @@ const darkMode: any = {
       padding: "5px 5px 5px 5px",
       margin: "0",
       font: "inherit",
-      color: "#1f1f21",
-      background: "transparent",
+      color: "rgba(255, 255, 255, 1)",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
       verticalAlign: "top",
       resize: "none",
-      outline: "none",
+      outline: "0",
       fallbacks: [
+        {
+          color: "#fff",
+        },
         {
           color: "inherit",
         },
@@ -4058,19 +4205,40 @@ const darkMode: any = {
     },
     ".textarea--transparent:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
     },
     ".textarea--transparent::-webkit-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".textarea--transparent:-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".textarea--transparent::-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".textarea--transparent::placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".dialog": {
       boxSizing: "border-box",
@@ -4079,14 +4247,15 @@ const darkMode: any = {
       margin: "auto auto",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -4112,17 +4281,23 @@ const darkMode: any = {
       borderRadius: "4px",
       backgroundColor: "#f4f4f4",
       webkitMaskImage:
-        'url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC")',
-      color: "#1f1f21",
+        "url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC)",
+      color: "rgba(255, 255, 255, 1)",
+      fallbacks: [
+        {
+          color: "#fff",
+        },
+      ],
     },
     ".dialog-mask": {
       padding: "0",
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -4135,28 +4310,33 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0.2)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
     },
     ".dialog--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       textAlign: "left",
       boxShadow:
-        "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),\r\n    0 8px 10px -5px rgba(0, 0, 0, 0.4)",
+        "0 16px 24px 2px rgba(0, 0, 0, 0.14),\r\n    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4)",
     },
     ".dialog-container--material": {
       borderRadius: "2px",
-      backgroundColor: "#ffffff",
-      color: "#1f1f21",
+      backgroundColor: "#121212",
+      color: "rgba(255, 255, 255, 1)",
+      fallbacks: [
+        {
+          color: "#fff",
+        },
+      ],
     },
     ".dialog-mask--material": {
       backgroundColor: "rgba(0, 0, 0, 0.3)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
     },
@@ -4167,14 +4347,15 @@ const darkMode: any = {
       margin: "auto",
       font: "inherit",
       color: "#1f1f21",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -4203,7 +4384,7 @@ const darkMode: any = {
       overflow: "hidden",
     },
     ".alert-dialog-title": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "500",
@@ -4236,13 +4417,14 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#4a148c",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "44px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -4277,13 +4459,13 @@ const darkMode: any = {
       backgroundColor: "transparent",
       textAlign: "center",
       height: "44px",
-      outline: "none",
+      outline: "0",
     },
     ".alert-dialog-button:active": {
       backgroundColor: "rgba(0, 0, 0, 0.05)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
     },
@@ -4320,9 +4502,10 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -4335,43 +4518,45 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0.2)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
     },
     ".alert-dialog--material": {
-      borderRadius: "8px",
-      backgroundColor: "#ffffff",
+      borderRadius: "2px",
+      backgroundColor: "#121212",
     },
     ".alert-dialog-container--material": {
-      borderRadius: "8px",
       padding: "22px 0 0 0",
       boxShadow:
-        "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),\r\n    0 8px 10px -5px rgba(0, 0, 0, 0.4)",
+        "0 16px 24px 2px rgba(0, 0, 0, 0.14),\r\n    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4)",
     },
     ".alert-dialog-title--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
       textAlign: "left",
       fontSize: "20px",
       fallbacks: [
         {
+          color: "#fff",
+        },
+        {
           fontWeight: "400",
         },
       ],
       padding: "0 24px",
-      color: "#31313a",
+      color: "rgba(255, 255, 255, 1)",
     },
     ".alert-dialog-content--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       textAlign: "left",
       fontSize: "16px",
       fallbacks: [
         {
-          color: "#31313a",
+          color: "#fff",
         },
         {
           fontWeight: "400",
@@ -4381,7 +4566,7 @@ const darkMode: any = {
       padding: "0 24px",
       margin: "24px 0 10px 0",
       minHeight: "0",
-      color: "rgba(49, 49, 58, 0.85)",
+      color: "rgba(255, 255, 255, 0.85)",
     },
     ".alert-dialog-footer--material": {
       display: "block",
@@ -4392,14 +4577,14 @@ const darkMode: any = {
       lineHeight: "1",
     },
     ".alert-dialog-button--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "500",
       textTransform: "uppercase",
       display: "inline-block",
       width: "auto",
       float: "right",
-      background: "none",
+      background: "0 0",
       border: "none",
       borderRadius: "2px",
       fontSize: "14px",
@@ -4408,14 +4593,14 @@ const darkMode: any = {
           fontWeight: "400",
         },
       ],
-      outline: "none",
+      outline: "0",
       height: "36px",
       lineHeight: "36px",
       padding: "0 8px",
       margin: "8px 8px 8px 0",
       boxSizing: "border-box",
       minWidth: "50px",
-      color: "#4a148c",
+      color: "#bb86fc",
     },
     ".alert-dialog-button--material:active": {
       backgroundColor: "initial",
@@ -4435,7 +4620,7 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0.3)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
     },
@@ -4463,7 +4648,7 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0.2)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
       position: "absolute",
@@ -4476,14 +4661,15 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#1f1f21",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
       userSelect: "none",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -4492,7 +4678,7 @@ const darkMode: any = {
       overflow: "auto",
       minHeight: "100px",
       maxHeight: "100%",
-      backgroundColor: "white",
+      backgroundColor: "#fff",
       borderRadius: "8px",
       fallbacks: [
         {
@@ -4501,10 +4687,6 @@ const darkMode: any = {
       ],
       pointerEvents: "auto",
     },
-    ".popover--top__content": {},
-    ".popover--bottom__content": {},
-    ".popover--left__content": {},
-    ".popover--right__content": {},
     ".popover__arrow": {
       position: "absolute",
       width: "18px",
@@ -4512,7 +4694,7 @@ const darkMode: any = {
       webkitTransformOrigin: "50% 50% 0",
       transformOrigin: "50% 50% 0",
       backgroundColor: "transparent",
-      backgroundImage: "linear-gradient(45deg, white, white 50%, transparent 50%)",
+      backgroundImage: "linear-gradient(45deg, #fff, #fff 50%, transparent 50%)",
       borderRadius: "0 0 0 4px",
       margin: "0",
       zIndex: "20001",
@@ -4541,14 +4723,18 @@ const darkMode: any = {
       right: "0",
       marginBottom: "-18px",
     },
-    ".popover--material": {},
     ".popover-mask--material": {
       backgroundColor: "transparent",
     },
     ".popover--material__content": {
       backgroundColor: "#fafafa",
       borderRadius: "2px",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
+      fallbacks: [
+        {
+          color: "#fff",
+        },
+      ],
       boxShadow:
         "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),\r\n    0 3px 1px -2px rgba(0, 0, 0, 0.2)",
     },
@@ -4587,8 +4773,8 @@ const darkMode: any = {
       left: "0",
       bottom: "0",
       willChange: "left, right",
-      webkitAnimation: "progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395)\r\n    infinite",
-      animation: "progress-bar__indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite",
+      webkitAnimation: "progress-bar__indeterminate 2.1s\r\n    cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite",
+      animation: "progress-bar__indeterminate 2.1s\r\n    cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite",
       borderRadius: "4px",
     },
     ".progress-bar--indeterminate:after": {
@@ -4599,8 +4785,8 @@ const darkMode: any = {
       left: "0",
       bottom: "0",
       willChange: "left, right",
-      webkitAnimation: "progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1)\r\n    infinite",
-      animation: "progress-bar__indeterminate-short 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite",
+      webkitAnimation: "progress-bar__indeterminate-short 2.1s\r\n    cubic-bezier(0.165, 0.84, 0.44, 1) infinite",
+      animation: "progress-bar__indeterminate-short 2.1s\r\n    cubic-bezier(0.165, 0.84, 0.44, 1) infinite",
       webkitAnimationDelay: "1.15s",
       animationDelay: "1.15s",
       borderRadius: "4px",
@@ -4639,19 +4825,24 @@ const darkMode: any = {
       borderRadius: "0",
     },
     ".progress-bar--material__primary, .progress-bar--material__secondary": {
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       borderRadius: "0",
     },
     ".progress-bar--material__secondary": {
-      backgroundColor: "#12005e",
+      backgroundColor: "rgba(168, 98, 254, 1)",
+      fallbacks: [
+        {
+          backgroundColor: "#a862fe",
+        },
+      ],
       zIndex: "0",
     },
     ".progress-bar--material.progress-bar--indeterminate:before": {
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       borderRadius: "0",
     },
     ".progress-bar--material.progress-bar--indeterminate:after": {
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       borderRadius: "0",
     },
     ".progress-circular": {
@@ -4664,9 +4855,6 @@ const darkMode: any = {
       animation: "none",
     },
     ".progress-circular__background, .progress-circular__primary, .progress-circular__secondary": {
-      cx: "50%",
-      cy: "50%",
-      r: "40%",
       webkitAnimation: "none",
       animation: "none",
       fill: "none",
@@ -4726,12 +4914,12 @@ const darkMode: any = {
       stroke: "transparent",
     },
     ".progress-circular--material__primary": {
-      stroke: "#4a148c",
+      stroke: "#bb86fc",
     },
     ".progress-circular--material__secondary": {
-      stroke: "#12005e",
+      stroke: "rgba(172, 105, 254, 1)",
     },
-    "ons-fab.fab, ons-speed-dial-item.fab, button.fab": {
+    "button.fab, ons-fab.fab, ons-speed-dial-item.fab": {
       position: "relative",
       display: "inline-block",
       boxSizing: "border-box",
@@ -4739,14 +4927,15 @@ const darkMode: any = {
       padding: "0",
       margin: "0",
       font: "inherit",
-      color: "#ffffff",
-      background: "transparent",
+      color: "#fff",
+      background: "0 0",
       border: "0 solid currentColor",
       lineHeight: "56px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -4775,7 +4964,7 @@ const darkMode: any = {
       boxShadow: "0 3px 6px rgba(0, 0, 0, 0.12)",
       transition: "all 0.1s linear",
     },
-    "ons-fab.fab:active, ons-speed-dial-item.fab:active, button.fab:active": {
+    "button.fab:active, ons-fab.fab:active, ons-speed-dial-item.fab:active": {
       boxShadow: "0 0 6 rgba(0, 0, 0, 0.12)",
       backgroundColor: "color-mod(#4a148c a(70%))",
       transition: "all 0.2s ease",
@@ -4785,17 +4974,18 @@ const darkMode: any = {
         },
       ],
     },
-    "ons-fab.fab:focus, ons-speed-dial-item.fab:focus, button.fab:focus": {
+    "button.fab:focus, ons-fab.fab:focus, ons-speed-dial-item.fab:focus": {
       outline: "0",
     },
-    "ons-fab.fab:disabled, ons-fab.fab[disabled], ons-speed-dial-item.fab:disabled, ons-speed-dial-item.fab[disabled], button.fab:disabled, button.fab[disabled]":
+    "button.fab:disabled, button.fab[disabled], ons-fab.fab:disabled, ons-fab.fab[disabled], ons-speed-dial-item.fab:disabled, ons-speed-dial-item.fab[disabled]":
       {
         backgroundColor: "color-mod(black alpha(50%))",
         boxShadow: "none",
         opacity: "0.3",
+        cursor: "default",
         pointerEvents: "none",
       },
-    "ons-fab.fab__icon, ons-speed-dial-item.fab__icon, button.fab__icon": {
+    "button.fab__icon, ons-fab.fab__icon, ons-speed-dial-item.fab__icon": {
       position: "relative",
       overflow: "hidden",
       height: "100%",
@@ -4806,7 +4996,7 @@ const darkMode: any = {
       zIndex: "100",
       lineHeight: "56px",
     },
-    "ons-fab.fab--material, ons-speed-dial-item.fab--material, button.fab--material": {
+    "button.fab--material, ons-fab.fab--material, ons-speed-dial-item.fab--material": {
       position: "relative",
       display: "inline-block",
       boxSizing: "border-box",
@@ -4815,13 +5005,14 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "rgba(255, 255, 255, 1)",
-      background: "transparent",
+      background: "0 0",
       border: "0 solid currentColor",
       lineHeight: "56px",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       webkitUserSelect: "none",
       mozUserSelect: "none",
       msUserSelect: "none",
@@ -4841,10 +5032,10 @@ const darkMode: any = {
           backgroundColor: "#4a148c",
         },
         {
-          color: "#ffffff",
+          color: "#fff",
         },
         {
-          color: "#ffffff",
+          color: "#fff",
         },
         {
           lineHeight: "56px",
@@ -4868,7 +5059,7 @@ const darkMode: any = {
           webkitFontSmoothing: "antialiased",
         },
         {
-          fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+          fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
         },
         {
           border: "none",
@@ -4883,28 +5074,28 @@ const darkMode: any = {
       letterSpacing: "0",
       verticalAlign: "middle",
       textAlign: "center",
-      backgroundColor: "#4a148c",
+      backgroundColor: "#bb86fc",
       borderRadius: "50%",
       overflow: "hidden",
       boxShadow:
         "0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),\r\n    0 2px 4px -1px rgba(0, 0, 0, 0.4)",
       transition: "all 0.2s ease-in-out",
     },
-    "ons-fab.fab--material:active, ons-speed-dial-item.fab--material:active, button.fab--material:active": {
+    "button.fab--material:active, ons-fab.fab--material:active, ons-speed-dial-item.fab--material:active": {
       boxShadow:
-        "0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12),\r\n    0 5px 5px -3px rgba(0, 0, 0, 0.4)",
+        "0 8px 10px 1px rgba(0, 0, 0, 0.14),\r\n    0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4)",
       backgroundColor: "rgba(255, 255, 255, 0.75)",
       fallbacks: [
         {
-          backgroundColor: "#ffffff",
+          backgroundColor: "#fff",
         },
       ],
       transition: "all 0.2s ease",
     },
-    "ons-fab.fab--material:focus, ons-speed-dial-item.fab--material:focus, button.fab--material:focus": {
+    "button.fab--material:focus, ons-fab.fab--material:focus, ons-speed-dial-item.fab--material:focus": {
       outline: "0",
     },
-    "ons-fab.fab--material__icon, ons-speed-dial-item.fab--material__icon, button.fab--material__icon": {
+    "button.fab--material__icon, ons-fab.fab--material__icon, ons-speed-dial-item.fab--material__icon": {
       position: "relative",
       overflow: "hidden",
       height: "100%",
@@ -4915,55 +5106,56 @@ const darkMode: any = {
       zIndex: "100",
       lineHeight: "56px",
     },
-    "ons-fab.fab--material:disabled, ons-fab.fab--material[disabled], ons-speed-dial-item.fab--material:disabled, ons-speed-dial-item.fab--material[disabled], button.fab--material:disabled, button.fab--material[disabled]":
+    "button.fab--material:disabled, button.fab--material[disabled], ons-fab.fab--material:disabled, ons-fab.fab--material[disabled], ons-speed-dial-item.fab--material:disabled, ons-speed-dial-item.fab--material[disabled]":
       {
         backgroundColor: "color-mod(black alpha(50%))",
         boxShadow: "none",
         opacity: "0.3",
+        cursor: "default",
         pointerEvents: "none",
       },
-    "ons-fab.fab--mini, ons-speed-dial-item.fab--mini, button.fab--mini": {
+    "button.fab--mini, ons-fab.fab--mini, ons-speed-dial-item.fab--mini": {
       width: "40px",
       height: "40px",
       lineHeight: "40px",
     },
-    "ons-fab.fab--mini__icon, ons-speed-dial-item.fab--mini__icon, button.fab--mini__icon": {
+    "button.fab--mini__icon, ons-fab.fab--mini__icon, ons-speed-dial-item.fab--mini__icon": {
       lineHeight: "40px",
     },
-    "ons-fab.speed-dial__item, ons-speed-dial-item.speed-dial__item, button.speed-dial__item": {
+    "button.speed-dial__item, ons-fab.speed-dial__item, ons-speed-dial-item.speed-dial__item": {
       position: "absolute",
       webkitTransform: "scale(0)",
       transform: "scale(0)",
     },
-    "ons-fab.fab--top__right, button.fab--top__right, .speed-dial.fab--top__right": {
+    ".speed-dial.fab--top__right, button.fab--top__right, ons-fab.fab--top__right": {
       top: "20px",
       bottom: "auto",
       right: "20px",
       left: "auto",
       position: "absolute",
     },
-    "ons-fab.fab--bottom__right, button.fab--bottom__right, .speed-dial.fab--bottom__right": {
+    ".speed-dial.fab--bottom__right, button.fab--bottom__right, ons-fab.fab--bottom__right": {
       top: "auto",
       bottom: "20px",
       right: "20px",
       left: "auto",
       position: "absolute",
     },
-    "ons-fab.fab--top__left, button.fab--top__left, .speed-dial.fab--top__left": {
+    ".speed-dial.fab--top__left, button.fab--top__left, ons-fab.fab--top__left": {
       top: "20px",
       bottom: "auto",
       right: "auto",
       left: "20px",
       position: "absolute",
     },
-    "ons-fab.fab--bottom__left, button.fab--bottom__left, .speed-dial.fab--bottom__left": {
+    ".speed-dial.fab--bottom__left, button.fab--bottom__left, ons-fab.fab--bottom__left": {
       top: "auto",
       bottom: "20px",
       right: "auto",
       left: "20px",
       position: "absolute",
     },
-    "ons-fab.fab--top__center, button.fab--top__center, .speed-dial.fab--top__center": {
+    ".speed-dial.fab--top__center, button.fab--top__center, ons-fab.fab--top__center": {
       top: "20px",
       bottom: "auto",
       marginLeft: "-28px",
@@ -4971,7 +5163,7 @@ const darkMode: any = {
       right: "auto",
       position: "absolute",
     },
-    "ons-fab.fab--bottom__center, button.fab--bottom__center, .speed-dial.fab--bottom__center": {
+    ".speed-dial.fab--bottom__center, button.fab--bottom__center, ons-fab.fab--bottom__center": {
       top: "auto",
       bottom: "20px",
       marginLeft: "-28px",
@@ -4989,12 +5181,12 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "inherit",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
         {
           overflow: "hidden",
@@ -5006,7 +5198,7 @@ const darkMode: any = {
           boxSizing: "border-box",
         },
       ],
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -5031,7 +5223,7 @@ const darkMode: any = {
       margin: "0",
       font: "inherit",
       color: "#fff",
-      background: "transparent",
+      background: "0 0",
       border: "none",
       lineHeight: "normal",
       fallbacks: [
@@ -5048,7 +5240,7 @@ const darkMode: any = {
           boxSizing: "border-box",
         },
       ],
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -5062,13 +5254,13 @@ const darkMode: any = {
       padding: "0 20px 0 0",
       margin: "0",
       font: "inherit",
-      color: "#1f1f21",
-      background: "transparent",
+      color: "rgba(255, 255, 255, 1)",
+      background: "0 0",
       border: "none",
       verticalAlign: "top",
-      outline: "none",
+      outline: "0",
       lineHeight: "32px",
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -5081,6 +5273,9 @@ const darkMode: any = {
         },
         {
           border: "none",
+        },
+        {
+          color: "#fff",
         },
         {
           color: "inherit",
@@ -5103,7 +5298,7 @@ const darkMode: any = {
       display: "inline-block",
       borderRadius: "0",
       backgroundImage:
-        'url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTBweCIgaGVpZ2h0PSI1cHgiIHZpZXdCb3g9IjAgMCAxMCA1IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0My4yICgzOTA2OSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+c2VsZWN0LWFsbG93PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9InNlbGVjdCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Imlvcy1zZWxlY3QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xOTguMDAwMDAwLCAtMTE0LjAwMDAwMCkiIGZpbGw9IiM3NTc1NzUiPgogICAgICAgICAgICA8ZyBpZD0ibWVudS1iYXItKy1vcGVuLW1lbnUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyMy4wMDAwMDAsIDEwMC4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSJtZW51LWJhciI+CiAgICAgICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9InNlbGVjdC1hbGxvdyIgcG9pbnRzPSI3NSAxNCA4MCAxOSA4NSAxNCI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=")',
+        "url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTBweCIgaGVpZ2h0PSI1cHgiIHZpZXdCb3g9IjAgMCAxMCA1IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0My4yICgzOTA2OSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+c2VsZWN0LWFsbG93PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9InNlbGVjdCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Imlvcy1zZWxlY3QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xOTguMDAwMDAwLCAtMTE0LjAwMDAwMCkiIGZpbGw9IiM3NTc1NzUiPgogICAgICAgICAgICA8ZyBpZD0ibWVudS1iYXItKy1vcGVuLW1lbnUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyMy4wMDAwMDAsIDEwMC4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSJtZW51LWJhciI+CiAgICAgICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9InNlbGVjdC1hbGxvdyIgcG9pbnRzPSI3NSAxNCA4MCAxOSA4NSAxNCI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=)",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "right center",
       borderBottom: "none",
@@ -5112,19 +5307,40 @@ const darkMode: any = {
       display: "none",
     },
     ".select-input::-webkit-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input:-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input::-ms-input-placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input::placeholder": {
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
       border: "none",
       backgroundColor: "transparent",
@@ -5132,59 +5348,87 @@ const darkMode: any = {
     ".select-input:disabled::-webkit-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input:disabled:-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input:disabled::-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input:disabled::placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
+      fallbacks: [
+        {
+          color: "#ddd9d9",
+        },
+      ],
     },
     ".select-input:invalid": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
+      fallbacks: [
+        {
+          color: "#fff",
+        },
+      ],
     },
     ".select-input[multiple]": {
       height: "64px",
     },
     ".select-input--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
-      color: "#1f1f21",
-      fontSize: "15px",
-      backgroundImage:
-        'url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTBweCIgaGVpZ2h0PSI1cHgiIHZpZXdCb3g9IjAgMCAxMCA1IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0My4yICgzOTA2OSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+c2VsZWN0LWFsbG93PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9InNlbGVjdCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Imlvcy1zZWxlY3QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xOTguMDAwMDAwLCAtMTE0LjAwMDAwMCkiIGZpbGw9IiM3NTc1NzUiPgogICAgICAgICAgICA8ZyBpZD0ibWVudS1iYXItKy1vcGVuLW1lbnUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyMy4wMDAwMDAsIDEwMC4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSJtZW51LWJhciI+CiAgICAgICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9InNlbGVjdC1hbGxvdyIgcG9pbnRzPSI3NSAxNCA4MCAxOSA4NSAxNCI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4="),\r\n    linear-gradient(to top, color-mod(black a(12%)) 50%, color-mod(black a(12%)) 50%)',
-      backgroundSize: "auto, 100% 1px",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "right center, left bottom",
-      border: "none",
+      color: "rgba(212, 212, 232, 1)",
       fallbacks: [
         {
           fontWeight: "400",
         },
+        {
+          color: "#d4d4e8",
+        },
       ],
+      fontSize: "15px",
+      backgroundImage:
+        "url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTBweCIgaGVpZ2h0PSI1cHgiIHZpZXdCb3g9IjAgMCAxMCA1IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCA0My4yICgzOTA2OSkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+c2VsZWN0LWFsbG93PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9InNlbGVjdCIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Imlvcy1zZWxlY3QiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xOTguMDAwMDAwLCAtMTE0LjAwMDAwMCkiIGZpbGw9IiM3NTc1NzUiPgogICAgICAgICAgICA8ZyBpZD0ibWVudS1iYXItKy1vcGVuLW1lbnUiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEyMy4wMDAwMDAsIDEwMC4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSJtZW51LWJhciI+CiAgICAgICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9InNlbGVjdC1hbGxvdyIgcG9pbnRzPSI3NSAxNCA4MCAxOSA4NSAxNCI+PC9wb2x5Z29uPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=),\r\n    linear-gradient(\r\n      to top,\r\n      color-mod(black a(12%)) 50%,\r\n      color-mod(black a(12%)) 50%\r\n    )",
+      backgroundSize: "auto, 100% 1px",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "right center, left bottom",
+      border: "none",
       webkitTransform: "translate3d(0, 0, 0)",
       transform: "translate3d(0, 0, 0)",
     },
     ".select-input--material__label": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
-      color: "rgba(0, 0, 0, 0.81)",
+      color: "rgba(0, 0, 0, 0.92)",
       fallbacks: [
         {
-          color: "#000000",
+          color: "#000",
         },
       ],
       position: "absolute",
@@ -5203,54 +5447,54 @@ const darkMode: any = {
           transition: "color 0.1s ease-in, -webkit-transform 0.1s ease-in",
         },
         {
-          color: "#000000",
+          color: "#000",
         },
       ],
       webkitTransform: "translate(0, -75%) scale(0.75)",
       transform: "translate(0, -75%) scale(0.75)",
       webkitTransformOrigin: "left top",
       transformOrigin: "left top",
-      transition: "transform 0.1s ease-in, color 0.1s ease-in, -webkit-transform 0.1s ease-in",
+      transition: "transform 0.1s ease-in, color 0.1s ease-in,\r\n    -webkit-transform 0.1s ease-in",
     },
     ".select-input--material::-webkit-input-placeholder": {
-      color: "rgba(0, 0, 0, 0.81)",
+      color: "rgba(0, 0, 0, 0.92)",
       fallbacks: [
         {
-          color: "#000000",
+          color: "#000",
         },
       ],
       lineHeight: "20px",
     },
     ".select-input--material:-ms-input-placeholder": {
-      color: "rgba(0, 0, 0, 0.81)",
+      color: "rgba(0, 0, 0, 0.92)",
       fallbacks: [
         {
-          color: "#000000",
+          color: "#000",
         },
       ],
       lineHeight: "20px",
     },
     ".select-input--material::-ms-input-placeholder": {
-      color: "rgba(0, 0, 0, 0.81)",
+      color: "rgba(0, 0, 0, 0.92)",
       fallbacks: [
         {
-          color: "#000000",
+          color: "#000",
         },
       ],
       lineHeight: "20px",
     },
     ".select-input--material::placeholder": {
-      color: "rgba(0, 0, 0, 0.81)",
+      color: "rgba(0, 0, 0, 0.92)",
       fallbacks: [
         {
-          color: "#000000",
+          color: "#000",
         },
       ],
       lineHeight: "20px",
     },
     "@keyframes material-select-input-animate": {
       "0%": {
-        backgroundSize: "0% 2px, 100% 2px",
+        backgroundSize: "0 2px, 100% 2px",
       },
       "100%": {
         backgroundSize: "100% 2px, 100% 2px",
@@ -5262,6 +5506,7 @@ const darkMode: any = {
     },
     ".select-input--underbar:disabled": {
       opacity: "0.3",
+      cursor: "default",
       pointerEvents: "none",
       border: "none",
       backgroundColor: "transparent",
@@ -5278,59 +5523,71 @@ const darkMode: any = {
     ".select-input--underbar:disabled::-webkit-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".select-input--underbar:disabled:-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".select-input--underbar:disabled::-ms-input-placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".select-input--underbar:disabled::placeholder": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#999",
+      color: "rgba(221, 217, 217, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
         },
         {
           border: "none",
+        },
+        {
+          color: "#ddd9d9",
         },
       ],
     },
     ".select-input--underbar:invalid": {
       border: "none",
       backgroundColor: "transparent",
-      color: "#1f1f21",
+      color: "rgba(255, 255, 255, 1)",
       fallbacks: [
         {
           backgroundColor: "transparent",
@@ -5338,14 +5595,18 @@ const darkMode: any = {
         {
           border: "none",
         },
+        {
+          color: "#fff",
+        },
       ],
       borderBottom: "1px solid #ccc",
     },
     ".action-sheet": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
+      cursor: "default",
       position: "absolute",
       left: "10px",
       right: "10px",
@@ -5361,7 +5622,7 @@ const darkMode: any = {
       backgroundColor: "rgba(255, 255, 255, 0.9)",
       fallbacks: [
         {
-          backgroundColor: "#ffffff",
+          backgroundColor: "#fff",
         },
       ],
       borderRadius: "0",
@@ -5378,7 +5639,7 @@ const darkMode: any = {
       backgroundSize: "100% 1px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "bottom",
-      backgroundImage: "linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 100%)",
+      backgroundImage: "linear-gradient(\r\n    0deg,\r\n    rgba(0, 0, 0, 0.1),\r\n    rgba(0, 0, 0, 0.1) 100%\r\n  )",
     },
     ".action-sheet-button:first-child": {
       borderTopLeftRadius: "12px",
@@ -5389,7 +5650,7 @@ const darkMode: any = {
       backgroundImage: "none",
     },
     ".action-sheet-button:focus": {
-      outline: "none",
+      outline: "0",
     },
     ".action-sheet-button:nth-last-of-type(2)": {
       borderBottomRightRadius: "12px",
@@ -5418,7 +5679,7 @@ const darkMode: any = {
       backgroundColor: "rgba(255, 255, 255, 0.9)",
       fallbacks: [
         {
-          backgroundColor: "#ffffff",
+          backgroundColor: "#fff",
         },
       ],
       lineHeight: "56px",
@@ -5428,7 +5689,7 @@ const darkMode: any = {
       backgroundSize: "100% 1px",
       backgroundRepeat: "no-repeat",
       backgroundPosition: "bottom",
-      backgroundImage: "linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1) 100%)",
+      backgroundImage: "linear-gradient(\r\n    0deg,\r\n    rgba(0, 0, 0, 0.1),\r\n    rgba(0, 0, 0, 0.1) 100%\r\n  )",
     },
     ".action-sheet-title:first-child": {
       borderTopLeftRadius: "12px",
@@ -5446,7 +5707,7 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0.1)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
       zIndex: "1",
@@ -5456,10 +5717,10 @@ const darkMode: any = {
       right: "0",
       bottom: "0",
       boxShadow:
-        "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12),\r\n    0 8px 10px -5px rgba(0, 0, 0, 0.4)",
+        "0 16px 24px 2px rgba(0, 0, 0, 0.14),\r\n    0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4)",
     },
     ".action-sheet-title--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       borderRadius: "0",
@@ -5470,7 +5731,7 @@ const darkMode: any = {
       fontSize: "16px",
       padding: "0 0 0 16px",
       color: "#686868",
-      backgroundColor: "white",
+      backgroundColor: "#fff",
       fallbacks: [
         {
           fontWeight: "400",
@@ -5481,7 +5742,7 @@ const darkMode: any = {
       borderRadius: "0",
     },
     ".action-sheet-button--material": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       borderRadius: "0",
@@ -5497,7 +5758,7 @@ const darkMode: any = {
           fontWeight: "400",
         },
       ],
-      backgroundColor: "white",
+      backgroundColor: "#fff",
     },
     ".action-sheet-button--material:first-child": {
       borderRadius: "0",
@@ -5507,8 +5768,9 @@ const darkMode: any = {
     },
     ".action-sheet-button--material:last-of-type": {
       margin: "0",
-      borderRadius: "8px",
-      backgroundColor: "white",
+      borderRadius: "0",
+      fontWeight: "400",
+      backgroundColor: "#fff",
     },
     ".action-sheet-icon--material": {
       display: "inline-block",
@@ -5524,18 +5786,18 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0.2)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
     },
     ".card": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
       boxShadow: "0 1px 2px rgba(0, 0, 0, 0.12)",
       borderRadius: "8px",
-      backgroundColor: "white",
+      backgroundColor: "#fff",
       boxSizing: "border-box",
       display: "block",
       margin: "8px",
@@ -5550,7 +5812,7 @@ const darkMode: any = {
       color: "#030303",
     },
     ".card__title": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -5566,33 +5828,33 @@ const darkMode: any = {
       boxSizing: "border-box",
     },
     ".card--material": {
-      backgroundColor: "white",
+      backgroundColor: "#1f1f1f",
       borderRadius: "2px",
       boxShadow:
         "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),\r\n    0 3px 1px -2px rgba(0, 0, 0, 0.2)",
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
     },
     ".card--material__content": {
       fontSize: "14px",
       lineHeight: "1.4",
-      color: "rgba(0, 0, 0, 0.54)",
+      color: "rgba(255, 255, 255, 0.54)",
       fallbacks: [
         {
-          color: "#000000",
+          color: "#fff",
         },
       ],
     },
     ".card--material__title": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       fontSize: "24px",
       margin: "8px 0 12px 0",
     },
     ".toast": {
-      fontFamily: '-apple-system, "Helvetica Neue", "Helvetica", "Arial", "Lucida Grande", sans-serif',
+      fontFamily: '-apple-system, "Helvetica Neue", Helvetica, Arial,\r\n    "Lucida Grande", sans-serif',
       webkitFontSmoothing: "antialiased",
       mozOsxFontSmoothing: "grayscale",
       fontWeight: "400",
@@ -5612,7 +5874,7 @@ const darkMode: any = {
           display: "-webkit-box",
         },
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
       display: "flex",
@@ -5623,7 +5885,7 @@ const darkMode: any = {
     },
     ".toast__message": {
       fontSize: "14px",
-      color: "white",
+      color: "#fff",
       webkitBoxFlex: "1",
       webkitFlexGrow: "1",
       flexGrow: "1",
@@ -5633,7 +5895,7 @@ const darkMode: any = {
     },
     ".toast__button": {
       fontSize: "14px",
-      color: "white",
+      color: "#fff",
       webkitBoxFlex: "0",
       webkitFlexGrow: "0",
       flexGrow: "0",
@@ -5642,10 +5904,11 @@ const darkMode: any = {
       appearance: "none",
       border: "none",
       backgroundColor: "transparent",
+      cursor: "default",
       textTransform: "uppercase",
     },
     ".toast__button:focus": {
-      outline: "none",
+      outline: "0",
     },
     ".toast__button:active": {
       opacity: "0.4",
@@ -5658,23 +5921,23 @@ const darkMode: any = {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
       fallbacks: [
         {
-          backgroundColor: "#000000",
+          backgroundColor: "#000",
         },
       ],
       borderRadius: "0",
       padding: "16px 24px",
     },
     ".toast--material__message": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
       margin: "0 24px 0 0",
     },
     ".toast--material__button": {
-      fontFamily: '"Roboto", "Noto", sans-serif',
+      fontFamily: "Roboto, Noto, sans-serif",
       webkitFontSmoothing: "antialiased",
       fontWeight: "400",
-      color: "#4a148c",
+      color: "#bb86fc",
     },
     ".toolbar + .page__background": {
       top: "44px",
@@ -5696,7 +5959,7 @@ const darkMode: any = {
     ".toolbar.toolbar--transparent + .page__background": {
       top: "0",
     },
-    ".toolbar.toolbar--transparent.toolbar--cover-content + .page__background + .page__content, .toolbar.toolbar--transparent.toolbar--cover-content\r\n  + .page__background\r\n  + .page__content\r\n  .page_content":
+    ".toolbar.toolbar--transparent.toolbar--cover-content\r\n  + .page__background\r\n  + .page__content, .toolbar.toolbar--transparent.toolbar--cover-content\r\n  + .page__background\r\n  + .page__content\r\n  .page_content":
       {
         top: "0",
         paddingTop: "44px",
@@ -5738,14 +6001,14 @@ const darkMode: any = {
         paddingRight: "44px",
         width: "calc(100% - 88px)",
       },
-      "html[onsflag-iphonex-landscape] .fab--bottom__left, html[onsflag-iphonex-landscape] .fab--bottom__center, html[onsflag-iphonex-landscape] .fab--bottom__right":
+      "html[onsflag-iphonex-landscape] .fab--bottom__center, html[onsflag-iphonex-landscape] .fab--bottom__left, html[onsflag-iphonex-landscape] .fab--bottom__right":
         {
           bottom: "21px",
         },
-      "html[onsflag-iphonex-landscape] .fab--top__left, html[onsflag-iphonex-landscape] .fab--bottom__left": {
+      "html[onsflag-iphonex-landscape] .fab--bottom__left, html[onsflag-iphonex-landscape] .fab--top__left": {
         left: "44px",
       },
-      "html[onsflag-iphonex-landscape] .fab--top__right, html[onsflag-iphonex-landscape] .fab--bottom__right": {
+      "html[onsflag-iphonex-landscape] .fab--bottom__right, html[onsflag-iphonex-landscape] .fab--top__right": {
         right: "44px",
       },
       "html[onsflag-iphonex-landscape] .action-sheet": {
@@ -5758,13 +6021,13 @@ const darkMode: any = {
         right: "52px",
         bottom: "21px",
       },
-      "html[onsflag-iphonex-landscape] .dialog .bottom-bar, html[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .bottom-bar, html[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .bottom-bar":
+      "html[onsflag-iphonex-landscape] .dialog .bottom-bar, html[onsflag-iphonex-landscape]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .bottom-bar, html[onsflag-iphonex-landscape]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .bottom-bar":
         {
           bottom: "0",
           boxSizing: "border-box",
           paddingBottom: "0",
         },
-      "html[onsflag-iphonex-landscape] .dialog .page__content, html[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .page__content, html[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .page__content, html[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content":
+      "html[onsflag-iphonex-landscape] .dialog .page__content, html[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content, html[onsflag-iphonex-landscape]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .page__content, html[onsflag-iphonex-landscape]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .page__content":
         {
           bottom: "0",
           paddingBottom: "0",
@@ -5773,7 +6036,7 @@ const darkMode: any = {
         bottom: "65px",
         paddingBottom: "0",
       },
-      "html[onsflag-iphonex-landscape] .dialog .page-with-bottom-toolbar > .page__content, html[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .page-with-bottom-toolbar > .page__content, html[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .page-with-bottom-toolbar > .page__content":
+      "html[onsflag-iphonex-landscape]\r\n    .dialog\r\n    .page-with-bottom-toolbar\r\n    > .page__content, html[onsflag-iphonex-landscape]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .page-with-bottom-toolbar\r\n    > .page__content, html[onsflag-iphonex-landscape]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .page-with-bottom-toolbar\r\n    > .page__content":
         {
           bottom: "44px",
           paddingBottom: "0",
@@ -5781,14 +6044,14 @@ const darkMode: any = {
       "html[onsflag-iphonex-landscape] .tabbar:not(.tabbar--top)": {
         paddingBottom: "21px",
       },
-      "html[onsflag-iphonex-landscape] .dialog .tabbar:not(.tabbar--top), html[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .tabbar:not(.tabbar--top), html[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .tabbar:not(.tabbar--top)":
+      "html[onsflag-iphonex-landscape] .dialog .tabbar:not(.tabbar--top), html[onsflag-iphonex-landscape]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .tabbar:not(.tabbar--top), html[onsflag-iphonex-landscape]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .tabbar:not(.tabbar--top)":
         {
           paddingBottom: "0",
         },
       "html[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content)": {
         bottom: "70px",
       },
-      "html[onsflag-iphonex-landscape] .dialog .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-landscape] .page-with-bottom-toolbar > .page__content .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-landscape] .tabbar__content:not(.tabbar--top__content) .tabbar__content:not(.tabbar--top__content)":
+      "html[onsflag-iphonex-landscape]\r\n    .dialog\r\n    .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-landscape]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-landscape]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .tabbar__content:not(.tabbar--top__content)":
         {
           bottom: "49px",
         },
@@ -5796,10 +6059,10 @@ const darkMode: any = {
         marginLeft: "-44px",
         marginRight: "-44px",
       },
-      "html[onsflag-iphonex-landscape] .page__content > .list:not(.list--inset) > .list-header": {
+      "html[onsflag-iphonex-landscape]\r\n    .page__content\r\n    > .list:not(.list--inset)\r\n    > .list-header": {
         paddingLeft: "59px",
       },
-      "html[onsflag-iphonex-landscape] .page__content > .list:not(.list--inset) > .list-item": {
+      "html[onsflag-iphonex-landscape]\r\n    .page__content\r\n    > .list:not(.list--inset)\r\n    > .list-item": {
         paddingLeft: "58px",
       },
       "html[onsflag-iphonex-landscape]\r\n    .page__content\r\n    > .list:not(.list--inset)\r\n    > .list-item--chevron:before":
@@ -5818,16 +6081,18 @@ const darkMode: any = {
         {
           paddingRight: "74px",
         },
-      "html[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset)": {
+      "html[onsflag-iphonex-landscape]\r\n    .dialog\r\n    .page__content\r\n    > .list:not(.list--inset)": {
         marginLeft: "0",
         marginRight: "0",
       },
-      "html[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-header": {
-        paddingLeft: "15px",
-      },
-      "html[onsflag-iphonex-landscape] .dialog .page__content > .list:not(.list--inset) > .list-item": {
-        paddingLeft: "14px",
-      },
+      "html[onsflag-iphonex-landscape]\r\n    .dialog\r\n    .page__content\r\n    > .list:not(.list--inset)\r\n    > .list-header":
+        {
+          paddingLeft: "15px",
+        },
+      "html[onsflag-iphonex-landscape]\r\n    .dialog\r\n    .page__content\r\n    > .list:not(.list--inset)\r\n    > .list-item":
+        {
+          paddingLeft: "14px",
+        },
       "html[onsflag-iphonex-landscape]\r\n    .dialog\r\n    .page__content\r\n    > .list:not(.list--inset)\r\n    > .list-item--chevron:before":
         {
           right: "16px",
@@ -5846,11 +6111,11 @@ const darkMode: any = {
         },
     },
     "@media (orientation: portrait)": {
-      "html[onsflag-iphonex-portrait] .fab--top__left, html[onsflag-iphonex-portrait] .fab--top__center, html[onsflag-iphonex-portrait] .fab--top__right":
+      "html[onsflag-iphonex-portrait] .fab--top__center, html[onsflag-iphonex-portrait] .fab--top__left, html[onsflag-iphonex-portrait] .fab--top__right":
         {
           top: "64px",
         },
-      "html[onsflag-iphonex-portrait] .fab--bottom__left, html[onsflag-iphonex-portrait] .fab--bottom__center, html[onsflag-iphonex-portrait] .fab--bottom__right":
+      "html[onsflag-iphonex-portrait] .fab--bottom__center, html[onsflag-iphonex-portrait] .fab--bottom__left, html[onsflag-iphonex-portrait] .fab--bottom__right":
         {
           bottom: "34px",
         },
@@ -5865,7 +6130,7 @@ const darkMode: any = {
         boxSizing: "content-box",
         paddingTop: "44px",
       },
-      "html[onsflag-iphonex-portrait] .dialog .toolbar, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar, html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar":
+      "html[onsflag-iphonex-portrait] .dialog .toolbar, html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .toolbar":
         {
           top: "0",
           boxSizing: "border-box",
@@ -5876,7 +6141,7 @@ const darkMode: any = {
         boxSizing: "content-box",
         paddingBottom: "34px",
       },
-      "html[onsflag-iphonex-portrait] .dialog .bottom-bar, html[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .bottom-bar, html[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .bottom-bar":
+      "html[onsflag-iphonex-portrait] .dialog .bottom-bar, html[onsflag-iphonex-portrait]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .bottom-bar, html[onsflag-iphonex-portrait]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .bottom-bar":
         {
           bottom: "0",
           boxSizing: "border-box",
@@ -5888,22 +6153,22 @@ const darkMode: any = {
         bottom: "0",
         paddingBottom: "34px",
       },
-      "html[onsflag-iphonex-portrait] .dialog .page__content, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .page__content, html[onsflag-iphonex-portrait] .tabbar--top__content .page__content, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content":
+      "html[onsflag-iphonex-portrait] .dialog .page__content, html[onsflag-iphonex-portrait] .tabbar--top__content .page__content, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .page__content":
         {
           top: "0",
           paddingTop: "0",
         },
-      "html[onsflag-iphonex-portrait] .dialog .page__content, html[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .page__content, html[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .page__content, html[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content":
+      "html[onsflag-iphonex-portrait] .dialog .page__content, html[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content, html[onsflag-iphonex-portrait]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .page__content, html[onsflag-iphonex-portrait]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .page__content":
         {
           bottom: "0",
           paddingBottom: "0",
         },
-      "html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content) + .page__background, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content":
+      "html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content":
         {
           top: "88px",
           paddingTop: "0",
         },
-      "html[onsflag-iphonex-portrait] .dialog .toolbar:not(.toolbar--cover-content)+.page__background, html[onsflag-iphonex-portrait] .dialog .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar:not(.toolbar--cover-content)+.page__background, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar:not(.toolbar--cover-content)+.page__background+.page__content, html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar:not(.toolbar--cover-content)+.page__background, html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar:not(.toolbar--cover-content)+.page__background+.page__content":
+      "html[onsflag-iphonex-portrait]\r\n    .dialog\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background, html[onsflag-iphonex-portrait]\r\n    .dialog\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content, html[onsflag-iphonex-portrait]\r\n    .tabbar--top__content\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background, html[onsflag-iphonex-portrait]\r\n    .tabbar--top__content\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content":
         {
           top: "44px",
           paddingTop: "0",
@@ -5912,7 +6177,7 @@ const darkMode: any = {
         bottom: "78px",
         paddingBottom: "0",
       },
-      "html[onsflag-iphonex-portrait] .dialog .page-with-bottom-toolbar > .page__content, html[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .page-with-bottom-toolbar > .page__content, html[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .page-with-bottom-toolbar > .page__content":
+      "html[onsflag-iphonex-portrait]\r\n    .dialog\r\n    .page-with-bottom-toolbar\r\n    > .page__content, html[onsflag-iphonex-portrait]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .page-with-bottom-toolbar\r\n    > .page__content, html[onsflag-iphonex-portrait]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .page-with-bottom-toolbar\r\n    > .page__content":
         {
           bottom: "44px",
           paddingBottom: "0",
@@ -5922,7 +6187,7 @@ const darkMode: any = {
           top: "0",
           paddingTop: "88px",
         },
-      "html[onsflag-iphonex-portrait] .dialog .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, html[onsflag-iphonex-portrait] .dialog .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page__content, html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content, html[onsflag-iphonex-portrait] .tabbar--top__content .toolbar.toolbar--transparent.toolbar--cover-content+.page__background+.page__content .page_content":
+      "html[onsflag-iphonex-portrait]\r\n    .dialog\r\n    .toolbar.toolbar--transparent.toolbar--cover-content\r\n    + .page__background\r\n    + .page__content, html[onsflag-iphonex-portrait]\r\n    .dialog\r\n    .toolbar.toolbar--transparent.toolbar--cover-content\r\n    + .page__background\r\n    + .page__content\r\n    .page_content, html[onsflag-iphonex-portrait]\r\n    .tabbar--top__content\r\n    .toolbar.toolbar--transparent.toolbar--cover-content\r\n    + .page__background\r\n    + .page__content, html[onsflag-iphonex-portrait]\r\n    .tabbar--top__content\r\n    .toolbar.toolbar--transparent.toolbar--cover-content\r\n    + .page__background\r\n    + .page__content\r\n    .page_content, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .toolbar.toolbar--transparent.toolbar--cover-content\r\n    + .page__background\r\n    + .page__content, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .toolbar.toolbar--transparent.toolbar--cover-content\r\n    + .page__background\r\n    + .page__content\r\n    .page__content":
         {
           top: "0",
           paddingTop: "44px",
@@ -5930,28 +6195,28 @@ const darkMode: any = {
       "html[onsflag-iphonex-portrait] .tabbar--top": {
         paddingTop: "44px",
       },
-      "html[onsflag-iphonex-portrait] .dialog .tabbar--top, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .tabbar--top, html[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top":
+      "html[onsflag-iphonex-portrait] .dialog .tabbar--top, html[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .tabbar--top":
         {
           paddingTop: "0",
         },
       "html[onsflag-iphonex-portrait] .tabbar--top__content": {
         top: "93px",
       },
-      "html[onsflag-iphonex-portrait] .dialog .tabbar--top__content, html[onsflag-iphonex-portrait] .toolbar:not(.toolbar--cover-content)+.page__background+.page__content .tabbar--top__content, html[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top__content":
+      "html[onsflag-iphonex-portrait] .dialog .tabbar--top__content, html[onsflag-iphonex-portrait] .tabbar--top__content .tabbar--top__content, html[onsflag-iphonex-portrait]\r\n    .toolbar:not(.toolbar--cover-content)\r\n    + .page__background\r\n    + .page__content\r\n    .tabbar--top__content":
         {
           top: "49px",
         },
       "html[onsflag-iphonex-portrait] .tabbar:not(.tabbar--top):not(.tabbar--top)": {
         paddingBottom: "34px",
       },
-      "html[onsflag-iphonex-portrait] .dialog .tabbar:not(.tabbar--top):not(.tabbar--top), html[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .tabbar:not(.tabbar--top), html[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .tabbar:not(.tabbar--top)":
+      "html[onsflag-iphonex-portrait]\r\n    .dialog\r\n    .tabbar:not(.tabbar--top):not(.tabbar--top), html[onsflag-iphonex-portrait]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .tabbar:not(.tabbar--top), html[onsflag-iphonex-portrait]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .tabbar:not(.tabbar--top)":
         {
           paddingBottom: "0",
         },
       "html[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content)": {
         bottom: "83px",
       },
-      "html[onsflag-iphonex-portrait] .dialog .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-portrait] .page-with-bottom-toolbar > .page__content .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-portrait] .tabbar__content:not(.tabbar--top__content) .tabbar__content:not(.tabbar--top__content)":
+      "html[onsflag-iphonex-portrait]\r\n    .dialog\r\n    .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-portrait]\r\n    .page-with-bottom-toolbar\r\n    > .page__content\r\n    .tabbar__content:not(.tabbar--top__content), html[onsflag-iphonex-portrait]\r\n    .tabbar__content:not(.tabbar--top__content)\r\n    .tabbar__content:not(.tabbar--top__content)":
         {
           bottom: "49px",
         },
