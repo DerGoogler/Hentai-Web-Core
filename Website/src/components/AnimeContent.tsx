@@ -6,7 +6,7 @@ import native from "@Native/index";
 import tools from "@Misc/tools";
 
 class AnimeContent extends React.Component<{
-  data: any;
+  data: any[];
   name: string;
 }> {
   private makeUUID(length: number) {
@@ -44,8 +44,10 @@ class AnimeContent extends React.Component<{
     }
   }
 
-  public render() {
-    const listItems = this.props.data.map((item: any) => <PictureBuilder key={item} source={item} note={item} />);
+  public render = () => {
+    const listItems = this.props.data.map((item: any[]) => (
+      <PictureBuilder key={this.props.name} source={item} note={item} />
+    ));
 
     return (
       <ContentBody className="Anime-Content">
@@ -85,7 +87,7 @@ class AnimeContent extends React.Component<{
         </div>
       </ContentBody>
     );
-  }
+  };
 }
 
 export default AnimeContent;

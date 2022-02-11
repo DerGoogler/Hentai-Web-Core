@@ -16,18 +16,19 @@ import News from "@Components/News";
 import BuildPluginActivity from "./BuildPluginActivity";
 import Bootloader from "@Bootloader";
 import ChangelogActivity from "./ChangelogActivity";
+import images from "@DataPacks/images";
 
 class MainActivity extends React.Component<
   { pushPage: any; popPage: any },
-  { isContextOpen: boolean; sfw: any; nsfw: any }
+  { isContextOpen: boolean; sfw: any[]; nsfw: any[] }
 > {
   static props: any;
   public constructor(props: any) {
     super(props);
     this.state = {
       isContextOpen: false,
-      nsfw: [],
-      sfw: [],
+      sfw: images.sfw,
+      nsfw: images.nsfw,
     };
   }
 
@@ -71,16 +72,6 @@ class MainActivity extends React.Component<
           });
         }
       }
-    });
-
-    // SFW
-    tools.getMisc("images.yaml", (data: any) => {
-      this.setState({ sfw: data.sfw });
-    });
-
-    // NSFW
-    tools.getMisc("images.yaml", (data: any) => {
-      this.setState({ nsfw: data.nsfw });
     });
   };
 

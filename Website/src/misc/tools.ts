@@ -87,9 +87,14 @@ class tools {
     }
   }
 
-  public static getMisc(url: string, callback: Function) {
+  public static getMisc(url: string, callback: Function, options?: { json: boolean }) {
     axios.get(window.location.href.replace(/(\?(.*?)=(.*)|\?)/gm, "") + `misc/${url}`).then((res: { data: any }) => {
-      const data: any = yaml.load(res.data, { json: true });
+      let data;
+      if (options?.json) {
+        data = res.data;
+      } else {
+        data = yaml.load(res.data, { json: true });
+      }
       if (typeof callback === "function") {
         callback(data);
       }
