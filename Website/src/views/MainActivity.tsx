@@ -56,7 +56,7 @@ class MainActivity extends React.Component<
     // Get changelog
     tools.getMisc("changelog.yaml", (data: any) => {
       if (native.isAndroid || native.isWindows) {
-        if (data.version.toString() === native.getVersion()) {
+        if (data.version.toString() === native.getVersion) {
           console.log("Newst version installed");
         } else {
           this.props.pushPage({

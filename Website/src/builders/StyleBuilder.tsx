@@ -1,3 +1,4 @@
+import tools from "@Misc/tools";
 import native from "@Native/index";
 import * as React from "react";
 
@@ -27,7 +28,11 @@ class StyleBuilder extends React.Component<{ folder: string }, {}> {
           console.log("An plugin for " + this.props.folder + " was not found!");
           native.setPref("Plugin.Settings." + this.props.folder, "null");
         } else {
-          eval(native.fs.readFile("plugins/" + this.props.folder + "/" + this.getPluginConfig.run));
+          native.eval(native.fs.readFile("plugins/" + this.props.folder + "/" + this.getPluginConfig.run), {
+            plugin: {
+              name: this.props.folder,
+            },
+          });
         }
       }
     } else {

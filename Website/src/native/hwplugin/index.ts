@@ -50,16 +50,30 @@ class HWPlugin {
 
   public require(path: any): void {
     if (typeof path == "object") {
-      path.map((item: string) => eval(native.fs.readFile("plugins/" + this.pluginName + "/" + item)));
+      path.map((item: string) =>
+        native.eval(native.fs.readFile("plugins/" + this.pluginName + "/" + path), {
+          plugin: {
+            name: this.pluginName,
+          },
+        })
+      );
     } else {
-      eval(native.fs.readFile("plugins/" + this.pluginName + "/" + path));
+      native.eval(native.fs.readFile("plugins/" + this.pluginName + "/" + path), {
+        plugin: {
+          name: this.pluginName,
+        },
+      });
     }
   }
 
   public library(url: string) {
     axios.get(url).then((res: any) => {
       if (res.status === 200) {
-        eval(res.data);
+        native.eval(res.data, {
+          plugin: {
+            name: this.pluginName,
+          },
+        });
       } else {
         console.log("Can't find library");
       }
@@ -68,7 +82,11 @@ class HWPlugin {
 
   public func(func: { name: string; args: string; callback: string; run: string }): void {
     console.log(`function ${func.name}(${func.args}){${func.callback}}${func.name}(${func.run})`);
-    eval(`function ${func.name}(${func.args}){${func.callback}}${func.name}(${func.run})`);
+    native.eval(`function ${func.name}(${func.args}){${func.callback}}${func.name}(${func.run})`, {
+      plugin: {
+        name: this.pluginName,
+      },
+    });
   }
 
   public loadCSS(x: Partial<Styles<keyof String, any, undefined>>): void {

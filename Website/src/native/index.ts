@@ -5,6 +5,10 @@ import Mousetrap from "mousetrap";
 import yaml from "js-yaml";
 import ons from "onsenui";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
+import saferEval from "safer-eval";
+import HWPlugin from "./hwplugin";
+import tools from "@Misc/tools";
+import evil from "./hwplugin/eval";
 
 /**
  * Native calls for Windows and Android
@@ -280,19 +284,13 @@ class native {
 
   /**
    * Evaluates JavaScript code and executes it.
-   * @param x A String value that contains valid JavaScript code.
+   * @param javascriptString A String value that contains valid JavaScript code.
    */
-  public static eval(javascriptString: string) {
-    if (this.userAgent === this.userAgentAndroid) {
-      window.Android.eval(javascriptString);
-    } else if (this.userAgent === this.userAgentWindows) {
-      eval(javascriptString);
-    } else {
-      eval(javascriptString);
-    }
+  public static eval(javascriptString: string, extras: any) {
+    evil(javascriptString, extras);
   }
 
-  public static getVersion(): string {
+  public static get getVersion(): string {
     if (this.isAndroid) {
       return window.Android.getVersion();
     } else if (this.isWindows) {

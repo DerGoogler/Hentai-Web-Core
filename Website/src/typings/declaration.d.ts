@@ -3,7 +3,9 @@ declare module "react-dom";
 declare module "file-saver";
 declare module "react-translated";
 declare module "eruda";
+declare module "safer-eval";
 declare module "image-info";
+declare module 'vm-browserify';
 declare module "*.json" {
   const value: any;
   export default value;
