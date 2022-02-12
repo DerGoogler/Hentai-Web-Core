@@ -5,7 +5,7 @@ interface PluginAboutTypes {
 
 interface Package {
   author: string;
-  version: number;
+  version: string;
   language: string;
   description: string;
 }

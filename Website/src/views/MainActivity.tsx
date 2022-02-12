@@ -17,9 +17,10 @@ import BuildPluginActivity from "./BuildPluginActivity";
 import Bootloader from "@Bootloader";
 import ChangelogActivity from "./ChangelogActivity";
 import images from "@DataPacks/images";
+import { PushPageProps } from "@Types/init";
 
 class MainActivity extends React.Component<
-  { pushPage: any; popPage: any },
+  { pushPage(props: PushPageProps): void; popPage: any },
   { isContextOpen: boolean; sfw: any[]; nsfw: any[] }
 > {
   static props: any;
@@ -91,7 +92,7 @@ class MainActivity extends React.Component<
     return (
       <Toolbar>
         <ToolbarBuilder
-          title="Hentai Web"
+          title={"Hentai Web"}
           hasWindowsButtons={true}
           addToolbarButton={
             <>

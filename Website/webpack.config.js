@@ -5,6 +5,9 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const BrotliPlugin = require("brotli-webpack-plugin");
 const FsWebpackPlugin = require("fs-webpack-plugin");
 
+const APP_DIR = path.resolve(__dirname, "./src");
+const MONACO_DIR = path.resolve(__dirname, "./node_modules/monaco-editor");
+
 const config = {
   entry: {
     index: ["./src/index.tsx"],

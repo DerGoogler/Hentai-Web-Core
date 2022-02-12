@@ -46,7 +46,7 @@ class AnimeContent extends React.Component<{
 
   public render = () => {
     const listItems = this.props.data.map((item: any[]) => (
-      <PictureBuilder key={this.props.name} source={item} note={item} />
+      <PictureBuilder key={item.toString()} source={item} note={item} />
     ));
 
     return (

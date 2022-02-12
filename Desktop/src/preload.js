@@ -126,7 +126,7 @@ contextBridge.exposeInMainWorld("Windows", {
         .readFileSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path)
         .toString();
     } catch (error) {
-      console.log(error);
+      console.trace(`%c ${error}`, "color: orange;");
     }
   },
 
@@ -134,7 +134,7 @@ contextBridge.exposeInMainWorld("Windows", {
     try {
       fs.mkdirSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path);
     } catch (error) {
-      console.log(error);
+      console.trace(`%c ${error}`, "color: orange;");
     }
   },
 
@@ -146,7 +146,7 @@ contextBridge.exposeInMainWorld("Windows", {
         "UTF-8"
       );
     } catch (error) {
-      console.log(error);
+      console.trace(`%c ${error}`, "color: orange;");
     }
   },
 
@@ -156,7 +156,7 @@ contextBridge.exposeInMainWorld("Windows", {
         store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path
       );
     } catch (error) {
-      console.log(error);
+      console.trace(`%c ${error}`, "color: orange;");
     }
   },
 

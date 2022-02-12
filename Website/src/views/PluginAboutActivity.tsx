@@ -7,8 +7,12 @@ import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import tools from "@Misc/tools";
 import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
 import Bootloader from "@Bootloader";
+import { PushPageProps } from "@Types/init";
 
-class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: any }, {}> {
+class PluginAboutActivity extends React.Component<
+  { pushPage(props: PushPageProps): void; popPage: any; pluginAbout: any },
+  {}
+> {
   private getPluginConfig = native.fs.readFile("plugins/" + this.props.pluginAbout.name + "/plugin.yaml", {
     parse: { use: true, mode: "yaml" },
   });
@@ -21,7 +25,7 @@ class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: a
   public componentDidUpdate() {
     new Bootloader().styleInit();
   }
-  
+
   private renderToolbar = () => {
     return (
       <Toolbar>
@@ -69,7 +73,9 @@ class PluginAboutActivity extends React.Component<{ popPage: any; pluginAbout: a
               <div className="center">Description</div>
               <div className="expandable-content">
                 <div className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
-                  <HighlightedMarkdown>{this.description === tools.undefined ? "None" : this.description}</HighlightedMarkdown>
+                  <HighlightedMarkdown>
+                    {this.description === tools.undefined ? "None" : this.description}
+                  </HighlightedMarkdown>
                 </div>
               </div>
             </ListItem>

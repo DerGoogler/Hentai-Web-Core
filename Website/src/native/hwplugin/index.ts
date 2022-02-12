@@ -100,20 +100,20 @@ class HWPlugin {
     return native.fs.isFileExist(this.pluginName + "/" + path);
   }
 
-  public getAuthor() {
-    getPluginConfig(this.pluginName).package?.author;
+  public get getAuthor(): string {
+    return getPluginConfig(this.pluginName).package?.author;
   }
 
-  public getVersion() {
-    getPluginConfig(this.pluginName).package?.version;
+  public get getVersion(): string {
+    return getPluginConfig(this.pluginName).package?.version;
   }
 
-  public getLanguage() {
-    getPluginConfig(this.pluginName).package?.language;
+  public get getLanguage(): string {
+    return getPluginConfig(this.pluginName).package?.language;
   }
 
-  public getDescription() {
-    getPluginConfig(this.pluginName).package?.description;
+  public get getDescription(): string {
+    return getPluginConfig(this.pluginName).package?.description;
   }
 }
 

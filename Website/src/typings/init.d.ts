@@ -1,6 +1,7 @@
 interface PushPageProps {
-  activity: JSX.Element;
+  activity: JSX.Element | any;
   key: any;
+  extras?: any;
   pluginAbout?: PluginAbout;
   changelog?: Changelog;
 }
@@ -11,8 +12,17 @@ interface Changelog {
   package: Package;
 }
 
+/**
+ * Download links
+ */
 interface Package {
+  /**
+   * Download link for Android
+   */
   android: string;
+  /**
+   * Download link for Windows
+   */
   windows: string;
 }
 

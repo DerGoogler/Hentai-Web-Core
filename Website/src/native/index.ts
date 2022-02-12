@@ -5,7 +5,6 @@ import Mousetrap from "mousetrap";
 import yaml from "js-yaml";
 import ons from "onsenui";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
-import ChangelogActivity from "./../views/ChangelogActivity";
 
 /**
  * Native calls for Windows and Android

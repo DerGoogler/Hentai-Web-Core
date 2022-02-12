@@ -62,11 +62,12 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
     }
   };
 
-  public pushPage = (props: PushPageProps) => {
+  public pushPage = (props: PushPageProps): void => {
     const route = {
       component: props.activity,
       props: {
         key: props.key,
+        extras: props.extras,
         pluginAbout: props.pluginAbout,
         changelog: props.changelog,
         popPage: () => this.popPage(),
