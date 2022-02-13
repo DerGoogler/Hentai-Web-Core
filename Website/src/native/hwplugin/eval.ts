@@ -5,6 +5,7 @@ import native from "..";
 import HWPlugin from ".";
 
 export default function evil(javascriptString: string, extras: any) {
+  const darkmode = native.getPref("enableDarkmode") === "true";
   const context = {
     native: native,
     HWPlugin: HWPlugin,
@@ -40,22 +41,46 @@ export default function evil(javascriptString: string, extras: any) {
     console: {
       log(message?: any, ...optionalParams: any[]) {
         let pluginName = extras.plugin.name + ": ";
-        console.log(pluginName + message, ...optionalParams);
+        console.log(
+          `%c${pluginName}%c=>%c ${message}`,
+          `color: #fff; background: #4a148c; padding: 4px`,
+          `color: #fff; background: #bb86fc; padding: 4px`,
+          "",
+          ...optionalParams
+        );
       },
 
       info(message?: any, ...optionalParams: any[]) {
         let pluginName = extras.plugin.name + ": ";
-        console.info(pluginName + message, ...optionalParams);
+        console.info(
+          `%c${pluginName}%c=>%c ${message}`,
+          `color: #fff; background: #4a148c; padding: 4px`,
+          `color: #fff; background: #bb86fc; padding: 4px`,
+          "",
+          ...optionalParams
+        );
       },
 
       warn(message?: any, ...optionalParams: any[]) {
         let pluginName = extras.plugin.name + ": ";
-        console.warn(pluginName + message, ...optionalParams);
+        console.warn(
+          `%c${pluginName}%c=>%c ${message}`,
+          `color: #fff; background: #4a148c; padding: 4px`,
+          `color: #fff; background: #bb86fc; padding: 4px`,
+          "",
+          ...optionalParams
+        );
       },
 
       error(message?: any, ...optionalParams: any[]) {
         let pluginName = extras.plugin.name + ": ";
-        console.error(pluginName + message, ...optionalParams);
+        console.error(
+          `%c${pluginName}%c=>%c ${message}`,
+          `color: #fff; background: #4a148c; padding: 4px`,
+          `color: #fff; background: #bb86fc; padding: 4px`,
+          "",
+          ...optionalParams
+        );
       },
     },
   };

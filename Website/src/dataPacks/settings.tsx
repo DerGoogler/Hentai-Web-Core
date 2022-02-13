@@ -2,6 +2,8 @@ import ons from "onsenui";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import native from "@Native/index";
 import tools from "@Misc/tools";
+// There is a difference between native.isAndroid !
+import { isAndroid } from "react-device-detect";
 
 const settings: SettingsInterface[] = [
   {
@@ -123,9 +125,9 @@ const settings: SettingsInterface[] = [
         text: "erudaEnabled-string",
         type: "switch",
         style: {
-          display: native.isAndroid ? "" : "none",
+          display: isAndroid ? "" : "none",
         },
-        disabled: !native.isAndroid,
+        disabled: !isAndroid,
       },
     ],
   },

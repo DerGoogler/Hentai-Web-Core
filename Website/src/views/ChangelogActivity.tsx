@@ -11,9 +11,10 @@ import Bootloader from "@Bootloader";
 import { Changelog } from "@Types/init";
 
 class ChangelogActivity extends React.Component<{ popPage: any; changelog: Changelog }, {}> {
-  componentDidMount() {
+  public componentDidMount() {
     console.log(this.props.changelog.package.android);
   }
+
   public componentDidUpdate() {
     new Bootloader().styleInit();
   }

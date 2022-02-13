@@ -4,6 +4,9 @@ import config from "../misc/config";
 import tools from "../misc/tools";
 import native from "@Native/index";
 
+/**
+ * ContentBody is an optional component, to make the view better on desktop
+ */
 class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element> {
   private stlye: any = {
     boxSizing: "border-box",
