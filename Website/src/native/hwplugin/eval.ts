@@ -5,7 +5,6 @@ import native from "..";
 import HWPlugin from ".";
 
 export default function evil(javascriptString: string, extras: any) {
-  const darkmode = native.getPref("enableDarkmode") === "true";
   const context = {
     native: native,
     HWPlugin: HWPlugin,
@@ -40,7 +39,7 @@ export default function evil(javascriptString: string, extras: any) {
     },
     console: {
       log(message?: any, ...optionalParams: any[]) {
-        let pluginName = extras.plugin.name + ": ";
+        let pluginName = extras.plugin.name;
         console.log(
           `%c${pluginName}%c=>%c ${message}`,
           `color: #fff; background: #4a148c; padding: 4px`,
@@ -51,7 +50,7 @@ export default function evil(javascriptString: string, extras: any) {
       },
 
       info(message?: any, ...optionalParams: any[]) {
-        let pluginName = extras.plugin.name + ": ";
+        let pluginName = extras.plugin.name;
         console.info(
           `%c${pluginName}%c=>%c ${message}`,
           `color: #fff; background: #4a148c; padding: 4px`,
@@ -62,7 +61,7 @@ export default function evil(javascriptString: string, extras: any) {
       },
 
       warn(message?: any, ...optionalParams: any[]) {
-        let pluginName = extras.plugin.name + ": ";
+        let pluginName = extras.plugin.name;
         console.warn(
           `%c${pluginName}%c=>%c ${message}`,
           `color: #fff; background: #4a148c; padding: 4px`,
@@ -73,7 +72,7 @@ export default function evil(javascriptString: string, extras: any) {
       },
 
       error(message?: any, ...optionalParams: any[]) {
-        let pluginName = extras.plugin.name + ": ";
+        let pluginName = extras.plugin.name;
         console.error(
           `%c${pluginName}%c=>%c ${message}`,
           `color: #fff; background: #4a148c; padding: 4px`,

@@ -5,7 +5,7 @@ import MDIcon from "@Components/MDIcon";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import tools from "@Misc/tools";
-import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
+import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import Bootloader from "@Bootloader";
 import { PushPageProps } from "@Types/init";
 

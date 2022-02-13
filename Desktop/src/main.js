@@ -1,16 +1,8 @@
 // Modules to control application life and create native browser window
-const {
-  app,
-  BrowserWindow,
-  ipcMain,
-  Tray,
-  Menu,
-  shell,
-  Notification,
-  session,
-} = require("electron");
+const { app, BrowserWindow, ipcMain, Tray, Menu, shell, Notification, session } = require("electron");
 const path = require("path");
 const Store = require("electron-store");
+const isDev = require("electron-is-dev");
 const fs = require("fs");
 const fenster = require("@electron/remote/main");
 const setting = require("./defaultSettings");
@@ -86,10 +78,11 @@ function createWindow() {
   fenster.initialize();
   fenster.enable(webContents);
 
-  const url = "https://dergoogler.com/hentai-web/";
-  const url_ = "http://192.168.178.81:5500/";
+  const mainURL = "https://dergoogler.com/hentai-web/";
+  const debugURL = "http://192.168.178.81:5500/";
+  const checkMode = !isDev ? mainURL : debugURL;
 
-  mainWindow.loadURL(url_);
+  mainWindow.loadURL(checkMode);
   mainWindow.on("page-title-updated", function (e) {
     e.preventDefault();
   });

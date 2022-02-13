@@ -21,8 +21,8 @@ class LoginActivity extends React.Component<{ popPage: any }, { username: string
 
   private renderToolbar() {
     return (
-      <Toolbar>
-        <ToolbarBuilder title={<Translate text="sign-in" />} hasWindowsButtons={true} hasDarkMode={true} />
+      <Toolbar modifier="noshadow">
+        <ToolbarBuilder title={<Translate text="sign-in" />} hasWindowsButtons={true} />
       </Toolbar>
     );
   }
@@ -56,7 +56,7 @@ class LoginActivity extends React.Component<{ popPage: any }, { username: string
     return (
       <Translator>
         {({ translate }: any) => (
-          <Page modifier={native.checkPlatformForBorderStyle} /*renderToolbar={this.renderToolbar}*/>
+          <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
             <section
               className="drag--windows"
               style={{

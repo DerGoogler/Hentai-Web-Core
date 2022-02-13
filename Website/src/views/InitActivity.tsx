@@ -1,9 +1,9 @@
 import native from "@Native/index";
-import LoginActivity from "./LoginActivity";
 import MainActivity from "./MainActivity";
 import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
+import FirstStartupActivity from "./FirstStartupActivity";
 
 class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
   public constructor(props: any) {
@@ -13,7 +13,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
       if (native.getPref("loggedIn") === "true") {
         return MainActivity;
       } else {
-        return LoginActivity;
+        return FirstStartupActivity;
       }
     };
 

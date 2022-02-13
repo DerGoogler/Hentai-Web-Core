@@ -13,11 +13,12 @@ import MDIcon from "@Components/MDIcon";
 import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import News from "@Components/News";
-import BuildPluginActivity from "./BuildPluginActivity";
+import BuildPluginActivity from "./plugin/BuildPluginActivity";
 import Bootloader from "@Bootloader";
 import ChangelogActivity from "./ChangelogActivity";
 import images from "@DataPacks/images";
 import { PushPageProps } from "@Types/init";
+import PluginsActivity from "./plugin/PluginsActivity";
 
 class MainActivity extends React.Component<
   { pushPage(props: PushPageProps): void; popPage: any },
@@ -235,8 +236,21 @@ class MainActivity extends React.Component<
               },
             },
             {
+              text: "Plugins",
+              icon: "md-add",
+              style: { display: native.getPref("enableCustomScriptLoading") === "true" ? "" : "none" },
+              onClick: () => {
+                this.props.pushPage({
+                  activity: PluginsActivity,
+                  key: "plugins",
+                });
+                this.handleCancel();
+              },
+            },
+            {
               text: "Make HWPlugin",
               icon: "md-code",
+              style: { display: native.isAndroid || native.isWindows ? "" : "none" },
               onClick: () => {
                 this.props.pushPage({
                   activity: BuildPluginActivity,
@@ -248,21 +262,9 @@ class MainActivity extends React.Component<
             {
               text: "Open app path",
               icon: "md-android",
-              style: { display: tools.typeIF(native.userAgentEqualWindows(true), "", "none") },
+              style: { display: native.isWindows ? "" : "none" },
               onClick: () => {
                 window.Windows.openPath(window.Windows.appGetPath("userData"));
-              },
-            },
-            {
-              text: "Open DevTools",
-              icon: "logo_dev",
-              style: {
-                display:
-                  tools.typeIF(native.userAgentEqualWindows(true), "", "none") ||
-                  tools.typeIF(native.getPref("electron.devTools") === "true", "", "none"),
-              },
-              onClick: () => {
-                window.Windows.openDevTools();
               },
             },
             {
