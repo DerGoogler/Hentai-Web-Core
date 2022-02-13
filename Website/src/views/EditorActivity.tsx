@@ -38,8 +38,20 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
     );
   };
 
-  private onLoad() {
-    return false;
+  private onLoad(editor: any) {
+    editor.completers.push({
+      getCompletions: function (editor: any, session: any, pos: any, prefix: any, callback: any) {
+        var completions: any[] = [];
+        // we can use session and pos here to decide what we are going to show
+        ["native", "__dirname", "HWPlugin", "ons", "tools", "require()", "document"].forEach(function (w) {
+          completions.push({
+            value: w,
+            meta: "HWPlugin State",
+          });
+        });
+        callback(null, completions);
+      },
+    });
   }
 
   private onChange = (newValue: any) => {
@@ -68,8 +80,8 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
           onLoad={this.onLoad}
           onChange={this.onChange}
           fontSize={14}
+          width="100%"
           maxLines={Infinity}
-          style={{ width: "calc(100% - 2px)", marginLeft: "1px", marginRight: "1px" }}
           showPrintMargin={true}
           showGutter={true}
           highlightActiveLine={true}
@@ -77,6 +89,8 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
           setOptions={{
             enableBasicAutocompletion: true,
             enableLiveAutocompletion: true,
+            cursorStyle: "smooth",
+            spellcheck: false,
             enableSnippets: true,
             showLineNumbers: true,
             tabSize: 2,

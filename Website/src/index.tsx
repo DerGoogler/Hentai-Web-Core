@@ -12,8 +12,8 @@ import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
 
-// Webpack CSS imports
 import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/theme-nord_dark";
 import "onsenui/css/onsenui.css";
 import "bootstrap/dist/css/bootstrap.min.css";

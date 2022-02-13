@@ -21,6 +21,13 @@ The plugin path is \`/hentai-web/plugins/<PLUGINNAME>/\`
 
 In \`/hentai-web/plugins/<PLUGINNAME>/plugin.yaml\`
 
+Function should start like this
+\`\`\`js
+(function () {
+  console.log("Hello World!");
+})();
+\`\`\`
+
 \`\`\`yaml
 run: index.js
 package:
