@@ -9,6 +9,7 @@ import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";
 import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
 import Bootloader from "@Bootloader";
+import string from "@Strings";
 
 class LicensesActivity extends React.Component<{ popPage: any }, { data: string }> {
   public constructor(props: any) {
@@ -24,15 +25,11 @@ class LicensesActivity extends React.Component<{ popPage: any }, { data: string 
     });
   };
 
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
-
   private renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
-          title={"Licenses"}
+          title={string.licenses}
           onBackButton={this.props.popPage}
           hasWindowsButtons={true}
           hasDarkMode={true}

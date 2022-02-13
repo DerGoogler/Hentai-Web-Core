@@ -20,10 +20,6 @@ class News extends React.Component {
     });
   }
 
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
-
   public render() {
     /**
      * To load for every object an own AnimePicture from `data.ts`

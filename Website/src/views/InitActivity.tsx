@@ -4,6 +4,7 @@ import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
 import FirstStartupActivity from "./FirstStartupActivity";
+import Bootloader from "@Bootloader";
 
 class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
   public constructor(props: any) {
@@ -33,6 +34,11 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
   public componentDidMount = () => {
     window.addEventListener("load", this.windowLoadPush);
   };
+
+  public componentDidUpdate() {
+    new Bootloader().styleInit();
+    new Bootloader().checkLanguage();
+  }
 
   public componentWillUnmount = () => {
     window.removeEventListener("load", this.windowLoadPush);

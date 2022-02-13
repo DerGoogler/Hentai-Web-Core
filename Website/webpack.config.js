@@ -35,7 +35,6 @@ const config = {
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
         type: "asset/resource",
-        // use: "url-loader?limit=100000&name=files/[name].[ext]",
       },
     ],
   },
@@ -59,6 +58,7 @@ const config = {
       "@Misc": path.resolve(__dirname, "src/misc"),
       "@Bootloader": path.resolve(__dirname, "src/index.tsx"),
       "@Styles": path.resolve(__dirname, "src/styles"),
+      "@Strings": path.resolve(__dirname, "src/localization/index.ts"),
     },
     fallback: {
       path: require.resolve("path-browserify"),

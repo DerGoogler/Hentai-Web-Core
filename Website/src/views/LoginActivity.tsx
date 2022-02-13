@@ -1,9 +1,9 @@
 import ons from "onsenui";
 import React from "react";
 import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui";
-import { Provider, Translate, Translator } from "react-translated";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import string from "@Strings";
 
 class LoginActivity extends React.Component<{ popPage: any }, { username: string; password: string }> {
   public constructor(props: any) {
@@ -22,7 +22,7 @@ class LoginActivity extends React.Component<{ popPage: any }, { username: string
   private renderToolbar() {
     return (
       <Toolbar modifier="noshadow">
-        <ToolbarBuilder title={<Translate text="sign-in" />} hasWindowsButtons={true} />
+        <ToolbarBuilder title={string.signIn} hasWindowsButtons={true} />
       </Toolbar>
     );
   }
@@ -54,90 +54,67 @@ class LoginActivity extends React.Component<{ popPage: any }, { username: string
 
   public render() {
     return (
-      <Translator>
-        {({ translate }: any) => (
-          <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-            <section
-              className="drag--windows"
+      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+        <section
+          className="drag--windows"
+          style={{
+            textAlign: "center",
+            height: "100%",
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#4a148c",
+          }}
+        >
+          <div
+            className="noDrag--windows"
+            style={{
+              backgroundColor: "white",
+              padding: "16px",
+              borderRadius: "8px",
+              boxShadow:
+                "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),0 3px 1px -2px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            <p
               style={{
-                textAlign: "center",
-                height: "100%",
-                width: "100%",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                backgroundColor: "#4a148c",
+                fontSize: "xx-large",
+                fontVariant: "all-small-caps",
               }}
             >
-              <div
-                className="noDrag--windows"
-                style={{
-                  backgroundColor: "white",
-                  padding: "16px",
-                  borderRadius: "8px",
-                  boxShadow:
-                    "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),0 3px 1px -2px rgba(0, 0, 0, 0.2)",
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: "xx-large",
-                    fontVariant: "all-small-caps",
-                  }}
-                >
-                  Login
-                </p>
-                <p>
-                  <Input
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange}
-                    modifier="underbar"
-                    float
-                    placeholder={this.placeholderIF(
-                      window.navigator.userAgent === "HENTAI_WEB_AGENT",
-                      translate({
-                        text: "MANUFACTURER",
-                      }),
-                      "appCodeName"
-                    )}
-                  />
-                </p>
-                <p>
-                  <Input
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange}
-                    modifier="underbar"
-                    float
-                    placeholder={this.placeholderIF(
-                      window.navigator.userAgent === "HENTAI_WEB_AGENT",
-                      translate({
-                        text: "MODEL",
-                      }),
-                      "platform"
-                    )}
-                  />
-                </p>
-                <p>
-                  <Button onClick={this.handleClick}>
-                    <Translate text="sign-in" />
-                  </Button>
-                </p>
-                <p>
-                  <a
-                    style={{ textDecoration: "none" }}
-                    href={translate({
-                      text: "how-to-login-link",
-                    })}
-                  >
-                    <Translate text="how-to-login" />
-                  </a>
-                </p>
-              </div>
-            </section>
-          </Page>
-        )}
-      </Translator>
+              Login
+            </p>
+            <p>
+              <Input
+                value={this.state.username}
+                onChange={this.handleUsernameChange}
+                modifier="underbar"
+                float
+                placeholder={native.isAndroid ? string.MANUFACTURER : "appCodeName"}
+              />
+            </p>
+            <p>
+              <Input
+                value={this.state.password}
+                onChange={this.handlePasswordChange}
+                modifier="underbar"
+                float
+                placeholder={native.isAndroid ? string.MODEL : "platform"}
+              />
+            </p>
+            <p>
+              <Button onClick={this.handleClick}>sign-in</Button>
+            </p>
+            <p>
+              <a style={{ textDecoration: "none" }} href={string.howToLoginLink}>
+                {string.howToLogin}
+              </a>
+            </p>
+          </div>
+        </section>
+      </Page>
     );
   }
 }

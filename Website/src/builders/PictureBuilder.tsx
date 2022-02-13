@@ -2,11 +2,11 @@ import * as React from "react";
 import { Card, Button, Badge } from "react-bootstrap";
 import { Card as Kard } from "react-onsenui";
 import axios from "axios";
-import { Provider, Translate, Translator } from "react-translated";
 import native from "@Native/index";
 import { Icon } from "react-onsenui";
 import tools from "@Misc/tools";
 import ActionSheetBuilder from "./ActionSheetBuilder";
+import string from "@Strings";
 
 class PictureBuilder extends React.Component<{
   note?: any;
@@ -100,175 +100,161 @@ class PictureBuilder extends React.Component<{
     const { note, source, isNew } = this.props;
     return (
       <>
-        <Translator>
-          {({ translate }: any) => (
-            // @ts-ignore
-            <card>
-              <Kard style={{ padding: "0px", borderRadius: "8px", border: "0px" }}>
-                <Card
-                  key={this.getID}
-                  style={{
-                    padding: "0px",
-                    margin: "0px",
-                    boxShadow: "none",
-                    backgroundColor: "transparent",
-                  }}
-                >
-                  <Card.Header style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}>
-                    {/*
+        {/*
                 // @ts-ignore */}
-                    <name style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
-                      <h4
-                        style={{
-                          width: "100%",
-                          display: "flex",
-                          justifyContent: "left",
-                          alignItems: "center",
-                        }}
-                        className={"searchKey> " + this.getID + "_search"}
-                      >
-                        {(() => {
-                          if (isNew) {
-                            return (
-                              <>
-                                <Badge style={{ fontSize: "10px" }} bg={this.buttonDesign}>
-                                  NEW
-                                </Badge>
-                                &nbsp;
-                              </>
-                            );
-                          } else {
-                            return;
-                          }
-                        })()}
-                        {this.getNote}
-                      </h4>
-                      <Button
-                        style={{
-                          display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
-                        }}
-                        onClick={this.handleClick}
-                        variant={this.buttonDesign}
-                      >
-                        <Icon icon="md-more" />
-                      </Button>
-                      {/*
-                  // @ts-ignore */}
-                    </name>
-                  </Card.Header>
-                  <Card.Body
+        <card>
+          <Kard style={{ padding: "0px", borderRadius: "8px", border: "0px" }}>
+            <Card
+              key={this.getID}
+              style={{
+                padding: "0px",
+                margin: "0px",
+                boxShadow: "none",
+                backgroundColor: "transparent",
+              }}
+            >
+              <Card.Header style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}>
+                {/*
+                // @ts-ignore */}
+                <name style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
+                  <h4
                     style={{
-                      padding: tools.typeIF(native.getPref("fitImageToCard"), "0px", ""),
+                      width: "100%",
                       display: "flex",
-                      justifyContent: "center",
-                      flexDirection: "column",
+                      justifyContent: "left",
+                      alignItems: "center",
                     }}
+                    className={"searchKey> " + this.getID + "_search"}
                   >
-                    <blockquote className="blockquote mb-0">
-                      <p>
-                        {" "}
-                        <img
-                          id={this.getID}
-                          src={this.images}
-                          alt={this.getNote}
-                          onError={() => {
-                            this.setState({ isImageError: true });
-                          }}
-                          onDoubleClick={this.handleClick}
-                          style={{
-                            width: "100%",
-                            borderRadius: tools.typeIF(
-                              native.getPref("fitImageToCard"),
-                              tools.typeIF(
-                                native.getPref("displayDownload"),
-                                tools.typeIF(
-                                  native.getPref("removeTitle"),
-                                  "0.25rem 0.25rem 0rem 0rem",
-                                  "0rem 0rem 0rem 0rem"
-                                ),
-                                tools.typeIF(
-                                  native.getPref("removeTitle"),
-                                  "0.25rem 0.25rem 0.25rem 0.25rem",
-                                  "0rem 0rem 0.25rem 0.25rem"
-                                )
-                              ),
-                              ".25rem"
+                    {(() => {
+                      if (isNew) {
+                        return (
+                          <>
+                            <Badge style={{ fontSize: "10px" }} bg={this.buttonDesign}>
+                              NEW
+                            </Badge>
+                            &nbsp;
+                          </>
+                        );
+                      } else {
+                        return;
+                      }
+                    })()}
+                    {this.getNote}
+                  </h4>
+                  <Button
+                    style={{
+                      display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
+                    }}
+                    onClick={this.handleClick}
+                    variant={this.buttonDesign}
+                  >
+                    <Icon icon="md-more" />
+                  </Button>
+                  {/*
+                  // @ts-ignore */}
+                </name>
+              </Card.Header>
+              <Card.Body
+                style={{
+                  padding: tools.typeIF(native.getPref("fitImageToCard"), "0px", ""),
+                  display: "flex",
+                  justifyContent: "center",
+                  flexDirection: "column",
+                }}
+              >
+                <blockquote className="blockquote mb-0">
+                  <p>
+                    {" "}
+                    <img
+                      id={this.getID}
+                      src={this.images}
+                      alt={this.getNote}
+                      onError={() => {
+                        this.setState({ isImageError: true });
+                      }}
+                      onDoubleClick={this.handleClick}
+                      style={{
+                        width: "100%",
+                        borderRadius: tools.typeIF(
+                          native.getPref("fitImageToCard"),
+                          tools.typeIF(
+                            native.getPref("displayDownload"),
+                            tools.typeIF(
+                              native.getPref("removeTitle"),
+                              "0.25rem 0.25rem 0rem 0rem",
+                              "0rem 0rem 0rem 0rem"
                             ),
-                          }}
-                        />{" "}
-                        <ActionSheetBuilder
-                          options={{
-                            title: this.getNote + "'s options",
-                            onCancel: this.handleCancel,
-                            isOpen: this.state.isContextOpen,
-                            modifier: native.checkPlatformForBorderStyle,
-                          }}
-                          data={[
-                            {
-                              text: "view-image",
-                              icon: "md-eye",
-                              onClick: () => {
-                                native.open(source);
-                                this.handleCancel();
-                              },
-                            },
-                            {
-                              text: "copy-link",
-                              icon: "md-copy",
-                              onClick: () => {
-                                native.copyClipborad(source);
-                                this.handleCancel();
-                              },
-                            },
-                            {
-                              text: "reload-image",
-                              icon: "md-refresh",
-                              style: { display: "none" },
-                              onClick: () => {
-                                tools.ref(this.getID, (e: HTMLElement) => {
-                                  e.setAttribute("src", source);
-                                });
-                                this.handleCancel();
-                              },
-                            },
-                            {
-                              text: "view-hmtai-image-source",
-                              icon: "md-link",
-                              onClick: () => {
-                                native.open(
-                                  `https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note
-                                    .toLowerCase()
-                                    .replace(/ /g, "")}.json`
-                                );
-                                this.handleCancel();
-                              },
-                            },
-                            {
-                              text: "download-text",
-                              icon: "md-download",
-                              onClick: () => {
-                                native.downloadPicture(source, this.getID, this.getID);
-                                this.handleCancel();
-                              },
-                            },
-                            {
-                              text: "Cancel",
-                              icon: "md-close",
-                              modifier: native.checkPlatformForBorderStyle,
-                              onClick: this.handleCancel,
-                            },
-                          ]}
-                        />
-                      </p>
-                    </blockquote>
-                  </Card.Body>
-                </Card>
-              </Kard>
-              {/*
+                            tools.typeIF(
+                              native.getPref("removeTitle"),
+                              "0.25rem 0.25rem 0.25rem 0.25rem",
+                              "0rem 0rem 0.25rem 0.25rem"
+                            )
+                          ),
+                          ".25rem"
+                        ),
+                      }}
+                    />{" "}
+                    <ActionSheetBuilder
+                      options={{
+                        title: this.getNote + "'s options",
+                        onCancel: this.handleCancel,
+                        isOpen: this.state.isContextOpen,
+                        modifier: native.checkPlatformForBorderStyle,
+                      }}
+                      data={[
+                        {
+                          text: string.viewImageInBrowser,
+                          icon: "md-eye",
+                          onClick: () => {
+                            native.open(source);
+                            this.handleCancel();
+                          },
+                        },
+                        {
+                          text: string.copyLink,
+                          icon: "md-copy",
+                          onClick: () => {
+                            native.copyClipborad(source);
+                            this.handleCancel();
+                          },
+                        },
+                        {
+                          text: string.viewImageSource,
+                          icon: "md-link",
+                          onClick: () => {
+                            native.open(
+                              `https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note
+                                .toLowerCase()
+                                .replace(/ /g, "")}.json`
+                            );
+                            this.handleCancel();
+                          },
+                        },
+                        {
+                          text: string.download,
+                          icon: "md-download",
+                          onClick: () => {
+                            native.downloadPicture(source, this.getID, this.getID);
+                            this.handleCancel();
+                          },
+                        },
+                        {
+                          text: string.cancel,
+                          icon: "md-close",
+                          modifier: native.checkPlatformForBorderStyle,
+                          onClick: this.handleCancel,
+                        },
+                      ]}
+                    />
+                  </p>
+                </blockquote>
+              </Card.Body>
+            </Card>
+          </Kard>
+          {/*
                 // @ts-ignore */}
-            </card>
-          )}
-        </Translator>
+        </card>
       </>
     );
   }

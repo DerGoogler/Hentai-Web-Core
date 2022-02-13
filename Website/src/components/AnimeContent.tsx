@@ -4,6 +4,7 @@ import { List, SearchInput } from "react-onsenui";
 import ContentBody from "./ContentBody";
 import native from "@Native/index";
 import tools from "@Misc/tools";
+import string from "@Strings";
 
 class AnimeContent extends React.Component<{
   data: any[];
@@ -73,7 +74,7 @@ class AnimeContent extends React.Component<{
           >
             <SearchInput
               // @ts-ignore
-              placeholder={"Search " + this.props.name}
+              placeholder={`${string.search} ${this.props.name}`}
               style={{
                 display: tools.typeIF(native.getPref("hideSearchbar"), "none", ""),
                 borderRadius: "8px",

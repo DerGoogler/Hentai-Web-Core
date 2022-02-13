@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Provider, Translate, Translator } from "react-translated";
 import pkg from "./../../package.json";
 import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native/index";
@@ -19,6 +18,7 @@ import ChangelogActivity from "./ChangelogActivity";
 import images from "@DataPacks/images";
 import { PushPageProps } from "@Types/init";
 import PluginsActivity from "./plugin/PluginsActivity";
+import string from "@Strings";
 
 class MainActivity extends React.Component<
   { pushPage(props: PushPageProps): void; popPage: any },
@@ -76,10 +76,6 @@ class MainActivity extends React.Component<
       }
     });
   };
-
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
 
   private handleClick = () => {
     this.setState({ isContextOpen: true });
@@ -140,23 +136,19 @@ class MainActivity extends React.Component<
 
   private renderFixed() {
     return (
-      <Translator>
-        {({ translate }: any) => (
-          // @ts-ignore
-          <SpeedDial
-            style={{
-              bottom: tools.typeIF(native.getPref("enableBottomTabbar") === "true", "calc(20px + 49px)", ""),
-            }}
-            id="fab-element"
-            position="bottom right"
-          >
-            <Fab>
-              <Icon icon="md-more" />
-            </Fab>
-            {SpeedDialBuilder}
-          </SpeedDial>
-        )}
-      </Translator>
+      // @ts-ignore
+      <SpeedDial
+        style={{
+          bottom: tools.typeIF(native.getPref("enableBottomTabbar") === "true", "calc(20px + 49px)", ""),
+        }}
+        id="fab-element"
+        position="bottom right"
+      >
+        <Fab>
+          <Icon icon="md-more" />
+        </Fab>
+        {SpeedDialBuilder}
+      </SpeedDial>
     );
   }
 
@@ -213,7 +205,7 @@ class MainActivity extends React.Component<
           }}
           data={[
             {
-              text: "settings",
+              text: string.settings,
               icon: "md-settings",
               onClick: () => {
                 this.props.pushPage({
@@ -224,7 +216,7 @@ class MainActivity extends React.Component<
               },
             },
             {
-              text: "Licenses",
+              text: string.licenses,
               icon: "md-file",
               onClick: () => {
                 this.props.pushPage({
@@ -267,7 +259,7 @@ class MainActivity extends React.Component<
               },
             },
             {
-              text: "Cancel",
+              text: string.cancel,
               icon: "md-close",
               modifier: native.checkPlatformForBorderStyle,
               onClick: this.handleCancel,

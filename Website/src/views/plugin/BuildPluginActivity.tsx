@@ -219,10 +219,6 @@ plugin.require("/core/lib.js");
     `,
   };
 
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
-
   private renderToolbar = () => {
     return (
       <Toolbar>

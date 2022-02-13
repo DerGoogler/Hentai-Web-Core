@@ -15,10 +15,6 @@ class ChangelogActivity extends React.Component<{ popPage: any; changelog: Chang
     console.log(this.props.changelog.package.android);
   }
 
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
-
   private renderToolbar = () => {
     return (
       <Toolbar>

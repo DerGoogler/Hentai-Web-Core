@@ -14,10 +14,6 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
     this.state = { data: this.props.extras.value };
   }
 
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
-
   private renderToolbar = () => {
     return (
       <Toolbar>

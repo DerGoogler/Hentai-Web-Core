@@ -1,6 +1,5 @@
 import * as React from "react";
 import { ActionSheet, ActionSheetButton } from "react-onsenui";
-import { Provider, Translate, Translator } from "react-translated";
 import tools from "../misc/tools";
 
 interface MenuBuild {
@@ -30,24 +29,20 @@ class ActionSheetBuilder extends React.Component<{ data: MenuBuild[]; options: O
     const { data, options } = this.props;
 
     const result = data.map((item: MenuBuild) => (
-      <Translator>
-        {({ translate }: any) => (
-          <ActionSheetButton
-            icon={item.icon}
-            style={item.style}
-            modifier={item.modifier}
-            onClick={() => {
-              if (typeof item.onClick == "function") {
-                item.onClick(translate);
-              } else {
-                throw new Error("Invalid onClick in MenuBuilder");
-              }
-            }}
-          >
-            <Translate text={item.text} />
-          </ActionSheetButton>
-        )}
-      </Translator>
+      <ActionSheetButton
+        icon={item.icon}
+        style={item.style}
+        modifier={item.modifier}
+        onClick={() => {
+          if (typeof item.onClick == "function") {
+            item.onClick();
+          } else {
+            throw new Error("Invalid onClick in MenuBuilder");
+          }
+        }}
+      >
+        {item.text}
+      </ActionSheetButton>
     ));
 
     return (

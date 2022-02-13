@@ -4,6 +4,10 @@ import native from "@Native/index";
 import tools from "@Misc/tools";
 // There is a difference between native.isAndroid !
 import { isAndroid } from "react-device-detect";
+import string from "@Strings";
+import Bootloader from "@Bootloader";
+
+//new Bootloader().checkLanguage();
 
 const settings: SettingsInterface[] = [
   {
@@ -13,31 +17,31 @@ const settings: SettingsInterface[] = [
         key: "enableDarkmode",
         type: "switch",
         icon: "dark_mode",
-        text: "enableDarkmode-string",
+        text: string.enableDarkmode,
       },
       {
         key: "hideSearchbar",
         icon: "search",
         type: "switch",
-        text: "hideSearchbar-string",
+        text: string.hideSearchbar,
       },
       {
         key: "enableBottomTabbar",
         icon: "table_chart",
         type: "switch",
-        text: "Place Tabbar at bottom",
+        text: string.placeTabberOnBottom,
       },
       {
         key: "hideFAB",
         icon: "add",
         type: "switch",
-        text: "hideFAB-string",
+        text: string.hideFAB,
       },
       {
         key: "language",
         icon: "language",
         type: "select",
-        text: "language-string",
+        text: string.language,
         selectDefaultValue: "en",
         selectValue: [
           {
@@ -72,19 +76,19 @@ const settings: SettingsInterface[] = [
         key: "fitImageToCard",
         type: "switch",
         icon: "fit_screen",
-        text: "fitImageToCard-string",
+        text: string.fitImageToCard,
       },
       {
         key: "displayDownload",
         icon: "file_download",
         type: "switch",
-        text: "displayDownload-string",
+        text: string.displayMoreButton,
       },
       {
         key: "removeTitle",
         icon: "title",
         type: "switch",
-        text: "removeTitle-string",
+        text: string.removeTitle,
       },
     ],
   },
@@ -96,7 +100,7 @@ const settings: SettingsInterface[] = [
         key: "alwaysLogin",
         type: "switch",
         icon: "login",
-        text: "alwaysLogin-string",
+        text: string.alwaysLogin,
       },
       {
         key: "enableCustomScriptLoading",
@@ -112,7 +116,7 @@ const settings: SettingsInterface[] = [
       {
         key: "useFingerPrintToLogin",
         icon: "fingerprint",
-        text: "useFingerPrintToLogin-string",
+        text: string.useFingerPrintToLogin,
         type: "switch",
         style: {
           display: native.isWindows || !native.android.isHardwareAvailable() ? "none" : "",
@@ -122,7 +126,7 @@ const settings: SettingsInterface[] = [
       {
         key: "erudaEnabled",
         icon: "logo_dev",
-        text: "erudaEnabled-string",
+        text: string.erudaEnabled,
         type: "switch",
         style: {
           display: isAndroid ? "" : "none",
@@ -139,19 +143,19 @@ const settings: SettingsInterface[] = [
         key: "enableSwipeBetweenTabs",
         icon: "swipe",
         type: "switch",
-        text: "enableSwipeBetweenTabs-string",
+        text: string.enableSwipeBetweenTabs,
       },
       {
         key: "saveLastUsedTab",
         icon: "save",
         type: "switch",
-        text: "saveLastUsedTab-string",
+        text: string.saveLastUsedTab,
       },
       {
         key: "disableNSFW",
         icon: "accessible_forward",
         type: "switch",
-        text: "Disable NSFW content",
+        text: string.disableNSFWcontent,
       },
     ],
   },
@@ -165,7 +169,7 @@ const settings: SettingsInterface[] = [
         key: "electron.screenSizeInUse",
         type: "select",
         icon: "aspect_ratio",
-        text: "Screen/Window Size",
+        text: string.electronWindowSize,
         selectDefaultValue: "<width>375</width><height>812</height>",
         callback: (e: any, key: string, translate: any) => {
           const keyWin = "electron.windowSize";
@@ -248,13 +252,13 @@ const settings: SettingsInterface[] = [
         key: "electron.devTools",
         type: "switch",
         icon: "logo_dev",
-        text: "Enable DevTools",
+        text: string.enableDevTools,
       },
       {
         key: "electron.alwaysOnTop",
         type: "switch",
         icon: "pan_tool",
-        text: "Enable Always on top",
+        text: string.enableAlwaysOnTop,
         callback: (keepDefaultFuntion: any) => {
           native.electron.notification("Restart", "Please restart the application");
           keepDefaultFuntion();
@@ -264,7 +268,7 @@ const settings: SettingsInterface[] = [
         key: "electron.hardDevice",
         icon: "desktop_windows",
         type: "select",
-        text: "Hard device",
+        text: string.hardDevice,
         selectDefaultValue: "C",
         selectValue: [
           {
@@ -418,7 +422,7 @@ const settings: SettingsInterface[] = [
         key: "enableKeepScreenOn",
         type: "switch",
         icon: "visibility",
-        text: "enableKeepScreenOn--string",
+        text: string.enableKeepScreenOn,
       },
     ],
   },

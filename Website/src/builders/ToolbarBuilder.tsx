@@ -1,8 +1,6 @@
 import * as React from "react";
 import { BackButton, Icon, ToolbarButton } from "react-onsenui";
-import ons from "onsenui";
 import native from "@Native/index";
-import Bootloader from "@Bootloader";
 import { ToolbarBuilderInterface } from "@Types/ToolbarBuilder";
 import tools from "@Misc/tools";
 import MDIcon from "@Components/MDIcon";

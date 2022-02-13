@@ -1,32 +1,24 @@
 import * as React from "react";
 import { ListItem, Page, Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
-import { Provider, Translate, Translator } from "react-translated";
 import settings from "@DataPacks/settings";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Components/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
-import MDIcon from "@Components/MDIcon";
-import PluginAboutActivity from "./plugin/PluginAboutActivity";
 import Bootloader from "@Bootloader";
+import string from "@Strings";
 
 class SettingsActivity extends React.Component<{ pushPage: any; popPage: any }, {}> {
-  private scriptLosding = native.getPref("enableCustomScriptLoading");
-
   public componentDidMount() {
     native.electron.discordRPC("Viewing Settings");
-  }
-
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
   }
 
   private renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
-          title={<Translate text="settings" />}
+          title={string.settings}
           onBackButton={this.props.popPage}
           hasWindowsButtons={true}
           hasDarkMode={true}

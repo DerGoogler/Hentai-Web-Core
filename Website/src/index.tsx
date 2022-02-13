@@ -1,7 +1,7 @@
+import React from "react";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import { Provider } from "react-translated";
-import strings from "@DataPacks/strings";
 import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./views/InitActivity";
@@ -11,6 +11,7 @@ import erudaDom from "eruda-dom";
 import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
+import string from "@Strings";
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -19,16 +20,17 @@ import "onsenui/css/onsenui.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
+import tools from "@Misc/tools";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");
 
-  private checkLanguage() {
+  public checkLanguage() {
     var get = native.getPref("language");
-    if (get === "false") {
-      return "en";
+    if (get === tools.undefined) {
+      string.setLanguage("en");
     } else {
-      return get;
+      string.setLanguage(get);
     }
   }
 
@@ -55,10 +57,8 @@ class Bootloader {
 
     ReactDOM.render(
       <>
-        <Provider language={this.checkLanguage()} translation={strings}>
-          {node}
-          {customPlugins}
-        </Provider>
+        {node}
+        {customPlugins}
       </>,
       this.mountNode
     );
@@ -106,6 +106,7 @@ class Bootloader {
     this.folderInit();
     this.makeExamplePlugin();
     this.styleInit();
+    this.checkLanguage();
 
     ons.ready(() => {
       ons.platform.select("android");

@@ -22,10 +22,6 @@ class PluginAboutActivity extends React.Component<
   private language = this.getPluginConfig?.package?.language;
   private description = this.getPluginConfig?.package?.description;
 
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
-
   private renderToolbar = () => {
     return (
       <Toolbar>

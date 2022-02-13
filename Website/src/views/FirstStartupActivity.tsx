@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Carousel, CarouselItem, Page, Toolbar } from "react-onsenui";
 import native from "@Native/index";
-import axios from "axios";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Components/ContentBody";
 import "@Styles/github/markdown-dark.scss";
@@ -50,10 +49,6 @@ class FistStartupActivity extends React.Component<
       ],
       index: 0,
     };
-  }
-
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
   }
 
   private renderToolbar = () => {

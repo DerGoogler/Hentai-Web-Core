@@ -13,10 +13,6 @@ import EditorActivity from "./../EditorActivity";
 class PluginsActivity extends React.Component<{ pushPage: any; popPage: any }, {}> {
   private scriptLosding = native.getPref("enableCustomScriptLoading") === "true";
 
-  public componentDidUpdate() {
-    new Bootloader().styleInit();
-  }
-
   private renderToolbar = () => {
     return (
       <Toolbar>
