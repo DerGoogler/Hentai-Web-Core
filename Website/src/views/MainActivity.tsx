@@ -103,7 +103,6 @@ class MainActivity extends React.Component<
             </>
           }
           addToolbarButtonPosition="left"
-          hasDarkMode={true}
         />
       </Toolbar>
     );

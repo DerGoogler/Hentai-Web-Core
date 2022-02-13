@@ -1,9 +1,5 @@
 import ReactDOM from "react-dom";
 import ons from "onsenui";
-import "onsenui/css/onsenui.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "material-icons/iconfont/material-icons.css";
-import "@Styles/default.scss";
 import { Provider } from "react-translated";
 import strings from "@DataPacks/strings";
 import eruda from "eruda";
@@ -15,6 +11,14 @@ import erudaDom from "eruda-dom";
 import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
+
+// Webpack CSS imports
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/theme-nord_dark";
+import "onsenui/css/onsenui.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "material-icons/iconfont/material-icons.css";
+import "@Styles/default.scss";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");

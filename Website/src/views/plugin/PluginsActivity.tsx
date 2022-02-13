@@ -1,8 +1,6 @@
 import * as React from "react";
 import { ListHeader, ListItem, Page, Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
-import { Provider, Translate, Translator } from "react-translated";
-import settings from "@DataPacks/settings";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Components/ContentBody";
@@ -10,6 +8,7 @@ import SettingsBuilder from "@Builders/SettingsBuilder";
 import MDIcon from "@Components/MDIcon";
 import PluginAboutActivity from "./PluginAboutActivity";
 import Bootloader from "@Bootloader";
+import EditorActivity from "./../EditorActivity";
 
 class PluginsActivity extends React.Component<{ pushPage: any; popPage: any }, {}> {
   private scriptLosding = native.getPref("enableCustomScriptLoading") === "true";
@@ -67,6 +66,37 @@ class PluginsActivity extends React.Component<{ pushPage: any; popPage: any }, {
                           </div>
                           <div className="center">Developer</div>
                         </ListItem>
+                        {(() => {
+                          const getConfig: any = native.fs.readFile(`plugins/${item}/plugin.yaml`, {
+                            parse: { use: true, mode: "yaml" },
+                          });
+                          if (getConfig.options?.allowEditor) {
+                            return (
+                              <ListItem
+                                tappable
+                                modifier="chevron"
+                                onClick={() => {
+                                  this.props.pushPage({
+                                    activity: EditorActivity,
+                                    key: item + "-plugin-about",
+                                    extras: {
+                                      pluginName: item,
+                                      fileName: getConfig.run,
+                                      value: native.fs.readFile(`plugins/${item}/${getConfig.run}`),
+                                    },
+                                  });
+                                }}
+                              >
+                                <div className="left">
+                                  <MDIcon icon="logo_dev" size="24" />
+                                </div>
+                                <div className="center">Editor</div>
+                              </ListItem>
+                            );
+                          } else {
+                            return;
+                          }
+                        })()}
                         <SettingsBuilder
                           isPlugin={true}
                           pluginName={item}

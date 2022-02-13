@@ -43,6 +43,9 @@ package:
     ### And enjoy the useless!
 
     ![image](https://user-images.githubusercontent.com/54764558/151821078-4ef76687-a53e-4d29-9c79-a812d81d777d.png)
+options:
+  allowEditor: true
+
 \`\`\`
 
 > Note: The \`run\` is required, without will not work

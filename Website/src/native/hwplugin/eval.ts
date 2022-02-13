@@ -17,9 +17,11 @@ export default function evil(javascriptString: string, extras: any) {
       alert(message?: any): void {
         ons.notification.alert(message);
       },
+      eval: undefined,
     },
+    eval: undefined,
     document: document,
-    require(path: any) {
+    require(path: any): void {
       const pluginName = extras.plugin.name;
       if (typeof path == "object") {
         path.map((item: string) =>
@@ -38,7 +40,7 @@ export default function evil(javascriptString: string, extras: any) {
       }
     },
     console: {
-      log(message?: any, ...optionalParams: any[]) {
+      log(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
         console.log(
           `%c${pluginName}%c=>%c ${message}`,
@@ -49,7 +51,7 @@ export default function evil(javascriptString: string, extras: any) {
         );
       },
 
-      info(message?: any, ...optionalParams: any[]) {
+      info(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
         console.info(
           `%c${pluginName}%c=>%c ${message}`,
@@ -60,7 +62,7 @@ export default function evil(javascriptString: string, extras: any) {
         );
       },
 
-      warn(message?: any, ...optionalParams: any[]) {
+      warn(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
         console.warn(
           `%c${pluginName}%c=>%c ${message}`,
@@ -71,7 +73,7 @@ export default function evil(javascriptString: string, extras: any) {
         );
       },
 
-      error(message?: any, ...optionalParams: any[]) {
+      error(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
         console.error(
           `%c${pluginName}%c=>%c ${message}`,
@@ -84,5 +86,11 @@ export default function evil(javascriptString: string, extras: any) {
     },
   };
 
-  saferEval(javascriptString, context);
+  try {
+    saferEval(javascriptString, context);
+  } catch (e) {
+    if (e instanceof SyntaxError) {
+      console.log(e.message);
+    }
+  }
 }
