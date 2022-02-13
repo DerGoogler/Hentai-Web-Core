@@ -1,19 +1,16 @@
 const webpack = require("webpack");
 const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CompressionPlugin = require("compression-webpack-plugin");
-const BrotliPlugin = require("brotli-webpack-plugin");
-const FsWebpackPlugin = require("fs-webpack-plugin");
 
 const config = {
   entry: {
     index: ["./src/index.tsx"],
   },
   output: {
-    filename: "bundles/[name].goocode",
+    filename: "bundle/[name].js",
     path: path.resolve(__dirname, "dist"),
     library: "[name]",
     libraryTarget: "umd",
+    assetModuleFilename: "files/[name].[ext]",
   },
   module: {
     rules: [
@@ -32,18 +29,20 @@ const config = {
         use: "js-yaml-loader",
       },
       {
-        test: /(\.css$)/,
-        use: ["style-loader", "css-loader", "postcss-loader"],
-      },
-      {
-        test: /\.s[ac]ss$/i,
+        test: /\.s?css$/,
         use: ["style-loader", "css-loader", "sass-loader"],
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
-        use: "url-loader?limit=100000&name=files/[name].[ext]",
+        type: "asset/resource",
+        // use: "url-loader?limit=100000&name=files/[name].[ext]",
       },
     ],
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000,
   },
   resolveLoader: {
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],

@@ -1,20 +1,14 @@
 import config from "../misc/config";
-import * as htmlToImage from "html-to-image";
-import { saveAs } from "file-saver";
 import Mousetrap from "mousetrap";
 import yaml from "js-yaml";
 import ons from "onsenui";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
-import saferEval from "safer-eval";
-import HWPlugin from "./hwplugin";
-import tools from "@Misc/tools";
 import evil from "./hwplugin/eval";
 
 /**
  * Native calls for Windows and Android
  */
 class native {
-  private static element: HTMLElement | null;
   private static userAgentAndroid = "HENTAI_WEB_AGENT";
   private static userAgentWindows = "HENTAI_WEB_WINDOWS";
   public static userAgent = window.navigator.userAgent;
@@ -114,17 +108,6 @@ class native {
    * @param id
    */
   public static downloadPicture(downloadUrlOfImage: string, filename?: string, id?: any): void {
-    /**
-     * @deprecated
-     */
-    const dwnl = () => {
-      if ((this.element = document.getElementById(id))) {
-        htmlToImage.toBlob(this.element).then((blob: any) => {
-          saveAs(blob, id + ".png");
-        });
-      }
-    };
-
     const a = () => ons.notification.alert("Make an right click on the picture you want an save it.");
 
     if (this.userAgent === this.userAgentAndroid) {
