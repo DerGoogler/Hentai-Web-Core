@@ -28,10 +28,8 @@ import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.activity.BaseActivity;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.keyevent.BackKeyShutdown;
-import com.dergoogler.hentai.zero.permission.RPermissionListener;
 import com.dergoogler.hentai.zero.requetcode.RequestCode;
 import com.dergoogler.hentai.zero.util.FileUtil;
-import com.dergoogler.hentai.zero.permission.RPermission;
 import com.dergoogler.hentai.zero.util.StringUtil;
 import com.dergoogler.hentai.zero.webview.CSDownloadListener;
 import com.dergoogler.hentai.zero.webview.CSFileChooserListener;
@@ -41,8 +39,6 @@ import com.dergoogler.hentai.bridge.AndroidBridge;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.webview.WebViewHelper;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
@@ -58,9 +54,6 @@ public class WebViewActivity extends BaseActivity {
     private WebView webview;
     private CSWebChromeClient webChromeClient;
     private CSFileChooserListener webviewFileChooser;
- //   private String urlCore = Lib.getReleaseURl();
-   // private String urlCore_ = Lib.getDebugURl(); // For debugging
-    //private String mainURL = urlCore_; // Main url
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -69,19 +62,22 @@ public class WebViewActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         nativaeLocalstorage = this.getSharedPreferences(Lib.getStorageKey(), Activity.MODE_PRIVATE);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (getContext().checkSelfPermission(Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+        if (!nativaeLocalstorage.contains("language")) {
+            nativaeLocalstorage.edit().putString("language", "en").apply();
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                Uri uri = Uri.fromParts("package", getContext().getPackageName(), null);
+                Uri uri = Uri.fromParts("package", ((Activity) getContext()).getPackageName(), null);
                 intent.setData(uri);
-                getContext().startActivity(intent);
+                ((Activity) getContext()).startActivity(intent);
             }
         } else {
-            if (getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            if (getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                 ((Activity) getContext()).requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.MANAGE_EXTERNAL_STORAGE}, 1000);
             }
         }
-
 
         login();
     }

@@ -2,7 +2,7 @@ const Store = require("electron-store");
 
 const store = new Store();
 
-function setting(key, value) {
+function defaultSetting(key, value) {
   if (store.get(key) === undefined) {
     store.set(key, value);
   } else {
@@ -10,4 +10,6 @@ function setting(key, value) {
   }
 }
 
-module.exports = setting;
+module.exports = defaultSetting;
+
+// Das gleiche nochmal in JAVA

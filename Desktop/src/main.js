@@ -5,7 +5,7 @@ const Store = require("electron-store");
 const isDev = require("electron-is-dev");
 const fs = require("fs");
 const fenster = require("@electron/remote/main");
-const setting = require("./defaultSettings");
+const defaultSetting = require("./defaultSettings");
 const pkg = require("../package.json");
 const client = require("discord-rich-presence")("726837711851356242");
 const contextMenu = require("electron-context-menu");
@@ -29,15 +29,15 @@ const appIcon = path.join(app.getAppPath(), "/build/ic_launcher.ico");
 
 function createWindow() {
   // Create the browser window.
-  const width = setting("electron.windowSize.width", 375);
-  const height = setting("electron.windowSize.height", 812);
-  const frame = setting("electron.devTools", "false");
-  const devTools = setting("electron.devTools", "false");
-  const alwaysOnTop = setting("electron.alwaysOnTop", "false");
-  const dcrpclogo = setting("electron.rpcLogo", "hentaiweb__");
+  const width = defaultSetting("electron.windowSize.width", 375);
+  const height = defaultSetting("electron.windowSize.height", 812);
+  const frame = defaultSetting("electron.devTools", "false");
+  const devTools = defaultSetting("electron.devTools", "false");
+  const alwaysOnTop = defaultSetting("electron.alwaysOnTop", "false");
+  const dcrpclogo = defaultSetting("electron.rpcLogo", "hentaiweb__");
 
-  setting("electron.hardDevice", "C");
-  setting("language", "en");
+  defaultSetting("electron.hardDevice", "C");
+  defaultSetting("language", "en");
 
   if (!fs.existsSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/")) {
     try {

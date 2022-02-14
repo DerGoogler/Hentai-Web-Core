@@ -4,8 +4,6 @@ import ons from "onsenui";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import native from "@Native/index";
 import tools from "@Misc/tools";
-// There is a difference between native.isAndroid !
-import { isAndroid } from "react-device-detect";
 import { formatString, string } from "@Strings";
 
 const settings: SettingsInterface[] = [
@@ -60,9 +58,6 @@ const settings: SettingsInterface[] = [
           display: native.isAndroid || native.isWindows ? "block" : "none",
         },
         type: "switch",
-        expandable: true,
-        expandableContent:
-          'Custom themes can break the general app experience and includes no official theme fixes from the developer. Use at your own risk!\r\n\r\nIf you want to load the custom theme from an different hard device, just open the "config.json" and change the letter at "hardDivice"',
         text: "Custom Theming",
       },
     ],
@@ -128,9 +123,8 @@ const settings: SettingsInterface[] = [
         text: string.erudaEnabled,
         type: "switch",
         style: {
-          display: isAndroid ? "" : "none",
+          display: native.isAndroid ? "" : "none",
         },
-        disabled: !isAndroid,
       },
     ],
   },
