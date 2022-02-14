@@ -18,8 +18,6 @@ class StyleBuilder extends React.Component<{ folder: string }, {}> {
       if (native.userAgentEqualAndroid(true)) {
         native.android.setStatusbarColor(native.fs.readFile("inject/StatusbarColor"));
       }
-    } else {
-      console.log("Custom theming is disabled!");
     }
     if (native.getPref("enableCustomScriptLoading") === "true") {
       if (native.fs.isFileExist("plugins.yaml")) {
