@@ -7,7 +7,7 @@ import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Components/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
 import Bootloader from "@Bootloader";
-import string from "@Strings";
+import {string} from "@Strings";
 
 class SettingsActivity extends React.Component<{ pushPage: any; popPage: any }, {}> {
   public componentDidMount() {

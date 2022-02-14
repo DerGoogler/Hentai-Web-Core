@@ -13,12 +13,11 @@ import SettingsActivity from "./SettingsActivity";
 import LicensesActivity from "./LicensesActivity";
 import News from "@Components/News";
 import BuildPluginActivity from "./plugin/BuildPluginActivity";
-import Bootloader from "@Bootloader";
 import ChangelogActivity from "./ChangelogActivity";
 import images from "@DataPacks/images";
 import { PushPageProps } from "@Types/init";
 import PluginsActivity from "./plugin/PluginsActivity";
-import string from "@Strings";
+import { string } from "@Strings";
 
 class MainActivity extends React.Component<
   { pushPage(props: PushPageProps): void; popPage: any },

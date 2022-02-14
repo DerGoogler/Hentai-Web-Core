@@ -3,7 +3,7 @@ import React from "react";
 import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
-import string from "@Strings";
+import { string } from "@Strings";
 
 class LoginActivity extends React.Component<{ popPage: any }, { username: string; password: string }> {
   public constructor(props: any) {

@@ -1,4 +1,6 @@
-const de = {
+import { LanguageTypes } from "./../types";
+
+const de: LanguageTypes = {
   windowsCloseDialogMessage: "Willst du diese App schließen?",
   windowsCloseDialogTitle: "App schließen?",
   ok: "Ok",
@@ -11,7 +13,7 @@ const de = {
   settings: "Einstellungen",
   copyLink: "Link kopieren",
   signIn: "Anmelden",
-  howToLohinLink: "https://dergoogler.com/?/guide/hentai-web/de/how-to-login/",
+  howToLoginLink: "https://dergoogler.com/?/guide/hentai-web/de/how-to-login/",
   howToLogin: "Wie melde ich mich an?",
   MODEL: "Modell",
   MANUFACTURER: "Hersteller",
@@ -32,7 +34,7 @@ const de = {
   useFingerPrintToLogin: "Fingerabdruck zum öffnen der App benutzen",
   language: "Sprache",
   enableKeepScreenOn: "Behalte Bildschirm an",
-  electronChangeWindowSizeDialogMessage: "Willst du die Fenster größe ändern?",
+  electronChangeWindowSizeDialogMessage: "Fenster größe auf {size} ändern?",
   electronChangeWindowSizeDialogTitle: "Größe ändern?",
   hardDevice: "Speichermedium",
   enableAlwaysOnTop: "Immer ganz oben",

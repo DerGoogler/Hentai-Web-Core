@@ -11,7 +11,7 @@ interface LanguageTypes {
   settings: string;
   copyLink: string;
   signIn: string;
-  howToLohinLink: string;
+  howToLoginLink: string;
   howToLogin: string;
   MODEL: string;
   MANUFACTURER: string;
@@ -45,4 +45,4 @@ interface LanguageTypes {
   search: string;
 }
 
-export default LanguageTypes;
+export { LanguageTypes };

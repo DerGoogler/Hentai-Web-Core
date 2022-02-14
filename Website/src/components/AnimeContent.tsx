@@ -4,7 +4,7 @@ import { List, SearchInput } from "react-onsenui";
 import ContentBody from "./ContentBody";
 import native from "@Native/index";
 import tools from "@Misc/tools";
-import string from "@Strings";
+import { string } from "@Strings";
 
 class AnimeContent extends React.Component<{
   data: any[];

@@ -37,6 +37,7 @@ function createWindow() {
   const dcrpclogo = setting("electron.rpcLogo", "hentaiweb__");
 
   setting("electron.hardDevice", "C");
+  setting("language", "en");
 
   if (!fs.existsSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/")) {
     try {

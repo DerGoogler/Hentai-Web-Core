@@ -6,11 +6,11 @@ import native from "@Native/index";
 import tools from "@Misc/tools";
 // There is a difference between native.isAndroid !
 import { isAndroid } from "react-device-detect";
-import string from "@Strings";
+import { formatString, string } from "@Strings";
 
 const settings: SettingsInterface[] = [
   {
-    title: "appearance",
+    title: string.appearance,
     content: [
       {
         key: "enableDarkmode",
@@ -69,7 +69,7 @@ const settings: SettingsInterface[] = [
   },
 
   {
-    title: "card",
+    title: string.card,
     content: [
       {
         key: "fitImageToCard",
@@ -93,7 +93,7 @@ const settings: SettingsInterface[] = [
   },
 
   {
-    title: "security",
+    title: string.security,
     content: [
       {
         key: "alwaysLogin",
@@ -136,7 +136,7 @@ const settings: SettingsInterface[] = [
   },
 
   {
-    title: "others",
+    title: string.others,
     content: [
       {
         key: "enableSwipeBetweenTabs",
@@ -170,28 +170,18 @@ const settings: SettingsInterface[] = [
         icon: "aspect_ratio",
         text: string.electronWindowSize,
         selectDefaultValue: "<width>375</width><height>812</height>",
-        callback: (e: any, key: string, translate: any) => {
+        callback: (e: any, key: string) => {
           const keyWin = "electron.windowSize";
           const regex = /<width>(.*?)<\/width><height>(.*?)<\/height>/gm;
           const width = Number(e.target.value.replace(regex, "$1"));
           const height = Number(e.target.value.replace(regex, "$2"));
 
           ons.notification.confirm({
-            message: translate({
-              text: "electron-window-cange-size-screen-dialog-message",
-              data: { size: e.target.value.replace(regex, "$1x$2") },
+            message: formatString(string.electronChangeWindowSizeDialogMessage, {
+              size: e.target.value.replace(regex, "$1x$2"),
             }),
-            title: translate({
-              text: "electron-window-cange-size-screen-dialog-title",
-            }),
-            buttonLabels: [
-              translate({
-                text: "yes",
-              }),
-              translate({
-                text: "no",
-              }),
-            ],
+            title: string.electronChangeWindowSizeDialogTitle,
+            buttonLabels: [string.yes, string.no],
             animation: "default",
             modifier: native.checkPlatformForBorderStyle,
             primaryButtonIndex: 1,

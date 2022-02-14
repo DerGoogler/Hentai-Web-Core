@@ -1,8 +1,9 @@
 import tools from "@Misc/tools";
 import native from "@Native/index";
+import formatString from "./utils/formatString";
+import { LanguageTypes } from "./types";
 import de from "./lang/de";
 import en from "./lang/en";
-import LanguageTypes from "./types";
 
 const globals: any = {
   en: en,
@@ -11,7 +12,6 @@ const globals: any = {
 
 const language = (): string => {
   const lang = native.getPref("language");
-
   if (lang === tools.undefined) {
     return "en";
   } else {
@@ -21,4 +21,4 @@ const language = (): string => {
 
 const string: LanguageTypes = globals[language()];
 
-export default string;
+export { string, formatString };

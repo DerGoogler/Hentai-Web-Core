@@ -1,7 +1,5 @@
-import React from "react";
 import ReactDOM from "react-dom";
 import ons from "onsenui";
-import { Provider } from "react-translated";
 import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
 import InitActivity from "./views/InitActivity";
@@ -11,7 +9,6 @@ import erudaDom from "eruda-dom";
 import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
-import string from "@Strings";
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -20,7 +17,6 @@ import "onsenui/css/onsenui.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
-import tools from "@Misc/tools";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");

@@ -8,8 +8,7 @@ import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";
 import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
-import Bootloader from "@Bootloader";
-import string from "@Strings";
+import { string } from "@Strings";
 
 class LicensesActivity extends React.Component<{ popPage: any }, { data: string }> {
   public constructor(props: any) {
