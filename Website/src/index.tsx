@@ -25,15 +25,6 @@ import tools from "@Misc/tools";
 class Bootloader {
   private mountNode: any = document.querySelector("app");
 
-  public checkLanguage() {
-    var get = native.getPref("language");
-    if (get === tools.undefined) {
-      string.setLanguage("en");
-    } else {
-      string.setLanguage(get);
-    }
-  }
-
   private loadConsole() {
     if (native.getPref("erudaEnabled") === "true") {
       eruda.init();
@@ -106,7 +97,6 @@ class Bootloader {
     this.folderInit();
     this.makeExamplePlugin();
     this.styleInit();
-    this.checkLanguage();
 
     ons.ready(() => {
       ons.platform.select("android");

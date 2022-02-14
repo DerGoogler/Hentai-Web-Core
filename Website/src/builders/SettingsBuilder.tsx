@@ -68,7 +68,7 @@ class SettingsBuilder extends React.Component<{
     const settings = data.map((header: SettingsInterface) => (
       <>
         <section id={header.id} className={header.className} style={header.style}>
-          <ListTitle>header.title</ListTitle>
+          <ListTitle>{header.title}</ListTitle>
           {header.content.map((setting: SettingsOptions) => (
             <>
               <ListItem

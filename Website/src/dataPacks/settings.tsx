@@ -1,3 +1,5 @@
+"use strict";
+
 import ons from "onsenui";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import native from "@Native/index";
@@ -5,9 +7,6 @@ import tools from "@Misc/tools";
 // There is a difference between native.isAndroid !
 import { isAndroid } from "react-device-detect";
 import string from "@Strings";
-import Bootloader from "@Bootloader";
-
-//new Bootloader().checkLanguage();
 
 const settings: SettingsInterface[] = [
   {

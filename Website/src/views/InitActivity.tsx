@@ -37,7 +37,6 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
 
   public componentDidUpdate() {
     new Bootloader().styleInit();
-    new Bootloader().checkLanguage();
   }
 
   public componentWillUnmount = () => {
