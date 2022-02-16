@@ -15,7 +15,7 @@ class PictureBuilder extends React.Component<{
   isNew?: any;
 }> {
   private element!: HTMLElement | null;
-  private buttonDesign: string = tools.typeIF(native.getPref("enableDarkmode"), "lilaDarkMode", "lila");
+  private buttonDesign: string = native.getPref("enableDarkmode") === "true" ? "lilaDarkMode" : "lila";
 
   public state = {
     isContextOpen: false,
@@ -25,7 +25,7 @@ class PictureBuilder extends React.Component<{
   /**
    * To generate an id that refresh every page reload, to avoid duplicte ids
    */
-  private getID = this.props.note.replace(/ /g, "") + this.id();
+  private getID = this.props.note.replace(/\s/g, "") + this.id();
   private getNote = this.props.note.charAt(0).toUpperCase() + this.props.note.slice(1);
   private images = this.randomizer(this.props.note);
 
@@ -51,12 +51,12 @@ class PictureBuilder extends React.Component<{
       if (native.isAndroid || native.isWindows) {
         axios
           .get(
-            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/ /gm, "").toLowerCase() + ".json"
+            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/\s/g, "").toLowerCase() + ".json"
           )
           .then((res) => {
             try {
               const data = res.data;
-              native.fs.writeFile("images/" + image.replace(/ /gm, "").toLowerCase() + ".json", JSON.stringify(data));
+              native.fs.writeFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
             } catch (error) {
               console.log(error);
             }
@@ -64,12 +64,12 @@ class PictureBuilder extends React.Component<{
       } else {
         axios
           .get(
-            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/ /gm, "").toLowerCase() + ".json"
+            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/\s/g, "").toLowerCase() + ".json"
           )
           .then((res) => {
             try {
               const data = res.data;
-              native.setPref(image.replace(/ /gm, "").toLowerCase() + ".json", JSON.stringify(data));
+              native.setPref(image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
             } catch (error) {
               console.log(error);
             }
@@ -77,11 +77,11 @@ class PictureBuilder extends React.Component<{
       }
       const data =
         native.isAndroid || native.isWindows
-          ? native.fs.readFile("images/" + image.replace(/ /gm, "").toLowerCase() + ".json", {
+          ? native.fs.readFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", {
               parse: { use: true, mode: "json" },
             })
           : // @ts-ignore
-            JSON.parse(native.getPref(image.replace(/ /gm, "").toLowerCase() + ".json"));
+            JSON.parse(native.getPref(image.replace(/\s/g, "").toLowerCase() + ".json"));
       return data[Math.floor(Math.random() * data.length)];
     } catch (error) {
       return "error";
