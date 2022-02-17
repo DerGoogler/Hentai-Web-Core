@@ -40,7 +40,7 @@ const de: LanguageTypes = {
   enableAlwaysOnTop: "Immer ganz oben",
   enableDevTools: "Aktivere DevTools",
   electronWindowSize: "Fenster größe",
-  disableNSFWcontent: "deaktivire NSFW inhalt",
+  disableNSFWcontent: "Deaktivire NSFW inhalt",
   placeTabberOnBottom: "Tabbar unten platzieren",
   licenses: "Lizenzen",
   cancel: "Abbrechen",

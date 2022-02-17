@@ -5,6 +5,7 @@ import native from "..";
 import HWPlugin from ".";
 
 export default function evil(javascriptString: string, extras: any) {
+  "use strict";
   const context = {
     native: native,
     HWPlugin: HWPlugin,
@@ -25,7 +26,7 @@ export default function evil(javascriptString: string, extras: any) {
       const pluginName = extras.plugin.name;
       if (typeof path == "object") {
         path.map((item: string) =>
-          native.eval(native.fs.readFile("plugins/" + pluginName + "/" + path), {
+          native.eval(native.fs.readFile("plugins/" + pluginName + "/" + item), {
             plugin: {
               name: pluginName,
             },

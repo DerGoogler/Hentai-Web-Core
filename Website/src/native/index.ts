@@ -14,6 +14,8 @@ class native {
   public static userAgent = window.navigator.userAgent;
   public static isWindows = this.userAgentWindows === this.userAgent ? true : false;
   public static isAndroid = this.userAgentAndroid === this.userAgent ? true : false;
+  public static isInstagram = /Instagram/i.test(navigator.userAgent);
+  public static isFacebook = /Facebook/i.test(navigator.userAgent);
 
   public static checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
 

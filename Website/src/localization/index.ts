@@ -10,15 +10,15 @@ const globals: any = {
   de: de,
 };
 
-const language = (): string => {
+function checkLanguage(): string {
   const lang = native.getPref("language");
   if (lang === tools.undefined) {
     return "en";
   } else {
     return lang;
   }
-};
+}
 
-const string: LanguageTypes = globals[language()];
+const string: LanguageTypes = globals[checkLanguage()];
 
-export { string, formatString };
+export { string, formatString, LanguageTypes };

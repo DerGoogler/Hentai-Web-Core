@@ -55,7 +55,7 @@ const settings: SettingsInterface[] = [
         key: "enableCustomTheming",
         icon: "water_drop",
         style: {
-          display: native.isAndroid || native.isWindows ? "block" : "none",
+          display: native.isAndroid || native.isWindows ? "" : "none",
         },
         type: "switch",
         text: "Custom Theming",
@@ -149,6 +149,7 @@ const settings: SettingsInterface[] = [
         icon: "accessible_forward",
         type: "switch",
         text: string.disableNSFWcontent,
+        disabled: native.isInstagram || native.isFacebook,
       },
     ],
   },

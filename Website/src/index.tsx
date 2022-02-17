@@ -95,6 +95,10 @@ class Bootloader {
     this.styleInit();
     this.loadConsole();
 
+    if (native.isInstagram || native.isFacebook) {
+      native.setPref("disableNSFW", "true");
+    }
+
     ons.ready(() => {
       ons.platform.select("android");
       this.electronInit();

@@ -1,3 +1,5 @@
+import tools from "@Misc/tools";
+import { LanguageTypes } from "@Strings";
 import { PluginAboutTypes } from "@Types/pluginAbout";
 import { SettingsInterface } from "@Types/SettingsBuilder";
 import axios from "axios";
@@ -78,6 +80,20 @@ class HWPlugin {
         console.log("Can't find library");
       }
     });
+  }
+
+  public strings(globals: any): LanguageTypes {
+    const string: LanguageTypes = globals[this.checkLanguage()];
+    return string;
+  }
+
+  private checkLanguage(): string {
+    const lang = native.getPref("language");
+    if (lang === tools.undefined) {
+      return "en";
+    } else {
+      return lang;
+    }
   }
 
   public func(func: { name: string; args: string; callback: string; run: string }): void {

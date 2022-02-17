@@ -78,6 +78,26 @@ Before you add settings need to give an plugin name, like this
 const plugin = new HWPlugin("myPlugin");
 \`\`\`
 
+# Translate your plugin
+
+\`\`\`js
+const string = plugin.strings({
+  de: {
+    enableHCstring: "Aktivire Hohen Kontrast",
+    displayDLbutton: "Download button anzeigen",
+  },
+  en: {
+    enableHCstring: "Enable high contrast",
+    displayDLbutton: "Display download button",
+  },
+});
+\`\`\`
+
+Get string
+\`\`\`
+string.enableHCstring
+\`\`\`
+
 ### Example
 
 \`\`\`js
@@ -112,9 +132,9 @@ if (plugin.getPluginPref("enableStartupDialog") === "true") {
 ## Get plugin information
 
 \`\`\`js
-console.log(plugin.getPluginAuthor);
-console.log(plugin.getPluginVersion);
-console.log(plugin.getPluginLanguage);
+console.log(plugin.getAuthor);
+console.log(plugin.getVersion);
+console.log(plugin.getLanguage);
 \`\`\`
 
 ## Platform
@@ -123,7 +143,7 @@ You can allow the plugin on different platforms
 
 \`\`\`js
 if (native.isWindows /* native.isAndroid */) {
-  dlg.addSettings([
+  plugin.addSettings([
     {
       title: "DLG",
       content: [
@@ -136,7 +156,7 @@ if (native.isWindows /* native.isAndroid */) {
     },
   ]);
 } else {
-  dlg.removeSettings();
+  plugin.removeSettings();
 }
 \`\`\`
 
@@ -192,7 +212,7 @@ export default App;
 Here are other functions that can be used
 
 \`\`\`js
-// Will load from C:\hentai-web\plugins\<PLUGINNAME>\styles\index.css
+// Will load from C:\\hentai-web\\plugins\\<PLUGINNAME>\\styles\\index.css
 plugin.loadCSSfromFile("/styles/index.css");
 
 // Load CSS from an object. Lean more about JSS.
@@ -211,7 +231,7 @@ plugin.loadCSS({
   },
 });
 
-// Will load from C:\hentai-web\plugins\<PLUGINNAME>\core\lib.css
+// Will load from C:\\hentai-web\\plugins\\<PLUGINNAME>\\core\\lib.css
 // Nore: This code will directly executed!
 plugin.require("/core/lib.js");
 \`\`\`
