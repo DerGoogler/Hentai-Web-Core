@@ -2,16 +2,16 @@
 
 # The Hentai Web Project
 
-Get updates in the [Telegram](https://t.me/HentaiWebUpdates) channel.    
+Get updates in the [Telegram](https://t.me/HentaiWebUpdates) channel.  
 Support this with a **Star**!
 
 Lets get started! The sources listed below:
 
-- `/Website` Source for the website
-- `/Desktop` Source for Windows/Linux/MacOS
-- `/Android` Source for Andorid
-- `/Discord` Source for Discord
-- `/Telegram` Source for Telegram
+- [`Core`](https://github.com/Hentai-Web/Core) Source for the website
+- [`Windows`](https://github.com/Hentai-Web/Windows) Source for Windows
+- [`Android`](https://github.com/Hentai-Web/Android) Source for Andorid
+- [`Discord`](https://github.com/Hentai-Web/Discord) Source for Discord
+- [`Telegram`](https://github.com/Hentai-Web/Telegram) Source for Telegram
 
 # Features
 
@@ -25,6 +25,7 @@ The app includes some features :)
 - Option to inspect the app with an console
 - Option to login with an fingerprint
 - Option to use custom themes (Need to make self or download)
+- Custom scripting
 
 ## Windows
 
@@ -32,6 +33,7 @@ The app includes some features :)
 - Option to enable DevTools
 - Option to Resize the window to different phone sizes
 - Option to use custom themes (Need to make self or download)
+- Custom scripting
 
 ## Global (All Platforms)
 
