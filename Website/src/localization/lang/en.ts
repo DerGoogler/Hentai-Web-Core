@@ -1,4 +1,4 @@
-import { LanguageTypes } from "./../types";
+import { LanguageTypes } from "../utils/types";
 
 const en: LanguageTypes = {
   windowsCloseDialogMessage: "Do you want to close this app?",

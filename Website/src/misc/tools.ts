@@ -6,7 +6,7 @@ class tools {
   /**
    * Easy use undefined
    */
-  public static undefined = null || "" || undefined;
+  public static readonly undefined = null || "" || undefined;
 
   /**
    * Converts an string into boolean

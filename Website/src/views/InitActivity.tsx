@@ -3,8 +3,8 @@ import MainActivity from "./MainActivity";
 import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
-import FirstStartupActivity from "./FirstStartupActivity";
 import Bootloader from "@Bootloader";
+import LoginActivity from "./LoginActivity";
 
 class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
   public constructor(props: any) {
@@ -14,7 +14,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
       if (native.getPref("loggedIn") === "true") {
         return MainActivity;
       } else {
-        return FirstStartupActivity;
+        return LoginActivity;
       }
     };
 
@@ -33,6 +33,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
 
   public componentDidMount = () => {
     window.addEventListener("load", this.windowLoadPush);
+    console.log(native.isWindows)
   };
 
   public componentDidUpdate() {

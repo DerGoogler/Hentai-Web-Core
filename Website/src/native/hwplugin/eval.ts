@@ -16,11 +16,9 @@ export default function evil(javascriptString: string, extras: any) {
     window: {
       Android: undefined,
       Windows: undefined,
-      alert(message?: any): void {
-        ons.notification.alert(message);
-      },
-      eval: undefined,
     },
+    Android: undefined,
+    Windows: undefined,
     eval: undefined,
     document: document,
     require(path: any): void {

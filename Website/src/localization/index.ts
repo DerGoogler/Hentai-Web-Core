@@ -1,18 +1,12 @@
 import tools from "@Misc/tools";
 import native from "@Native/index";
+import { globals } from "./languageIndexes";
 import formatString from "./utils/formatString";
-import { LanguageTypes } from "./types";
-import de from "./lang/de";
-import en from "./lang/en";
-
-const globals: any = {
-  en: en,
-  de: de,
-};
+import { LanguageTypes } from "./utils/types";
 
 function checkLanguage(): string {
   const lang = native.getPref("language");
-  if (lang === tools.undefined) {
+  if (lang === "false") {
     return "en";
   } else {
     return lang;

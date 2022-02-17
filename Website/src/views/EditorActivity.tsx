@@ -76,7 +76,6 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
           fontSize={14}
           width="100%"
           height="100%"
-          style={{}}
           maxLines={Infinity}
           showPrintMargin={true}
           showGutter={true}

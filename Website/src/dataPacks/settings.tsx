@@ -5,6 +5,7 @@ import { SettingsInterface } from "@Types/SettingsBuilder";
 import native from "@Native/index";
 import tools from "@Misc/tools";
 import { formatString, string } from "@Strings";
+import { settingsIndex } from "./../localization/languageIndexes";
 
 const settings: SettingsInterface[] = [
   {
@@ -40,16 +41,7 @@ const settings: SettingsInterface[] = [
         type: "select",
         text: string.language,
         selectDefaultValue: "en",
-        selectValue: [
-          {
-            text: "English",
-            value: "en",
-          },
-          {
-            text: "German",
-            value: "de",
-          },
-        ],
+        selectValue: settingsIndex,
       },
       {
         key: "enableCustomTheming",

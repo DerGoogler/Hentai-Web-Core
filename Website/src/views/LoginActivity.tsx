@@ -28,7 +28,7 @@ class LoginActivity extends React.Component<{ popPage: any }, { username: string
   }
 
   private handleClick = () => {
-    if (this.state.username === native.getBuildMANUFACTURER() && this.state.password === native.getMODEL()) {
+    if (this.state.username === native.getBuildMANUFACTURER && this.state.password === native.getMODEL) {
       native.setPref("loggedIn", "true");
       native.reload();
     } else {

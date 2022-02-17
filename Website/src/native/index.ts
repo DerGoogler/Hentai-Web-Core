@@ -2,6 +2,7 @@ import config from "../misc/config";
 import Mousetrap from "mousetrap";
 import yaml from "js-yaml";
 import ons from "onsenui";
+import CryptoJS from "crypto-js";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 import evil from "./hwplugin/eval";
 
@@ -14,10 +15,10 @@ class native {
   public static readonly userAgent = window.navigator.userAgent;
   public static readonly isWindows = this.userAgentWindows === this.userAgent ? true : false;
   public static readonly isAndroid = this.userAgentAndroid === this.userAgent ? true : false;
-  public static readonly isInstagram = /Instagram/i.test(navigator.userAgent);
-  public static readonly isFacebook = /Facebook/i.test(navigator.userAgent);
+  public static readonly isInstagram = /Instagram/i.test(this.userAgent);
+  public static readonly isFacebook = /Facebook/i.test(this.userAgent);
 
-  public static checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
+  public static readonly checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
 
   /**
    * Get the Android userAgent
@@ -47,7 +48,7 @@ class native {
    * Get mobile phones build serial (Is pn every phone different)
    * @returns {String}
    */
-  public static getBuildMANUFACTURER(): string | String {
+  public static get getBuildMANUFACTURER(): string {
     const appCodeName = window.navigator.appCodeName.toUpperCase();
     if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMANUFACTURER().toUpperCase();
@@ -62,7 +63,7 @@ class native {
    * Get mobile phones emei number
    * @returns {String}
    */
-  public static getMODEL(): string | String {
+  public static get getMODEL(): string {
     const platform = window.navigator.platform.toUpperCase();
     if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMODEL().toUpperCase();
@@ -72,6 +73,26 @@ class native {
       return platform;
     }
   }
+
+  /**
+   * Nothing
+   */
+  public static AES = {
+    encrypt(value: string): string {
+      if (native.isAndroid) {
+        return window.Android.encryptAES(native.getMODEL, value);
+      } else {
+        return CryptoJS.AES.encrypt(value, native.getMODEL).toString();
+      }
+    },
+    decrypt(value: string): string {
+      if (native.isAndroid) {
+        return window.Android.decryptAES(native.getMODEL, value);
+      } else {
+        return CryptoJS.AES.encrypt(value, native.getMODEL).toString();
+      }
+    },
+  };
 
   /**
    * Reloads native the app
@@ -115,7 +136,7 @@ class native {
     if (native.isAndroid) {
       window.Android.downloadImage(downloadUrlOfImage);
     } else if (native.isWindows) {
-      window.Windows.downloadImage(downloadUrlOfImage);
+      a(); // window.Windows.downloadImage(downloadUrlOfImage);
     } else {
       a();
     }
@@ -127,9 +148,9 @@ class native {
    * @param content
    */
   public static setPref(key: string, content: string): void {
-    if (this.userAgent === this.userAgentAndroid) {
+    if (native.isAndroid) {
       window.Android.setPref(key, content.toString());
-    } else if (this.userAgent === this.userAgentWindows) {
+    } else if (native.isWindows) {
       window.Windows.setPref(key, content.toString());
     } else {
       localStorage.setItem(key, content.toString());
@@ -142,14 +163,14 @@ class native {
    * @returns
    */
   public static getPref(key: string): string {
-    if (this.userAgent === this.userAgentAndroid) {
+    if (native.isAndroid) {
       const get = window.Android.getPref(key);
       if (get === undefined || get === null || get === "") {
         return "false";
       } else {
         return get;
       }
-    } else if (this.userAgent === this.userAgentWindows) {
+    } else if (native.isWindows) {
       const get = window.Windows.getPref(key);
       if (get === undefined || get === null || get === "") {
         return "false";
@@ -180,25 +201,13 @@ class native {
     }
   }
 
-  public static encodeAES(text: string, password?: string): string | String {
-    const btoa = window.atob(text);
-    if (this.userAgent === this.userAgentAndroid) {
-      return window.Android.encryptAES(password, text);
-    } else if (this.userAgent === this.userAgentWindows) {
-      return btoa;
+  public static get getVersion(): string {
+    if (this.isAndroid) {
+      return window.Android.getVersion();
+    } else if (this.isWindows) {
+      return window.Windows.getVersion();
     } else {
-      return btoa;
-    }
-  }
-
-  public static decodeAES(text: string, password?: string): string | String {
-    const atob = window.atob(text);
-    if (this.userAgent === this.userAgentAndroid) {
-      return window.Android.decryptAES(password, text);
-    } else if (this.userAgent === this.userAgentWindows) {
-      return atob;
-    } else {
-      return atob;
+      return "";
     }
   }
 
@@ -273,16 +282,6 @@ class native {
    */
   public static eval(javascriptString: string, extras: any) {
     evil(javascriptString, extras);
-  }
-
-  public static get getVersion(): string {
-    if (this.isAndroid) {
-      return window.Android.getVersion();
-    } else if (this.isWindows) {
-      return window.Windows.getVersion();
-    } else {
-      return "";
-    }
   }
 
   /**
