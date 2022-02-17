@@ -6,6 +6,7 @@ const { ipcRenderer } = require("electron");
 const { contextBridge } = require("electron");
 const Store = require("electron-store");
 const fs = require("fs");
+const http = require("http");
 const path = require("path");
 const fenster = require("@electron/remote");
 const Mousetrap = require("mousetrap");
@@ -116,15 +117,20 @@ contextBridge.exposeInMainWorld("Windows", {
     return app.getPath(path);
   },
 
+  downloadImage: (downloadUrlOfImage) => {
+    const file = fs.createWriteStream(downloadUrlOfImage.replace(/(\w+)(\.\w+)+(?!.*(\w+)(\.\w+)+)/gm, "$1$2"));
+    http.get(downloadUrlOfImage, function (response) {
+      response.pipe(file);
+    });
+  },
+
   /**
    * @param {*} path
    * @returns
    */
   readFile: (path) => {
     try {
-      return fs
-        .readFileSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path)
-        .toString();
+      return fs.readFileSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path).toString();
     } catch (error) {
       console.trace(`%c ${error}`, "color: orange;");
     }
@@ -140,11 +146,7 @@ contextBridge.exposeInMainWorld("Windows", {
 
   writeFile: (path, content) => {
     try {
-      fs.writeFileSync(
-        store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path,
-        content,
-        "UTF-8"
-      );
+      fs.writeFileSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path, content, "UTF-8");
     } catch (error) {
       console.trace(`%c ${error}`, "color: orange;");
     }
@@ -152,9 +154,7 @@ contextBridge.exposeInMainWorld("Windows", {
 
   isFileExist: (path) => {
     try {
-      return fs.existsSync(
-        store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path
-      );
+      return fs.existsSync(store.get("electron.hardDevice") + ":".toUpperCase() + "/hentai-web/" + path);
     } catch (error) {
       console.trace(`%c ${error}`, "color: orange;");
     }

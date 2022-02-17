@@ -141,6 +141,8 @@ interface Windows {
    */
   closeDevTools(): void;
 
+  downloadImage(downloadUrlOfImage: string): void;
+
   readFile(path: string): string;
 
   writeFile(path: string, content: string): void;

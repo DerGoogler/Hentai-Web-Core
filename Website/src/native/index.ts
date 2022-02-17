@@ -9,13 +9,13 @@ import evil from "./hwplugin/eval";
  * Native calls for Windows and Android
  */
 class native {
-  private static userAgentAndroid = "HENTAI_WEB_AGENT";
-  private static userAgentWindows = "HENTAI_WEB_WINDOWS";
-  public static userAgent = window.navigator.userAgent;
-  public static isWindows = this.userAgentWindows === this.userAgent ? true : false;
-  public static isAndroid = this.userAgentAndroid === this.userAgent ? true : false;
-  public static isInstagram = /Instagram/i.test(navigator.userAgent);
-  public static isFacebook = /Facebook/i.test(navigator.userAgent);
+  private static readonly userAgentAndroid = "HENTAI_WEB_AGENT";
+  private static readonly userAgentWindows = "HENTAI_WEB_WINDOWS";
+  public static readonly userAgent = window.navigator.userAgent;
+  public static readonly isWindows = this.userAgentWindows === this.userAgent ? true : false;
+  public static readonly isAndroid = this.userAgentAndroid === this.userAgent ? true : false;
+  public static readonly isInstagram = /Instagram/i.test(navigator.userAgent);
+  public static readonly isFacebook = /Facebook/i.test(navigator.userAgent);
 
   public static checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
 
@@ -112,10 +112,10 @@ class native {
   public static downloadPicture(downloadUrlOfImage: string, filename?: string, id?: any): void {
     const a = () => ons.notification.alert("Make an right click on the picture you want an save it.");
 
-    if (this.userAgent === this.userAgentAndroid) {
+    if (native.isAndroid) {
       window.Android.downloadImage(downloadUrlOfImage);
-    } else if (this.userAgent === this.userAgentWindows) {
-      a();
+    } else if (native.isWindows) {
+      window.Windows.downloadImage(downloadUrlOfImage);
     } else {
       a();
     }

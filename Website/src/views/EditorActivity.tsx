@@ -2,9 +2,6 @@ import React from "react";
 import { Page, Toolbar, ToolbarButton } from "react-onsenui";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
-import "@Styles/github/markdown-dark.scss";
-import "@Styles/github/markdown-light.scss";
-import Bootloader from "@Bootloader";
 import AceEditor from "react-ace";
 import MDIcon from "@Components/MDIcon";
 
@@ -39,7 +36,7 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
       getCompletions: function (editor: any, session: any, pos: any, prefix: any, callback: any) {
         var completions: any[] = [];
         // we can use session and pos here to decide what we are going to show
-        ["native", "__dirname", "HWPlugin", "ons", "tools", "require()", "document"].forEach(function (w) {
+        ["native", "__dirname", "HWPlugin", "ons", "tools", 'require("")', "document"].forEach(function (w) {
           completions.push({
             value: w,
             meta: "HWPlugin State",
@@ -48,6 +45,7 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
         callback(null, completions);
       },
     });
+    editor.getSession().getAnnotations();
   }
 
   private onChange = (newValue: any) => {
@@ -77,6 +75,8 @@ class EditorActivity extends React.Component<{ extras: any; popPage: any }, { da
           onChange={this.onChange}
           fontSize={14}
           width="100%"
+          height="100%"
+          style={{}}
           maxLines={Infinity}
           showPrintMargin={true}
           showGutter={true}
