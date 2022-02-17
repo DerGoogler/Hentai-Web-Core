@@ -5,14 +5,12 @@ import MDIcon from "@Components/MDIcon";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import tools from "@Misc/tools";
-import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
+import { HighlightedMarkdown } from "../../../components/HighlightMarkdown";
 import Bootloader from "@Bootloader";
 import { PushPageProps } from "@Types/init";
+import { Props, States } from "./interface";
 
-class PluginAboutActivity extends React.Component<
-  { pushPage(props: PushPageProps): void; popPage: any; pluginAbout: any },
-  {}
-> {
+class PluginAboutActivity extends React.Component<Props, States> {
   private getPluginConfig = native.fs.readFile("plugins/" + this.props.pluginAbout.name + "/plugin.yaml", {
     parse: { use: true, mode: "yaml" },
   });

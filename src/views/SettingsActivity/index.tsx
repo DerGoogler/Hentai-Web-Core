@@ -1,15 +1,15 @@
 import * as React from "react";
-import { ListItem, Page, Toolbar } from "react-onsenui";
+import { Page, Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
 import settings from "@DataPacks/settings";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Components/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
-import Bootloader from "@Bootloader";
-import {string} from "@Strings";
+import { string } from "@Strings";
+import { Props, States } from "./interface";
 
-class SettingsActivity extends React.Component<{ pushPage: any; popPage: any }, {}> {
+class SettingsActivity extends React.Component<Props, States> {
   public componentDidMount() {
     native.electron.discordRPC("Viewing Settings");
   }

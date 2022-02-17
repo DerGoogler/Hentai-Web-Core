@@ -26,7 +26,8 @@
       "@Misc/*": ["misc/*"],
       "@Bootloader": ["index.tsx"],
       "@Styles/*": ["styles/*"],
-      "@Strings": ["localization/index.ts"]
+      "@Strings": ["localization/index.ts"],
+      "@Views/*": ["views/*"]
     }
   },
   "include": ["./src/**/*"]

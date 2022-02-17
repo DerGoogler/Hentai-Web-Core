@@ -4,8 +4,9 @@ import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import { string } from "@Strings";
+import { Props, States } from "./interface";
 
-class LoginActivity extends React.Component<{ popPage: any }, { username: string; password: string }> {
+class LoginActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };

@@ -6,10 +6,10 @@ import ContentBody from "@Components/ContentBody";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";
-import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
-import Bootloader from "@Bootloader";
+import { HighlightedMarkdown } from "../../../components/HighlightMarkdown";
+import { Props, States } from "./interface";
 
-class BuildPluginActivity extends React.Component<{ popPage: any }, {}> {
+class BuildPluginActivity extends React.Component<Props, States> {
   public state = {
     data: `
 # HWPlugin

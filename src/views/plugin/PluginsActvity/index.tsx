@@ -6,11 +6,11 @@ import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Components/ContentBody";
 import SettingsBuilder from "@Builders/SettingsBuilder";
 import MDIcon from "@Components/MDIcon";
-import PluginAboutActivity from "./PluginAboutActivity";
-import Bootloader from "@Bootloader";
-import EditorActivity from "./../EditorActivity";
+import PluginAboutActivity from "../PluginAboutActivity";
+import EditorActivity from "../../EditorActivity";
+import { Props, States } from "./interface";
 
-class PluginsActivity extends React.Component<{ pushPage: any; popPage: any }, {}> {
+class PluginsActivity extends React.Component<Props, States> {
   private scriptLosding = native.getPref("enableCustomScriptLoading") === "true";
 
   private renderToolbar = () => {

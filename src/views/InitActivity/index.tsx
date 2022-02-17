@@ -1,12 +1,13 @@
 import native from "@Native/index";
-import MainActivity from "./MainActivity";
+import MainActivity from "../MainActivity";
 import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
 import Bootloader from "@Bootloader";
-import LoginActivity from "./LoginActivity";
+import LoginActivity from "../LoginActivity";
+import { Props, States } from "./interface";
 
-class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: string }> {
+class InitActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
 
@@ -33,7 +34,7 @@ class InitActivity extends React.Component<{}, { routeConfig: any; currentPage: 
 
   public componentDidMount = () => {
     window.addEventListener("load", this.windowLoadPush);
-    console.log(native.isWindows)
+    console.log(native.isWindows);
   };
 
   public componentDidUpdate() {

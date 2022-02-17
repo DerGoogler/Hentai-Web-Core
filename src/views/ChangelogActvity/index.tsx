@@ -6,11 +6,10 @@ import ContentBody from "@Components/ContentBody";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";
-import { HighlightedMarkdown } from "../components/HighlightMarkdown";
-import Bootloader from "@Bootloader";
-import { Changelog } from "@Types/init";
+import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
+import { Props, States } from "./interface";
 
-class ChangelogActivity extends React.Component<{ popPage: any; changelog: Changelog }, {}> {
+class ChangelogActivity extends React.Component<Props, States> {
   public componentDidMount() {
     console.log(this.props.changelog.package.android);
   }

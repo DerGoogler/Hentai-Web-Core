@@ -7,10 +7,11 @@ import ContentBody from "@Components/ContentBody";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
 import tools from "@Misc/tools";
-import { HighlightedMarkdown } from "./../components/HighlightMarkdown";
+import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import { string } from "@Strings";
+import { Props, States } from "./interface";
 
-class LicensesActivity extends React.Component<{ popPage: any }, { data: string }> {
+class LicensesActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { data: "" };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import pkg from "./../../package.json";
+import pkg from "./../../../package.json";
 import { Page, Toolbar, Tabbar, Fab, SpeedDial, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native/index";
 import tools from "@Misc/tools";
@@ -9,21 +9,17 @@ import AnimeContent from "@Components/AnimeContent";
 import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 import MDIcon from "@Components/MDIcon";
-import SettingsActivity from "./SettingsActivity";
-import LicensesActivity from "./LicensesActivity";
+import SettingsActivity from "../SettingsActivity";
+import LicensesActivity from "../LicenseActivity";
 import News from "@Components/News";
-import BuildPluginActivity from "./plugin/BuildPluginActivity";
-import ChangelogActivity from "./ChangelogActivity";
+import BuildPluginActivity from "../plugin/BuildPluginActivity";
+import ChangelogActivity from "../ChangelogActvity";
 import images from "@DataPacks/images";
-import { PushPageProps } from "@Types/init";
-import PluginsActivity from "./plugin/PluginsActivity";
+import PluginsActivity from "../plugin/PluginsActvity";
 import { string } from "@Strings";
+import { Props, States } from "./interface";
 
-class MainActivity extends React.Component<
-  { pushPage(props: PushPageProps): void; popPage: any },
-  { isContextOpen: boolean; sfw: any[]; nsfw: any[] }
-> {
-  static props: any;
+class MainActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = {

@@ -4,8 +4,9 @@ import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import AceEditor from "react-ace";
 import MDIcon from "@Components/MDIcon";
+import { Props, States } from "./interface";
 
-class EditorActivity extends React.Component<{ extras: any; popPage: any }, { data: string }> {
+class EditorActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { data: this.props.extras.value };
