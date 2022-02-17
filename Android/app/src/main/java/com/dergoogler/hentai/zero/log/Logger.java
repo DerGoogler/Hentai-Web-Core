@@ -2,13 +2,7 @@ package com.dergoogler.hentai.zero.log;
 
 import android.util.Log;
 
-/**
- * Log Utilities
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
-@SuppressWarnings({"unused", "RedundantSuppression"})
+
 public class Logger {
 
     public static final int VERBOSE = Log.VERBOSE;

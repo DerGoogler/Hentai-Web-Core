@@ -73,19 +73,6 @@ interface Windows {
 
   /**
    *
-   * @param shortcut
-   * @param callbacl
-   */
-  registerShortcut(shortcut: string, callback?: Function): void;
-
-  /**
-   *
-   * @param shortcut
-   */
-  isRegisteredShortcut(shortcut: string): boolean;
-
-  /**
-   *
    * @param state
    */
   discordRPC(state: string): void;

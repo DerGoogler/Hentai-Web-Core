@@ -5,12 +5,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 
-/**
- * Package Utilities
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class PackageUtil {
 
     public static String getApplicationName(Context context) throws PackageManager.NameNotFoundException {

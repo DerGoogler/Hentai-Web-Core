@@ -14,12 +14,6 @@ import android.widget.Toast;
 import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.zero.util.StringUtil;
 
-/**
- * Dialog Helper
- *
- * @author mcharima5@gmail.com
- * @since 2019
- */
 public class DialogBuilder {
 	private static final String TAG = DialogBuilder.class.getSimpleName();
 

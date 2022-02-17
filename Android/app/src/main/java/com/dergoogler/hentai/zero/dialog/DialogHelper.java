@@ -13,12 +13,6 @@ import android.widget.Toast;
 
 import com.dergoogler.hentai.zero.log.Logger;
 
-/**
- * Dialog Helper
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class DialogHelper {
 
     public static void alert(Activity activity, String message) {

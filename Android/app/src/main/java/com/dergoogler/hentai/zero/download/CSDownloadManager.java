@@ -10,22 +10,16 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.webkit.MimeTypeMap;
 
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.log.Logger;
-import com.dergoogler.hentai.zero.mimetype.MimeType;
 import com.dergoogler.hentai.zero.permission.RPermissionListener;
 import com.dergoogler.hentai.zero.permission.RPermission;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Download Manager
- *
- * @author mcharima5@gmail.com
- * @since 2020
- */
 public class CSDownloadManager {
     private static final String TAG = CSDownloadManager.class.getSimpleName();
 
@@ -74,7 +68,7 @@ public class CSDownloadManager {
             int lastIdx = urlString.lastIndexOf("/");
             String fileName = urlString.substring(lastIdx);
             request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, fileName);
-            request.setMimeType(MimeType.getMimeFromFileName(fileName));
+            request.setMimeType(getMimeFromFileName(fileName));
 
             registerDownloadReceiver(context);
 
@@ -88,6 +82,11 @@ public class CSDownloadManager {
                     .setMessage(e.toString())
                     .show();
         }
+    }
+    public static String getMimeFromFileName(String fileName) {
+        MimeTypeMap map = MimeTypeMap.getSingleton();
+        String ext = MimeTypeMap.getFileExtensionFromUrl(fileName);
+        return map.getMimeTypeFromExtension(ext);
     }
 
     private void registerDownloadReceiver(Context context) {

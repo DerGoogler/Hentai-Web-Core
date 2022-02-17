@@ -75,26 +75,6 @@ class native {
   }
 
   /**
-   * Nothing
-   */
-  public static AES = {
-    encrypt(value: string): string {
-      if (native.isAndroid) {
-        return window.Android.encryptAES(native.getMODEL, value);
-      } else {
-        return CryptoJS.AES.encrypt(value, native.getMODEL).toString();
-      }
-    },
-    decrypt(value: string): string {
-      if (native.isAndroid) {
-        return window.Android.decryptAES(native.getMODEL, value);
-      } else {
-        return CryptoJS.AES.encrypt(value, native.getMODEL).toString();
-      }
-    },
-  };
-
-  /**
    * Reloads native the app
    * @returns
    */
@@ -260,22 +240,6 @@ class native {
     }
   }
 
-  public static registerShortcut(shortcut: string, callback?: Function): any | void {
-    if (this.userAgent === this.userAgentAndroid) {
-      console.log("globalShortcut are not supported on Android");
-    } else if (this.userAgent === this.userAgentWindows) {
-      window.Windows.registerShortcut(shortcut, callback);
-    } else {
-      Mousetrap.bind(shortcut, (e) => {
-        if (typeof callback == "function") {
-          callback(e, shortcut);
-        } else {
-          console.log(shortcut + " pressed Successfully");
-        }
-      });
-    }
-  }
-
   /**
    * Evaluates JavaScript code and executes it.
    * @param javascriptString A String value that contains valid JavaScript code.
@@ -295,16 +259,6 @@ class native {
     newWindow: (url: string, options: BrowserWindowConstructorOptions) => {
       if (native.isWindows) {
         window.Windows.newWindow(url, options);
-      }
-    },
-
-    isRegisteredShortcut(shortcut: string): boolean | Boolean {
-      if (this.agent === this.userAgentAndroid) {
-        return false;
-      } else if (this.agent === this.userAgentWindows) {
-        return window.Windows.isRegisteredShortcut(shortcut);
-      } else {
-        return false;
       }
     },
 
@@ -363,14 +317,6 @@ class native {
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
 
-    getAppManifest(state: "versionName" | "versionCode" | "packageName" | "sdk"): string | String {
-      if (this.agent === this.userAgentAndroid) {
-        return window.Android.getAppManifest(state);
-      } else {
-        return "";
-      }
-    },
-
     setStatusbarColor(color: string): void {
       if (this.agent === this.userAgentAndroid) {
         window.Android.setStatusbarColor(color);
@@ -405,33 +351,6 @@ class native {
       }
     },
 
-    isAppInstalled(uri: string): boolean {
-      if (this.agent === this.userAgentAndroid) {
-        return window.Android.isAppInstalled(uri);
-      } else {
-        return false;
-      }
-    },
-
-    /**
-     *
-     * Example
-     * ```js
-     * if (native.android.isRooted()) {
-     *  return "Yes"
-     * } else {
-     *  return "No"
-     * }
-     * ```
-     * @returns {Boolean}
-     */
-    isRooted(): boolean {
-      if (this.agent === this.userAgentAndroid) {
-        return window.Android.isRooted();
-      } else {
-        return false;
-      }
-    },
     /**
      * Check if has write permission
      * @returns {boolean}

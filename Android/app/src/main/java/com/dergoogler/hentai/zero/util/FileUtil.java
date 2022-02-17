@@ -35,12 +35,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * File Utilities
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class FileUtil {
 
     private static boolean mkdirs(File dir) {
@@ -65,11 +59,6 @@ public class FileUtil {
         return file.exists();
     }
 
-    public static String newFilename(String extension) {
-        String name = DateTimeUtil.formatDate(new Date(), "yyyyMMdd_HHmmss");
-        return name + "." + extension;
-    }
-
     public static File createFile(File dir, String... pathAndFilename) throws IOException {
         File file = dir;
         for (String path : pathAndFilename) {
@@ -87,22 +76,6 @@ public class FileUtil {
             return file;
         }
         return null;
-    }
-
-    public static void write(FileInputStream fin, FileOutputStream fos) throws IOException {
-        try {
-            byte[] buff = new byte[1024 * 4];    // 1MB = 1048576 = 1024 * 1024, 10KB = 10240 = 10 * 1024
-            while (true) {
-                int len = fin.read(buff);
-                if (-1 == len) {
-                    break;
-                }
-                fos.write(buff, 0, len);
-            }
-        } finally {
-            IOUtil.closeQuietly(fin);
-            IOUtil.closeQuietly(fos);
-        }
     }
 
 

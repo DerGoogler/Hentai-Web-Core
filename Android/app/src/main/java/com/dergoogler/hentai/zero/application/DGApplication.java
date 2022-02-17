@@ -4,12 +4,6 @@ import com.dergoogler.hentai.zero.log.Logger;
 
 import androidx.multidex.MultiDexApplication;
 
-/**
- * Application
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class DGApplication extends MultiDexApplication {
     private static final String TAG = DGApplication.class.getSimpleName();
 

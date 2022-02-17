@@ -45,21 +45,6 @@ interface Android {
   /**
    * @Native
    */
-  getAppManifest(state: string): string;
-
-  /**
-   * @Native
-   */
-  encryptAES(password?: string, text?: string): string;
-
-  /**
-   * @Native
-   */
-  decryptAES(password?: string, text?: string): string;
-
-  /**
-   * @Native
-   */
   open(link: string): void;
 
   /**
@@ -76,25 +61,6 @@ interface Android {
    * @Native
    */
   keepScreenOn(): void;
-
-  /**
-   * @Native
-   */
-  isAppInstalled(uri: string): boolean;
-
-  /**
-   *
-   * Example
-   * ```js
-   * if (window.Android.isRooted()) {
-   *  return "Yes"
-   * } else {
-   *  return "No"
-   * }
-   * ```
-   * @returns {Boolean}
-   */
-  isRooted(): boolean;
 
   /**
    * @Native
@@ -132,12 +98,6 @@ interface Android {
   isHardwareAvailable(): boolean;
 
   /**
-   * Evaluates JavaScript code and executes it.
-   * @param x A String value that contains valid JavaScript code.
-   */
-  eval(javascriptString: string): void;
-
-  /**
    * @Native
    */
   hasStoragePermission(): boolean;
@@ -145,7 +105,7 @@ interface Android {
   /**
    * @Native
    */
-   requestStoargePermission(): void;
+  requestStoargePermission(): void;
 
   /**
    * @Native

@@ -4,12 +4,6 @@ import android.os.Bundle;
 
 import java.util.Iterator;
 
-/**
- * String Utilities
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class StringUtil {
 
     public static String nvl(Object str, String defaultValue) {

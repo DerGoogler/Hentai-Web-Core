@@ -14,12 +14,6 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**
- * WebView Download Listener
- *
- * @author mcharima5@gmail.com
- * @since 2020
- */
 public class CSDownloadListener implements DownloadListener {
     private static final String TAG = CSDownloadListener.class.getSimpleName();
 

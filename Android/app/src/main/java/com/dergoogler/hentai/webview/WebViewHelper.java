@@ -23,12 +23,6 @@ import java.util.List;
 import java.util.Map;
 
 
-/**
- * WebView Helper
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class WebViewHelper {
     private static final String TAG = WebViewHelper.class.getSimpleName();
 

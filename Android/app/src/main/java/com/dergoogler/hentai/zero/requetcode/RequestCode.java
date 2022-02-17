@@ -1,11 +1,5 @@
 package com.dergoogler.hentai.zero.requetcode;
 
-/**
- * Request Code
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class RequestCode {
     // Mask
     private static final int REQUEST_CODE_MASK = 0x0000FFFF;

@@ -28,32 +28,20 @@ import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.activity.BaseActivity;
 import com.dergoogler.hentai.zero.dialog.DialogBuilder;
 import com.dergoogler.hentai.zero.keyevent.BackKeyShutdown;
-import com.dergoogler.hentai.zero.requetcode.RequestCode;
 import com.dergoogler.hentai.zero.util.FileUtil;
-import com.dergoogler.hentai.zero.util.StringUtil;
 import com.dergoogler.hentai.zero.webview.CSDownloadListener;
-import com.dergoogler.hentai.zero.webview.CSFileChooserListener;
 import com.dergoogler.hentai.zero.webview.CSWebChromeClient;
 import com.dergoogler.hentai.zero.webview.CSWebViewClient;
 import com.dergoogler.hentai.bridge.AndroidBridge;
-import com.dergoogler.hentai.zero.log.Logger;
 import com.dergoogler.hentai.webview.WebViewHelper;
 
 import java.util.Objects;
 import java.util.concurrent.Executor;
 
-/**
- * WebView Activity
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class WebViewActivity extends BaseActivity {
     private static final String TAG = WebViewActivity.class.getSimpleName();
     private SharedPreferences nativaeLocalstorage;
     private WebView webview;
-    private CSWebChromeClient webChromeClient;
-    private CSFileChooserListener webviewFileChooser;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
@@ -149,12 +137,8 @@ public class WebViewActivity extends BaseActivity {
         this.webview.setWebViewClient(webviewClient);
 
         // set webChromeClient
-        this.webChromeClient = new CSWebChromeClient(getContext());
-        this.webview.setWebChromeClient(this.webChromeClient);
-
-        // set fileChooser
-        this.webviewFileChooser = new CSFileChooserListener(getContext());
-        this.webChromeClient.setFileChooserListener(this.webviewFileChooser);
+        CSWebChromeClient webChromeClient = new CSWebChromeClient(getContext());
+        this.webview.setWebChromeClient(webChromeClient);
 
         // add interface
         this.webview.addJavascriptInterface(new AndroidBridge(webview), Lib.getInterfaceName());
@@ -186,25 +170,6 @@ public class WebViewActivity extends BaseActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (KeyEvent.KEYCODE_BACK == keyCode) {
-            Logger.i(TAG, "[ACTIVITY] onKeyDown(): WebView isVideoPlayingInFullscreen = " + this.webChromeClient.isVideoPlayingInFullscreen());
-            if (this.webChromeClient.isVideoPlayingInFullscreen()) {
-                return false;
-            }
-
-            // multiple windows go back
-            if (null != this.webChromeClient.getNewWebView()) {
-                Logger.i(TAG, "[ACTIVITY] onKeyDown(): NewWebView canGoBack = " + this.webChromeClient.getNewWebView().canGoBack());
-                if (this.webChromeClient.getNewWebView().canGoBack()) {
-                    this.webChromeClient.getNewWebView().goBack();
-                    return true;
-                } else {
-                    this.webChromeClient.closeNewWebView();
-                }
-                return true;
-            }
-
-            Logger.i(TAG, "[ACTIVITY] onKeyDown(): WebView canGoBack = " + this.webview.canGoBack());
-            // go back
             if (this.webview.canGoBack()) {
                 this.webview.goBack();
                 return true;
@@ -218,33 +183,6 @@ public class WebViewActivity extends BaseActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (null == data) {
-            Logger.i(TAG, "[ACTIVITY] onActivityResult(): requestCode[" + requestCode + "],  resultCode[" + resultCode + "],  data[null]");
-        } else {
-            Logger.i(TAG, "[ACTIVITY] onActivityResult(): requestCode[" + requestCode + "],  resultCode[" + resultCode + "],  data[" +
-                    "\n  action = " + data.getAction() +
-                    "\n  scheme = " + data.getScheme() +
-                    "\n  data = " + data.getData() +
-                    "\n  type = " + data.getType() +
-                    "\n  extras = " + StringUtil.toString(data.getExtras()) +
-                    "\n]");
-        }
-
-        //++ [[START] File Chooser]
-        if (RequestCode.REQUEST_FILE_CHOOSER_NORMAL == requestCode) {
-            Logger.i(TAG, "[ACTIVITY] onActivityResult(): REQUEST_FILE_CHOOSER_NORMAL");
-            this.webviewFileChooser.onActivityResultFileChooserNormal(requestCode, resultCode, data);
-        } else if (RequestCode.REQUEST_FILE_CHOOSER_LOLLIPOP == requestCode) {
-            Logger.i(TAG, "[ACTIVITY] onActivityResult(): REQUEST_FILE_CHOOSER_LOLLIPOP");
-            this.webviewFileChooser.onActivityResultFileChooserLollipop(requestCode, resultCode, data);
-        }
-        //-- [[E N D] File Chooser]
-
-        super.onActivityResult(requestCode, resultCode, data);
     }
 }
 

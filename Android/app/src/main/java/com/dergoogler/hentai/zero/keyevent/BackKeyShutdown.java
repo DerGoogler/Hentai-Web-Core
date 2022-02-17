@@ -4,12 +4,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.KeyEvent;
 
-/**
- * BackKey
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class BackKeyShutdown {
 
     private static final int PRESS_BACK_KEY_INTERVAL = 2000;

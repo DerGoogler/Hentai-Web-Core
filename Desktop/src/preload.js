@@ -83,16 +83,6 @@ contextBridge.exposeInMainWorld("Windows", {
     store.delete(key);
   },
 
-  registerShortcut: (shortcut, callback) => {
-    Mousetrap.bind(shortcut, (e) => {
-      if (typeof callback == "function") {
-        callback(e, shortcut);
-      } else {
-        console.log(shortcut + " pressed Successfully");
-      }
-    });
-  },
-
   discordRPC: (arg) => {
     ipcRenderer.send("dcrpc-state", arg);
   },

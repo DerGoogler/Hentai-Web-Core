@@ -1,7 +1,6 @@
 package com.dergoogler.hentai.zero.webview;
 
 import android.annotation.TargetApi;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -18,9 +17,6 @@ import com.dergoogler.hentai.BuildConfig;
 import com.dergoogler.hentai.R;
 import com.dergoogler.hentai.tools.Lib;
 import com.dergoogler.hentai.zero.log.Logger;
-import com.dergoogler.hentai.zero.util.IntentUtil;
-
-import java.net.URISyntaxException;
 
 import androidx.annotation.RequiresApi;
 import androidx.browser.customtabs.CustomTabColorSchemeParams;
@@ -28,12 +24,6 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.content.ContextCompat;
 import androidx.webkit.WebViewAssetLoader;
 
-/**
- * Custom WebView Client
- *
- * @author mcharima5@gmail.com
- * @since 2018
- */
 public class CSWebViewClient extends WebViewClient {
     private static final String TAG = WebViewClient.class.getSimpleName();
 
