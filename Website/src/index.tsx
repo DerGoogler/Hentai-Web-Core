@@ -93,11 +93,11 @@ class Bootloader {
     this.folderInit();
     this.makeExamplePlugin();
     this.styleInit();
+    this.loadConsole();
 
     ons.ready(() => {
       ons.platform.select("android");
       this.electronInit();
-      this.loadConsole();
       this.androidSettingsinit();
       this.loadActivity(<InitActivity />);
     });
