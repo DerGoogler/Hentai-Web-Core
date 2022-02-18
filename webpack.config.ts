@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const config = {
+const config: any = {
   entry: {
     app: ["@babel/polyfill", "./src/index.tsx"],
   },
