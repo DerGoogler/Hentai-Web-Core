@@ -6,6 +6,8 @@ import axios from "axios";
 import jss, { Styles } from "jss";
 import preset from "jss-preset-default";
 import native from "..";
+import LocalizedStrings from "./../../localization/utils/LocalizedStrings";
+import { Language, StringAguments } from "./../../localization/utils/types";
 
 const getPluginConfig = (name: string): PluginAboutTypes => {
   return native.fs.readFile("/plugins/" + name + "/plugin.yaml", {
@@ -83,7 +85,10 @@ class HWPlugin {
   }
 
   public strings(globals: any): LanguageTypes {
-    const string: LanguageTypes = globals[this.checkLanguage()];
+    // @ts-ignore
+    const string: Language & StringAguments = new LocalizedStrings(globals, {});
+    string.setLanguage(this.checkLanguage());
+    //@ts-ignore
     return string;
   }
 

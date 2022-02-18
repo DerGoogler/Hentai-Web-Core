@@ -4,7 +4,7 @@ import ons from "onsenui";
 import { ListInterface } from "@Types/ListBuilder";
 import native from "@Native/index";
 import tools from "@Misc/tools";
-import { formatString, string } from "@Strings";
+import { string } from "@Strings";
 import { settingsIndex } from "./../localization/languageIndexes";
 
 const settings: ListInterface[] = [
@@ -164,7 +164,7 @@ const settings: ListInterface[] = [
           const height = Number(e.target.value.replace(regex, "$2"));
 
           ons.notification.confirm({
-            message: formatString(string.electronChangeWindowSizeDialogMessage, {
+            message: string.formatString(string.electronChangeWindowSizeDialogMessage, {
               size: e.target.value.replace(regex, "$1x$2"),
             }),
             title: string.electronChangeWindowSizeDialogTitle,

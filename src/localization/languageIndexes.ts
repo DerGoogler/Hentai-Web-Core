@@ -2,8 +2,9 @@ import native from "@Native/index";
 import de from "./lang/de";
 import en from "./lang/en";
 import idiotGERMAN from "./lang/idiot.german";
+import { LanguageTypes } from "./utils/types";
 
-const globals: any = {
+const globals: LanguageTypes = {
   en: en,
   de: de,
   idiotGERMAN: idiotGERMAN,

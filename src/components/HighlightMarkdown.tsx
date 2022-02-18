@@ -12,9 +12,8 @@ export function HighlightedMarkdown({ children }: HighlightedMarkdownProps) {
 
   useEffect(() => {
     // @ts-ignore
-    rootRef.current.querySelectorAll("pre code").forEach((block) => {
-      // @ts-ignore
-      hljs.highlightBlock(block);
+    rootRef.current.querySelectorAll("pre code").forEach((block: any) => {
+      hljs.highlightElement(block);
     });
   }, [children]);
 

@@ -1,7 +1,7 @@
-import { LanguageTypes } from "../utils/types";
+import { Language } from "../utils/types";
 import de from "./de";
 
-const idiotGERMAN: LanguageTypes = {
+const idiotGERMAN: Language = {
   windowsCloseDialogMessage: "Willst du diese Äpp schließen?",
   windowsCloseDialogTitle: "Äpp schließen?",
   ok: "ok",

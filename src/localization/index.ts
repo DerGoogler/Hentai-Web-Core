@@ -1,8 +1,7 @@
-import tools from "@Misc/tools";
+import LocalizedStrings from "./utils/LocalizedStrings";
 import native from "@Native/index";
 import { globals } from "./languageIndexes";
-import formatString from "./utils/formatString";
-import { LanguageTypes } from "./utils/types";
+import { Language, LanguageTypes, StringAguments } from "./utils/types";
 
 function checkLanguage(): string {
   const lang = native.getPref("language");
@@ -13,6 +12,9 @@ function checkLanguage(): string {
   }
 }
 
-const string: LanguageTypes = globals[checkLanguage()];
+//@ts-ignore
+const string: Language & StringAguments = new LocalizedStrings(globals, {});
 
-export { string, formatString, LanguageTypes };
+string.setLanguage(checkLanguage());
+
+export { string, LanguageTypes };

@@ -1,4 +1,15 @@
+interface StringAguments {
+  setLanguage(arg0: string): void;
+  formatString(str: string, ...valuesForPlaceholders: any): string;
+}
+
 interface LanguageTypes {
+  en: Language;
+  de: Language;
+  idiotGERMAN: Language;
+}
+
+interface Language {
   windowsCloseDialogMessage: string;
   windowsCloseDialogTitle: string;
   ok: string;
@@ -46,4 +57,4 @@ interface LanguageTypes {
   hideCardWithImageError: string;
 }
 
-export { LanguageTypes };
+export { LanguageTypes, Language, StringAguments };

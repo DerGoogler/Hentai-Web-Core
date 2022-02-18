@@ -1,6 +1,6 @@
-import { LanguageTypes } from "../utils/types";
+import { Language } from "../utils/types";
 
-const de: LanguageTypes = {
+const de: Language = {
   windowsCloseDialogMessage: "Willst du diese App schließen?",
   windowsCloseDialogTitle: "App schließen?",
   ok: "Ok",
