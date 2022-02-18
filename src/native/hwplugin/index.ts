@@ -1,7 +1,7 @@
 import tools from "@Misc/tools";
 import { LanguageTypes } from "@Strings";
 import { PluginAboutTypes } from "@Types/pluginAbout";
-import { SettingsInterface } from "@Types/SettingsBuilder";
+import { ListInterface } from "@Types/ListBuilder";
 import axios from "axios";
 import jss, { Styles } from "jss";
 import preset from "jss-preset-default";
@@ -21,7 +21,7 @@ class HWPlugin {
     this.pluginName = pluginName;
   }
 
-  public addSettings(items: SettingsInterface[]): void {
+  public addSettings(items: ListInterface[]): void {
     if (this.pluginName === (undefined || null)) {
       throw new Error(this.pluginErrorString);
     } else {

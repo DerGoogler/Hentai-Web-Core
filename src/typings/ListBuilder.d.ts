@@ -1,6 +1,6 @@
 // type Icon = `${string}-${string}`;
 
-interface SettingsOptions {
+interface ListOptions {
   key?: string;
   disabled?: boolean | any;
   id?: string;
@@ -25,12 +25,12 @@ interface SelectValue {
   disabled?: boolean;
 }
 
-interface SettingsInterface {
+interface ListInterface {
   title: string;
   id?: string;
   style?: React.CSSProperties;
   className?: string;
-  content: SettingsOptions[];
+  content: ListOptions[];
 }
 
-export { SettingsOptions, SettingsInterface, SelectValue };
+export { ListOptions, ListInterface, SelectValue };

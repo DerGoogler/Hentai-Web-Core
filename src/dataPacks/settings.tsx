@@ -1,13 +1,13 @@
 "use strict";
 
 import ons from "onsenui";
-import { SettingsInterface } from "@Types/SettingsBuilder";
+import { ListInterface } from "@Types/ListBuilder";
 import native from "@Native/index";
 import tools from "@Misc/tools";
 import { formatString, string } from "@Strings";
 import { settingsIndex } from "./../localization/languageIndexes";
 
-const settings: SettingsInterface[] = [
+const settings: ListInterface[] = [
   {
     title: string.appearance,
     content: [
@@ -28,12 +28,6 @@ const settings: SettingsInterface[] = [
         icon: "table_chart",
         type: "switch",
         text: string.placeTabberOnBottom,
-      },
-      {
-        key: "hideFAB",
-        icon: "add",
-        type: "switch",
-        text: string.hideFAB,
       },
       {
         key: "language",

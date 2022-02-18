@@ -7,6 +7,7 @@ import { Icon } from "react-onsenui";
 import tools from "@Misc/tools";
 import ActionSheetBuilder from "./ActionSheetBuilder";
 import { string } from "@Strings";
+import ListDialogBuilder from "./ListDialogBuilder";
 
 class PictureBuilder extends React.Component<
   {
@@ -212,55 +213,64 @@ class PictureBuilder extends React.Component<
                                 );
                               }
                             })()}
-                            <ActionSheetBuilder
+                            <ListDialogBuilder
                               options={{
-                                title: this.getNote + "'s options",
                                 onCancel: this.handleCancel,
                                 isOpen: this.state.isContextOpen,
                                 modifier: native.checkPlatformForBorderStyle,
                               }}
                               data={[
                                 {
-                                  text: string.viewImageInBrowser,
-                                  icon: "md-eye",
-                                  onClick: () => {
-                                    native.open(source);
-                                    this.handleCancel();
-                                  },
-                                },
-                                {
-                                  text: string.copyLink,
-                                  icon: "md-copy",
-                                  onClick: () => {
-                                    native.copyClipborad(source);
-                                    this.handleCancel();
-                                  },
-                                },
-                                {
-                                  text: string.viewImageSource,
-                                  icon: "md-link",
-                                  onClick: () => {
-                                    native.open(
-                                      `https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note
-                                        .toLowerCase()
-                                        .replace(/ /g, "")}.json`
-                                    );
-                                    this.handleCancel();
-                                  },
-                                },
-                                {
-                                  text: string.download,
-                                  icon: "md-download",
-                                  onClick: () => {
-                                    native.downloadPicture(source, this.getID, this.getID);
-                                    this.handleCancel();
-                                  },
-                                },
-                                {
-                                  text: string.cancel,
-                                  icon: "md-close",
-                                  modifier: native.checkPlatformForBorderStyle,
-                                  onClick: this.handleCancel,
+                                  title: this.getNote + "'s options",
+                                  content: [
+                                    {
+                                      text: string.viewImageInBrowser,
+                                      type: "",
+                                      icon: "open_in_browser",
+                                      onClick: () => {
+                                        native.open(source);
+                                        this.handleCancel();
+                                      },
+                                    },
+                                    {
+                                      text: string.copyLink,
+                                      type: "",
+                                      icon: "copy",
+                                      onClick: () => {
+                                        native.copyClipborad(source);
+                                        this.handleCancel();
+                                      },
+                                    },
+                                    {
+                                      text: string.viewImageSource,
+                                      type: "",
+                                      icon: "link",
+                                      onClick: () => {
+                                        native.open(
+                                          `https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note
+                                            .toLowerCase()
+                                            .replace(/ /g, "")}.json`
+                                        );
+                                        this.handleCancel();
+                                      },
+                                    },
+                                    {
+                                      text: string.download,
+                                      type: "",
+                                      icon: "download",
+                                      onClick: () => {
+                                        native.downloadPicture(source, this.getID, this.getID);
+                                        this.handleCancel();
+                                      },
+                                    },
+                                    {
+                                      text: string.cancel,
+                                      type: "",
+                                      icon: "close",
+                                      modifier: native.checkPlatformForBorderStyle,
+                                      onClick: this.handleCancel,
+                                    },
+                                  ],
                                 },
                               ]}
                             />

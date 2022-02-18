@@ -200,6 +200,15 @@ body {
   background-color: #fff;
 }
 
+.dialog-container--material {
+  border-radius: 8px;
+}
+
+.dialog--material {
+  height: 587px;
+  border-radius: 8px;
+}
+
 a {
   color: #4a148c;
   text-decoration: underline;

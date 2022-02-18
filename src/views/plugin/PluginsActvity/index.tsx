@@ -4,7 +4,7 @@ import { List } from "react-onsenui";
 import native from "@Native/index";
 import ToolbarBuilder from "@Builders/ToolbarBuilder";
 import ContentBody from "@Components/ContentBody";
-import SettingsBuilder from "@Builders/SettingsBuilder";
+import SettingsBuilder from "@Builders/ListBuilder";
 import MDIcon from "@Components/MDIcon";
 import PluginAboutActivity from "../PluginAboutActivity";
 import EditorActivity from "../../EditorActivity";

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { ListItem, ListTitle, Select, Switch } from "react-onsenui";
-import { SelectValue, SettingsInterface, SettingsOptions } from "@Types/SettingsBuilder";
+import { SelectValue, ListInterface, ListOptions } from "@Types/ListBuilder";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import MDIcon from "@Components/MDIcon";
@@ -9,7 +9,7 @@ import HWPlugin from "@Native/hwplugin";
 class SettingsBuilder extends React.Component<{
   isPlugin: boolean;
   pluginName: string;
-  data: SettingsInterface[];
+  data: ListInterface[];
 }> {
   /**
    * Check if an key is there
@@ -65,11 +65,11 @@ class SettingsBuilder extends React.Component<{
   public render() {
     const { data } = this.props;
 
-    const settings = data.map((header: SettingsInterface) => (
+    const settings = data.map((header: ListInterface) => (
       <>
         <section id={header.id} className={header.className} style={header.style}>
           <ListTitle>{header.title}</ListTitle>
-          {header.content.map((setting: SettingsOptions) => (
+          {header.content.map((setting: ListOptions) => (
             <>
               <ListItem
                 expandable={tools.typeCheck(setting.expandable, false)}

@@ -254,15 +254,20 @@ class native {
     }
   }
 
-  public static get getVersion(): string {
-    if (this.isAndroid) {
-      return window.Android.getVersion();
-    } else if (this.isWindows) {
-      return window.Windows.getVersion();
-    } else {
-      return "";
-    }
-  }
+  public static readonly version = {
+    get get(): string {
+      if (native.isAndroid) {
+        return window.Android.getVersion();
+      } else if (native.isWindows) {
+        return window.Windows.getVersion();
+      } else {
+        return "";
+      }
+    },
+    require(version: number): boolean {
+      return +Number(this.get.replace(/\./gm, "")) >= +version;
+    },
+  };
 
   /**
    * Opens an link with native Android method
@@ -324,7 +329,7 @@ class native {
   /**
    * Methods that are here can only used on Windows
    */
-  public static electron = {
+  public static readonly electron = {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
@@ -385,7 +390,7 @@ class native {
   /**
    * Methods that are here can only used on Android
    */
-  public static android = {
+  public static readonly android = {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
@@ -449,7 +454,7 @@ class native {
   /**
    * This class is for the file access on both platforms, Android and Windows.
    */
-  public static fs = {
+  public static readonly fs = {
     userAgentAndroid: "HENTAI_WEB_AGENT",
     userAgentWindows: "HENTAI_WEB_WINDOWS",
     agent: window.navigator.userAgent,
