@@ -51,16 +51,16 @@ Some screenshots of the app
 
 ## Desktop Light
 
-![Desktop Light](https://raw.githubusercontent.com/DerGoogler/Hentai-Web/master/Website/images/desktop_light.png)
+![Desktop Light](https://raw.githubusercontent.com/Hentai-Web/Hentai-Web/master/Website/images/desktop_light.png)
 
 ## Desktop Dark
 
-![Desktop Dark](https://raw.githubusercontent.com/DerGoogler/Hentai-Web/master/Website/images/desktop_dark.png)
+![Desktop Dark](https://raw.githubusercontent.com/Hentai-Web/Hentai-Web/master/Website/images/desktop_dark.png)
 
 ## Mobile Light
 
-![Mobile Light](https://raw.githubusercontent.com/DerGoogler/Hentai-Web/master/Website/images/mobile_light.png)
+![Mobile Light](https://raw.githubusercontent.com/Hentai-Web/Hentai-Web/master/Website/images/mobile_light.png)
 
 ## Mobile Dark
 
-![Mobile Dark](https://raw.githubusercontent.com/DerGoogler/Hentai-Web/master/Website/images/mobile_dark.png)
+![Mobile Dark](https://raw.githubusercontent.com/Hentai-Web/Hentai-Web/master/Website/images/mobile_dark.png)
