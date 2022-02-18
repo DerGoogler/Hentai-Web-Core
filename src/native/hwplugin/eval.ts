@@ -3,10 +3,18 @@ import saferEval from "safer-eval";
 import tools from "@Misc/tools";
 import native from "..";
 import HWPlugin from ".";
+import { purple } from "@material-ui/core/colors";
+import PluginContext from "@Types/pluginContext";
 
 export default function evil(javascriptString: string, extras: any) {
   "use strict";
-  const context = {
+
+  const consoleColor = {
+    purple: "color: #fff; background: #4a148c; padding: 4px; border-radius: 8px 0px 0px 8px;",
+    lightPurple: "color: #fff; background: #bb86fc; padding: 4px; border-radius: 0px 8px 8px 0px;",
+  };
+
+  const context: PluginContext = {
     native: native,
     HWPlugin: HWPlugin,
     tools: tools,
@@ -20,11 +28,6 @@ export default function evil(javascriptString: string, extras: any) {
     Windows: undefined,
     eval: undefined,
     document: document,
-    module: {
-      exports(func: any) {
-        module.exports = func;
-      },
-    },
     require(path: any): void {
       const pluginName = extras.plugin.name;
       if (typeof path == "object") {
@@ -48,8 +51,8 @@ export default function evil(javascriptString: string, extras: any) {
         let pluginName = extras.plugin.name;
         console.log(
           `%c${pluginName}%c=>%c ${message}`,
-          `color: #fff; background: #4a148c; padding: 4px`,
-          `color: #fff; background: #bb86fc; padding: 4px`,
+          consoleColor.purple,
+          consoleColor.lightPurple,
           "",
           ...optionalParams
         );
@@ -59,8 +62,8 @@ export default function evil(javascriptString: string, extras: any) {
         let pluginName = extras.plugin.name;
         console.info(
           `%c${pluginName}%c=>%c ${message}`,
-          `color: #fff; background: #4a148c; padding: 4px`,
-          `color: #fff; background: #bb86fc; padding: 4px`,
+          consoleColor.purple,
+          consoleColor.lightPurple,
           "",
           ...optionalParams
         );
@@ -70,8 +73,8 @@ export default function evil(javascriptString: string, extras: any) {
         let pluginName = extras.plugin.name;
         console.warn(
           `%c${pluginName}%c=>%c ${message}`,
-          `color: #fff; background: #4a148c; padding: 4px`,
-          `color: #fff; background: #bb86fc; padding: 4px`,
+          consoleColor.purple,
+          consoleColor.lightPurple,
           "",
           ...optionalParams
         );
@@ -81,8 +84,8 @@ export default function evil(javascriptString: string, extras: any) {
         let pluginName = extras.plugin.name;
         console.error(
           `%c${pluginName}%c=>%c ${message}`,
-          `color: #fff; background: #4a148c; padding: 4px`,
-          `color: #fff; background: #bb86fc; padding: 4px`,
+          consoleColor.purple,
+          consoleColor.lightPurple,
           "",
           ...optionalParams
         );
