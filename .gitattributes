@@ -1,2 +1,4 @@
 *.css             binary
 *.css             linguist-language=plain
+*.js              binary
+*.js              linguist-language=plain
