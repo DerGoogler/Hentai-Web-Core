@@ -9,13 +9,9 @@ import AnimeContent from "@Components/AnimeContent";
 import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import SpeedDialBuilder from "@Builders/SpeedDialBuilder";
 import MDIcon from "@Components/MDIcon";
-import SettingsActivity from "../SettingsActivity";
-import LicensesActivity from "../LicenseActivity";
 import News from "@Components/News";
-import BuildPluginActivity from "../plugin/BuildPluginActivity";
-import ChangelogActivity from "../ChangelogActvity";
+import { BuildPluginActivity, ChangelogActivity, PluginsActivity, SettingsActivity, LicenseActivity } from "@Views";
 import images from "@DataPacks/images";
-import PluginsActivity from "../plugin/PluginsActvity";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
 
@@ -217,7 +213,7 @@ class MainActivity extends React.Component<Props, States> {
               icon: "md-file",
               onClick: () => {
                 this.props.pushPage({
-                  activity: LicensesActivity,
+                  activity: LicenseActivity,
                   key: "licenses",
                 });
                 this.handleCancel();

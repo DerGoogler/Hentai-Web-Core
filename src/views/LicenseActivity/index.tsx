@@ -11,7 +11,7 @@ import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
 
-class LicensesActivity extends React.Component<Props, States> {
+class LicenseActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { data: "" };
@@ -56,4 +56,4 @@ class LicensesActivity extends React.Component<Props, States> {
   }
 }
 
-export default LicensesActivity;
+export default LicenseActivity;

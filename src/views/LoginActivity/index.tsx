@@ -45,14 +45,6 @@ class LoginActivity extends React.Component<Props, States> {
     this.setState({ password: e.target.value.toUpperCase() });
   };
 
-  private placeholderIF(IFdata: any, return_: any, else_: any) {
-    if (IFdata) {
-      return return_;
-    } else {
-      return else_;
-    }
-  }
-
   public render() {
     return (
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>

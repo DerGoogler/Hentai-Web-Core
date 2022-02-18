@@ -2,13 +2,13 @@ import ReactDOM from "react-dom";
 import ons from "onsenui";
 import eruda from "eruda";
 import StyleBuilder from "@Builders/StyleBuilder";
-import InitActivity from "./views/InitActivity";
 import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
 import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
+import { ForbiddenActivity, InitActivity } from "@Views";
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -17,7 +17,6 @@ import "onsenui/css/onsenui.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
-import "@babel/polyfill";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");
@@ -32,7 +31,7 @@ class Bootloader {
   private loadActivity(node: JSX.Element) {
     let pas,
       customPlugins = null;
-    if (native.userAgentEqualAndroid(true) || native.userAgentEqualWindows(true)) {
+    if (native.isAndroid || native.isWindows) {
       if (native.fs.isFileExist("plugins.yaml")) {
         pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
         customPlugins = pas.map((item: string) => (
@@ -91,21 +90,31 @@ class Bootloader {
   }
 
   public init() {
-    this.folderInit();
-    this.makeExamplePlugin();
+    ons.platform.select("android");
     this.styleInit();
-    this.loadConsole();
-
-    if (native.isInstagram || native.isFacebook) {
-      native.setPref("disableNSFW", "true");
-    }
-
-    ons.ready(() => {
-      ons.platform.select("android");
+    if (
+      native.isIframe ||
+      native.isElectron ||
+      native.isEmbedded ||
+      native.isIE ||
+      native.isEdge ||
+      native.isMIUI ||
+      native.isSamsungBrowser
+    ) {
+      this.loadActivity(<ForbiddenActivity />);
+    } else {
+      this.folderInit();
+      this.makeExamplePlugin();
+      this.loadConsole();
       this.electronInit();
       this.androidSettingsinit();
+
+      if (native.isInstagram || native.isFacebook) {
+        native.setPref("disableNSFW", "true");
+      }
+
       this.loadActivity(<InitActivity />);
-    });
+    }
   }
 }
 

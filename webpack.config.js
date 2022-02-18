@@ -81,7 +81,7 @@ const config = {
       "@Bootloader": path.resolve(__dirname, "src/index.tsx"),
       "@Styles": path.resolve(__dirname, "src/styles"),
       "@Strings": path.resolve(__dirname, "src/localization/index.ts"),
-      "@Views": path.resolve(__dirname, "src/views"),
+      "@Views": path.resolve(__dirname, "src/views/index.ts"),
     },
     fallback: {
       path: require.resolve("path-browserify"),

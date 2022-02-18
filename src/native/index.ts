@@ -1,10 +1,46 @@
 import config from "../misc/config";
-import Mousetrap from "mousetrap";
 import yaml from "js-yaml";
 import ons from "onsenui";
-import CryptoJS from "crypto-js";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 import evil from "./hwplugin/eval";
+import {
+  browserName,
+  browserVersion,
+  deviceType,
+  engineName,
+  engineVersion,
+  isBrowser,
+  isChrome,
+  isChromium,
+  isConsole,
+  isDesktop,
+  isEdge,
+  isEdgeChromium,
+  isElectron,
+  isEmbedded,
+  isFirefox,
+  isIE,
+  isIOS,
+  isIOS13,
+  isIPad13,
+  isIPhone13,
+  isIPod13,
+  isMacOs,
+  isMIUI,
+  isMobile,
+  isMobileOnly,
+  isMobileSafari,
+  isOpera,
+  isSafari,
+  isSamsungBrowser,
+  isSmartTV,
+  isTablet,
+  isWearable,
+  isWinPhone,
+  isYandex,
+  mobileModel,
+  mobileVendor,
+} from "react-device-detect";
 
 /**
  * Native calls for Windows and Android
@@ -17,6 +53,43 @@ class native {
   public static readonly isAndroid = this.userAgentAndroid === this.userAgent ? true : false;
   public static readonly isInstagram = /Instagram/i.test(this.userAgent);
   public static readonly isFacebook = /Facebook/i.test(this.userAgent);
+  public static readonly isIframe = window.self !== window.top;
+  public static readonly isSmartTV = isSmartTV;
+  public static readonly isConsole = isConsole;
+  public static readonly isWearable = isWearable;
+  public static readonly isEmbedded = isEmbedded;
+  public static readonly isMobileSafari = isMobileSafari;
+  public static readonly isChromium = isChromium;
+  public static readonly isMobile = isMobile;
+  public static readonly isMobileOnly = isMobileOnly;
+  public static readonly isTablet = isTablet;
+  public static readonly isBrowser = isBrowser;
+  public static readonly isDesktop = isDesktop;
+  public static readonly isWinPhone = isWinPhone;
+  public static readonly isIOS = isIOS;
+  public static readonly isChrome = isChrome;
+  public static readonly isFirefox = isFirefox;
+  public static readonly isSafari = isSafari;
+  public static readonly isOpera = isOpera;
+  public static readonly isIE = isIE;
+  public static readonly browserVersion = browserVersion;
+  public static readonly browserName = browserName;
+  public static readonly mobileVendor = mobileVendor;
+  public static readonly mobileModel = mobileModel;
+  public static readonly engineName = engineName;
+  public static readonly engineVersion = engineVersion;
+  public static readonly isEdge = isEdge;
+  public static readonly isYandex = isYandex;
+  public static readonly deviceType = deviceType;
+  public static readonly isIOS13 = isIOS13;
+  public static readonly isIPad13 = isIPad13;
+  public static readonly isIPhone13 = isIPhone13;
+  public static readonly isIPod13 = isIPod13;
+  public static readonly isElectron = isElectron;
+  public static readonly isEdgeChromium = isEdgeChromium;
+  public static readonly isMacOs = isMacOs;
+  public static readonly isMIUI = isMIUI;
+  public static readonly isSamsungBrowser = isSamsungBrowser;
 
   public static readonly checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
 

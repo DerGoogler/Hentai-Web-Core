@@ -27,7 +27,7 @@
       "@Bootloader": ["index.tsx"],
       "@Styles/*": ["styles/*"],
       "@Strings": ["localization/index.ts"],
-      "@Views/*": ["views/*"]
+      "@Views": ["views/index.ts"]
     }
   },
   "include": ["./src/**/*"]
