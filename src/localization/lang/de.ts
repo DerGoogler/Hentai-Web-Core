@@ -45,6 +45,7 @@ const de: LanguageTypes = {
   licenses: "Lizenzen",
   cancel: "Abbrechen",
   search: "Suche",
+  hideCardWithImageError: "Bilder die nicht gefunden wurden ausblenden",
 };
 
 export default de;

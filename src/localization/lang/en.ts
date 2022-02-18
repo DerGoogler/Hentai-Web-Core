@@ -45,6 +45,7 @@ const en: LanguageTypes = {
   licenses: "Licenses",
   cancel: "Cancel",
   search: "Search",
+  hideCardWithImageError: "Hide cards with no images",
 };
 
 export default en;

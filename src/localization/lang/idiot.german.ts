@@ -1,4 +1,5 @@
 import { LanguageTypes } from "../utils/types";
+import de from "./de";
 
 const idiotGERMAN: LanguageTypes = {
   windowsCloseDialogMessage: "Willst du diese Äpp schließen?",
@@ -45,6 +46,7 @@ const idiotGERMAN: LanguageTypes = {
   licenses: "Lizenzen",
   cancel: "Äbbrechen",
   search: "Süche",
+  hideCardWithImageError: de.hideCardWithImageError,
 };
 
 export default idiotGERMAN;

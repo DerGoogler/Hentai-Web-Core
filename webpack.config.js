@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
   entry: {
-    app: ["./src/index.tsx"],
+    app: ["@babel/polyfill", "./src/index.tsx"],
   },
   output: {
     filename: "bundle/[name].bundle.js",

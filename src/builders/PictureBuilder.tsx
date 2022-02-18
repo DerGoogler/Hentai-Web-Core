@@ -8,20 +8,39 @@ import tools from "@Misc/tools";
 import ActionSheetBuilder from "./ActionSheetBuilder";
 import { string } from "@Strings";
 
-class PictureBuilder extends React.Component<{
-  note?: any;
-  source?: any;
-  getId?: any;
-  isNew?: any;
-}> {
+class PictureBuilder extends React.Component<
+  {
+    note?: any;
+    source?: any;
+    getId?: any;
+    isNew?: any;
+  },
+  { isContextOpen: boolean; isImageError: boolean }
+> {
   private element!: HTMLElement | null;
   private buttonDesign: string = native.getPref("enableDarkmode") === "true" ? "lilaDarkMode" : "lila";
-
-  public state = {
-    isContextOpen: false,
-    isImageError: false,
+  private imageError: React.RefObject<HTMLImageElement>;
+  private imageStyle: React.CSSProperties = {
+    width: "100%",
+    borderRadius: tools.typeIF(
+      native.getPref("fitImageToCard"),
+      tools.typeIF(
+        native.getPref("displayDownload"),
+        tools.typeIF(native.getPref("removeTitle"), "0.25rem 0.25rem 0rem 0rem", "0rem 0rem 0rem 0rem"),
+        tools.typeIF(native.getPref("removeTitle"), "0.25rem 0.25rem 0.25rem 0.25rem", "0rem 0rem 0.25rem 0.25rem")
+      ),
+      ".25rem"
+    ),
   };
 
+  public constructor(props: any) {
+    super(props);
+    this.state = {
+      isContextOpen: false,
+      isImageError: false,
+    };
+    this.imageError = React.createRef();
+  }
   /**
    * To generate an id that refresh every page reload, to avoid duplicte ids
    */
@@ -100,161 +119,163 @@ class PictureBuilder extends React.Component<{
     const { note, source, isNew } = this.props;
     return (
       <>
-        {/*
-                // @ts-ignore */}
-        <card>
-          <Kard style={{ padding: "0px", borderRadius: "8px", border: "0px" }}>
-            <Card
-              key={this.getID}
-              style={{
-                padding: "0px",
-                margin: "0px",
-                boxShadow: "none",
-                backgroundColor: "transparent",
-              }}
-            >
-              <Card.Header style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}>
+        {(() => {
+          if (this.state.isImageError && native.getPref("hideCardWithImageError") === "true") {
+            return;
+          } else {
+            return (
+              <>
                 {/*
                 // @ts-ignore */}
-                <name style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
-                  <h4
-                    style={{
-                      width: "100%",
-                      display: "flex",
-                      justifyContent: "left",
-                      alignItems: "center",
-                    }}
-                    className={"searchKey> " + this.getID + "_search"}
-                  >
-                    {(() => {
-                      if (isNew) {
-                        return (
-                          <>
-                            <Badge style={{ fontSize: "10px" }} bg={this.buttonDesign}>
-                              NEW
-                            </Badge>
-                            &nbsp;
-                          </>
-                        );
-                      } else {
-                        return;
-                      }
-                    })()}
-                    {this.getNote}
-                  </h4>
-                  <Button
-                    style={{
-                      display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
-                    }}
-                    onClick={this.handleClick}
-                    variant={this.buttonDesign}
-                  >
-                    <Icon icon="md-more" />
-                  </Button>
-                  {/*
-                  // @ts-ignore */}
-                </name>
-              </Card.Header>
-              <Card.Body
-                style={{
-                  padding: tools.typeIF(native.getPref("fitImageToCard"), "0px", ""),
-                  display: "flex",
-                  justifyContent: "center",
-                  flexDirection: "column",
-                }}
-              >
-                <blockquote className="blockquote mb-0">
-                  <p>
-                    {" "}
-                    <img
-                      id={this.getID}
-                      src={this.images}
-                      alt={this.getNote}
-                      onError={() => {
-                        this.setState({ isImageError: true });
-                      }}
-                      onDoubleClick={this.handleClick}
+                <card>
+                  <Kard style={{ padding: "0px", borderRadius: "8px", border: "0px" }}>
+                    <Card
+                      key={this.getID}
                       style={{
-                        width: "100%",
-                        borderRadius: tools.typeIF(
-                          native.getPref("fitImageToCard"),
-                          tools.typeIF(
-                            native.getPref("displayDownload"),
-                            tools.typeIF(
-                              native.getPref("removeTitle"),
-                              "0.25rem 0.25rem 0rem 0rem",
-                              "0rem 0rem 0rem 0rem"
-                            ),
-                            tools.typeIF(
-                              native.getPref("removeTitle"),
-                              "0.25rem 0.25rem 0.25rem 0.25rem",
-                              "0rem 0rem 0.25rem 0.25rem"
-                            )
-                          ),
-                          ".25rem"
-                        ),
+                        padding: "0px",
+                        margin: "0px",
+                        boxShadow: "none",
+                        backgroundColor: "transparent",
                       }}
-                    />{" "}
-                    <ActionSheetBuilder
-                      options={{
-                        title: this.getNote + "'s options",
-                        onCancel: this.handleCancel,
-                        isOpen: this.state.isContextOpen,
-                        modifier: native.checkPlatformForBorderStyle,
-                      }}
-                      data={[
-                        {
-                          text: string.viewImageInBrowser,
-                          icon: "md-eye",
-                          onClick: () => {
-                            native.open(source);
-                            this.handleCancel();
-                          },
-                        },
-                        {
-                          text: string.copyLink,
-                          icon: "md-copy",
-                          onClick: () => {
-                            native.copyClipborad(source);
-                            this.handleCancel();
-                          },
-                        },
-                        {
-                          text: string.viewImageSource,
-                          icon: "md-link",
-                          onClick: () => {
-                            native.open(
-                              `https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note
-                                .toLowerCase()
-                                .replace(/ /g, "")}.json`
-                            );
-                            this.handleCancel();
-                          },
-                        },
-                        {
-                          text: string.download,
-                          icon: "md-download",
-                          onClick: () => {
-                            native.downloadPicture(source, this.getID, this.getID);
-                            this.handleCancel();
-                          },
-                        },
-                        {
-                          text: string.cancel,
-                          icon: "md-close",
-                          modifier: native.checkPlatformForBorderStyle,
-                          onClick: this.handleCancel,
-                        },
-                      ]}
-                    />
-                  </p>
-                </blockquote>
-              </Card.Body>
-            </Card>
-          </Kard>
-          {/*
+                    >
+                      <Card.Header style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}>
+                        {/*
                 // @ts-ignore */}
-        </card>
+                        <name style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
+                          <h4
+                            style={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "left",
+                              alignItems: "center",
+                            }}
+                            className={"searchKey> " + this.getID + "_search"}
+                          >
+                            {(() => {
+                              if (isNew) {
+                                return (
+                                  <>
+                                    <Badge style={{ fontSize: "10px" }} bg={this.buttonDesign}>
+                                      NEW
+                                    </Badge>
+                                    &nbsp;
+                                  </>
+                                );
+                              } else {
+                                return;
+                              }
+                            })()}
+                            {this.getNote}
+                          </h4>
+                          <Button
+                            style={{
+                              display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
+                            }}
+                            onClick={this.handleClick}
+                            variant={this.buttonDesign}
+                          >
+                            <Icon icon="md-more" />
+                          </Button>
+                          {/*
+                  // @ts-ignore */}
+                        </name>
+                      </Card.Header>
+                      <Card.Body
+                        style={{
+                          padding: tools.typeIF(native.getPref("fitImageToCard"), "0px", ""),
+                          display: "flex",
+                          justifyContent: "center",
+                          flexDirection: "column",
+                        }}
+                      >
+                        <blockquote className="blockquote mb-0">
+                          <p>
+                            {(() => {
+                              if (this.state.isImageError) {
+                                return (
+                                  <span>
+                                    The <strong>{this.getNote}</strong> image was not found
+                                  </span>
+                                );
+                              } else {
+                                return (
+                                  <img
+                                    id={this.getID}
+                                    src={this.images}
+                                    alt={this.getNote}
+                                    onDoubleClick={this.handleClick}
+                                    onError={() => {
+                                      this.setState({ isImageError: true });
+                                    }}
+                                    style={this.imageStyle}
+                                  />
+                                );
+                              }
+                            })()}
+                            <ActionSheetBuilder
+                              options={{
+                                title: this.getNote + "'s options",
+                                onCancel: this.handleCancel,
+                                isOpen: this.state.isContextOpen,
+                                modifier: native.checkPlatformForBorderStyle,
+                              }}
+                              data={[
+                                {
+                                  text: string.viewImageInBrowser,
+                                  icon: "md-eye",
+                                  onClick: () => {
+                                    native.open(source);
+                                    this.handleCancel();
+                                  },
+                                },
+                                {
+                                  text: string.copyLink,
+                                  icon: "md-copy",
+                                  onClick: () => {
+                                    native.copyClipborad(source);
+                                    this.handleCancel();
+                                  },
+                                },
+                                {
+                                  text: string.viewImageSource,
+                                  icon: "md-link",
+                                  onClick: () => {
+                                    native.open(
+                                      `https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note
+                                        .toLowerCase()
+                                        .replace(/ /g, "")}.json`
+                                    );
+                                    this.handleCancel();
+                                  },
+                                },
+                                {
+                                  text: string.download,
+                                  icon: "md-download",
+                                  onClick: () => {
+                                    native.downloadPicture(source, this.getID, this.getID);
+                                    this.handleCancel();
+                                  },
+                                },
+                                {
+                                  text: string.cancel,
+                                  icon: "md-close",
+                                  modifier: native.checkPlatformForBorderStyle,
+                                  onClick: this.handleCancel,
+                                },
+                              ]}
+                            />
+                          </p>
+                        </blockquote>
+                      </Card.Body>
+                    </Card>
+                  </Kard>
+                  {/*
+                // @ts-ignore */}
+                </card>
+              </>
+            );
+          }
+        })()}
       </>
     );
   }

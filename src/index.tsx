@@ -17,6 +17,7 @@ import "onsenui/css/onsenui.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
+import "@babel/polyfill";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");

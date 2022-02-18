@@ -3,7 +3,6 @@ import saferEval from "safer-eval";
 import tools from "@Misc/tools";
 import native from "..";
 import HWPlugin from ".";
-import { formatString } from "@Strings";
 
 export default function evil(javascriptString: string, extras: any) {
   "use strict";
@@ -21,6 +20,11 @@ export default function evil(javascriptString: string, extras: any) {
     Windows: undefined,
     eval: undefined,
     document: document,
+    module: {
+      exports(func: any) {
+        module.exports = func;
+      },
+    },
     require(path: any): void {
       const pluginName = extras.plugin.name;
       if (typeof path == "object") {

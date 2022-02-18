@@ -174,6 +174,8 @@ class MainActivity extends React.Component<Props, States> {
           index={this.tabIndexChecker()}
           // @ts-ignore
           onPreChange={(event: any) => {
+            event.preventDefault(); // For newer Onsen UI version
+
             if (event.index != this.tabIndexChecker) {
               native.setPref("tabIndex", event.index);
             }

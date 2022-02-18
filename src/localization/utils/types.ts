@@ -43,6 +43,7 @@ interface LanguageTypes {
   licenses: string;
   cancel: string;
   search: string;
+  hideCardWithImageError: string;
 }
 
 export { LanguageTypes };

@@ -207,3 +207,35 @@ a {
     color: #4a148c;
   }
 }
+.card--bootstrap__content {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+}
+
+.card--bootstrap {
+  padding-top: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  border-radius: 0px;
+}
+
+.card {
+  .header {
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  .footer {
+    margin-top: auto;
+  }
+}
+.card-bootstrap {
+  .footer {
+    padding: 0.75rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-top: 1px solid rgba(0, 0, 0, 0.125);
+  }
+}

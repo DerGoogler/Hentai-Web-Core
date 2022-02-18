@@ -76,6 +76,12 @@ const settings: SettingsInterface[] = [
         type: "switch",
         text: string.removeTitle,
       },
+      {
+        key: "hideCardWithImageError",
+        icon: "error",
+        type: "switch",
+        text: string.hideCardWithImageError,
+      },
     ],
   },
 
