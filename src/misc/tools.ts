@@ -109,6 +109,11 @@ class tools {
     }
   }
 
+  public static arrayRemove(arr: any, position: any) {
+    arr.splice(position, position);
+    return arr;
+  }
+
   public static typeCheck(_: any, __: any) {
     if (_ === undefined || _ === null || _ === "" || __ === 0 || _ === "0" || _ === false || _ === "false") {
       return __;

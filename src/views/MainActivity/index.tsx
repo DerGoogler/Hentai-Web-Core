@@ -93,32 +93,25 @@ class MainActivity extends React.Component<Props, States> {
   }
 
   private renderTabs = () => {
+    const tabs = TabbarBuilder([
+      {
+        label: "SFW",
+        content: <AnimeContent name="SFW" data={this.state.sfw} />,
+      },
+      {
+        label: "NSFW",
+        content: <AnimeContent name="NSFW" data={this.state.nsfw} />,
+      },
+      {
+        label: "NEWS",
+        content: <News />,
+      },
+    ]);
+
     if (native.getPref("disableNSFW") === "true") {
-      return TabbarBuilder([
-        {
-          label: "SFW",
-          content: <AnimeContent name="SFW" data={this.state.sfw} />,
-        },
-        {
-          label: "NEWS",
-          content: <News />,
-        },
-      ]);
+      return tools.arrayRemove(tabs, 2);
     } else {
-      return TabbarBuilder([
-        {
-          label: "SFW",
-          content: <AnimeContent name="SFW" data={this.state.sfw} />,
-        },
-        {
-          label: "NSFW",
-          content: <AnimeContent name="NSFW" data={this.state.nsfw} />,
-        },
-        {
-          label: "NEWS",
-          content: <News />,
-        },
-      ]);
+      return tabs;
     }
   };
 
