@@ -1,7 +1,7 @@
 import React from "react";
 import { Toolbar, Page } from "react-onsenui";
 import native from "@Native/index";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 
 class ForbiddenActivity extends React.Component {

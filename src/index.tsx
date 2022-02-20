@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import eruda from "eruda";
-import StyleBuilder from "@Builders/StyleBuilder";
+import { StyleBuilder } from "@Builders";
 import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";

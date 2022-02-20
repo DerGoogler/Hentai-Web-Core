@@ -3,18 +3,14 @@ import pkg from "./../../../package.json";
 import { Page, Toolbar, Tabbar, Fab, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native/index";
 import tools from "@Misc/tools";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
-import TabbarBuilder from "@Builders/TabbarBuilder";
+import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import AnimeContent from "@Components/AnimeContent";
-import ActionSheetBuilder from "@Builders/ActionSheetBuilder";
 import MDIcon from "@Components/MDIcon";
 import News from "@Components/News";
 import { BuildPluginActivity, ChangelogActivity, PluginsActivity, SettingsActivity, LicenseActivity } from "@Views";
 import images from "@DataPacks/images";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
-import ListDialogBuilder from "@Builders/ListDialogBuilder";
-import settings from "@DataPacks/settings";
 
 class MainActivity extends React.Component<Props, States> {
   public constructor(props: any) {

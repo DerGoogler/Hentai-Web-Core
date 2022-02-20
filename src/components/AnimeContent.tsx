@@ -1,4 +1,4 @@
-import PictureBuilder from "@Builders/PictureBuilder";
+import { PictureBuilder } from "@Builders";
 import * as React from "react";
 import { List, SearchInput } from "react-onsenui";
 import ContentBody from "./ContentBody";

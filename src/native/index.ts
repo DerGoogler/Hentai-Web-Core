@@ -449,6 +449,10 @@ class native {
         window.Android.requestStoargePermission();
       }
     },
+
+    requireSDK(sdk: number): boolean {
+      return +Number(window.Android.requireSDK().replace(/\./gm, "")) >= +sdk;
+    },
   };
 
   /**

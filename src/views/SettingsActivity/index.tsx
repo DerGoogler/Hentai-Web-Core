@@ -3,9 +3,8 @@ import { Page, Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
 import settings from "@DataPacks/settings";
 import native from "@Native/index";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import { ToolbarBuilder, ListViewBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
-import SettingsBuilder from "@Builders/ListBuilder";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
 
@@ -32,7 +31,7 @@ class SettingsActivity extends React.Component<Props, States> {
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
         <ContentBody>
           <List>
-            <SettingsBuilder isPlugin={false} pluginName="" data={settings} />
+            <ListViewBuilder isPlugin={false} pluginName="" data={settings} />
           </List>
         </ContentBody>
       </Page>

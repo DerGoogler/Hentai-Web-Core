@@ -1,7 +1,7 @@
 import React from "react";
 import { Page, Toolbar, ToolbarButton } from "react-onsenui";
 import native from "@Native/index";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import { ToolbarBuilder } from "@Builders";
 import AceEditor from "react-ace";
 import MDIcon from "@Components/MDIcon";
 import { Props, States } from "./interface";

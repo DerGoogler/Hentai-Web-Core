@@ -3,11 +3,9 @@ import { List, ListItem, Page, Toolbar } from "react-onsenui";
 import ContentBody from "@Components/ContentBody";
 import MDIcon from "@Components/MDIcon";
 import native from "@Native/index";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import { ToolbarBuilder } from "@Builders";
 import tools from "@Misc/tools";
 import { HighlightedMarkdown } from "../../../components/HighlightMarkdown";
-import Bootloader from "@Bootloader";
-import { PushPageProps } from "@Types/init";
 import { Props, States } from "./interface";
 
 class PluginAboutActivity extends React.Component<Props, States> {

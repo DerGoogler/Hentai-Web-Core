@@ -19,7 +19,7 @@
     "baseUrl": "./src",
     "paths": {
       "@Native/*": ["native/*"],
-      "@Builders/*": ["builders/*"],
+      "@Builders": ["builders/index.ts"],
       "@Components/*": ["components/*"],
       "@Types/*": ["typings/*"],
       "@DataPacks/*": ["dataPacks/*"],

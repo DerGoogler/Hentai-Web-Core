@@ -2,7 +2,7 @@ import ons from "onsenui";
 import React from "react";
 import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native/index";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import { ToolbarBuilder } from "@Builders";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
 

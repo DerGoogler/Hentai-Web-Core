@@ -111,6 +111,11 @@ interface Android {
    * @Native
    */
   getVersion(): string;
+
+  /**
+   * @Native
+   */
+  requireSDK(): string;
 }
 
 export default Android;

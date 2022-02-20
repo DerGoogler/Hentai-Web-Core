@@ -2,7 +2,7 @@ import React from "react";
 import { Page, Toolbar } from "react-onsenui";
 import native from "@Native/index";
 import axios from "axios";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";

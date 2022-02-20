@@ -2,9 +2,8 @@ import * as React from "react";
 import { ListHeader, ListItem, Page, Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
 import native from "@Native/index";
-import ToolbarBuilder from "@Builders/ToolbarBuilder";
+import { ToolbarBuilder, ListViewBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
-import SettingsBuilder from "@Builders/ListBuilder";
 import MDIcon from "@Components/MDIcon";
 import PluginAboutActivity from "../PluginAboutActivity";
 import EditorActivity from "../../EditorActivity";
@@ -93,7 +92,7 @@ class PluginsActivity extends React.Component<Props, States> {
                             return;
                           }
                         })()}
-                        <SettingsBuilder
+                        <ListViewBuilder
                           isPlugin={true}
                           pluginName={item}
                           data={JSON.parse(native.getPref("Plugin.Settings." + item + ".settings"))}
