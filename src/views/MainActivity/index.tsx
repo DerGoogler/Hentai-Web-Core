@@ -139,18 +139,8 @@ class MainActivity extends React.Component<Props, States> {
           // @ts-ignore
           onPreChange={(event: any) => {
             event.preventDefault(); // For newer Onsen UI version
-
             if (event.index != this.tabIndexChecker) {
               native.setPref("tabIndex", event.index);
-            }
-            if (event.index === 0) {
-              native.electron.discordRPC("Viewing SFW Images");
-            } else if (event.index === 1) {
-              native.electron.discordRPC("Viewing NSFW Images");
-            } else if (event.index === 2) {
-              native.electron.discordRPC("Viewing News");
-            } else {
-              return;
             }
           }}
           renderTabs={this.renderTabs}

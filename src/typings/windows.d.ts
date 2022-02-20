@@ -104,10 +104,32 @@ interface Windows {
   notification(title: string, body: string): void;
 
   /**
-   * Gets the userData from app path
-   * @param path
+   * A path to a special directory or file associated with `name`. On failure, an
+   * `Error` is thrown.
+   *
+   * If `app.getPath('logs')` is called without called `app.setAppLogsPath()` being
+   * called first, a default log directory will be created equivalent to calling
+   * `app.setAppLogsPath()` without a `path` parameter.
    */
-  appGetPath(path: "userData"): string | String;
+  appGetPath(
+    path:
+      | "home"
+      | "appData"
+      | "userData"
+      | "cache"
+      | "temp"
+      | "exe"
+      | "module"
+      | "desktop"
+      | "documents"
+      | "downloads"
+      | "music"
+      | "pictures"
+      | "videos"
+      | "recent"
+      | "logs"
+      | "crashDumps"
+  ): string | String;
 
   /**
    * Opens an selectd path

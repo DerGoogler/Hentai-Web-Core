@@ -33,8 +33,8 @@ class InitActivity extends React.Component<Props, States> {
   }
 
   public componentDidMount = () => {
+    native.electron.discordRPC("Viewing images")
     window.addEventListener("load", this.windowLoadPush);
-    console.log(native.isWindows);
   };
 
   public componentDidUpdate() {
