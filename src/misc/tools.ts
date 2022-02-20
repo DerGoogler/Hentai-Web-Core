@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import yaml from "js-yaml";
+import native from "@Native/index";
 
 class tools {
   /**
@@ -99,6 +100,27 @@ class tools {
         callback(data);
       }
     });
+  }
+
+  public static PluginInitial(folder: string) {
+    const getPluginConfig = native.fs.readFile("plugins/" + folder + "/plugin.yaml", {
+      parse: { use: true, mode: "yaml" },
+    });
+
+    if (native.getPref("enableCustomScriptLoading") === "true") {
+      if (native.fs.isFileExist("plugins.yaml")) {
+        if (!native.fs.isFileExist("plugins/" + folder + "/" + getPluginConfig.run)) {
+          console.log("An plugin for " + folder + " was not found!");
+          native.setPref("Plugin.Settings." + folder, "null");
+        } else {
+          native.eval(native.fs.readFile("plugins/" + folder + "/" + getPluginConfig.run), {
+            plugin: {
+              name: folder,
+            },
+          });
+        }
+      }
+    }
   }
 
   public static if(item: { wenn: any; dann: any; fehler: any }) {

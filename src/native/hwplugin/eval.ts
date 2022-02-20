@@ -3,7 +3,6 @@ import saferEval from "safer-eval";
 import tools from "@Misc/tools";
 import native from "..";
 import HWPlugin from ".";
-import { purple } from "@material-ui/core/colors";
 import PluginContext from "@Types/pluginContext";
 
 export default function evil(javascriptString: string, extras: any) {

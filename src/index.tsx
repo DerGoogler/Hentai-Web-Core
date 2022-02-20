@@ -1,7 +1,6 @@
 import ReactDOM from "react-dom";
 import ons from "onsenui";
 import eruda from "eruda";
-import { StyleBuilder } from "@Builders";
 import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
@@ -29,26 +28,7 @@ class Bootloader {
   }
 
   private loadActivity(node: JSX.Element) {
-    let pas,
-      customPlugins = null;
-    if (native.isAndroid || native.isWindows) {
-      if (native.fs.isFileExist("plugins.yaml")) {
-        pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
-        customPlugins = pas.map((item: string) => (
-          <>
-            <StyleBuilder folder={item} />;
-          </>
-        ));
-      }
-    }
-
-    ReactDOM.render(
-      <>
-        {node}
-        {customPlugins}
-      </>,
-      this.mountNode
-    );
+    ReactDOM.render(<>{node}</>, this.mountNode);
   }
 
   private electronInit() {

@@ -37,15 +37,6 @@ const settings: ListInterface[] = [
         selectDefaultValue: "en",
         selectValue: settingsIndex,
       },
-      {
-        key: "enableCustomTheming",
-        icon: "water_drop",
-        style: {
-          display: native.isAndroid || native.isWindows ? "" : "none",
-        },
-        type: "switch",
-        text: "Custom Theming",
-      },
     ],
   },
 
