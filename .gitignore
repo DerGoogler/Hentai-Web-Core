@@ -1,9 +1,13 @@
+# Dist folder
+dist/*
+!dist/index.html
+!dist/src/native
+
+# Others
 test.js
 .cache/
 coverage/
-dist/*
 .vscode/*
-!dist/index.html
 node_modules/
 *.log
 
