@@ -108,7 +108,7 @@ class MainActivity extends React.Component<Props, States> {
       },
     ]);
 
-    if (native.getPref("disableNSFW") === "true") {
+    if (native.getPref("disableNSFW") === "true" || native.isInstagram || native.isFacebook) {
       return tools.arrayRemove(tabs, 2);
     } else {
       return tabs;

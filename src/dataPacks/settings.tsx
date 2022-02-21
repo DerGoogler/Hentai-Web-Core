@@ -1,5 +1,3 @@
-"use strict";
-
 import ons from "onsenui";
 import { ListInterface } from "@Types/ListBuilder";
 import native from "@Native/index";

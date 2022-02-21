@@ -1,6 +1,7 @@
 import config from "../misc/config";
 import yaml from "js-yaml";
 import ons from "onsenui";
+import CryptoJS from "crypto-js";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 import evil from "./hwplugin/eval";
 import {
@@ -239,6 +240,24 @@ class native {
       }
     }
   }
+
+  /**
+   * Shortcut functions to the cipher's object interface.
+   *
+   * @example
+   *
+   *     native.AES.encrypt(text, password);
+   *     native.AES.decrypt(text, password);
+   */
+  public static AES = {
+    encrypt(text: string, password: string): string {
+      return CryptoJS.AES.encrypt(text, password).toString();
+    },
+
+    decrypt(text: string, password: string): string {
+      return CryptoJS.AES.decrypt(text, password).toString(CryptoJS.enc.Utf8);
+    },
+  };
 
   /**
    * Remove an saved key from localstorage or shared prefs
