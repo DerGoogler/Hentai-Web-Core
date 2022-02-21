@@ -35,7 +35,7 @@ const settings: ListInterface[] = [
         selectDefaultValue: "en",
         selectValue: settingsIndex,
         callback: (keepDefaultFuntion: void) => {
-          if (confirm("Do you change the language?")) {
+          if (native.confirm("Do you change the language?")) {
             native.reload();
             keepDefaultFuntion;
           } else {

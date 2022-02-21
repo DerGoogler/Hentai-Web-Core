@@ -47,6 +47,7 @@ import {
  * Native calls for Windows and Android
  */
 class native {
+  // User agents
   private static readonly userAgentAndroid = "HENTAI_WEB_AGENT";
   private static readonly userAgentWindows = "HENTAI_WEB_WINDOWS";
   public static readonly userAgent = window.navigator.userAgent;
@@ -92,7 +93,12 @@ class native {
   public static readonly isMIUI = isMIUI;
   public static readonly isSamsungBrowser = isSamsungBrowser;
 
+  // Pltforms checks
   public static readonly checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
+
+  // Basics
+  public static navigator: Navigator = navigator;
+  public static location: Location = location;
 
   /**
    * Get the Android userAgent
@@ -100,9 +106,9 @@ class native {
    */
   public static userAgentEqualAndroid(state: boolean): boolean {
     if (state) {
-      return window.navigator.userAgent === config.options.userAgent;
+      return this.navigator.userAgent === config.options.userAgent;
     } else {
-      return window.navigator.userAgent != config.options.userAgent;
+      return this.navigator.userAgent != config.options.userAgent;
     }
   }
 
@@ -112,9 +118,9 @@ class native {
    */
   public static userAgentEqualWindows(state: boolean): boolean {
     if (state) {
-      return window.navigator.userAgent === config.options.userAgentWindows;
+      return this.navigator.userAgent === config.options.userAgentWindows;
     } else {
-      return window.navigator.userAgent != config.options.userAgentWindows;
+      return this.navigator.userAgent != config.options.userAgentWindows;
     }
   }
 
@@ -175,6 +181,18 @@ class native {
     } else {
       copy;
     }
+  }
+
+  public static alert(message?: any): void {
+    alert(message);
+  }
+
+  public static confirm(message?: string | undefined): boolean {
+    return confirm(message);
+  }
+
+  public static prompt(message?: string | undefined, _default?: string | undefined): string | null {
+    return prompt(message, _default);
   }
 
   /**
