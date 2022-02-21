@@ -222,6 +222,22 @@ class MainActivity extends React.Component<Props, States> {
                   },
                 },
                 {
+                  text: "Privacy Policy",
+                  type: "",
+                  icon: "policy",
+                  onClick: () => {
+                    native.open("https://hw.dergoogler.com/tos/privacy-policy");
+                  },
+                },
+                {
+                  text: "Terms & Conditions",
+                  type: "",
+                  icon: "gavel",
+                  onClick: () => {
+                    native.open("https://hw.dergoogler.com/tos/terms-conditions");
+                  },
+                },
+                {
                   text: string.cancel,
                   type: "",
                   icon: "close",
