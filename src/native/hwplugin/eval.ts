@@ -23,7 +23,7 @@ export default function evil(javascriptString: string, extras: any) {
       Android: undefined,
       Windows: undefined,
     },
-    initFile(core: Function) {
+    initFile: (core: Function) => {
       if (typeof core === "function") {
         const plugin = new HWPlugin(extras.plugin.name);
         core(plugin);
