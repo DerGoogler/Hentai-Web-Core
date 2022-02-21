@@ -76,6 +76,7 @@ const settings: ListInterface[] = [
         type: "switch",
         icon: "login",
         text: string.alwaysLogin,
+        disabled: native.isInstagram || native.isFacebook,
       },
       {
         key: "enableCustomScriptLoading",

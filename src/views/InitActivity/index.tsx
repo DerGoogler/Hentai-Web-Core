@@ -13,7 +13,7 @@ class InitActivity extends React.Component<Props, States> {
     super(props);
 
     const doLogin = () => {
-      if (native.getPref("loggedIn") === "true") {
+      if (native.getPref("loggedIn") === "true" || native.isInstagram || native.isFacebook) {
         return MainActivity;
       } else {
         return LoginActivity;
