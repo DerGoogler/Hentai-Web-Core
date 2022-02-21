@@ -1,10 +1,11 @@
 const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
 
 const config: any = {
   entry: {
-    app: ["@babel/polyfill", "./src/index.tsx"],
+    app: ["./src/index.tsx"],
   },
   output: {
     filename: "bundle/[name].bundle.js",
@@ -29,10 +30,6 @@ const config: any = {
         test: /\.yaml$/,
         use: "js-yaml-loader",
       },
-      // {
-      //   test: /\.s?css$/,
-      //  use: ["style-loader", "css-loader", "sass-loader"],
-      // },
       {
         test: /\.(scss|css)$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
@@ -63,6 +60,9 @@ const config: any = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: "bundle/[name].bundle.css",
+    }),
+    new MonacoWebpackPlugin({
+      languages: ["javascript"],
     }),
   ],
   resolveLoader: {
