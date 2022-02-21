@@ -26,6 +26,9 @@ const settings: ListInterface[] = [
         icon: "table_chart",
         type: "switch",
         text: string.placeTabberOnBottom,
+        helper: {
+          text: "This settings requires not app reload/start",
+        },
       },
       {
         key: "language",

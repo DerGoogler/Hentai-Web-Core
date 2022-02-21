@@ -9,6 +9,7 @@ interface ListOptions {
   expandable?: boolean;
   tappable?: boolean;
   modifier?: string;
+  helper?: Helper;
   type: "switch" | "select" | "";
   text: string;
   /**
@@ -26,6 +27,11 @@ interface ListOptions {
    * @param {Void} keepDefaultFuntion This will keep the default function
    */
   callback?(e?: any, key?: string | undefined, keepDefaultFuntion?: void): void;
+}
+
+interface Helper {
+  text: string;
+  cancelable?: boolean;
 }
 
 interface SelectValue {

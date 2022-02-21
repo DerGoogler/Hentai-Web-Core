@@ -76,6 +76,40 @@ class tools {
     }
   }
 
+  public static gesture(
+    e: any,
+    eventName:
+      | "drag"
+      | "dragleft"
+      | "dragright"
+      | "dragup"
+      | "dragdown"
+      | "hold"
+      | "release"
+      | "swipe"
+      | "swipeleft"
+      | "swiperight"
+      | "swipeup"
+      | "swipedown"
+      | "tap"
+      | "doubletap"
+      | "touch"
+      | "transform"
+      | "pinch"
+      | "pinchin"
+      | "pinchout"
+      | "rotate",
+    callback: Function
+  ) {
+    tools.ref(e, (element: HTMLElement) => {
+      element.addEventListener(eventName, () => {
+        if (typeof callback === "function") {
+          callback();
+        }
+      });
+    });
+  }
+
   /**
    * Inline IF statement
    * @deprecated Use the normal inline if statement

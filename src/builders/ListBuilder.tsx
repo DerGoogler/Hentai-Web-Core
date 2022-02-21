@@ -5,6 +5,8 @@ import tools from "@Misc/tools";
 import native from "@Native/index";
 import MDIcon from "@Components/MDIcon";
 import HWPlugin from "@Native/hwplugin";
+import Gesture from "@Components/Gesture";
+import ons from "onsenui";
 
 class SettingsBuilder extends React.Component<{
   isPlugin: boolean;
@@ -65,57 +67,69 @@ class SettingsBuilder extends React.Component<{
   public render() {
     const { data } = this.props;
 
-    const settings = data.map((header: ListInterface) => (
+    const list = data.map((header: ListInterface) => (
       <>
         <section id={header.id} className={header.className} style={header.style}>
           <ListTitle>{header.title}</ListTitle>
-          {header.content.map((setting: ListOptions) => (
+          {header.content.map((item: ListOptions) => (
             <>
               <ListItem
-                expandable={tools.typeCheck(setting.expandable, false)}
-                modifier={tools.typeCheck(setting.modifier, "")}
-                tappable={tools.typeCheck(setting.tappable, false)}
-                id={setting.id}
-                style={setting.style}
+                expandable={tools.typeCheck(item.expandable, false)}
+                modifier={tools.typeCheck(item.modifier, "")}
+                tappable={tools.typeCheck(item.tappable, false)}
+                id={item.key + "-ListItem"}
+                style={item.style}
                 onClick={() => {
-                  if (typeof setting.onClick == "function") {
-                    const key = setting.key;
-                    setting.onClick(key);
+                  if (typeof item.onClick == "function") {
+                    const key = item.key;
+                    item.onClick(key);
                   }
                 }}
               >
                 {(() => {
-                  if (setting.icon === null || setting.icon === undefined) {
+                  if (item.icon === null || item.icon === undefined) {
                     return;
                   } else {
                     return (
                       <div className="left">
-                        <MDIcon icon={setting.icon} size="24" isInList={true}></MDIcon>
+                        <MDIcon icon={item.icon} size="24" isInList={true}></MDIcon>
                       </div>
                     );
                   }
                 })()}
-                <div className="center">{setting.text}</div>
+                <Gesture
+                  id={item.key + "-Info"}
+                  event="hold"
+                  callback={() => {
+                    ons.notification.alert({
+                      message: item.helper?.text,
+                      title: "Info",
+                      buttonLabels: ["Ok"],
+                      modifier: native.checkPlatformForBorderStyle,
+                      animation: "default",
+                      primaryButtonIndex: 1,
+                      cancelable: tools.typeCheck(item.helper?.cancelable, true),
+                    });
+                  }}
+                >
+                  <div className="center">{item.text}</div>
+                </Gesture>
                 <div className="right">
                   {(() => {
-                    switch (setting.type) {
+                    switch (item.type) {
                       case "switch":
                         return (
                           <Switch
-                            checked={this.default(
-                              setting.switchDefaultValue,
-                              this.getSettingSwitch(setting.key!),
-                              false
-                            )}
-                            disabled={Boolean(setting.disabled)}
+                            checked={this.default(item.switchDefaultValue, this.getSettingSwitch(item.key!), false)}
+                            disabled={Boolean(item.disabled)}
                             onChange={(e: any) => {
                               /**
                                * This will keep the default funtion
                                */
-                              const keepDefaultFuntion = (): void => this.setSetting(setting.key!, e.target.checked);
-                              if (typeof setting.callback == "function") {
-                                const key = setting.key;
-                                setting.callback(e, key, keepDefaultFuntion());
+                              const keepDefaultFuntion = (): void => this.setSetting(item.key!, e.target.checked);
+                              if (typeof item.callback == "function") {
+                                const key = item.key;
+                                item.callback(e, key, keepDefaultFuntion());
                               } else {
                                 keepDefaultFuntion();
                               }
@@ -126,19 +140,19 @@ class SettingsBuilder extends React.Component<{
                         return (
                           <Select
                             id="choose-sel"
-                            disabled={Boolean(setting.disabled)}
+                            disabled={Boolean(item.disabled)}
                             value={tools.typeCheck(
-                              this.getSettingSelect(setting.key!),
-                              tools.typeCheck(setting.selectDefaultValue, "")
+                              this.getSettingSelect(item.key!),
+                              tools.typeCheck(item.selectDefaultValue, "")
                             )}
                             onChange={(e: any) => {
                               /**
                                * This will keep the default funtion
                                */
-                              const keepDefaultFuntion = () => this.setSetting(setting.key!, e.target.value);
-                              if (typeof setting.callback == "function") {
-                                const key = setting.key;
-                                setting.callback(e, key, keepDefaultFuntion());
+                              const keepDefaultFuntion = () => this.setSetting(item.key!, e.target.value);
+                              if (typeof item.callback == "function") {
+                                const key = item.key;
+                                item.callback(e, key, keepDefaultFuntion());
                               } else {
                                 keepDefaultFuntion();
                               }
@@ -147,7 +161,7 @@ class SettingsBuilder extends React.Component<{
                             <option value="" selected disabled hidden>
                               Choose
                             </option>
-                            {setting.selectValue?.map((select: SelectValue) => (
+                            {item.selectValue?.map((select: SelectValue) => (
                               <>
                                 <option value={select.value} disabled={select.disabled}>
                                   {select.text}
@@ -162,8 +176,8 @@ class SettingsBuilder extends React.Component<{
                   })()}
                 </div>
                 {(() => {
-                  if (setting.expandable) {
-                    return <div className="expandable-content">{setting.expandableContent}</div>;
+                  if (item.expandable) {
+                    return <div className="expandable-content">{item.expandableContent}</div>;
                   } else {
                     return;
                   }
@@ -175,7 +189,7 @@ class SettingsBuilder extends React.Component<{
       </>
     ));
 
-    return settings;
+    return list;
   }
 }
 

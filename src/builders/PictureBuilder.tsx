@@ -8,6 +8,7 @@ import tools from "@Misc/tools";
 import ActionSheetBuilder from "./ActionSheetBuilder";
 import { string } from "@Strings";
 import ListDialogBuilder from "./ListDialogBuilder";
+import Gesture from "@Components/Gesture";
 
 class PictureBuilder extends React.Component<
   {
@@ -20,7 +21,7 @@ class PictureBuilder extends React.Component<
 > {
   private element!: HTMLElement | null;
   private buttonDesign: string = native.getPref("enableDarkmode") === "true" ? "lilaDarkMode" : "lila";
-  private imageError: React.RefObject<HTMLImageElement>;
+  private imageHold: React.RefObject<HTMLImageElement>;
   private imageStyle: React.CSSProperties = {
     width: "100%",
     borderRadius: tools.typeIF(
@@ -40,7 +41,7 @@ class PictureBuilder extends React.Component<
       isContextOpen: false,
       isImageError: false,
     };
-    this.imageError = React.createRef();
+    this.imageHold = React.createRef();
   }
   /**
    * To generate an id that refresh every page reload, to avoid duplicte ids
@@ -108,7 +109,8 @@ class PictureBuilder extends React.Component<
     }
   }
 
-  private handleClick = () => {
+  private handleClick = (e: any) => {
+    // e.preventDefault();
     this.setState({ isContextOpen: true });
   };
 
@@ -200,16 +202,18 @@ class PictureBuilder extends React.Component<
                                 );
                               } else {
                                 return (
-                                  <img
-                                    id={this.getID}
-                                    src={this.images}
-                                    alt={this.getNote}
-                                    onDoubleClick={this.handleClick}
-                                    onError={() => {
-                                      this.setState({ isImageError: true });
-                                    }}
-                                    style={this.imageStyle}
-                                  />
+                                  <Gesture id={this.getID + "-Holder"} event="hold" callback={this.handleClick}>
+                                    <img
+                                      id={this.getID}
+                                      src={this.images}
+                                      alt={this.getNote}
+                                      onDoubleClick={this.handleClick}
+                                      onError={() => {
+                                        this.setState({ isImageError: true });
+                                      }}
+                                      style={this.imageStyle}
+                                    />
+                                  </Gesture>
                                 );
                               }
                             })()}
