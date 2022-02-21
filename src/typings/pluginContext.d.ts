@@ -12,6 +12,7 @@ interface PluginContext {
   readonly window: Window;
   readonly Android: undefined;
   readonly Windows: undefined;
+  initFile(callback: Function): void;
   readonly eval: undefined;
   readonly document: typeof document;
   require(path: any): void;
