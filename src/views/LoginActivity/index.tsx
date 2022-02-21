@@ -85,7 +85,7 @@ class LoginActivity extends React.Component<Props, States> {
                 onChange={this.handleUsernameChange}
                 modifier="underbar"
                 float
-                placeholder={native.isAndroid ? string.MANUFACTURER : "appCodeName"}
+                placeholder={native.isAndroid ? string.MANUFACTURER : native.isWindows ? "type" : "appCodeName"}
               />
             </p>
             <p>

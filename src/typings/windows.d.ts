@@ -169,6 +169,10 @@ interface Windows {
   newWindow(url: string, options: BrowserWindowConstructorOptions): void;
 
   getVersion(): string;
+
+  getType(): string;
+
+  getPlatform(): string;
 }
 
 export default Windows;

@@ -124,33 +124,23 @@ class native {
     }
   }
 
-  /**
-   * Get mobile phones build serial (Is pn every phone different)
-   * @returns {String}
-   */
   public static get getBuildMANUFACTURER(): string {
-    const appCodeName = window.navigator.appCodeName.toUpperCase();
     if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMANUFACTURER().toUpperCase();
     } else if (this.userAgent === this.userAgentWindows) {
-      return appCodeName;
+      return window.Windows.getType().toUpperCase();
     } else {
-      return appCodeName;
+      return window.navigator.appCodeName.toUpperCase();
     }
   }
 
-  /**
-   * Get mobile phones emei number
-   * @returns {String}
-   */
   public static get getMODEL(): string {
-    const platform = window.navigator.platform.toUpperCase();
     if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMODEL().toUpperCase();
     } else if (this.userAgent === this.userAgentWindows) {
-      return platform;
+      return window.Windows.getPlatform().toUpperCase();
     } else {
-      return platform;
+      return window.navigator.platform.toUpperCase();
     }
   }
 
