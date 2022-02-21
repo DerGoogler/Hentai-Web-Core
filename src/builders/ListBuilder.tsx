@@ -79,7 +79,8 @@ class SettingsBuilder extends React.Component<{
                 style={setting.style}
                 onClick={() => {
                   if (typeof setting.onClick == "function") {
-                    setting.onClick();
+                    const key = setting.key;
+                    setting.onClick(key);
                   }
                 }}
               >
@@ -108,9 +109,13 @@ class SettingsBuilder extends React.Component<{
                             )}
                             disabled={Boolean(setting.disabled)}
                             onChange={(e: any) => {
-                              const keepDefaultFuntion = () => this.setSetting(setting.key!, e.target.checked);
+                              /**
+                               * This will keep the default funtion
+                               */
+                              const keepDefaultFuntion = (): void => this.setSetting(setting.key!, e.target.checked);
                               if (typeof setting.callback == "function") {
-                                setting.callback(e, setting.key, keepDefaultFuntion());
+                                const key = setting.key;
+                                setting.callback(e, key, keepDefaultFuntion());
                               } else {
                                 keepDefaultFuntion();
                               }
@@ -127,9 +132,13 @@ class SettingsBuilder extends React.Component<{
                               tools.typeCheck(setting.selectDefaultValue, "")
                             )}
                             onChange={(e: any) => {
+                              /**
+                               * This will keep the default funtion
+                               */
                               const keepDefaultFuntion = () => this.setSetting(setting.key!, e.target.value);
                               if (typeof setting.callback == "function") {
-                                setting.callback(e, setting.key, keepDefaultFuntion());
+                                const key = setting.key;
+                                setting.callback(e, key, keepDefaultFuntion());
                               } else {
                                 keepDefaultFuntion();
                               }

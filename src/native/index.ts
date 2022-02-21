@@ -153,13 +153,12 @@ class native {
    * @returns
    */
   public static reload(): void {
-    const reload = window.location.reload();
     if (this.userAgent === this.userAgentAndroid) {
       window.Android.reload();
     } else if (this.userAgent === this.userAgentWindows) {
       window.Windows.reload();
     } else {
-      return reload;
+      window.location.reload();
     }
   }
 
@@ -289,8 +288,9 @@ class native {
   };
 
   /**
-   * Opens an link with native Android method
+   * Open an link specified by the platform
    * @param link
+   * @param target
    */
   public static open(link: string, target?: string): void {
     if (this.userAgent === this.userAgentAndroid) {
@@ -475,7 +475,7 @@ class native {
   };
 
   /**
-   * This class is for the file access on both platforms, Android and Windows.
+   * The fs class enables interacting with the file system on both platforms, Windows and Android
    */
   public static readonly fs = {
     userAgentAndroid: "HENTAI_WEB_AGENT",

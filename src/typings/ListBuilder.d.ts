@@ -11,12 +11,21 @@ interface ListOptions {
   modifier?: string;
   type: "switch" | "select" | "";
   text: string;
+  /**
+   * Performs an onClick event to the current list item
+   */
   onClick?: Function;
   selectValue?: SelectValue[];
-  icon?: /*Icon*/ string;
+  icon?: string;
   selectDefaultValue?: string;
   switchDefaultValue?: boolean;
-  callback?: Function;
+  /**
+   *
+   * @param {Event} e Event
+   * @param {String} key Returns the key
+   * @param {Void} keepDefaultFuntion This will keep the default function
+   */
+  callback?(e?: any, key?: string | undefined, keepDefaultFuntion?: void): void;
 }
 
 interface SelectValue {

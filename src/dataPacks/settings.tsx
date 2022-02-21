@@ -34,6 +34,14 @@ const settings: ListInterface[] = [
         text: string.language,
         selectDefaultValue: "en",
         selectValue: settingsIndex,
+        callback: (keepDefaultFuntion: void) => {
+          if (confirm("Do you change the language?")) {
+            native.reload();
+            keepDefaultFuntion;
+          } else {
+            return;
+          }
+        },
       },
     ],
   },
@@ -225,9 +233,9 @@ const settings: ListInterface[] = [
         type: "switch",
         icon: "pan_tool",
         text: string.enableAlwaysOnTop,
-        callback: (keepDefaultFuntion: any) => {
+        callback: (keepDefaultFuntion: void) => {
           native.electron.notification("Restart", "Please restart the application");
-          keepDefaultFuntion();
+          keepDefaultFuntion;
         },
       },
       {
