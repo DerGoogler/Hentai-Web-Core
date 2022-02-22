@@ -24,7 +24,7 @@ class Gesture extends React.Component<
       | "pinchin"
       | "pinchout"
       | "rotate";
-    callback: Function;
+    callback(...props: any): void;
   },
   {}
 > {
@@ -37,15 +37,7 @@ class Gesture extends React.Component<
     const { callback, event } = this.props;
 
     tools.ref(this.gerstureID, (reff: HTMLDivElement) => {
-      reff.addEventListener(
-        event,
-        () => {
-          if (typeof callback === "function") {
-            callback();
-          }
-        },
-        false
-      );
+      reff.addEventListener(event, callback);
     });
   }
 
