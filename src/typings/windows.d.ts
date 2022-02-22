@@ -173,6 +173,8 @@ interface Windows {
   getType(): string;
 
   getPlatform(): string;
+
+  dialog(props: { title: string; message: string }): void;
 }
 
 export default Windows;

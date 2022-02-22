@@ -92,7 +92,7 @@ class Bootloader {
       if (native.isInstagram || native.isFacebook) {
         native.setPref("disableNSFW", "true");
       }
-      console.log(native.navigator.userAgent);
+      ons.notification.toast('Toast')
 
       this.loadActivity(<InitActivity />);
     }

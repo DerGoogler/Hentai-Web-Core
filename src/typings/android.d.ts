@@ -116,6 +116,11 @@ interface Android {
    * @Native
    */
   requireSDK(): string;
+
+  /**
+   * @Native
+   */
+  dialog(title: string, message: string): void;
 }
 
 export default Android;

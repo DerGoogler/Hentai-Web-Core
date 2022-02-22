@@ -2,7 +2,7 @@ import tools from "@Misc/tools";
 import { ListInterface } from "@Types/ListBuilder";
 import * as React from "react";
 import { Dialog, List } from "react-onsenui";
-import SettingsBuilder from "./ListBuilder";
+import ListViewBuilder from "./ListViewBuilder";
 
 interface Options {
   isOpen: boolean;
@@ -34,7 +34,7 @@ class ListDialogBuilder extends React.Component<{ data: ListInterface[]; options
         isOpen={options.isOpen}
       >
         <List style={{ height: "587px", overflowY: "auto" }}>
-          <SettingsBuilder isPlugin={false} pluginName="" data={data} />
+          <ListViewBuilder isPlugin={false} pluginName="" data={data} />
         </List>
       </Dialog>
     );

@@ -21,7 +21,6 @@ class PictureBuilder extends React.Component<
 > {
   private element!: HTMLElement | null;
   private buttonDesign: string = native.getPref("enableDarkmode") === "true" ? "lilaDarkMode" : "lila";
-  private imageHold: React.RefObject<HTMLImageElement>;
   private imageStyle: React.CSSProperties = {
     width: "100%",
     borderRadius: tools.typeIF(
@@ -41,7 +40,6 @@ class PictureBuilder extends React.Component<
       isContextOpen: false,
       isImageError: false,
     };
-    this.imageHold = React.createRef();
   }
   /**
    * To generate an id that refresh every page reload, to avoid duplicte ids
@@ -110,7 +108,6 @@ class PictureBuilder extends React.Component<
   }
 
   private handleClick = (e: any) => {
-    // e.preventDefault();
     this.setState({ isContextOpen: true });
   };
 

@@ -8,7 +8,7 @@ import HWPlugin from "@Native/hwplugin";
 import Gesture from "@Components/Gesture";
 import ons from "onsenui";
 
-class SettingsBuilder extends React.Component<{
+class ListViewBuilder extends React.Component<{
   isPlugin: boolean;
   pluginName: string;
   data: ListInterface[];
@@ -193,4 +193,4 @@ class SettingsBuilder extends React.Component<{
   }
 }
 
-export default SettingsBuilder;
+export default ListViewBuilder;

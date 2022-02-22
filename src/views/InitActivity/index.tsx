@@ -30,7 +30,10 @@ class InitActivity extends React.Component<Props, States> {
       },
     ]);
 
-    this.state = { routeConfig, currentPage: "main" };
+    this.state = {
+      routeConfig,
+      currentPage: "main",
+    };
   }
 
   public componentDidMount = () => {
@@ -46,6 +49,9 @@ class InitActivity extends React.Component<Props, States> {
     }
 
     window.addEventListener("load", this.windowLoadPush);
+    if (native.isMobile) {
+      window.addEventListener("contextmenu", this.removeContextMenuMobile);
+    }
   };
 
   public componentDidUpdate() {
@@ -54,6 +60,13 @@ class InitActivity extends React.Component<Props, States> {
 
   public componentWillUnmount = () => {
     window.removeEventListener("load", this.windowLoadPush);
+    if (native.isMobile) {
+      window.removeEventListener("contextmenu", this.removeContextMenuMobile);
+    }
+  };
+
+  private removeContextMenuMobile = (e: any) => {
+    e.preventDefault();
   };
 
   private windowLoadPush = () => {

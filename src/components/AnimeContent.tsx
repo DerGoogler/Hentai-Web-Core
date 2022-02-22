@@ -10,6 +10,13 @@ class AnimeContent extends React.Component<{
   data: any[];
   name: string;
 }> {
+  private list: React.RefObject<HTMLElement>;
+
+  public constructor(props: any) {
+    super(props);
+    this.list = React.createRef();
+  }
+
   private makeUUID(length: number) {
     var result = "";
     var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -22,7 +29,7 @@ class AnimeContent extends React.Component<{
 
   private uuid: string = this.makeUUID(26);
 
-  private filter(e: any) {
+  private filter = (e: any) => {
     // Declare variables
     var input, filter, ul, li, a, i, txtValue;
     filter = e.target.value.toUpperCase();
@@ -43,7 +50,7 @@ class AnimeContent extends React.Component<{
         li[i].style.display = "none";
       }
     }
-  }
+  };
 
   public render = () => {
     const listItems = this.props.data.map((item: any[]) => (

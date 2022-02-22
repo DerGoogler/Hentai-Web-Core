@@ -158,6 +158,24 @@ class native {
     }
   }
 
+  public static dialog(props: { title: string; message: string }) {
+    if (this.isAndroid) {
+      window.Android.dialog(props.title, props.message);
+    } else if (this.isWindows) {
+      window.Windows.dialog(props);
+    } else {
+      ons.notification.alert({
+        message: props.message,
+        title: props.title,
+        buttonLabels: ["Ok"],
+        modifier: native.checkPlatformForBorderStyle,
+        animation: "default",
+        primaryButtonIndex: 1,
+        cancelable: false,
+      });
+    }
+  }
+
   /**
    * Copy an string to clipboard on Android
    * @param content
