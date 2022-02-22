@@ -106,8 +106,15 @@ class EditorActivity extends React.Component<Props, States> {
       {
         label: "native",
         kind: monaco.languages.CompletionItemKind.Function,
-        documentation: "The Lodash library exported as Node.js modules.",
+        documentation: "",
         insertText: "native",
+        range: range,
+      },
+      {
+        label: "ignore",
+        kind: monaco.languages.CompletionItemKind.Function,
+        documentation: "",
+        insertText: "// @ts-ignore",
         range: range,
       },
     ];
