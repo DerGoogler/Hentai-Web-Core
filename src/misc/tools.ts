@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
 import yaml from "js-yaml";
 import native from "@Native/index";
 

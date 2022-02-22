@@ -92,10 +92,8 @@ const settings: ListInterface[] = [
       {
         key: "enableCustomScriptLoading",
         icon: "description",
-        style: {
-          display: native.isAndroid || native.isWindows ? "" : "none",
-        },
         type: "switch",
+        disabled: native.isInstagram || native.isFacebook,
         expandable: true,
         expandableContent: "Danger by using this!",
         text: "Custom Scripting",
@@ -136,6 +134,14 @@ const settings: ListInterface[] = [
         icon: "save",
         type: "switch",
         text: string.saveLastUsedTab,
+      },
+      {
+        key: "enablePluginTestting",
+        icon: "code",
+        type: "switch",
+        style: { display: native.isAndroid || native.isWindows ? "none" : "" },
+        text: "Enable plugin testing",
+        disabled: native.isInstagram || native.isFacebook,
       },
       {
         key: "disableNSFW",

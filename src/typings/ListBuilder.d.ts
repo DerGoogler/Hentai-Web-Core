@@ -8,6 +8,7 @@ interface ListOptions {
   expandableContent?: JSX.Element | HTMLElement | string | undefined;
   expandable?: boolean;
   tappable?: boolean;
+  unTyped?: any;
   modifier?: string;
   helper?: Helper;
   type: "switch" | "select" | "";
@@ -43,6 +44,7 @@ interface SelectValue {
 interface ListInterface {
   title: string;
   id?: string;
+  unTyped?: any;
   style?: React.CSSProperties;
   className?: string;
   content: ListOptions[];

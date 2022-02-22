@@ -7,7 +7,14 @@ import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import AnimeContent from "@Components/AnimeContent";
 import MDIcon from "@Components/MDIcon";
 import News from "@Components/News";
-import { BuildPluginActivity, ChangelogActivity, PluginsActivity, SettingsActivity, LicenseActivity } from "@Views";
+import {
+  BuildPluginActivity,
+  ChangelogActivity,
+  PluginsActivity,
+  SettingsActivity,
+  LicenseActivity,
+  EditorActivity,
+} from "@Views";
 import images from "@DataPacks/images";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
@@ -190,11 +197,46 @@ class MainActivity extends React.Component<Props, States> {
                   text: "Plugins",
                   type: "",
                   icon: "extension",
-                  style: { display: native.getPref("enableCustomScriptLoading") === "true" ? "" : "none" },
+                  style: {
+                    display:
+                      (native.getPref("enablePluginTestting") && native.getPref("enableCustomScriptLoading")) === "true"
+                        ? ""
+                        : "none",
+                  },
                   onClick: () => {
                     this.props.pushPage({
                       activity: PluginsActivity,
                       key: "plugins",
+                    });
+                    this.handleCancel();
+                  },
+                },
+                {
+                  text: "Playground",
+                  type: "",
+                  icon: "code",
+                  style: {
+                    display:
+                      native.isAndroid || native.isWindows
+                        ? "none"
+                        : (native.getPref("enablePluginTestting") && native.getPref("enableCustomScriptLoading")) ===
+                          "true"
+                        ? ""
+                        : "none",
+                  },
+                  onClick: () => {
+                    const getPlayground = native.getPref("playground");
+                    this.props.pushPage({
+                      activity: EditorActivity,
+                      key: "plugin-play-ground",
+                      extras: {
+                        pluginName: "playground",
+                        fileName: "index.js",
+                        value:
+                          getPlayground === "false"
+                            ? 'initFile((plugin) => {\r\n  console.log("Hello, world!")\r\n});\r\n'
+                            : getPlayground,
+                      },
                     });
                     this.handleCancel();
                   },

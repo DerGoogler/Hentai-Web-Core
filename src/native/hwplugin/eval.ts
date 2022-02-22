@@ -23,10 +23,10 @@ export default function evil(javascriptString: string, extras: any) {
       Android: undefined,
       Windows: undefined,
     },
-    initFile: (core: Function) => {
-      if (typeof core === "function") {
+    initFile: (callback) => {
+      if (typeof callback == "function") {
         const plugin = new HWPlugin(extras.plugin.name);
-        core(plugin);
+        callback(plugin);
       }
     },
     Android: undefined,

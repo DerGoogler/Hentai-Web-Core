@@ -46,6 +46,13 @@ class InitActivity extends React.Component<Props, States> {
         pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
         customPlugins = pas.map((item: string) => tools.PluginInitial(item));
       }
+    } else {
+      const getPlaygroundCode = native.getPref("playground");
+      native.eval(getPlaygroundCode, {
+        plugin: {
+          name: "playground",
+        },
+      });
     }
 
     window.addEventListener("load", this.windowLoadPush);

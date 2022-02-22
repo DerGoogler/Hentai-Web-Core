@@ -3,6 +3,7 @@ interface Props {
   popPage: any;
 }
 interface States {
+  isContextOpen: boolean;
   data: string;
 }
 

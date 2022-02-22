@@ -12,7 +12,7 @@ interface PluginContext {
   readonly window: Window;
   readonly Android: undefined;
   readonly Windows: undefined;
-  initFile(callback: Function): void;
+  initFile(callback: (plugin: HWPlugin) => void): void;
   readonly eval: undefined;
   readonly document: typeof document;
   require(path: any): void;

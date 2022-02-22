@@ -3,7 +3,7 @@
     "outDir": "./dist/",
     "typeRoots": ["src/typings/global.d.ts"],
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
