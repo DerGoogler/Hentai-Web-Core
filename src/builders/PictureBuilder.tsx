@@ -199,7 +199,7 @@ class PictureBuilder extends React.Component<
                                 );
                               } else {
                                 return (
-                                  <Gesture id={this.getID + "-Holder"} event="hold" callback={this.handleClick}>
+                                  <Gesture event="hold" callback={this.handleClick}>
                                     <img
                                       id={this.getID}
                                       src={this.images}

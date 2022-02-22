@@ -3,7 +3,7 @@ import saferEval from "safer-eval";
 import tools from "@Misc/tools";
 import native from "..";
 import HWPlugin from ".";
-import PluginContext from "@Types/pluginContext";
+import { PluginContext, PluginOptions } from "@Types/pluginContext";
 
 export default function evil(javascriptString: string, extras: any) {
   "use strict";
@@ -23,10 +23,15 @@ export default function evil(javascriptString: string, extras: any) {
       Android: undefined,
       Windows: undefined,
     },
-    initFile: (callback) => {
-      if (typeof callback == "function") {
-        const plugin = new HWPlugin(extras.plugin.name);
-        callback(plugin);
+    initFile: (callback: (plugin: HWPlugin) => void, options?: PluginOptions) => {
+      const requireVersion = options?.requireVersion;
+      const plugin = new HWPlugin(extras.plugin.name);
+      if (native.version.require(requireVersion)) {
+        if (typeof callback == "function") {
+          callback(plugin);
+        }
+      } else {
+        console.log(`This plugin requires the latest version of ${requireVersion}`);
       }
     },
     Android: undefined,

@@ -41,7 +41,11 @@ class tools {
    *
    * Use
    * ```ts
+   * // Id's
    * tools.ref("element", (element: HTMLElement) => { element.style.display = "none" })
+   *
+   * // Refs
+   * tools.ref(this.myRef, (reff: HTMLElement) => { reff.style.display = "none" })
    * ```
    */
   public static getElementById(id: string, callback: Function) {
@@ -59,7 +63,7 @@ class tools {
    * @param id
    * @param callback HTMLElement
    */
-  public static ref(id: any | React.RefObject<HTMLElement>, callback: Function) {
+  public static ref(id: any | React.RefObject<any>, callback: Function) {
     if (typeof id == "string") {
       var element: HTMLElement | null;
       if ((element = document.getElementById(id))) {
@@ -68,10 +72,13 @@ class tools {
         }
       }
     } else {
-      var ref: React.RefObject<HTMLElement>;
+      var ref: React.RefObject<any>;
       if ((ref = id)) {
-        if (typeof callback == "function") {
-          callback(ref);
+        if (ref && ref.current) {
+          if (typeof callback == "function") {
+            const reff: typeof ref = ref.current;
+            callback(reff);
+          }
         }
       }
     }

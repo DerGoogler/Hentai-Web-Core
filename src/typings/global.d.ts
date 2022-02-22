@@ -9,12 +9,12 @@ declare global {
     /**
      * Declare the custom window event (`Android`) for the WebView
      */
-    Android: Android;
+    readonly Android: Android;
 
     /**
      * Declare the custom window event (`Windows`) for the WebView
      */
-    Windows: Windows;
+    readonly Windows: Windows;
 
     /**
      *

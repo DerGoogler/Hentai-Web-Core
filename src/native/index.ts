@@ -1,6 +1,7 @@
 import config from "../misc/config";
 import yaml from "js-yaml";
 import ons from "onsenui";
+import pkg from "./../../package.json";
 import CryptoJS from "crypto-js";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 import evil from "./hwplugin/eval";
@@ -305,11 +306,15 @@ class native {
       } else if (native.isWindows) {
         return window.Windows.getVersion();
       } else {
-        return "";
+        return pkg.version;
       }
     },
-    require(version: number): boolean {
-      return +Number(this.get.replace(/\./gm, "")) >= +version;
+
+    /**
+     * Requires an selected version above {version}
+     */
+    require(version: number | undefined): boolean {
+      return +Number(this.get.replace(/\./gm, "")) >= +!version;
     },
   };
 

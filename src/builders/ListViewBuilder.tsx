@@ -98,7 +98,6 @@ class ListViewBuilder extends React.Component<{
                   }
                 })()}
                 <Gesture
-                  id={item.key + "-Info"}
                   event="hold"
                   callback={() => {
                     ons.notification.alert({

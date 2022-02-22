@@ -3,7 +3,6 @@ import * as React from "react";
 
 class Gesture extends React.Component<
   {
-    id: string;
     event:
       | "drag"
       | "dragleft"
@@ -29,19 +28,30 @@ class Gesture extends React.Component<
   },
   {}
 > {
+  private gerstureID: React.RefObject<HTMLDivElement>;
+  constructor(props: any) {
+    super(props);
+    this.gerstureID = React.createRef();
+  }
   public componentDidMount() {
-    const { id, callback, event } = this.props;
+    const { callback, event } = this.props;
 
-    tools.gesture(id, event, () => {
-      if (typeof callback === "function") {
-        callback();
-      }
+    tools.ref(this.gerstureID, (reff: HTMLDivElement) => {
+      reff.addEventListener(
+        event,
+        () => {
+          if (typeof callback === "function") {
+            callback();
+          }
+        },
+        false
+      );
     });
   }
 
   public render() {
-    const { id, children } = this.props;
-    return <div id={id}>{children}</div>;
+    const { children } = this.props;
+    return <div ref={this.gerstureID}>{children}</div>;
   }
 }
 

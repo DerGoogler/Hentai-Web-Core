@@ -2,8 +2,16 @@ const d = `
 /**
  * Initialize the plugin
  * @param callback \`plugin\` to get the plugin name
+ * @param options 
  */
-declare function initFile(callback: (plugin: HWPlugin) => void): void;
+declare function initFile(callback: (plugin: HWPlugin) => void, options?: PluginOptions): void;
+
+/**
+ * Initialize the plugin
+ * @param callback \`plugin\` to get the plugin name
+ */
+declare function initFile(callback: (plugin: HWPlugin) => void, options: PluginOptions): void;
+
 /**
  * Requires an file and will directly executed
  * @param path 
@@ -11,6 +19,13 @@ declare function initFile(callback: (plugin: HWPlugin) => void): void;
 declare function require(path: any): void;
 
 declare const __dirname: string;
+
+interface PluginOptions {
+    /**
+     * Requires an selected version above {version}
+     */
+    requireVersion: number | undefined;
+}
 
 interface ListOptions {
     key?: string;

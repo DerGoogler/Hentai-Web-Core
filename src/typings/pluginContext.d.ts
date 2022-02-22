@@ -12,11 +12,15 @@ interface PluginContext {
   readonly window: Window;
   readonly Android: undefined;
   readonly Windows: undefined;
-  initFile(callback: (plugin: HWPlugin) => void): void;
+  initFile(callback: (plugin: HWPlugin) => void, options: PluginOptions): void;
   readonly eval: undefined;
   readonly document: typeof document;
   require(path: any): void;
   readonly console: Console;
+}
+
+interface PluginOptions {
+  requireVersion: number | undefined;
 }
 
 interface Console {
@@ -72,4 +76,4 @@ interface Window {
   readonly Windows: undefined;
 }
 
-export default PluginContext;
+export { PluginContext, PluginOptions };
