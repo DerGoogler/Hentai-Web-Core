@@ -5,7 +5,6 @@ import axios from "axios";
 import native from "@Native/index";
 import { Icon } from "react-onsenui";
 import tools from "@Misc/tools";
-import ActionSheetBuilder from "./ActionSheetBuilder";
 import { string } from "@Strings";
 import ListDialogBuilder from "./ListDialogBuilder";
 import Gesture from "@Components/Gesture";
