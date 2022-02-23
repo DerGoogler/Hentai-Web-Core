@@ -80,7 +80,7 @@ const config = {
     symlinks: false,
     cacheWithContext: false,
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
-    extensions: [".js", ".ts", ".jsx", ".tsx", ".d.ts"],
+    extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
       "@Builders": path.resolve(__dirname, "src/builders/index.ts"),
       "@Components": path.resolve(__dirname, "src/components"),
@@ -92,10 +92,6 @@ const config = {
       "@Styles": path.resolve(__dirname, "src/styles"),
       "@Strings": path.resolve(__dirname, "src/localization/index.ts"),
       "@Views": path.resolve(__dirname, "src/views/index.ts"),
-    },
-    fallback: {
-      path: require.resolve("path-browserify"),
-      fs: false,
     },
   },
 };
