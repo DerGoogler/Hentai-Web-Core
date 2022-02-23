@@ -9,8 +9,8 @@ import { Props, States } from "./interface";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { Ace } from "ace-builds";
 import ons from "onsenui";
-import d from "./Plugin.declaration";
 import editorTheme from "./editorTheme";
+import tools from "@Misc/tools";
 
 class EditorActivity extends React.Component<Props, States> {
   public constructor(props: any) {
@@ -18,8 +18,19 @@ class EditorActivity extends React.Component<Props, States> {
     this.state = {
       isContextOpen: false,
       data: this.props.extras.value,
+      types: "",
     };
   }
+
+  public componentDidMount = () => {
+    tools.getMisc(
+      "editor.d.ts",
+      (data: any) => {
+        this.setState({ types: data });
+      },
+      { json: true }
+    );
+  };
 
   private renderToolbar = () => {
     return (
@@ -121,6 +132,7 @@ class EditorActivity extends React.Component<Props, States> {
   };
 
   private editorDidMount = (editor: monacoEditor.editor.IStandaloneCodeEditor, monaco: Monaco) => {
+    const { types } = this.state;
     monaco.editor.defineTheme("editorTheme", editorTheme);
     monaco.editor.setTheme("editorTheme");
 
@@ -137,12 +149,12 @@ class EditorActivity extends React.Component<Props, States> {
       allowNonTsExtensions: true,
     });
 
-    const libUri = "ts:filename/facthgs.d.ts";
-    monaco.languages.typescript.javascriptDefaults.addExtraLib(d, libUri);
+    const libUri = "ts:filename/editor.d.ts";
+    monaco.languages.typescript.javascriptDefaults.addExtraLib(types, libUri);
     // When resolving definitions and references, the editor will try to use created models.
     // Creating a model for the library allows "peek definition/references" commands to work with the library.
     if (monaco.editor.getModels().length === 0) {
-      monaco.editor.createModel(d, "typescript", monaco.Uri.parse(libUri));
+      monaco.editor.createModel(types, "typescript", monaco.Uri.parse(libUri));
     }
 
     monaco.languages.registerCompletionItemProvider("javascript", {

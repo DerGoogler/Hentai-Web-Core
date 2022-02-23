@@ -1,26 +1,27 @@
-import React, { useRef, useEffect } from "react";
+import * as React from "react";
 import Markdown from "markdown-to-jsx";
+import tools from "@Misc/tools";
 import hljs from "highlight.js";
 // import "highlight.js/styles/atom-one-dark.css";
 
-interface HighlightedMarkdownProps {
-  children: string;
-}
+class HighlightedMarkdown extends React.Component<{ children: string }> {
+  rootRef: React.RefObject<HTMLDivElement>;
+  public constructor(props: any) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
 
-export function HighlightedMarkdown({ children }: HighlightedMarkdownProps) {
-  const rootRef = useRef<HTMLDivElement>();
-
-  useEffect(() => {
-    // @ts-ignore
-    rootRef.current.querySelectorAll("pre code").forEach((block: any) => {
-      hljs.highlightElement(block);
+  public componentDidMount() {
+    tools.ref(this.rootRef, (reff: HTMLDivElement) => {
+      reff.querySelectorAll("pre code").forEach((block: any) => {
+        hljs.highlightBlock(block);
+      });
     });
-  }, [children]);
+  }
 
-  return (
-    // @ts-ignore
-    <div ref={rootRef}>
-      <Markdown>{children}</Markdown>
-    </div>
-  );
+  public render() {
+    return <Markdown ref={this.rootRef}>{this.props.children}</Markdown>;
+  }
 }
+
+export { HighlightedMarkdown };

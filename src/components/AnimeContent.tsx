@@ -3,18 +3,18 @@ import * as React from "react";
 import { List, SearchInput } from "react-onsenui";
 import ContentBody from "./ContentBody";
 import native from "@Native/index";
-import tools from "@Misc/tools";
 import { string } from "@Strings";
 
-class AnimeContent extends React.Component<{
-  data: any[];
-  name: string;
-}> {
-  private list: React.RefObject<HTMLElement>;
-
+class AnimeContent extends React.Component<
+  {
+    data: any[];
+    name: string;
+  },
+  { search: string }
+> {
   public constructor(props: any) {
     super(props);
-    this.list = React.createRef();
+    this.state = { search: "" };
   }
 
   private makeUUID(length: number) {
@@ -30,31 +30,12 @@ class AnimeContent extends React.Component<{
   private uuid: string = this.makeUUID(26);
 
   private filter = (e: any) => {
-    // Declare variables
-    var input, filter, ul, li, a, i, txtValue;
-    filter = e.target.value.toUpperCase();
-    ul = document.getElementById(`picture-list-${this.uuid}`);
-    // @ts-ignore
-    li = ul.getElementsByTagName("card");
-
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("name")[0];
-      // @ts-ignore
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        // @ts-ignore
-        li[i].style.display = "";
-      } else {
-        // @ts-ignore
-        li[i].style.display = "none";
-      }
-    }
+    this.setState({ search: e.target.value.toLowerCase() });
   };
 
   public render = () => {
     const listItems = this.props.data.map((item: any[]) => (
-      <PictureBuilder key={item.toString()} source={item} note={item} />
+      <PictureBuilder searchState={this.state.search} key={item.toString()} source={item} note={item} />
     ));
 
     return (
@@ -83,11 +64,10 @@ class AnimeContent extends React.Component<{
               // @ts-ignore
               placeholder={`${string.search} ${this.props.name}`}
               style={{
-                display: tools.typeIF(native.getPref("hideSearchbar"), "none", ""),
+                display: native.getPref("hideSearchbar") === "true" ? "none" : "",
                 borderRadius: "8px",
-                backgroundColor: tools.typeIF(native.getPref("enableDarkmode"), "#1F1F1F", "transparent"),
+                backgroundColor: native.getPref("enableDarkmode") === "true" ? "#1F1F1F" : "transparent",
               }}
-              modifier="custom"
               onChange={this.filter}
             />
           </div>

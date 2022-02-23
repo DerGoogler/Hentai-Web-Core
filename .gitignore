@@ -2,6 +2,7 @@
 dist/*
 !dist/index.html
 !dist/src/native/*
+!dist/misc
 
 # Others
 test.js

@@ -32,7 +32,7 @@ const config = {
       },
       {
         test: /\.(scss|css)$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/,
@@ -42,6 +42,13 @@ const config = {
   },
   optimization: {
     splitChunks: {
+      chunks: "async",
+      minSize: 20000,
+      minRemainingSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
       cacheGroups: {
         vendor: {
           test: /node_modules/,
@@ -70,7 +77,8 @@ const config = {
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
   },
   resolve: {
-    fallback: { constants: false },
+    symlinks: false,
+    cacheWithContext: false,
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
     extensions: [".js", ".ts", ".jsx", ".tsx", ".d.ts"],
     alias: {

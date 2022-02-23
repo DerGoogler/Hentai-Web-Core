@@ -5,6 +5,7 @@ interface Props {
 interface States {
   isContextOpen: boolean;
   data: string;
+  types: string;
 }
 
 export { Props, States };

@@ -1,20 +1,13 @@
 import * as React from "react";
 import pkg from "./../../../package.json";
-import { Page, Toolbar, Tabbar, Fab, ToolbarButton, Icon } from "react-onsenui";
+import { Page, Toolbar, Tabbar, ToolbarButton } from "react-onsenui";
 import native from "@Native/index";
 import tools from "@Misc/tools";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import AnimeContent from "@Components/AnimeContent";
 import MDIcon from "@Components/MDIcon";
 import News from "@Components/News";
-import {
-  BuildPluginActivity,
-  ChangelogActivity,
-  PluginsActivity,
-  SettingsActivity,
-  LicenseActivity,
-  EditorActivity,
-} from "@Views";
+import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity } from "@Views";
 import images from "@DataPacks/images";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
@@ -187,8 +180,12 @@ class MainActivity extends React.Component<Props, States> {
                   icon: "article",
                   onClick: () => {
                     this.props.pushPage({
-                      activity: LicenseActivity,
+                      activity: TextFetchActivity,
                       key: "licenses",
+                      textFetch: {
+                        title: string.licenses,
+                        url: "https://cdn.dergoogler.com/others/hentai-web/vendor.bundle.js.LICENSE.txt",
+                      },
                     });
                     this.handleCancel();
                   },
@@ -248,8 +245,12 @@ class MainActivity extends React.Component<Props, States> {
                   style: { display: native.isAndroid || native.isWindows ? "" : "none" },
                   onClick: () => {
                     this.props.pushPage({
-                      activity: BuildPluginActivity,
+                      activity: TextFetchActivity,
                       key: "makehwplugin",
+                      textFetch: {
+                        title: "Make HWPlugin",
+                        url: "https://raw.githubusercontent.com/Hentai-Web/hentai-web.github.io/master/docs/make-hwplugin.md",
+                      },
                     });
                     this.handleCancel();
                   },

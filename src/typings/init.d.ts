@@ -2,8 +2,14 @@ interface PushPageProps {
   activity: JSX.Element | any;
   key: any;
   extras?: any;
+  textFetch?: TextFetch;
   pluginAbout?: PluginAbout;
   changelog?: Changelog;
+}
+
+interface TextFetch {
+  title: string;
+  url: string;
 }
 
 interface Changelog {
@@ -30,4 +36,4 @@ interface PluginAbout {
   name: string;
 }
 
-export { PushPageProps, Changelog };
+export { PushPageProps, Changelog, TextFetch };
