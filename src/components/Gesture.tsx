@@ -36,8 +36,8 @@ class Gesture extends React.Component<
   public componentDidMount() {
     const { callback, event } = this.props;
 
-    tools.ref(this.gerstureID, (reff: HTMLDivElement) => {
-      reff.addEventListener(event, callback);
+    tools.ref(this.gerstureID, (ref: HTMLDivElement) => {
+      ref.addEventListener(event, callback);
     });
   }
 

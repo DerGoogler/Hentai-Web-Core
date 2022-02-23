@@ -59,11 +59,20 @@ class tools {
   }
 
   /**
-   * Simplfied
    * @param id
    * @param callback HTMLElement
+   *
+   * @description
+   * Usage
+   * ```ts
+   * // Id's
+   * tools.ref("element", (element: HTMLElement) => { element.style.display = "none" })
+   *
+   * // Refs
+   * tools.ref(this.myRef, (ref: HTMLElement) => { ref.style.display = "none" })
+   * ```
    */
-  public static ref(id: any | React.RefObject<any>, callback: Function) {
+  public static ref(id: string | React.RefObject<any>, callback: (...props: any) => void) {
     if (typeof id == "string") {
       var element: HTMLElement | null;
       if ((element = document.getElementById(id))) {
@@ -72,12 +81,12 @@ class tools {
         }
       }
     } else {
-      var ref: React.RefObject<any>;
-      if ((ref = id)) {
-        if (ref && ref.current) {
+      var reff: React.RefObject<any>;
+      if ((reff = id)) {
+        if (reff && reff.current) {
           if (typeof callback == "function") {
-            const reff: typeof ref = ref.current;
-            callback(reff);
+            const ref: typeof reff = reff.current;
+            callback(ref);
           }
         }
       }

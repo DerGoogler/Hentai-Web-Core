@@ -17,18 +17,6 @@ class AnimeContent extends React.Component<
     this.state = { search: "" };
   }
 
-  private makeUUID(length: number) {
-    var result = "";
-    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
-  }
-
-  private uuid: string = this.makeUUID(26);
-
   private filter = (e: any) => {
     this.setState({ search: e.target.value.toLowerCase() });
   };
@@ -71,7 +59,7 @@ class AnimeContent extends React.Component<
               onChange={this.filter}
             />
           </div>
-          <List id={`picture-list-${this.uuid}`}>{listItems}</List>
+          <List>{listItems}</List>
         </div>
       </ContentBody>
     );

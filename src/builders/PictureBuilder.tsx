@@ -55,21 +55,21 @@ class PictureBuilder extends React.Component<
 
   public componentDidUpdate() {
     const { searchState } = this.props;
-    tools.ref(this.cardName, (reff: HTMLHeadingElement) => {
+    tools.ref(this.cardName, (ref: HTMLHeadingElement) => {
       if (searchState != "") {
-        const search = reff.textContent || reff.innerText;
+        const search = ref.textContent || ref.innerText;
         if (search.toLowerCase().indexOf(searchState) > -1) {
-          tools.ref(this.searchedCard, (reff: HTMLDivElement) => {
-            reff.style.display = "";
+          tools.ref(this.searchedCard, (ref: HTMLDivElement) => {
+            ref.style.display = "";
           });
         } else {
-          tools.ref(this.searchedCard, (reff: HTMLDivElement) => {
-            reff.style.display = "none";
+          tools.ref(this.searchedCard, (ref: HTMLDivElement) => {
+            ref.style.display = "none";
           });
         }
       } else {
-        tools.ref(this.searchedCard, (reff: HTMLDivElement) => {
-          reff.style.display = "";
+        tools.ref(this.searchedCard, (ref: HTMLDivElement) => {
+          ref.style.display = "";
         });
       }
     });

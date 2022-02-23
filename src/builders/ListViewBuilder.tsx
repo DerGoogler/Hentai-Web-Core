@@ -74,7 +74,6 @@ class ListViewBuilder extends React.Component<{
           {header.content.map((item: ListOptions) => (
             <>
               <ListItem
-                expandable={tools.typeCheck(item.expandable, false)}
                 modifier={tools.typeCheck(item.modifier, "")}
                 tappable={tools.typeCheck(item.tappable, false)}
                 id={item.key + "-ListItem"}
@@ -174,13 +173,6 @@ class ListViewBuilder extends React.Component<{
                     }
                   })()}
                 </div>
-                {(() => {
-                  if (item.expandable) {
-                    return <div className="expandable-content">{item.expandableContent}</div>;
-                  } else {
-                    return;
-                  }
-                })()}
               </ListItem>
             </>
           ))}

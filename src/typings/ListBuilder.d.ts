@@ -5,18 +5,29 @@ interface ListOptions {
   disabled?: boolean | any;
   id?: string;
   style?: React.CSSProperties;
+  /**
+   * @deprecated This element slow down the rendering
+   */
   expandableContent?: JSX.Element | HTMLElement | string | undefined;
+  /**
+   * @deprecated This element slow down the rendering
+   */
   expandable?: boolean;
   tappable?: boolean;
   unTyped?: any;
   modifier?: string;
+  /**
+   * Makes an dialog
+   */
   helper?: Helper;
   type: "switch" | "select" | "";
   text: string;
   /**
    * Performs an onClick event to the current list item
+   * @param key Get the key from the current list item
+   * @param e Event
    */
-  onClick?: Function;
+  onClick?(key: string | undefined, e?: MouseEvent): void;
   selectValue?: SelectValue[];
   icon?: string;
   selectDefaultValue?: string;
@@ -31,7 +42,13 @@ interface ListOptions {
 }
 
 interface Helper {
+  /**
+   * Hold the current list item text to open the dialog
+   */
   text: string;
+  /**
+   * @default true
+   */
   cancelable?: boolean;
 }
 

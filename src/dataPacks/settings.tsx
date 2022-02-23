@@ -94,8 +94,6 @@ const settings: ListInterface[] = [
         icon: "description",
         type: "switch",
         disabled: native.isInstagram || native.isFacebook,
-        expandable: true,
-        expandableContent: "Danger by using this!",
         text: "Custom Scripting",
       },
       {
@@ -366,8 +364,6 @@ const settings: ListInterface[] = [
         type: "switch",
         icon: "discord",
         text: "Disable Discord RPC",
-        expandable: true,
-        expandableContent: "You need to relaunch whole app!",
       },
       {
         key: "electron.rpcLogo",

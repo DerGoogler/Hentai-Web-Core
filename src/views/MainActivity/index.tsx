@@ -34,8 +34,6 @@ class MainActivity extends React.Component<Props, States> {
           element.style.display = "none";
         });
       }
-
-      native.electron.discordRPC("Viewing SFW Images");
     }
 
     tools.ref("menu-click", (e: HTMLElement) => {

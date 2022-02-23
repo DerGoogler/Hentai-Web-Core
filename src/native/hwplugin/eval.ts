@@ -3,7 +3,6 @@ import saferEval from "safer-eval";
 import tools from "@Misc/tools";
 import native from "..";
 import HWPlugin from ".";
-import Babel from "@babel/standalone";
 import { PluginContext, PluginOptions } from "@Types/pluginContext";
 
 export default function evil(javascriptString: string, extras: any) {
