@@ -27,6 +27,17 @@ class AnimeContent extends React.Component<
     this.searchBar = React.createRef();
   }
 
+  /*
+  public componentDidMount() {
+    tools.ref(this.searchBar, (ref: SearchInput) => {
+      ref.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.keyCode === 13) {
+          console.log("Enter")
+        }
+      });
+    })
+  } */
+
   private filter = (e: any) => {
     this.setState({ search: e.target.value.toLowerCase() });
   };

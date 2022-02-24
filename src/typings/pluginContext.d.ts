@@ -1,3 +1,4 @@
+import ipc from "@Misc/ipc";
 import tools from "@Misc/tools";
 import HWPlugin from "@Native/hwplugin";
 import native from "@Native/index";
@@ -7,6 +8,7 @@ interface PluginContext {
   readonly native: typeof native;
   readonly HWPlugin: typeof HWPlugin;
   readonly tools: typeof tools;
+  readonly ipc: typeof ipc;
   readonly ons: typeof ons;
   readonly __dirname: string;
   readonly window: Window;

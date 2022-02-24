@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 const config = {
   entry: {
@@ -58,6 +59,8 @@ const config = {
         },
       },
     },
+    minimizer: [new CssMinimizerPlugin()],
+    minimize: true,
   },
   performance: {
     hints: false,

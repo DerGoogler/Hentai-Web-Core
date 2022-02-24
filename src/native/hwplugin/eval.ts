@@ -4,6 +4,7 @@ import tools from "@Misc/tools";
 import native from "..";
 import HWPlugin from ".";
 import { PluginContext, PluginOptions } from "@Types/pluginContext";
+import ipc from "@Misc/ipc";
 
 export default function evil(javascriptString: string, extras: any) {
   "use strict";
@@ -17,6 +18,7 @@ export default function evil(javascriptString: string, extras: any) {
     native: native,
     HWPlugin: HWPlugin,
     tools: tools,
+    ipc: ipc,
     ons: ons,
     __dirname: `${native.getPref("electron.hardDevice").toUpperCase()}:\\hentai-web\\plugins\\${extras.plugin.name}`,
     window: {
@@ -59,46 +61,22 @@ export default function evil(javascriptString: string, extras: any) {
     console: {
       log(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
-        console.log(
-          `%c${pluginName}%c=>%c ${message}`,
-          consoleColor.purple,
-          consoleColor.lightPurple,
-          "",
-          ...optionalParams
-        );
+        console.log(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
       },
 
       info(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
-        console.info(
-          `%c${pluginName}%c=>%c ${message}`,
-          consoleColor.purple,
-          consoleColor.lightPurple,
-          "",
-          ...optionalParams
-        );
+        console.info(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
       },
 
       warn(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
-        console.warn(
-          `%c${pluginName}%c=>%c ${message}`,
-          consoleColor.purple,
-          consoleColor.lightPurple,
-          "",
-          ...optionalParams
-        );
+        console.warn(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
       },
 
       error(message?: any, ...optionalParams: any[]): void {
         let pluginName = extras.plugin.name;
-        console.error(
-          `%c${pluginName}%c=>%c ${message}`,
-          consoleColor.purple,
-          consoleColor.lightPurple,
-          "",
-          ...optionalParams
-        );
+        console.error(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
       },
     },
   };
