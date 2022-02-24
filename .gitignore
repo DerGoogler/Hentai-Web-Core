@@ -1,8 +1,8 @@
 # Dist folder
 dist/*
 !dist/index.html
-!dist/src/native/*
 !dist/misc
+!dist/src
 
 # Others
 test.js

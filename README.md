@@ -24,7 +24,6 @@ The app includes some features :)
 - Option to keep the screen on
 - Option to inspect the app with an console
 - Option to login with an fingerprint
-- Option to use custom themes (Need to make self or download)
 - Custom scripting
 
 ## Windows
@@ -32,7 +31,6 @@ The app includes some features :)
 - Option to open the app path
 - Option to enable DevTools
 - Option to Resize the window to different phone sizes
-- Option to use custom themes (Need to make self or download)
 - Custom scripting
 
 ## Global (All Platforms)
@@ -42,7 +40,6 @@ The app includes some features :)
 - Option to enable always login
 - Option to change the cards design
 - Option to enable dark mode
-- Option to enable iOS design (don't use it with dark mode, because it isn't supported)
 - Option to hide the search bars/inputs
 
 # Screenshots

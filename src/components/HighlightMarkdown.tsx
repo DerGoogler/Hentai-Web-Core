@@ -14,7 +14,7 @@ class HighlightedMarkdown extends React.Component<{ children: string }> {
   public componentDidMount() {
     tools.ref(this.rootRef, (ref: HTMLDivElement) => {
       ref.querySelectorAll("pre code").forEach((block: any) => {
-        hljs.highlightBlock(block);
+        hljs.highlightElement(block);
       });
     });
   }

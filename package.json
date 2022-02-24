@@ -30,6 +30,7 @@
   "scripts": {
     "build-dev": " webpack --mode development",
     "build-prod": "webpack --mode production",
+    "make-types": "npx -p typescript tsc src/**/*.ts --declaration --outDir dist/types",
     "start": "webpack-dev-server"
   },
   "dependencies": {

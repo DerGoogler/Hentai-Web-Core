@@ -50,7 +50,7 @@ interface Android {
   /**
    * @Native
    */
-  setStatusbarColor(color: string): void;
+  setStatusbarColor(color: `${string}`): void;
 
   /**
    * @Native
