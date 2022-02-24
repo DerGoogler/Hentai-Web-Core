@@ -1,7 +1,7 @@
 import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
 
 const editorTheme: monacoEditor.editor.IStandaloneThemeData = {
-  inherit: false,
+  inherit: true,
   base: "vs-dark",
   colors: {
     "activityBar.activeBorder": "#f78166",

@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Card, Button, Badge } from "react-bootstrap";
-import { Card as Kard } from "react-onsenui";
+import { Card } from "react-bootstrap";
+import { Button, Card as Kard } from "react-onsenui";
 import axios from "axios";
 import native from "@Native/index";
 import { Icon } from "react-onsenui";
@@ -9,6 +9,7 @@ import { string } from "@Strings";
 import ListDialogBuilder from "./ListDialogBuilder";
 import Gesture from "@Components/Gesture";
 import Logger from "@Misc/Logger";
+import MDIcon from "@Components/MDIcon";
 
 class PictureBuilder extends React.Component<
   {
@@ -124,10 +125,10 @@ class PictureBuilder extends React.Component<
       const data =
         native.isAndroid || native.isWindows
           ? native.fs.readFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", {
-              parse: { use: true, mode: "json" },
-            })
+            parse: { use: true, mode: "json" },
+          })
           : // @ts-ignore
-            JSON.parse(native.getPref(image.replace(/\s/g, "").toLowerCase() + ".json"));
+          JSON.parse(native.getPref(image.replace(/\s/g, "").toLowerCase() + ".json"));
       return data[Math.floor(Math.random() * data.length)];
     } catch (error) {
       return "error";
@@ -164,26 +165,38 @@ class PictureBuilder extends React.Component<
                       }}
                     >
                       <Card.Header style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}>
-                        <h4
+                        <div
                           style={{
+                            textAlign: "center",
+                            display: "inline-flex",
                             width: "100%",
-                            display: "flex",
-                            justifyContent: "left",
-                            alignItems: "center",
+                            justifyContent: "center",
                           }}
-                          ref={this.cardName}
                         >
-                          {this.getNote}
-                        </h4>
-                        <Button
-                          style={{
-                            display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
-                          }}
-                          onClick={this.handleClick}
-                          variant={this.buttonDesign}
-                        >
-                          <Icon icon="md-more" />
-                        </Button>
+                          <h4
+                            style={{
+                              width: "100%",
+                              display: "flex",
+                              justifyContent: "left",
+                              alignItems: "center",
+                            }}
+                            ref={this.cardName}
+                          >
+                            {this.getNote}
+                          </h4>
+                          <Button
+                            onClick={this.handleClick}
+                            style={{
+                              textAlign: "center",
+                              display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
+                              justifyContent: "center",
+                              borderRadius: "8px",
+                            }}
+                          >
+                            <MDIcon icon="more_horiz" size="18" ignoreDarkmode={true} />
+                          </Button>
+                        </div>
+
                       </Card.Header>
                       <Card.Body
                         style={{

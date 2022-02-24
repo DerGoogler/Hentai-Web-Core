@@ -77,7 +77,6 @@ class AnimeContent extends React.Component<
               onChange={this.filter}
             />
             <Button
-              disabled
               onClick={this.triggerSearch}
               style={{
                 textAlign: "center",
