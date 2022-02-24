@@ -93,31 +93,7 @@ class tools {
     }
   }
 
-  public static gesture(
-    e: any,
-    eventName:
-      | "drag"
-      | "dragleft"
-      | "dragright"
-      | "dragup"
-      | "dragdown"
-      | "hold"
-      | "release"
-      | "swipe"
-      | "swipeleft"
-      | "swiperight"
-      | "swipeup"
-      | "swipedown"
-      | "tap"
-      | "doubletap"
-      | "touch"
-      | "transform"
-      | "pinch"
-      | "pinchin"
-      | "pinchout"
-      | "rotate",
-    callback: Function
-  ) {
+  public static gesture(e: any, eventName: "drag" | "dragleft" | "dragright" | "dragup" | "dragdown" | "hold" | "release" | "swipe" | "swipeleft" | "swiperight" | "swipeup" | "swipedown" | "tap" | "doubletap" | "touch" | "transform" | "pinch" | "pinchin" | "pinchout" | "rotate", callback: Function) {
     tools.ref(e, (element: HTMLElement) => {
       element.addEventListener(eventName, () => {
         if (typeof callback === "function") {
@@ -167,10 +143,7 @@ class tools {
       bottom: boundsTop + element.clientHeight,
     };
 
-    return (
-      (bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom) ||
-      (bounds.top <= viewport.bottom && bounds.top >= viewport.top)
-    );
+    return (bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom) || (bounds.top <= viewport.bottom && bounds.top >= viewport.top);
   }
 
   public static PluginInitial(folder: string) {

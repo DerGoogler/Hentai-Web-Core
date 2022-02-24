@@ -137,7 +137,6 @@ class MainActivity extends React.Component<Props, States> {
     return (
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
         <Tabbar
-          // @ts-ignore
           swipeable={tools.stringToBoolean(native.getPref("enableSwipeBetweenTabs"))}
           position={native.getPref("enableBottomTabbar") === "true" ? "bottom" : "top"}
           index={this.tabIndexChecker()}
