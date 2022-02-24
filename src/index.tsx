@@ -18,9 +18,10 @@ import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
+import AppRoot from "@Components/AppRoot";
 
 class Bootloader {
-  private mountNode: any = document.querySelector("app");
+  private mountNode: any = document.querySelector("app-root");
 
   private loadConsole() {
     if (native.getPref("erudaEnabled") === "true") {
@@ -94,7 +95,8 @@ class Bootloader {
       if (native.isInstagram || native.isFacebook) {
         native.setPref("disableNSFW", "true");
       }
-      ons.notification.toast("Toast");
+      
+      customElements.define("app-root", AppRoot);
 
       this.loadActivity(<InitActivity />);
     }

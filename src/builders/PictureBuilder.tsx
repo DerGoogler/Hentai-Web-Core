@@ -8,6 +8,7 @@ import tools from "@Misc/tools";
 import { string } from "@Strings";
 import ListDialogBuilder from "./ListDialogBuilder";
 import Gesture from "@Components/Gesture";
+import Logger from "@Misc/Logger";
 
 class PictureBuilder extends React.Component<
   {
@@ -103,7 +104,7 @@ class PictureBuilder extends React.Component<
               const data = res.data;
               native.fs.writeFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
             } catch (error) {
-              console.log(error);
+              Logger.error(error);
             }
           });
       } else {
@@ -116,7 +117,7 @@ class PictureBuilder extends React.Component<
               const data = res.data;
               native.setPref(image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
             } catch (error) {
-              console.log(error);
+              Logger.error(error);
             }
           });
       }

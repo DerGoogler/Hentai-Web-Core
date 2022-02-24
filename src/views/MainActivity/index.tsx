@@ -242,14 +242,7 @@ class MainActivity extends React.Component<Props, States> {
                   icon: "code",
                   style: { display: native.isAndroid || native.isWindows ? "" : "none" },
                   onClick: () => {
-                    this.props.pushPage({
-                      activity: TextFetchActivity,
-                      key: "makehwplugin",
-                      textFetch: {
-                        title: "Make HWPlugin",
-                        url: "https://raw.githubusercontent.com/Hentai-Web/hentai-web.github.io/master/docs/make-hwplugin.md",
-                      },
-                    });
+                    native.open("https://docs.dergoogler.com/HWPlugin");
                     this.handleCancel();
                   },
                 },

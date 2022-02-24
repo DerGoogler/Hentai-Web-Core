@@ -1,9 +1,12 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "declarationMap": false,
     "outDir": "./dist/",
     "typeRoots": ["src/typings/global.d.ts"],
     "sourceMap": true,
-    "declaration": true,
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
@@ -14,7 +17,6 @@
     "target": "es6",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "allowJs": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {

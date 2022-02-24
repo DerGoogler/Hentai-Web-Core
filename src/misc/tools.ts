@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import * as monacoEditor from "monaco-editor/esm/vs/editor/editor.api";
 import yaml from "js-yaml";
 import native from "@Native/index";
+import Logger from "./Logger";
 
 class tools {
   /**
@@ -181,7 +181,7 @@ class tools {
     if (native.getPref("enableCustomScriptLoading") === "true") {
       if (native.fs.isFileExist("plugins.yaml")) {
         if (!native.fs.isFileExist("plugins/" + folder + "/" + getPluginConfig.run)) {
-          console.log("An plugin for " + folder + " was not found!");
+          Logger.error(`An plugin for ${folder} was not found!`);
           native.setPref("Plugin.Settings." + folder, "null");
         } else {
           native.eval(native.fs.readFile("plugins/" + folder + "/" + getPluginConfig.run), {

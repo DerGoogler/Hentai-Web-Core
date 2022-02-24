@@ -2,6 +2,10 @@ import * as React from "react";
 import Markdown from "markdown-to-jsx";
 import tools from "@Misc/tools";
 import hljs from "highlight.js";
+import Video from "./Video";
+import Center from "./Center";
+import DiscordWidget from "./DiscordWidget";
+import Font from "./Font";
 // import "highlight.js/styles/atom-one-dark.css";
 
 class HighlightedMarkdown extends React.Component<{ children: string }> {
@@ -22,7 +26,26 @@ class HighlightedMarkdown extends React.Component<{ children: string }> {
   public render() {
     return (
       <div ref={this.rootRef}>
-        <Markdown>{this.props.children}</Markdown>
+        <Markdown
+          options={{
+            overrides: {
+              video: {
+                component: Video,
+              },
+              center: {
+                component: Center,
+              },
+              font: {
+                component: Font,
+              },
+              discordwidget: {
+                component: DiscordWidget,
+              },
+            },
+          }}
+        >
+          {this.props.children}
+        </Markdown>
       </div>
     );
   }
