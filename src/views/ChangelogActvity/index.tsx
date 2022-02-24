@@ -35,6 +35,7 @@ class ChangelogActivity extends React.Component<Props, States> {
           >
             <HighlightedMarkdown>{this.props.changelog.changes}</HighlightedMarkdown>
             <Button
+              style={{ borderRadius: "8px" }}
               modifier="large"
               onClick={() => {
                 if (native.isAndroid) {

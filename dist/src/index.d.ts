@@ -1,7 +1,7 @@
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/theme-nord_dark";
-import "onsenui/css/onsenui.css";
+import "onsenui/css/onsenui-core.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
