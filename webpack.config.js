@@ -80,6 +80,9 @@ const config = {
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
   },
   resolve: {
+    fallback: {
+      vm: require.resolve("vm-browserify"),
+    },
     symlinks: false,
     cacheWithContext: false,
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
