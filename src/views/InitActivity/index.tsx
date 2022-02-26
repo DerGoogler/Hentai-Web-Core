@@ -30,7 +30,10 @@ class InitActivity extends React.Component<Props, States> {
       },
     ]);
 
-    this.state = { routeConfig, currentPage: "main" };
+    this.state = {
+      routeConfig,
+      currentPage: "main",
+    };
   }
 
   public componentDidMount = () => {
@@ -43,9 +46,19 @@ class InitActivity extends React.Component<Props, States> {
         pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
         customPlugins = pas.map((item: string) => tools.PluginInitial(item));
       }
+    } else {
+      const getPlaygroundCode = native.getPref("playground");
+      native.eval(getPlaygroundCode, {
+        plugin: {
+          name: "playground",
+        },
+      });
     }
 
     window.addEventListener("load", this.windowLoadPush);
+    if (native.isMobile) {
+      window.addEventListener("contextmenu", this.removeContextMenuMobile);
+    }
   };
 
   public componentDidUpdate() {
@@ -54,6 +67,13 @@ class InitActivity extends React.Component<Props, States> {
 
   public componentWillUnmount = () => {
     window.removeEventListener("load", this.windowLoadPush);
+    if (native.isMobile) {
+      window.removeEventListener("contextmenu", this.removeContextMenuMobile);
+    }
+  };
+
+  private removeContextMenuMobile = (e: any) => {
+    e.preventDefault();
   };
 
   private windowLoadPush = () => {
@@ -86,6 +106,7 @@ class InitActivity extends React.Component<Props, States> {
       props: {
         key: props.key,
         extras: props.extras,
+        textFetch: props.textFetch,
         pluginAbout: props.pluginAbout,
         changelog: props.changelog,
         popPage: () => this.popPage(),
@@ -138,7 +159,7 @@ class InitActivity extends React.Component<Props, States> {
     return <route.component {...props} />;
   };
 
-  public renderToolbar() {
+  private renderToolbar() {
     return (
       <Toolbar>
         <div className="left">

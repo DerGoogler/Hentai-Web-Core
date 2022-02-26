@@ -1,3 +1,4 @@
+import ipc from "@Misc/ipc";
 import tools from "@Misc/tools";
 import HWPlugin from "@Native/hwplugin";
 import native from "@Native/index";
@@ -7,15 +8,21 @@ interface PluginContext {
   readonly native: typeof native;
   readonly HWPlugin: typeof HWPlugin;
   readonly tools: typeof tools;
+  readonly ipc: typeof ipc;
   readonly ons: typeof ons;
   readonly __dirname: string;
   readonly window: Window;
   readonly Android: undefined;
   readonly Windows: undefined;
+  initFile(callback: (plugin: HWPlugin) => void, options: PluginOptions): void;
   readonly eval: undefined;
   readonly document: typeof document;
   require(path: any): void;
   readonly console: Console;
+}
+
+interface PluginOptions {
+  requireVersion: number | undefined;
 }
 
 interface Console {
@@ -71,4 +78,4 @@ interface Window {
   readonly Windows: undefined;
 }
 
-export default PluginContext;
+export { PluginContext, PluginOptions };

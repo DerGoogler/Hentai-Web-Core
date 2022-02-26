@@ -26,6 +26,9 @@ const settings: ListInterface[] = [
         icon: "table_chart",
         type: "switch",
         text: string.placeTabberOnBottom,
+        helper: {
+          text: "This settings requires not app reload/start",
+        },
       },
       {
         key: "language",
@@ -35,7 +38,7 @@ const settings: ListInterface[] = [
         selectDefaultValue: "en",
         selectValue: settingsIndex,
         callback: (keepDefaultFuntion: void) => {
-          if (confirm("Do you change the language?")) {
+          if (native.confirm("Do you change the language?")) {
             native.reload();
             keepDefaultFuntion;
           } else {
@@ -89,12 +92,8 @@ const settings: ListInterface[] = [
       {
         key: "enableCustomScriptLoading",
         icon: "description",
-        style: {
-          display: native.isAndroid || native.isWindows ? "" : "none",
-        },
         type: "switch",
-        expandable: true,
-        expandableContent: "Danger by using this!",
+        disabled: native.isInstagram || native.isFacebook,
         text: "Custom Scripting",
       },
       {
@@ -133,6 +132,14 @@ const settings: ListInterface[] = [
         icon: "save",
         type: "switch",
         text: string.saveLastUsedTab,
+      },
+      {
+        key: "enablePluginTestting",
+        icon: "code",
+        type: "switch",
+        style: { display: native.isAndroid || native.isWindows ? "none" : "" },
+        text: "Enable plugin testing",
+        disabled: native.isInstagram || native.isFacebook,
       },
       {
         key: "disableNSFW",
@@ -357,8 +364,6 @@ const settings: ListInterface[] = [
         type: "switch",
         icon: "discord",
         text: "Disable Discord RPC",
-        expandable: true,
-        expandableContent: "You need to relaunch whole app!",
       },
       {
         key: "electron.rpcLogo",

@@ -1,26 +1,54 @@
-import React, { useRef, useEffect } from "react";
+import * as React from "react";
 import Markdown from "markdown-to-jsx";
+import tools from "@Misc/tools";
 import hljs from "highlight.js";
+import Video from "./Video";
+import Center from "./Center";
+import DiscordWidget from "./DiscordWidget";
+import Font from "./Font";
 // import "highlight.js/styles/atom-one-dark.css";
 
-interface HighlightedMarkdownProps {
-  children: string;
-}
+class HighlightedMarkdown extends React.Component<{ children: string }> {
+  rootRef: React.RefObject<HTMLDivElement>;
+  public constructor(props: any) {
+    super(props);
+    this.rootRef = React.createRef();
+  }
 
-export function HighlightedMarkdown({ children }: HighlightedMarkdownProps) {
-  const rootRef = useRef<HTMLDivElement>();
-
-  useEffect(() => {
-    // @ts-ignore
-    rootRef.current.querySelectorAll("pre code").forEach((block: any) => {
-      hljs.highlightElement(block);
+  public componentDidMount() {
+    tools.ref(this.rootRef, (ref: HTMLDivElement) => {
+      ref.querySelectorAll("pre code").forEach((block: any) => {
+        hljs.highlightElement(block);
+      });
     });
-  }, [children]);
+  }
 
-  return (
-    // @ts-ignore
-    <div ref={rootRef}>
-      <Markdown>{children}</Markdown>
-    </div>
-  );
+  public render() {
+    return (
+      <div ref={this.rootRef}>
+        <Markdown
+          options={{
+            overrides: {
+              video: {
+                component: Video,
+              },
+              center: {
+                component: Center,
+              },
+              font: {
+                component: Font,
+              },
+              discordwidget: {
+                component: DiscordWidget,
+              },
+            },
+          }}
+        >
+          {this.props.children}
+        </Markdown>
+      </div>
+    );
+  }
 }
+
+export { HighlightedMarkdown };

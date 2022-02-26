@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import yaml from "js-yaml";
 import native from "@Native/index";
+import Logger from "./Logger";
 
 class tools {
   /**
@@ -40,7 +41,11 @@ class tools {
    *
    * Use
    * ```ts
+   * // Id's
    * tools.ref("element", (element: HTMLElement) => { element.style.display = "none" })
+   *
+   * // Refs
+   * tools.ref(this.myRef, (reff: HTMLElement) => { reff.style.display = "none" })
    * ```
    */
   public static getElementById(id: string, callback: Function) {
@@ -54,11 +59,20 @@ class tools {
   }
 
   /**
-   * Simplfied
    * @param id
    * @param callback HTMLElement
+   *
+   * @description
+   * Usage
+   * ```ts
+   * // Id's
+   * tools.ref("element", (element: HTMLElement) => { element.style.display = "none" })
+   *
+   * // Refs
+   * tools.ref(this.myRef, (ref: HTMLElement) => { ref.style.display = "none" })
+   * ```
    */
-  public static ref(id: any | React.RefObject<HTMLElement>, callback: Function) {
+  public static ref(id: string | React.RefObject<any>, callback: (...props: any) => void) {
     if (typeof id == "string") {
       var element: HTMLElement | null;
       if ((element = document.getElementById(id))) {
@@ -67,13 +81,26 @@ class tools {
         }
       }
     } else {
-      var ref: React.RefObject<HTMLElement>;
-      if ((ref = id)) {
-        if (typeof callback == "function") {
-          callback(ref);
+      var reff: React.RefObject<any>;
+      if ((reff = id)) {
+        if (reff && reff.current) {
+          if (typeof callback == "function") {
+            const ref: typeof reff = reff.current;
+            callback(ref);
+          }
         }
       }
     }
+  }
+
+  public static gesture(e: any, eventName: "drag" | "dragleft" | "dragright" | "dragup" | "dragdown" | "hold" | "release" | "swipe" | "swipeleft" | "swiperight" | "swipeup" | "swipedown" | "tap" | "doubletap" | "touch" | "transform" | "pinch" | "pinchin" | "pinchout" | "rotate", callback: Function) {
+    tools.ref(e, (element: HTMLElement) => {
+      element.addEventListener(eventName, () => {
+        if (typeof callback === "function") {
+          callback();
+        }
+      });
+    });
   }
 
   /**
@@ -102,6 +129,23 @@ class tools {
     });
   }
 
+  public static inViewport(element: any) {
+    const scroll = window.scrollY || window.pageYOffset;
+    const boundsTop = element.getBoundingClientRect().top + scroll;
+
+    const viewport = {
+      top: scroll,
+      bottom: scroll + window.innerHeight,
+    };
+
+    const bounds = {
+      top: boundsTop,
+      bottom: boundsTop + element.clientHeight,
+    };
+
+    return (bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom) || (bounds.top <= viewport.bottom && bounds.top >= viewport.top);
+  }
+
   public static PluginInitial(folder: string) {
     const getPluginConfig = native.fs.readFile("plugins/" + folder + "/plugin.yaml", {
       parse: { use: true, mode: "yaml" },
@@ -110,7 +154,7 @@ class tools {
     if (native.getPref("enableCustomScriptLoading") === "true") {
       if (native.fs.isFileExist("plugins.yaml")) {
         if (!native.fs.isFileExist("plugins/" + folder + "/" + getPluginConfig.run)) {
-          console.log("An plugin for " + folder + " was not found!");
+          Logger.error(`An plugin for ${folder} was not found!`);
           native.setPref("Plugin.Settings." + folder, "null");
         } else {
           native.eval(native.fs.readFile("plugins/" + folder + "/" + getPluginConfig.run), {

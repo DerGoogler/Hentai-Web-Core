@@ -12,13 +12,16 @@ import { ForbiddenActivity, InitActivity } from "@Views";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/ext-language_tools";
 import "ace-builds/src-noconflict/theme-nord_dark";
-import "onsenui/css/onsenui.css";
+import "onsenui/css/onsenui-core.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
+import "@Styles/github/markdown-dark.scss";
+import "@Styles/github/markdown-light.scss";
+import AppRoot from "@Components/AppRoot";
 
 class Bootloader {
-  private mountNode: any = document.querySelector("app");
+  private mountNode: any = document.querySelector("app-root");
 
   private loadConsole() {
     if (native.getPref("erudaEnabled") === "true") {
@@ -92,6 +95,8 @@ class Bootloader {
       if (native.isInstagram || native.isFacebook) {
         native.setPref("disableNSFW", "true");
       }
+      
+      customElements.define("app-root", AppRoot);
 
       this.loadActivity(<InitActivity />);
     }

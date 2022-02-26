@@ -169,6 +169,14 @@ interface Windows {
   newWindow(url: string, options: BrowserWindowConstructorOptions): void;
 
   getVersion(): string;
+
+  getType(): string;
+
+  getPlatform(): string;
+
+  dialog(props: { title: string; message: string }): void;
+
+  getDirectories(path: string, callback: Function): void;
 }
 
 export default Windows;

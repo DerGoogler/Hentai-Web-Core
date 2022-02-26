@@ -31,9 +31,13 @@ class PluginsActivity extends React.Component<Props, States> {
     if (native.isAndroid || native.isWindows) {
       if (this.scriptLosding) {
         if (native.fs.isFileExist("plugins.yaml")) {
-          pas = native.fs.readFile("/plugins.yaml", {
-            parse: { use: true, mode: "yaml" },
-          });
+          if (native.isAndroid || native.isWindows) {
+            pas = native.fs.readFile("/plugins.yaml", {
+              parse: { use: true, mode: "yaml" },
+            });
+          } else {
+            pas = ["playground"];
+          }
           customPlugins = pas.map((item: string) => (
             <>
               {(() => {

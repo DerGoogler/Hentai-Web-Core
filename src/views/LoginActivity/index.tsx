@@ -13,7 +13,6 @@ class LoginActivity extends React.Component<Props, States> {
   }
 
   public componentDidMount() {
-    native.electron.discordRPC("Trying to login");
     native.android.setStatusbarColor("#4a148c");
     native.userAgentEqualWindows(true)
       ? window.Windows.notification("Welcome to HW", "The app includes nsfw content.")
@@ -85,7 +84,7 @@ class LoginActivity extends React.Component<Props, States> {
                 onChange={this.handleUsernameChange}
                 modifier="underbar"
                 float
-                placeholder={native.isAndroid ? string.MANUFACTURER : "appCodeName"}
+                placeholder={native.isAndroid ? string.MANUFACTURER : native.isWindows ? "type" : "appCodeName"}
               />
             </p>
             <p>

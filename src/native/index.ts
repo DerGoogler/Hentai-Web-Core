@@ -1,6 +1,7 @@
 import config from "../misc/config";
 import yaml from "js-yaml";
 import ons from "onsenui";
+import pkg from "./../../package.json";
 import CryptoJS from "crypto-js";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 import evil from "./hwplugin/eval";
@@ -47,6 +48,7 @@ import {
  * Native calls for Windows and Android
  */
 class native {
+  // User agents
   private static readonly userAgentAndroid = "HENTAI_WEB_AGENT";
   private static readonly userAgentWindows = "HENTAI_WEB_WINDOWS";
   public static readonly userAgent = window.navigator.userAgent;
@@ -92,7 +94,12 @@ class native {
   public static readonly isMIUI = isMIUI;
   public static readonly isSamsungBrowser = isSamsungBrowser;
 
+  // Pltforms checks
   public static readonly checkPlatformForBorderStyle = this.isWindows ? "windows" : "";
+
+  // Basics
+  public static navigator: Navigator = navigator;
+  public static location: Location = location;
 
   /**
    * Get the Android userAgent
@@ -100,9 +107,9 @@ class native {
    */
   public static userAgentEqualAndroid(state: boolean): boolean {
     if (state) {
-      return window.navigator.userAgent === config.options.userAgent;
+      return this.navigator.userAgent === config.options.userAgent;
     } else {
-      return window.navigator.userAgent != config.options.userAgent;
+      return this.navigator.userAgent != config.options.userAgent;
     }
   }
 
@@ -112,39 +119,29 @@ class native {
    */
   public static userAgentEqualWindows(state: boolean): boolean {
     if (state) {
-      return window.navigator.userAgent === config.options.userAgentWindows;
+      return this.navigator.userAgent === config.options.userAgentWindows;
     } else {
-      return window.navigator.userAgent != config.options.userAgentWindows;
+      return this.navigator.userAgent != config.options.userAgentWindows;
     }
   }
 
-  /**
-   * Get mobile phones build serial (Is pn every phone different)
-   * @returns {String}
-   */
   public static get getBuildMANUFACTURER(): string {
-    const appCodeName = window.navigator.appCodeName.toUpperCase();
     if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMANUFACTURER().toUpperCase();
     } else if (this.userAgent === this.userAgentWindows) {
-      return appCodeName;
+      return window.Windows.getType().toUpperCase();
     } else {
-      return appCodeName;
+      return window.navigator.appCodeName.toUpperCase();
     }
   }
 
-  /**
-   * Get mobile phones emei number
-   * @returns {String}
-   */
   public static get getMODEL(): string {
-    const platform = window.navigator.platform.toUpperCase();
     if (this.userAgent === this.userAgentAndroid) {
       return window.Android.BuildMODEL().toUpperCase();
     } else if (this.userAgent === this.userAgentWindows) {
-      return platform;
+      return window.Windows.getPlatform().toUpperCase();
     } else {
-      return platform;
+      return window.navigator.platform.toUpperCase();
     }
   }
 
@@ -162,6 +159,24 @@ class native {
     }
   }
 
+  public static dialog(props: { title: string; message: string }) {
+    if (this.isAndroid) {
+      window.Android.dialog(props.title, props.message);
+    } else if (this.isWindows) {
+      window.Windows.dialog(props);
+    } else {
+      ons.notification.alert({
+        message: props.message,
+        title: props.title,
+        buttonLabels: ["Ok"],
+        modifier: native.checkPlatformForBorderStyle,
+        animation: "default",
+        primaryButtonIndex: 1,
+        cancelable: false,
+      });
+    }
+  }
+
   /**
    * Copy an string to clipboard on Android
    * @param content
@@ -175,6 +190,18 @@ class native {
     } else {
       copy;
     }
+  }
+
+  public static alert(message?: any): void {
+    alert(message);
+  }
+
+  public static confirm(message?: string | undefined): boolean {
+    return confirm(message);
+  }
+
+  public static prompt(message?: string | undefined, _default?: string | undefined): string | null {
+    return prompt(message, _default);
   }
 
   /**
@@ -279,11 +306,15 @@ class native {
       } else if (native.isWindows) {
         return window.Windows.getVersion();
       } else {
-        return "";
+        return pkg.version;
       }
     },
-    require(version: number): boolean {
-      return +Number(this.get.replace(/\./gm, "")) >= +version;
+
+    /**
+     * Requires an selected version above {version}
+     */
+    require(version: number | undefined): boolean {
+      return +Number(this.get.replace(/\./gm, "")) >= +!version;
     },
   };
 

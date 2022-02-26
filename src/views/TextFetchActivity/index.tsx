@@ -4,36 +4,29 @@ import native from "@Native/index";
 import axios from "axios";
 import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
-import "@Styles/github/markdown-dark.scss";
-import "@Styles/github/markdown-light.scss";
-import tools from "@Misc/tools";
 import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
-import { string } from "@Strings";
 import { Props, States } from "./interface";
 
-class LicenseActivity extends React.Component<Props, States> {
+class TextFetchActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { data: "" };
+    
   }
 
   public componentDidMount = () => {
-    native.electron.discordRPC("Viewing Licenses");
-    axios.get("https://cdn.dergoogler.com/others/hentai-web/vendor.bundle.js.LICENSE.txt").then((res) => {
+    const { textFetch } = this.props;
+    axios.get(textFetch.url).then((res) => {
       const data = res.data;
       this.setState({ data: data });
     });
   };
 
   private renderToolbar = () => {
+    const { textFetch, popPage } = this.props;
     return (
       <Toolbar>
-        <ToolbarBuilder
-          title={string.licenses}
-          onBackButton={this.props.popPage}
-          hasWindowsButtons={true}
-          hasDarkMode={true}
-        />
+        <ToolbarBuilder title={textFetch.title} onBackButton={popPage} hasWindowsButtons={true} />
       </Toolbar>
     );
   };
@@ -42,7 +35,7 @@ class LicenseActivity extends React.Component<Props, States> {
     const { data } = this.state;
     return (
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
+        <ContentBody className="markdownBody">
           <div
             style={{
               padding: "16px",
@@ -56,4 +49,4 @@ class LicenseActivity extends React.Component<Props, States> {
   }
 }
 
-export default LicenseActivity;
+export default TextFetchActivity;

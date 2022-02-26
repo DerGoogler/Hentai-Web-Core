@@ -6,7 +6,6 @@ import yaml from "js-yaml";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import { HighlightedMarkdown } from "./HighlightMarkdown";
-import Bootloader from "@Bootloader";
 
 class News extends React.Component {
   public state = {

@@ -50,7 +50,7 @@ interface Android {
   /**
    * @Native
    */
-  setStatusbarColor(color: string): void;
+  setStatusbarColor(color: `${string}`): void;
 
   /**
    * @Native
@@ -116,6 +116,11 @@ interface Android {
    * @Native
    */
   requireSDK(): string;
+
+  /**
+   * @Native
+   */
+  dialog(title: string, message: string): void;
 }
 
 export default Android;

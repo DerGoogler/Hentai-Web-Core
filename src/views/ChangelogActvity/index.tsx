@@ -3,9 +3,6 @@ import { Button, Page, Toolbar } from "react-onsenui";
 import native from "@Native/index";
 import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
-import "@Styles/github/markdown-dark.scss";
-import "@Styles/github/markdown-light.scss";
-import tools from "@Misc/tools";
 import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import { Props, States } from "./interface";
 
@@ -30,7 +27,7 @@ class ChangelogActivity extends React.Component<Props, States> {
   public render = () => {
     return (
       <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
+        <ContentBody className="markdownBody">
           <div
             style={{
               padding: "16px",
@@ -38,6 +35,7 @@ class ChangelogActivity extends React.Component<Props, States> {
           >
             <HighlightedMarkdown>{this.props.changelog.changes}</HighlightedMarkdown>
             <Button
+              style={{ borderRadius: "8px" }}
               modifier="large"
               onClick={() => {
                 if (native.isAndroid) {

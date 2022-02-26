@@ -1,13 +1,15 @@
 import * as React from "react";
-import { Card, Button, Badge } from "react-bootstrap";
-import { Card as Kard } from "react-onsenui";
+import { Card } from "react-bootstrap";
+import { Button, Card as Kard } from "react-onsenui";
 import axios from "axios";
 import native from "@Native/index";
 import { Icon } from "react-onsenui";
 import tools from "@Misc/tools";
-import ActionSheetBuilder from "./ActionSheetBuilder";
 import { string } from "@Strings";
 import ListDialogBuilder from "./ListDialogBuilder";
+import Gesture from "@Components/Gesture";
+import Logger from "@Misc/Logger";
+import MDIcon from "@Components/MDIcon";
 
 class PictureBuilder extends React.Component<
   {
@@ -15,12 +17,12 @@ class PictureBuilder extends React.Component<
     source?: any;
     getId?: any;
     isNew?: any;
+    searchState: string;
   },
   { isContextOpen: boolean; isImageError: boolean }
 > {
   private element!: HTMLElement | null;
   private buttonDesign: string = native.getPref("enableDarkmode") === "true" ? "lilaDarkMode" : "lila";
-  private imageError: React.RefObject<HTMLImageElement>;
   private imageStyle: React.CSSProperties = {
     width: "100%",
     borderRadius: tools.typeIF(
@@ -33,6 +35,8 @@ class PictureBuilder extends React.Component<
       ".25rem"
     ),
   };
+  private searchedCard: React.RefObject<HTMLDivElement>;
+  private cardName: React.RefObject<HTMLHeadingElement>;
 
   public constructor(props: any) {
     super(props);
@@ -40,7 +44,8 @@ class PictureBuilder extends React.Component<
       isContextOpen: false,
       isImageError: false,
     };
-    this.imageError = React.createRef();
+    this.searchedCard = React.createRef();
+    this.cardName = React.createRef();
   }
   /**
    * To generate an id that refresh every page reload, to avoid duplicte ids
@@ -48,6 +53,28 @@ class PictureBuilder extends React.Component<
   private getID = this.props.note.replace(/\s/g, "") + this.id();
   private getNote = this.props.note.charAt(0).toUpperCase() + this.props.note.slice(1);
   private images = this.randomizer(this.props.note);
+
+  public componentDidUpdate() {
+    const { searchState } = this.props;
+    tools.ref(this.cardName, (ref: HTMLHeadingElement) => {
+      if (searchState != "") {
+        const search = ref.textContent || ref.innerText;
+        if (search.toLowerCase().indexOf(searchState) > -1) {
+          tools.ref(this.searchedCard, (ref: HTMLDivElement) => {
+            ref.style.display = "";
+          });
+        } else {
+          tools.ref(this.searchedCard, (ref: HTMLDivElement) => {
+            ref.style.display = "none";
+          });
+        }
+      } else {
+        tools.ref(this.searchedCard, (ref: HTMLDivElement) => {
+          ref.style.display = "";
+        });
+      }
+    });
+  }
 
   private id() {
     const { note } = this.props;
@@ -78,7 +105,7 @@ class PictureBuilder extends React.Component<
               const data = res.data;
               native.fs.writeFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
             } catch (error) {
-              console.log(error);
+              Logger.error(error);
             }
           });
       } else {
@@ -91,24 +118,24 @@ class PictureBuilder extends React.Component<
               const data = res.data;
               native.setPref(image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
             } catch (error) {
-              console.log(error);
+              Logger.error(error);
             }
           });
       }
       const data =
         native.isAndroid || native.isWindows
           ? native.fs.readFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", {
-              parse: { use: true, mode: "json" },
-            })
+            parse: { use: true, mode: "json" },
+          })
           : // @ts-ignore
-            JSON.parse(native.getPref(image.replace(/\s/g, "").toLowerCase() + ".json"));
+          JSON.parse(native.getPref(image.replace(/\s/g, "").toLowerCase() + ".json"));
       return data[Math.floor(Math.random() * data.length)];
     } catch (error) {
       return "error";
     }
   }
 
-  private handleClick = () => {
+  private handleClick = (e: any) => {
     this.setState({ isContextOpen: true });
   };
 
@@ -126,9 +153,7 @@ class PictureBuilder extends React.Component<
           } else {
             return (
               <>
-                {/*
-                // @ts-ignore */}
-                <card>
+                <div ref={this.searchedCard}>
                   <Kard style={{ padding: "0px", borderRadius: "8px", border: "0px" }}>
                     <Card
                       key={this.getID}
@@ -140,9 +165,14 @@ class PictureBuilder extends React.Component<
                       }}
                     >
                       <Card.Header style={{ display: tools.typeIF(native.getPref("removeTitle"), "none", "block") }}>
-                        {/*
-                // @ts-ignore */}
-                        <name style={{ display: "flex", justifyContent: "left", alignItems: "center" }}>
+                        <div
+                          style={{
+                            textAlign: "center",
+                            display: "inline-flex",
+                            width: "100%",
+                            justifyContent: "center",
+                          }}
+                        >
                           <h4
                             style={{
                               width: "100%",
@@ -150,36 +180,23 @@ class PictureBuilder extends React.Component<
                               justifyContent: "left",
                               alignItems: "center",
                             }}
-                            className={"searchKey> " + this.getID + "_search"}
+                            ref={this.cardName}
                           >
-                            {(() => {
-                              if (isNew) {
-                                return (
-                                  <>
-                                    <Badge style={{ fontSize: "10px" }} bg={this.buttonDesign}>
-                                      NEW
-                                    </Badge>
-                                    &nbsp;
-                                  </>
-                                );
-                              } else {
-                                return;
-                              }
-                            })()}
                             {this.getNote}
                           </h4>
                           <Button
-                            style={{
-                              display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
-                            }}
                             onClick={this.handleClick}
-                            variant={this.buttonDesign}
+                            style={{
+                              textAlign: "center",
+                              display: tools.typeIF(native.getPref("displayDownload"), "flex", "none"),
+                              justifyContent: "center",
+                              borderRadius: "8px",
+                            }}
                           >
-                            <Icon icon="md-more" />
+                            <MDIcon icon="more_horiz" size="18" ignoreDarkmode={true} />
                           </Button>
-                          {/*
-                  // @ts-ignore */}
-                        </name>
+                        </div>
+
                       </Card.Header>
                       <Card.Body
                         style={{
@@ -200,16 +217,18 @@ class PictureBuilder extends React.Component<
                                 );
                               } else {
                                 return (
-                                  <img
-                                    id={this.getID}
-                                    src={this.images}
-                                    alt={this.getNote}
-                                    onDoubleClick={this.handleClick}
-                                    onError={() => {
-                                      this.setState({ isImageError: true });
-                                    }}
-                                    style={this.imageStyle}
-                                  />
+                                  <Gesture event="hold" callback={this.handleClick}>
+                                    <img
+                                      id={this.getID}
+                                      src={this.images}
+                                      alt={this.getNote}
+                                      onDoubleClick={this.handleClick}
+                                      onError={() => {
+                                        this.setState({ isImageError: true });
+                                      }}
+                                      style={this.imageStyle}
+                                    />
+                                  </Gesture>
                                 );
                               }
                             })()}
@@ -279,9 +298,7 @@ class PictureBuilder extends React.Component<
                       </Card.Body>
                     </Card>
                   </Kard>
-                  {/*
-                // @ts-ignore */}
-                </card>
+                </div>
               </>
             );
           }

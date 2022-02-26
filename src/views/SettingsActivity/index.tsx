@@ -9,10 +9,6 @@ import { string } from "@Strings";
 import { Props, States } from "./interface";
 
 class SettingsActivity extends React.Component<Props, States> {
-  public componentDidMount() {
-    native.electron.discordRPC("Viewing Settings");
-  }
-
   private renderToolbar = () => {
     return (
       <Toolbar>

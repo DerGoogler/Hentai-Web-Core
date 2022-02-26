@@ -1,53 +1,57 @@
 import { PictureBuilder } from "@Builders";
 import * as React from "react";
-import { List, SearchInput } from "react-onsenui";
+import { Button, List, SearchInput } from "react-onsenui";
 import ContentBody from "./ContentBody";
 import native from "@Native/index";
-import tools from "@Misc/tools";
 import { string } from "@Strings";
+import MDIcon from "./MDIcon";
+import tools from "@Misc/tools";
+import { OnsSearchInputElement } from "onsenui";
 
-class AnimeContent extends React.Component<{
-  data: any[];
-  name: string;
-}> {
-  private makeUUID(length: number) {
-    var result = "";
-    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    var charactersLength = characters.length;
-    for (var i = 0; i < length; i++) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    return result;
+class AnimeContent extends React.Component<
+  {
+    data: any[];
+    name: string;
+  },
+  { search: string; currentSerachText: string; searchButtonDisabled: boolean }
+> {
+  private searchBar: React.RefObject<SearchInput>;
+
+  public constructor(props: any) {
+    super(props);
+    this.state = {
+      search: "",
+      currentSerachText: "",
+      searchButtonDisabled: true,
+    };
+    this.searchBar = React.createRef();
   }
 
-  private uuid: string = this.makeUUID(26);
+  /*
+  public componentDidMount() {
+    tools.ref(this.searchBar, (ref: SearchInput) => {
+      ref.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.keyCode === 13) {
+          console.log("Enter")
+        }
+      });
+    })
+  } */
 
-  private filter(e: any) {
-    // Declare variables
-    var input, filter, ul, li, a, i, txtValue;
-    filter = e.target.value.toUpperCase();
-    ul = document.getElementById(`picture-list-${this.uuid}`);
-    // @ts-ignore
-    li = ul.getElementsByTagName("card");
+  private filter = (e: any) => {
+    this.setState({ search: e.target.value.toLowerCase() });
+  };
 
-    // Loop through all list items, and hide those who don't match the search query
-    for (i = 0; i < li.length; i++) {
-      a = li[i].getElementsByTagName("name")[0];
-      // @ts-ignore
-      txtValue = a.textContent || a.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        // @ts-ignore
-        li[i].style.display = "";
-      } else {
-        // @ts-ignore
-        li[i].style.display = "none";
-      }
-    }
-  }
+  private triggerSearch = () => {
+    const { currentSerachText, searchButtonDisabled, search } = this.state;
+    this.setState({ search: currentSerachText });
+  };
 
   public render = () => {
+    const { currentSerachText, searchButtonDisabled, search } = this.state;
+
     const listItems = this.props.data.map((item: any[]) => (
-      <PictureBuilder key={item.toString()} source={item} note={item} />
+      <PictureBuilder searchState={search} key={item.toString()} source={item} note={item} />
     ));
 
     return (
@@ -55,7 +59,7 @@ class AnimeContent extends React.Component<{
         <div
           style={{
             textAlign: "center",
-            display: /*"flex"*/ "flex",
+            display: "flex",
             justifyContent: "center",
             padding: "0px",
             paddingBottom: "0px",
@@ -65,26 +69,38 @@ class AnimeContent extends React.Component<{
           <div
             style={{
               textAlign: "center",
-              display: "flex",
+              display: native.getPref("hideSearchbar") === "true" ? "none" : "inline-flex",
               justifyContent: "center",
               padding: "8px",
               paddingBottom: "0px",
-              flexDirection: "column",
             }}
           >
             <SearchInput
               // @ts-ignore
               placeholder={`${string.search} ${this.props.name}`}
+              ref={this.searchBar}
               style={{
-                display: tools.typeIF(native.getPref("hideSearchbar"), "none", ""),
                 borderRadius: "8px",
-                backgroundColor: tools.typeIF(native.getPref("enableDarkmode"), "#1F1F1F", "transparent"),
+                width: "100%",
+                marginRight: "4px",
+                backgroundColor: native.getPref("enableDarkmode") === "true" ? "#1F1F1F" : "transparent",
               }}
-              modifier="custom"
               onChange={this.filter}
             />
+            <Button
+              onClick={this.triggerSearch}
+              style={{
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                marginLeft: "4px",
+                borderRadius: "8px",
+              }}
+            >
+              <MDIcon icon="search" size="24" ignoreDarkmode={true} />
+            </Button>
           </div>
-          <List id={`picture-list-${this.uuid}`}>{listItems}</List>
+          <List>{listItems}</List>
         </div>
       </ContentBody>
     );
