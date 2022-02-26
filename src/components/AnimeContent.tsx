@@ -1,10 +1,26 @@
 import { PictureBuilder } from "@Builders";
 import * as React from "react";
+<<<<<<< Updated upstream
 import { List, SearchInput } from "react-onsenui";
+=======
+import { Button, Col, List, SearchInput } from "react-onsenui";
+>>>>>>> Stashed changes
 import ContentBody from "./ContentBody";
 import native from "@Native/index";
 import tools from "@Misc/tools";
+<<<<<<< Updated upstream
 import { string } from "@Strings";
+=======
+
+class AnimeContent extends React.Component<
+  {
+    data: any[];
+    name: string;
+  },
+  { search: string; currentSerachText: string; searchButtonDisabled: boolean }
+> {
+  private searchBar: React.RefObject<SearchInput>;
+>>>>>>> Stashed changes
 
 class AnimeContent extends React.Component<{
   data: any[];

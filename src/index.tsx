@@ -5,6 +5,7 @@ import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
 import jss from "jss";
+import AppRoot from "@Components/AppRoot";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
 import { ForbiddenActivity, InitActivity } from "@Views";
@@ -16,6 +17,11 @@ import "onsenui/css/onsenui.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
+<<<<<<< Updated upstream
+=======
+import "@Styles/github/markdown-dark.scss";
+import "@Styles/github/markdown-light.scss";
+>>>>>>> Stashed changes
 
 class Bootloader {
   private mountNode: any = document.querySelector("app");
@@ -92,6 +98,11 @@ class Bootloader {
       if (native.isInstagram || native.isFacebook) {
         native.setPref("disableNSFW", "true");
       }
+<<<<<<< Updated upstream
+=======
+
+      customElements.define("app-root", AppRoot);
+>>>>>>> Stashed changes
 
       this.loadActivity(<InitActivity />);
     }

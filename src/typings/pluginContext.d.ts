@@ -3,7 +3,7 @@ import HWPlugin from "@Native/hwplugin";
 import native from "@Native/index";
 import ons from "onsenui";
 
-interface PluginContext {
+interface PluginContext extends NodeJS.Dict<any> {
   readonly native: typeof native;
   readonly HWPlugin: typeof HWPlugin;
   readonly tools: typeof tools;
