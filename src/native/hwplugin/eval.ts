@@ -6,16 +6,22 @@ import HWPlugin from ".";
 import { PluginOptions } from "@Types/pluginContext";
 import ipc from "@Misc/ipc";
 
-export default function evil(javascriptString: string, extras: any) {
-  "use strict";
+class evil {
+  private static purple = "color: #fff; background: #4a148c; padding: 4px; border-radius: 8px 0px 0px 8px;";
+  private static lightPurple = "color: #fff; background: #bb86fc; padding: 4px; border-radius: 0px 8px 8px 0px;";
 
-  const consoleColor = {
-    purple: "color: #fff; background: #4a148c; padding: 4px; border-radius: 8px 0px 0px 8px;",
-    lightPurple: "color: #fff; background: #bb86fc; padding: 4px; border-radius: 0px 8px 8px 0px;",
-  };
+  public constructor(javascriptString: string, extras: any) {
+    try {
+      vm.runInNewContext(javascriptString, this.context(extras));
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        console.log(e.message);
+      }
+    }
+  }
 
-  try {
-    const context = vm.createContext(
+  private context = (extras: any) => {
+    return vm.createContext(
       {
         native: native,
         HWPlugin: HWPlugin,
@@ -63,22 +69,22 @@ export default function evil(javascriptString: string, extras: any) {
         console: {
           log(message?: any, ...optionalParams: any[]): void {
             let pluginName = extras.plugin.name;
-            console.log(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
+            console.log(`%c${pluginName}%c=>%c ${message}`, evil.purple, evil.lightPurple, "", ...optionalParams);
           },
 
           info(message?: any, ...optionalParams: any[]): void {
             let pluginName = extras.plugin.name;
-            console.info(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
+            console.info(`%c${pluginName}%c=>%c ${message}`, evil.purple, evil.lightPurple, "", ...optionalParams);
           },
 
           warn(message?: any, ...optionalParams: any[]): void {
             let pluginName = extras.plugin.name;
-            console.warn(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
+            console.warn(`%c${pluginName}%c=>%c ${message}`, evil.purple, evil.lightPurple, "", ...optionalParams);
           },
 
           error(message?: any, ...optionalParams: any[]): void {
             let pluginName = extras.plugin.name;
-            console.error(`%c${pluginName}%c=>%c ${message}`, consoleColor.purple, consoleColor.lightPurple, "", ...optionalParams);
+            console.error(`%c${pluginName}%c=>%c ${message}`, evil.purple, evil.lightPurple, "", ...optionalParams);
           },
         },
       },
@@ -86,11 +92,7 @@ export default function evil(javascriptString: string, extras: any) {
         name: extras.plugin.name,
       }
     );
-
-    vm.runInNewContext(javascriptString, context);
-  } catch (e) {
-    if (e instanceof SyntaxError) {
-      console.log(e.message);
-    }
-  }
+  };
 }
+
+export default evil;

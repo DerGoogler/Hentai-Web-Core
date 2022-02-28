@@ -15,10 +15,5 @@ declare global {
      * Declare the custom window event (`Windows`) for the WebView
      */
     readonly Windows: Windows;
-
-    /**
-     *
-     */
-    webkit: any;
   }
 }

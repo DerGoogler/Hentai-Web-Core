@@ -4,6 +4,7 @@ import eruda from "eruda";
 import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
+import AppRoot from "@Components/AppRoot";
 import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
@@ -18,7 +19,6 @@ import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
-import AppRoot from "@Components/AppRoot";
 
 class Bootloader {
   private mountNode: any = document.querySelector("app-root");

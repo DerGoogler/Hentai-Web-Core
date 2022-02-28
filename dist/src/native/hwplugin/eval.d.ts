@@ -1,1 +1,7 @@
-export default function evil(javascriptString: string, extras: any): void;
+declare class evil {
+    private purple;
+    private lightPurple;
+    constructor(javascriptString: string, extras: any);
+    private context;
+}
+export default evil;

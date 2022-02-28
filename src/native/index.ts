@@ -373,7 +373,7 @@ class native {
    * @param javascriptString A String value that contains valid JavaScript code.
    */
   public static eval(javascriptString: string, extras: any) {
-    evil(javascriptString, extras);
+    new evil(javascriptString, extras);
   }
 
   /**

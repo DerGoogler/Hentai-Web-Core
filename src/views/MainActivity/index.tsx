@@ -75,7 +75,7 @@ class MainActivity extends React.Component<Props, States> {
     return (
       <Toolbar>
         <ToolbarBuilder
-          title={"Hentai Web"}
+          title={native.isFacebook || native.isInstagram ? "Safe Web" : "Hentai Web"}
           hasWindowsButtons={true}
           addToolbarButton={
             <>
@@ -215,8 +215,8 @@ class MainActivity extends React.Component<Props, States> {
                         ? "none"
                         : (native.getPref("enablePluginTestting") && native.getPref("enableCustomScriptLoading")) ===
                           "true"
-                        ? ""
-                        : "none",
+                          ? ""
+                          : "none",
                   },
                   onClick: () => {
                     const getPlayground = native.getPref("playground");
