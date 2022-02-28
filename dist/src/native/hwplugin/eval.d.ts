@@ -1,6 +1,6 @@
 declare class evil {
-    private purple;
-    private lightPurple;
+    private static purple;
+    private static lightPurple;
     constructor(javascriptString: string, extras: any);
     private context;
 }
