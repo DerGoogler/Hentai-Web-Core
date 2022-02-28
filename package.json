@@ -52,6 +52,7 @@
     "bota64": "github:DerGoogler/Bota64",
     "core-js": "^3.18.1",
     "crypto-js": "^4.1.1",
+    "electron": "^17.1.0",
     "eruda": "^2.4.1",
     "eruda-dom": "^2.0.0",
     "file-saver": "^2.0.5",

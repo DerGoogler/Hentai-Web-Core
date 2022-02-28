@@ -1,3 +1,4 @@
+import * as Electron from "electron";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 
 /**
@@ -111,25 +112,7 @@ interface Windows {
    * called first, a default log directory will be created equivalent to calling
    * `app.setAppLogsPath()` without a `path` parameter.
    */
-  appGetPath(
-    path:
-      | "home"
-      | "appData"
-      | "userData"
-      | "cache"
-      | "temp"
-      | "exe"
-      | "module"
-      | "desktop"
-      | "documents"
-      | "downloads"
-      | "music"
-      | "pictures"
-      | "videos"
-      | "recent"
-      | "logs"
-      | "crashDumps"
-  ): string | String;
+  appGetPath(path: "home" | "appData" | "userData" | "cache" | "temp" | "exe" | "module" | "desktop" | "documents" | "downloads" | "music" | "pictures" | "videos" | "recent" | "logs" | "crashDumps"): string | String;
 
   /**
    * Opens an selectd path
@@ -177,6 +160,14 @@ interface Windows {
   dialog(props: { title: string; message: string }): void;
 
   getDirectories(path: string, callback: Function): void;
+
+  readonly core: Core;
+}
+
+interface Core {
+  app: Electron.App;
+  BrowserWindow: typeof Electron.BrowserWindow;
+  getCurrentWindow: typeof Electron.BrowserWindow;
 }
 
 export default Windows;

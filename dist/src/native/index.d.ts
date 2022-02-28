@@ -144,6 +144,11 @@ declare class native {
         userAgentAndroid: string;
         userAgentWindows: string;
         agent: string;
+        core: {
+            app: Electron.App | null;
+            BrowserWindow: typeof Electron.CrossProcessExports.BrowserWindow | null;
+            getCurrentWindow: typeof Electron.CrossProcessExports.BrowserWindow | null;
+        };
         newWindow: (url: string, options: BrowserWindowConstructorOptions) => void;
         /**
          *
