@@ -209,6 +209,12 @@ body {
   border-radius: 8px;
 }
 
+.list-item--material {
+  &hover {
+    background-color: rgb(209 209 209 / 12%);
+  }
+}
+
 a {
   color: #4a148c;
   text-decoration: underline;

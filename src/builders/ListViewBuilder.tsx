@@ -74,7 +74,7 @@ class ListViewBuilder extends React.Component<{
           {header.content.map((item: ListOptions) => (
             <>
               <ListItem
-                modifier={tools.typeCheck(item.modifier, "")}
+                modifier={item.type === "" ? "chevron" : "" || tools.typeCheck(item.modifier, "")}
                 tappable={tools.typeCheck(item.tappable, false)}
                 id={item.key + "-ListItem"}
                 style={item.style}
