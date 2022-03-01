@@ -5,9 +5,9 @@ declare class MainActivity extends BaseActivity<Props, States> {
     componentDidMount: () => void;
     private handleClick;
     private handleCancel;
-    private renderToolbar;
+    renderToolbar: () => JSX.Element;
     private renderTabs;
     private tabIndexChecker;
-    render: () => JSX.Element;
+    renderPage: () => JSX.Element;
 }
 export default MainActivity;

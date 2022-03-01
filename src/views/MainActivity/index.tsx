@@ -72,7 +72,7 @@ class MainActivity extends BaseActivity<Props, States> {
     this.setState({ isContextOpen: false });
   };
 
-  private renderToolbar() {
+  public renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
@@ -134,9 +134,9 @@ class MainActivity extends BaseActivity<Props, States> {
     }
   }
 
-  public render = () => {
+  public renderPage = () => {
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+      <>
         <Tabbar
           swipeable={tools.stringToBoolean(native.getPref("enableSwipeBetweenTabs"))}
           position={native.getPref("enableBottomTabbar") === "true" ? "bottom" : "top"}
@@ -282,7 +282,7 @@ class MainActivity extends BaseActivity<Props, States> {
             },
           ]}
         />
-      </Page>
+      </>
     );
   };
 }

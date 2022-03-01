@@ -6,6 +6,7 @@ import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
 import Logger from "@Misc/Logger";
+import { Page } from "react-onsenui";
 
 /**
  * This should only used on Activitys
@@ -16,6 +17,7 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
     this.updateStyle = this.updateStyle.bind(this);
     this.initialPluginState = this.initialPluginState.bind(this);
     this.setDiscordStatus = this.setDiscordStatus.bind(this);
+    this.render = this.render.bind(this);
   }
 
   private updateStyle(): void {
@@ -52,18 +54,43 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P, S, SS> {
   };
 
   public componentDidMount = (): void => {
-    Logger.log(this.setDiscordStatus());
     native.electron.discordRPC(this.setDiscordStatus());
     this.updateStyle();
     this.initialPluginState();
   };
 
   public componentDidUpdate = (): void => {
-    Logger.log(this.setDiscordStatus());
     native.electron.discordRPC(this.setDiscordStatus());
     this.updateStyle();
     this.initialPluginState();
   };
+
+  /**
+   * Renders the Toolbar
+   */
+  public renderToolbar = (): JSX.Element => {
+    return <></>
+  };
+
+  /**
+   * Renders the page
+   */
+  public renderPage = (): JSX.Element => {
+    return <></>
+  };
+
+  /**
+   * Don't use that if the Activity is with `BaseActivity` extended       
+   * Use `renderPage` instead
+   */
+  public render = () => {
+    return (
+      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+        {this.renderPage()}
+      </Page>
+    );
+  };
+
 }
 
 export default BaseActivity;

@@ -1,8 +1,9 @@
 import React from "react";
 import { Props, States } from "./interface";
 declare class ChangelogActivity extends React.Component<Props, States> {
-    componentDidMount(): void;
-    private renderToolbar;
+    constructor(props: any);
+    componentDidMount: () => void;
+    renderToolbar: () => JSX.Element;
     render: () => JSX.Element;
 }
 export default ChangelogActivity;

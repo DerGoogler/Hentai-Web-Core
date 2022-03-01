@@ -1,17 +1,25 @@
-import React from "react";
 import { Button, Page, Toolbar } from "react-onsenui";
 import native from "@Native/index";
 import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import { Props, States } from "./interface";
+import { BaseActivity } from "@Views";
 
-class ChangelogActivity extends React.Component<Props, States> {
-  public componentDidMount() {
-    console.log(this.props.changelog.package.android);
+class ChangelogActivity extends BaseActivity<Props, States> {
+  public constructor(props: any) {
+    super(props)
   }
 
-  private renderToolbar = () => {
+  public componentDidMount = () => {
+    super.componentDidMount;
+  }
+
+  public componentDidUpdate = () => {
+    super.componentDidUpdate;
+  }
+
+  public renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
@@ -24,9 +32,9 @@ class ChangelogActivity extends React.Component<Props, States> {
     );
   };
 
-  public render = () => {
+  public renderPage = () => {
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+      <>
         <ContentBody className="markdownBody">
           <div
             style={{
@@ -51,7 +59,7 @@ class ChangelogActivity extends React.Component<Props, States> {
             </Button>
           </div>
         </ContentBody>
-      </Page>
+      </>
     );
   };
 }
