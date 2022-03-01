@@ -10,9 +10,10 @@ import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity
 import { Props, States } from "./interface"
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
-import { Page, Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
+import { Page, Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, RouterUtil, Fab } from "react-onsenui";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import MDIcon from "@Components/MDIcon";
+import ContentBody from "@Components/ContentBody";
 import AnimeContent from "@Components/AnimeContent";
 import AceEditor from "react-ace";
 import { string } from "@Strings";
@@ -42,15 +43,19 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
   public Button = Button
   public Icon = Icon
   public Input = Input
+  public Fab = Fab
   public RouterUtil = RouterUtil
   public RouterNavigator = RouterNavigator
   public BackButton = BackButton
 
   // Others
   public AceEditor = AceEditor
+
+  // Components
   public AnimeContent = AnimeContent
   public News = News
   public MDIcon = MDIcon
+  public ContentBody = ContentBody
 
   // Builders
   public ToolbarBuilder = ToolbarBuilder
@@ -151,13 +156,43 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
     return <></>
   };
 
+
+  public renderModal(): JSX.Element {
+    return <></>
+  }
+
+  public renderBottomToolbar(): JSX.Element {
+    return <></>
+  }
+
+  public renderFixed(): JSX.Element {
+    return <></>
+  }
+
+  public onInit(): void { }
+
+  public onShow(): void { }
+
+  public onHide(): void { }
+
+  public onInfiniteScroll(): void { }
+
   /**
    * Don't use that if the Activity is with `BaseActivity` extended       
    * Use `renderPage` instead
    */
   public render = () => {
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+      <Page
+        modifier={native.checkPlatformForBorderStyle}
+        renderBottomToolbar={this.renderBottomToolbar}
+        renderFixed={this.renderFixed}
+        renderModal={this.renderModal}
+        onInfiniteScroll={this.onInfiniteScroll}
+        onHide={this.onHide}
+        onShow={this.onShow}
+        onInit={this.onInit}
+        renderToolbar={this.renderToolbar}>
         {this.renderPage()}
       </Page>
     );

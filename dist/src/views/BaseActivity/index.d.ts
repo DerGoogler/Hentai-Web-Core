@@ -6,9 +6,10 @@ import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity
 import { Props } from "./interface";
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
-import { Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator } from "react-onsenui";
+import { Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, Fab } from "react-onsenui";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import MDIcon from "@Components/MDIcon";
+import ContentBody from "@Components/ContentBody";
 import AnimeContent from "@Components/AnimeContent";
 import AceEditor from "react-ace";
 /**
@@ -48,7 +49,9 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
             boolean: string;
             bootstrap: string;
             "bootstrap-icons": string;
-            bota64: string;
+            bota64: string; /**
+             * Native calls for Windows and Android
+             */
             "core-js": string;
             "crypto-js": string;
             electron: string;
@@ -143,6 +146,7 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
     Button: typeof Button;
     Icon: typeof Icon;
     Input: typeof Input;
+    Fab: typeof Fab;
     RouterUtil: {
         init: (routes: any[]) => import("react-onsenui").RouteConfig;
         replace: (config: {
@@ -177,6 +181,7 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
     AnimeContent: typeof AnimeContent;
     News: typeof News;
     MDIcon: typeof MDIcon;
+    ContentBody: typeof ContentBody;
     ToolbarBuilder: typeof ToolbarBuilder;
     TabbarBuilder: typeof TabbarBuilder;
     ListDialogBuilder: typeof ListDialogBuilder;
@@ -206,6 +211,13 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
      * Renders the page
      */
     renderPage(): JSX.Element;
+    renderModal(): JSX.Element;
+    renderBottomToolbar(): JSX.Element;
+    renderFixed(): JSX.Element;
+    onInit(): void;
+    onShow(): void;
+    onHide(): void;
+    onInfiniteScroll(): void;
     /**
      * Don't use that if the Activity is with `BaseActivity` extended
      * Use `renderPage` instead

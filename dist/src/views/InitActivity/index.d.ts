@@ -3,7 +3,7 @@ import { PushPageProps } from "@Types/init";
 import { Props, States } from "./interface";
 import { BaseActivity } from "@Views";
 declare class InitActivity extends BaseActivity<Props, States> {
-    constructor(props: any);
+    constructor(props: Readonly<Props> | Props);
     componentDidMount: () => void;
     componentDidUpdate(): void;
     componentWillUnmount: () => void;

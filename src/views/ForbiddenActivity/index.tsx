@@ -1,37 +1,49 @@
-import { Toolbar } from "react-onsenui";
-import native from "@Native/index";
-import { ToolbarBuilder } from "@Builders";
-import ContentBody from "@Components/ContentBody";
 import { BaseActivity } from "@Views";
 
 class ForbiddenActivity extends BaseActivity {
+  public constructor(props: any) {
+    super(props)
+  }
+
   public renderToolbar() {
     return (
-      <Toolbar>
-        <ToolbarBuilder title={"Forbidden"} hasWindowsButtons={false} />
-      </Toolbar>
+      <this.Toolbar>
+        <this.ToolbarBuilder title={"Forbidden"} hasWindowsButtons={false} />
+      </this.Toolbar>
     );
   }
 
-  public renderPage() {
+  public renderFixed = () => {
     return (
-      <ContentBody>
-        {native.isIframe
+      <this.Fab
+        onClick={() => {
+          this.native.alert("LOL")
+        }}
+        position='bottom right'>
+        <this.MDIcon icon='face' size="24" ignoreDarkmode={true} />
+      </this.Fab>
+    );
+  }
+
+  public renderPage = () => {
+    return (
+      <this.ContentBody>
+        {this.native.isIframe
           ? "Embedding in iFrame are not allowed"
-          : native.isElectron
+          : this.native.isElectron
             ? "This app does not support Electron"
-            : native.isEdge
+            : this.native.isEdge
               ? "There are no support for Edge"
-              : native.isIE
+              : this.native.isIE
                 ? "IE is deprecated"
-                : native.isMIUI
+                : this.native.isMIUI
                   ? "We don't allow MIUI devices/systems"
-                  : native.isSamsungBrowser
+                  : this.native.isSamsungBrowser
                     ? "We don't allow the Samsung Browser"
-                    : native.isSmartTV
+                    : this.native.isSmartTV
                       ? "SmartTV are not optimized for this usage"
                       : null}
-      </ContentBody>
+      </this.ContentBody>
     );
   }
 }
