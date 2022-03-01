@@ -2,11 +2,11 @@ import * as React from "react";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import ons from "onsenui";
-import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity } from "@Views";
+import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity, LoginActivity, MainActivity } from "@Views";
 import { Props } from "./interface";
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
-import { Toolbar, Tabbar, ToolbarButton, Button, Input, Icon } from "react-onsenui";
+import { Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator } from "react-onsenui";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import MDIcon from "@Components/MDIcon";
 import AnimeContent from "@Components/AnimeContent";
@@ -45,9 +45,6 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
             "babel-core": string;
             "babel-plugin-transform-runtime": string;
             "babel-preset-es2015": string;
-            /**
-             * Native calls for Windows and Android
-             */
             boolean: string;
             bootstrap: string;
             "bootstrap-icons": string;
@@ -146,18 +143,50 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
     Button: typeof Button;
     Icon: typeof Icon;
     Input: typeof Input;
-    MDIcon: typeof MDIcon;
+    RouterUtil: {
+        init: (routes: any[]) => import("react-onsenui").RouteConfig;
+        replace: (config: {
+            routeConfig: import("react-onsenui").RouteConfig;
+            route: any;
+            options?: any;
+            key?: any;
+        }) => import("react-onsenui").RouteConfig;
+        reset: (config: {
+            routeConfig: import("react-onsenui").RouteConfig;
+            route: any;
+            options?: any;
+            key?: any;
+        }) => import("react-onsenui").RouteConfig;
+        push: (config: {
+            routeConfig: import("react-onsenui").RouteConfig;
+            route: any;
+            options?: any;
+            key?: any;
+        }) => import("react-onsenui").RouteConfig;
+        pop: (config: {
+            routeConfig: import("react-onsenui").RouteConfig;
+            options?: any;
+            key?: any;
+        }) => import("react-onsenui").RouteConfig;
+        postPush: (routeConfig: import("react-onsenui").RouteConfig) => import("react-onsenui").RouteConfig;
+        postPop: (routeConfig: import("react-onsenui").RouteConfig) => import("react-onsenui").RouteConfig;
+    };
+    RouterNavigator: typeof RouterNavigator;
+    BackButton: typeof BackButton;
     AceEditor: typeof AceEditor;
     AnimeContent: typeof AnimeContent;
     News: typeof News;
+    MDIcon: typeof MDIcon;
     ToolbarBuilder: typeof ToolbarBuilder;
     TabbarBuilder: typeof TabbarBuilder;
     ListDialogBuilder: typeof ListDialogBuilder;
     EditorActivity: typeof EditorActivity;
     TextFetchActivity: typeof TextFetchActivity;
+    MainActivity: typeof MainActivity;
     SettingsActivity: typeof SettingsActivity;
     PluginsActivity: typeof PluginsActivity;
     ChangelogActivity: typeof ChangelogActivity;
+    LoginActivity: typeof LoginActivity;
     constructor(props: Readonly<P & Props> | P & Props);
     componentDidMount(): void;
     componentDidUpdate(): void;

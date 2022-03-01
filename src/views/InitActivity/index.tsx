@@ -1,25 +1,20 @@
-import native from "@Native/index";
-import MainActivity from "../MainActivity";
-import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
-import Bootloader from "@Bootloader";
-import LoginActivity from "../LoginActivity";
 import { Props, States } from "./interface";
 import { BaseActivity } from "@Views";
 
 class InitActivity extends BaseActivity<Props, States> {
-  public constructor(props: any) {
+  public constructor(props: Readonly<Props> | Props) {
     super(props);
 
     const doLogin = () => {
-      if (native.getPref("loggedIn") === "true" || native.isInstagram || native.isFacebook) {
-        return MainActivity;
+      if (this.native.getPref("loggedIn") === "true" || this.native.isInstagram || this.native.isFacebook) {
+        return this.MainActivity;
       } else {
-        return LoginActivity;
+        return this.LoginActivity;
       }
     };
 
-    const routeConfig = RouterUtil.init([
+    const routeConfig = this.RouterUtil.init([
       {
         component: doLogin(),
         props: {
@@ -38,7 +33,7 @@ class InitActivity extends BaseActivity<Props, States> {
   public componentDidMount = () => {
     super.componentDidMount;
     window.addEventListener("load", this.windowLoadPush);
-    if (native.isMobile) {
+    if (this.native.isMobile) {
       window.addEventListener("contextmenu", this.removeContextMenuMobile);
     }
   };
@@ -49,7 +44,7 @@ class InitActivity extends BaseActivity<Props, States> {
 
   public componentWillUnmount = () => {
     window.removeEventListener("load", this.windowLoadPush);
-    if (native.isMobile) {
+    if (this.native.isMobile) {
       window.removeEventListener("contextmenu", this.removeContextMenuMobile);
     }
   };
@@ -64,7 +59,7 @@ class InitActivity extends BaseActivity<Props, States> {
       window.onpopstate = () => {
         history.pushState("newjibberish", "", null);
         if (this.state.currentPage === "main") {
-          native.close();
+          this.native.close();
         } else {
           this.popPage();
         }
@@ -98,7 +93,7 @@ class InitActivity extends BaseActivity<Props, States> {
 
     let routeConfig = this.state.routeConfig;
 
-    routeConfig = RouterUtil.push({
+    routeConfig = this.RouterUtil.push({
       routeConfig,
       route,
     });
@@ -110,7 +105,7 @@ class InitActivity extends BaseActivity<Props, States> {
   public popPage = (options = {}) => {
     let routeConfig = this.state.routeConfig;
 
-    routeConfig = RouterUtil.pop({
+    routeConfig = this.RouterUtil.pop({
       routeConfig,
       options: {
         ...options,
@@ -127,12 +122,12 @@ class InitActivity extends BaseActivity<Props, States> {
   };
 
   public onPostPush = () => {
-    const routeConfig = RouterUtil.postPush(this.state.routeConfig);
+    const routeConfig = this.RouterUtil.postPush(this.state.routeConfig);
     this.setState({ routeConfig });
   };
 
   public onPostPop = () => {
-    const routeConfig = RouterUtil.postPop(this.state.routeConfig);
+    const routeConfig = this.RouterUtil.postPop(this.state.routeConfig);
     this.setState({ routeConfig });
   };
 
@@ -144,7 +139,7 @@ class InitActivity extends BaseActivity<Props, States> {
 
   public renderPage() {
     return (
-      <RouterNavigator
+      <this.RouterNavigator
         swipeable={true}
         // @ts-ignore
         swipePop={(options: any) => this.popPage(options)}

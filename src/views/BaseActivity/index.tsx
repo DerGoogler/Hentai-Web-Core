@@ -6,11 +6,11 @@ import jss from "jss";
 import pkg from "./../../../package.json";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light"; import ons from "onsenui";
-import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity } from "@Views";
+import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity, LoginActivity, MainActivity } from "@Views";
 import { Props, States } from "./interface"
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
-import { Page, Toolbar, Tabbar, ToolbarButton, Button, Input, Icon } from "react-onsenui";
+import { Page, Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import MDIcon from "@Components/MDIcon";
 import AnimeContent from "@Components/AnimeContent";
@@ -42,12 +42,15 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
   public Button = Button
   public Icon = Icon
   public Input = Input
-  public MDIcon = MDIcon
+  public RouterUtil = RouterUtil
+  public RouterNavigator = RouterNavigator
+  public BackButton = BackButton
 
   // Others
   public AceEditor = AceEditor
   public AnimeContent = AnimeContent
   public News = News
+  public MDIcon = MDIcon
 
   // Builders
   public ToolbarBuilder = ToolbarBuilder
@@ -57,9 +60,11 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
   // Views
   public EditorActivity = EditorActivity
   public TextFetchActivity = TextFetchActivity
+  public MainActivity = MainActivity
   public SettingsActivity = SettingsActivity
   public PluginsActivity = PluginsActivity
   public ChangelogActivity = ChangelogActivity
+  public LoginActivity = LoginActivity
 
 
 
