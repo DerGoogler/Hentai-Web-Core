@@ -2,6 +2,7 @@ import vm from "vm";
 import ons from "onsenui";
 import tools from "@Misc/tools";
 import native from "..";
+import ReactDOM from "react-dom";
 import HWPlugin from ".";
 import { PluginOptions } from "@Types/pluginContext";
 import ipc from "@Misc/ipc";

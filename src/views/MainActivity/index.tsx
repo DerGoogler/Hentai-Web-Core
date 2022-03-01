@@ -1,3 +1,4 @@
+import { ListViewBuilder } from "@Builders";
 import { BaseActivity } from "@Views";
 import { Props, States } from "./interface";
 
@@ -60,6 +61,171 @@ class MainActivity extends BaseActivity<Props, States> {
   private handleCancel = () => {
     this.setState({ isContextOpen: false });
   };
+
+  private renderSplitter() {
+    return (<>
+      <this.Splitter>
+        <this.SplitterSide
+          style={{
+            boxShadow: '0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)'
+          }}
+          side='left'
+          width={200}
+          collapse={true}
+          swipeable={true}
+          isOpen={this.state.isContextOpen}
+          onClose={this.handleCancel}
+          onOpen={this.handleClick}
+        >
+          <this.Page>
+            <ListViewBuilder isPlugin={false} pluginName="" data={[
+              {
+                title: "Menu",
+                content: [
+                  {
+                    text: this.string.settings,
+                    type: "",
+                    icon: "settings",
+                    onClick: () => {
+                      this.pushPage({
+                        activity: this.SettingsActivity,
+                        key: "settings",
+                      });
+                      this.handleCancel();
+                    },
+                  },
+                  {
+                    text: this.string.licenses,
+                    type: "",
+                    icon: "article",
+                    onClick: () => {
+                      this.pushPage({
+                        activity: this.TextFetchActivity,
+                        key: "licenses",
+                        textFetch: {
+                          title: this.string.licenses,
+                          url: "https://cdn.dergoogler.com/others/hentai-web/vendor.bundle.js.LICENSE.txt",
+                        },
+                      });
+                      this.handleCancel();
+                    },
+                  },
+                  {
+                    text: "Plugins",
+                    type: "",
+                    icon: "extension",
+                    style: {
+                      display:
+                        (this.native.getPref("enablePluginTestting") && this.native.getPref("enableCustomScriptLoading")) === "true"
+                          ? ""
+                          : "none",
+                    },
+                    onClick: () => {
+                      this.pushPage({
+                        activity: this.PluginsActivity,
+                        key: "plugins",
+                      });
+                      this.handleCancel();
+                    },
+                  },
+                  {
+                    text: "Playground",
+                    type: "",
+                    icon: "code",
+                    style: {
+                      display:
+                        this.native.isAndroid || this.native.isWindows
+                          ? "none"
+                          : (this.native.getPref("enablePluginTestting") && this.native.getPref("enableCustomScriptLoading")) ===
+                            "true"
+                            ? ""
+                            : "none",
+                    },
+                    onClick: () => {
+                      const getPlayground = this.native.getPref("playground");
+                      this.pushPage({
+                        activity: this.EditorActivity,
+                        key: "plugin-play-ground",
+                        extras: {
+                          pluginName: "playground",
+                          fileName: "index.js",
+                          value:
+                            getPlayground === "false"
+                              ? 'initFile((plugin) => {\r\n  console.log("Hello, world!")\r\n});\r\n'
+                              : getPlayground,
+                        },
+                      });
+                      this.handleCancel();
+                    },
+                  },
+                  {
+                    text: "Make HWPlugin",
+                    type: "",
+                    icon: "code",
+                    style: { display: this.native.isAndroid || this.native.isWindows ? "" : "none" },
+                    onClick: () => {
+                      this.native.open("https://docs.dergoogler.com/HWPlugin");
+                      this.handleCancel();
+                    },
+                  },
+                  {
+                    text: "Open app path",
+                    type: "",
+                    icon: "android",
+                    style: { display: this.native.isWindows ? "" : "none" },
+                    onClick: () => {
+                      window.Windows.openPath(window.Windows.appGetPath("userData"));
+                    },
+                  },
+                  {
+                    text: "Privacy Policy",
+                    type: "",
+                    icon: "policy",
+                    onClick: () => {
+                      this.native.open("https://hw.dergoogler.com/tos/privacy-policy");
+                    },
+                  },
+                  {
+                    text: "Terms & Conditions",
+                    type: "",
+                    icon: "gavel",
+                    onClick: () => {
+                      this.native.open("https://hw.dergoogler.com/tos/terms-conditions");
+                    },
+                  },
+                  {
+                    text: this.string.cancel,
+                    type: "",
+                    icon: "close",
+                    modifier: this.native.checkPlatformForBorderStyle,
+                    onClick: this.handleCancel,
+                  },
+                ],
+              },
+            ]} />
+
+          </this.Page>
+        </this.SplitterSide>
+        <this.SplitterContent>
+          <>
+            <this.Tabbar
+              swipeable={this.tools.stringToBoolean(this.native.getPref("enableSwipeBetweenTabs"))}
+              position={this.native.getPref("enableBottomTabbar") === "true" ? "bottom" : "top"}
+              index={this.tabIndexChecker()}
+              // @ts-ignore
+              onPreChange={(event: any) => {
+                event.preventDefault(); // For newer Onsen UI version
+                if (event.index != this.tabIndexChecker) {
+                  this.native.setPref("tabIndex", event.index);
+                }
+              }}
+              renderTabs={this.renderTabs}
+            />
+          </>
+        </this.SplitterContent>
+      </this.Splitter>
+    </>)
+  }
 
   public renderToolbar = () => {
     return (
@@ -124,156 +290,141 @@ class MainActivity extends BaseActivity<Props, States> {
   }
 
   public renderPage = () => {
-    return (
-      <>
-        <this.Tabbar
-          swipeable={this.tools.stringToBoolean(this.native.getPref("enableSwipeBetweenTabs"))}
-          position={this.native.getPref("enableBottomTabbar") === "true" ? "bottom" : "top"}
-          index={this.tabIndexChecker()}
-          // @ts-ignore
-          onPreChange={(event: any) => {
-            event.preventDefault(); // For newer Onsen UI version
-            if (event.index != this.tabIndexChecker) {
-              this.native.setPref("tabIndex", event.index);
-            }
-          }}
-          renderTabs={this.renderTabs}
-        />
-        <this.ListDialogBuilder
-          options={{
-            onCancel: this.handleCancel,
-            isOpen: this.state.isContextOpen,
-            modifier: this.native.checkPlatformForBorderStyle,
-          }}
-          data={[
-            {
-              title: "Menu",
-              content: [
-                {
-                  text: this.string.settings,
-                  type: "",
-                  icon: "settings",
-                  onClick: () => {
-                    this.pushPage({
-                      activity: this.SettingsActivity,
-                      key: "settings",
-                    });
-                    this.handleCancel();
-                  },
-                },
-                {
-                  text: this.string.licenses,
-                  type: "",
-                  icon: "article",
-                  onClick: () => {
-                    this.pushPage({
-                      activity: this.TextFetchActivity,
-                      key: "licenses",
-                      textFetch: {
-                        title: this.string.licenses,
-                        url: "https://cdn.dergoogler.com/others/hentai-web/vendor.bundle.js.LICENSE.txt",
-                      },
-                    });
-                    this.handleCancel();
-                  },
-                },
-                {
-                  text: "Plugins",
-                  type: "",
-                  icon: "extension",
-                  style: {
-                    display:
-                      (this.native.getPref("enablePluginTestting") && this.native.getPref("enableCustomScriptLoading")) === "true"
-                        ? ""
-                        : "none",
-                  },
-                  onClick: () => {
-                    this.pushPage({
-                      activity: this.PluginsActivity,
-                      key: "plugins",
-                    });
-                    this.handleCancel();
-                  },
-                },
-                {
-                  text: "Playground",
-                  type: "",
-                  icon: "code",
-                  style: {
-                    display:
-                      this.native.isAndroid || this.native.isWindows
-                        ? "none"
-                        : (this.native.getPref("enablePluginTestting") && this.native.getPref("enableCustomScriptLoading")) ===
-                          "true"
-                          ? ""
-                          : "none",
-                  },
-                  onClick: () => {
-                    const getPlayground = this.native.getPref("playground");
-                    this.pushPage({
-                      activity: this.EditorActivity,
-                      key: "plugin-play-ground",
-                      extras: {
-                        pluginName: "playground",
-                        fileName: "index.js",
-                        value:
-                          getPlayground === "false"
-                            ? 'initFile((plugin) => {\r\n  console.log("Hello, world!")\r\n});\r\n'
-                            : getPlayground,
-                      },
-                    });
-                    this.handleCancel();
-                  },
-                },
-                {
-                  text: "Make HWPlugin",
-                  type: "",
-                  icon: "code",
-                  style: { display: this.native.isAndroid || this.native.isWindows ? "" : "none" },
-                  onClick: () => {
-                    this.native.open("https://docs.dergoogler.com/HWPlugin");
-                    this.handleCancel();
-                  },
-                },
-                {
-                  text: "Open app path",
-                  type: "",
-                  icon: "android",
-                  style: { display: this.native.isWindows ? "" : "none" },
-                  onClick: () => {
-                    window.Windows.openPath(window.Windows.appGetPath("userData"));
-                  },
-                },
-                {
-                  text: "Privacy Policy",
-                  type: "",
-                  icon: "policy",
-                  onClick: () => {
-                    this.native.open("https://hw.dergoogler.com/tos/privacy-policy");
-                  },
-                },
-                {
-                  text: "Terms & Conditions",
-                  type: "",
-                  icon: "gavel",
-                  onClick: () => {
-                    this.native.open("https://hw.dergoogler.com/tos/terms-conditions");
-                  },
-                },
-                {
-                  text: this.string.cancel,
-                  type: "",
-                  icon: "close",
-                  modifier: this.native.checkPlatformForBorderStyle,
-                  onClick: this.handleCancel,
-                },
-              ],
-            },
-          ]}
-        />
-      </>
-    );
+    return (this.renderSplitter());
   };
 }
 
 export default MainActivity;
+
+/*<this.ListDialogBuilder
+  options={{
+    onCancel: this.handleCancel,
+    isOpen: this.state.isContextOpen,
+    modifier: this.native.checkPlatformForBorderStyle,
+  }}
+  data={[
+    {
+      title: "Menu",
+      content: [
+        {
+          text: this.string.settings,
+          type: "",
+          icon: "settings",
+          onClick: () => {
+            this.pushPage({
+              activity: this.SettingsActivity,
+              key: "settings",
+            });
+            this.handleCancel();
+          },
+        },
+        {
+          text: this.string.licenses,
+          type: "",
+          icon: "article",
+          onClick: () => {
+            this.pushPage({
+              activity: this.TextFetchActivity,
+              key: "licenses",
+              textFetch: {
+                title: this.string.licenses,
+                url: "https://cdn.dergoogler.com/others/hentai-web/vendor.bundle.js.LICENSE.txt",
+              },
+            });
+            this.handleCancel();
+          },
+        },
+        {
+          text: "Plugins",
+          type: "",
+          icon: "extension",
+          style: {
+            display:
+              (this.native.getPref("enablePluginTestting") && this.native.getPref("enableCustomScriptLoading")) === "true"
+                ? ""
+                : "none",
+          },
+          onClick: () => {
+            this.pushPage({
+              activity: this.PluginsActivity,
+              key: "plugins",
+            });
+            this.handleCancel();
+          },
+        },
+        {
+          text: "Playground",
+          type: "",
+          icon: "code",
+          style: {
+            display:
+              this.native.isAndroid || this.native.isWindows
+                ? "none"
+                : (this.native.getPref("enablePluginTestting") && this.native.getPref("enableCustomScriptLoading")) ===
+                  "true"
+                  ? ""
+                  : "none",
+          },
+          onClick: () => {
+            const getPlayground = this.native.getPref("playground");
+            this.pushPage({
+              activity: this.EditorActivity,
+              key: "plugin-play-ground",
+              extras: {
+                pluginName: "playground",
+                fileName: "index.js",
+                value:
+                  getPlayground === "false"
+                    ? 'initFile((plugin) => {\r\n  console.log("Hello, world!")\r\n});\r\n'
+                    : getPlayground,
+              },
+            });
+            this.handleCancel();
+          },
+        },
+        {
+          text: "Make HWPlugin",
+          type: "",
+          icon: "code",
+          style: { display: this.native.isAndroid || this.native.isWindows ? "" : "none" },
+          onClick: () => {
+            this.native.open("https://docs.dergoogler.com/HWPlugin");
+            this.handleCancel();
+          },
+        },
+        {
+          text: "Open app path",
+          type: "",
+          icon: "android",
+          style: { display: this.native.isWindows ? "" : "none" },
+          onClick: () => {
+            window.Windows.openPath(window.Windows.appGetPath("userData"));
+          },
+        },
+        {
+          text: "Privacy Policy",
+          type: "",
+          icon: "policy",
+          onClick: () => {
+            this.native.open("https://hw.dergoogler.com/tos/privacy-policy");
+          },
+        },
+        {
+          text: "Terms & Conditions",
+          type: "",
+          icon: "gavel",
+          onClick: () => {
+            this.native.open("https://hw.dergoogler.com/tos/terms-conditions");
+          },
+        },
+        {
+          text: this.string.cancel,
+          type: "",
+          icon: "close",
+          modifier: this.native.checkPlatformForBorderStyle,
+          onClick: this.handleCancel,
+        },
+      ],
+    },
+  ]}
+/>*/

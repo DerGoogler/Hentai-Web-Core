@@ -10,7 +10,7 @@ import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity
 import { Props, States } from "./interface"
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
-import { Page, Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, RouterUtil, Fab } from "react-onsenui";
+import { Page, Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, RouterUtil, Fab, Splitter, SplitterSide, SplitterContent, List, ListItem } from "react-onsenui";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import MDIcon from "@Components/MDIcon";
 import ContentBody from "@Components/ContentBody";
@@ -41,8 +41,14 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
   public Tabbar = Tabbar
   public ToolbarButton = ToolbarButton
   public Button = Button
+  public List = List
+  public ListItem = ListItem
   public Icon = Icon
   public Input = Input
+  public SplitterContent = SplitterContent
+  public SplitterSide = SplitterSide
+  public Splitter = Splitter
+  public Page = Page
   public Fab = Fab
   public RouterUtil = RouterUtil
   public RouterNavigator = RouterNavigator

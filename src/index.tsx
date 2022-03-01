@@ -1,4 +1,4 @@
-import ReactDOM from "react-dom";
+import * as ReactDOM from "react-dom";
 import ons from "onsenui";
 import eruda from "eruda";
 import native from "@Native/index";
@@ -95,7 +95,7 @@ class Bootloader {
       if (native.isInstagram || native.isFacebook) {
         native.setPref("disableNSFW", "true");
       }
-      
+
       customElements.define("app-root", AppRoot);
 
       this.loadActivity(<InitActivity />);

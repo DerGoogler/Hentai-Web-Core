@@ -5,6 +5,7 @@ declare class MainActivity extends BaseActivity<Props, States> {
     componentDidMount: () => void;
     private handleClick;
     private handleCancel;
+    private renderSplitter;
     renderToolbar: () => JSX.Element;
     private renderTabs;
     private tabIndexChecker;

@@ -6,7 +6,7 @@ import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity
 import { Props } from "./interface";
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
-import { Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, Fab } from "react-onsenui";
+import { Page, Toolbar, Tabbar, ToolbarButton, Button, Input, Icon, BackButton, RouterNavigator, Fab, Splitter, SplitterSide, SplitterContent, List, ListItem } from "react-onsenui";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import MDIcon from "@Components/MDIcon";
 import ContentBody from "@Components/ContentBody";
@@ -49,9 +49,7 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
             boolean: string;
             bootstrap: string;
             "bootstrap-icons": string;
-            bota64: string; /**
-             * Native calls for Windows and Android
-             */
+            bota64: string;
             "core-js": string;
             "crypto-js": string;
             electron: string;
@@ -99,6 +97,7 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
             "@types/lodash": string;
             "@types/mousetrap": string;
             "@types/node": string;
+            "@types/react-dom": string;
             "@types/webpack-dev-server": string;
             "@types/webpack-sources": string;
             "babel-loader": string;
@@ -144,8 +143,14 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
     Tabbar: typeof Tabbar;
     ToolbarButton: typeof ToolbarButton;
     Button: typeof Button;
+    List: typeof List;
+    ListItem: typeof ListItem;
     Icon: typeof Icon;
     Input: typeof Input;
+    SplitterContent: typeof SplitterContent;
+    SplitterSide: typeof SplitterSide;
+    Splitter: typeof Splitter;
+    Page: typeof Page;
     Fab: typeof Fab;
     RouterUtil: {
         init: (routes: any[]) => import("react-onsenui").RouteConfig;
