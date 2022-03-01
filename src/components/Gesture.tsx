@@ -1,33 +1,32 @@
 import tools from "@Misc/tools";
 import * as React from "react";
 
-class Gesture extends React.Component<
-  {
-    event:
-    | "drag"
-    | "dragleft"
-    | "dragright"
-    | "dragup"
-    | "dragdown"
-    | "hold"
-    | "release"
-    | "swipe"
-    | "swipeleft"
-    | "swiperight"
-    | "swipeup"
-    | "swipedown"
-    | "tap"
-    | "doubletap"
-    | "touch"
-    | "transform"
-    | "pinch"
-    | "pinchin"
-    | "pinchout"
-    | "rotate";
-    callback(...props: any): void;
-  },
-  {}
-> {
+interface Props {
+  event:
+  | "drag"
+  | "dragleft"
+  | "dragright"
+  | "dragup"
+  | "dragdown"
+  | "hold"
+  | "release"
+  | "swipe"
+  | "swipeleft"
+  | "swiperight"
+  | "swipeup"
+  | "swipedown"
+  | "tap"
+  | "doubletap"
+  | "touch"
+  | "transform"
+  | "pinch"
+  | "pinchin"
+  | "pinchout"
+  | "rotate";
+  callback(...props: any): void;
+}
+
+class Gesture extends React.Component<Props, {}> {
   private gerstureID: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);

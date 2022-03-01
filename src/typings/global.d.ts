@@ -20,7 +20,13 @@ declare global {
 
   namespace JSX {
     interface IntrinsicElements {
+      /**
+       * ContentBody is an optional component, to make the view better on desktop
+       */
       "content-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+      /**
+       * ContentBody is an optional component, to make the view better on desktop
+       */
       "inner-content-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
       "page-section": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
