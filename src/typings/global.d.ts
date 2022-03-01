@@ -1,3 +1,4 @@
+import * as React from "react";
 import Android from "@Types/android";
 import Windows from "@Types/windows";
 
@@ -15,5 +16,18 @@ declare global {
      * Declare the custom window event (`Windows`) for the WebView
      */
     readonly Windows: Windows;
+  }
+
+  namespace JSX {
+    interface IntrinsicElements {
+      "content-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+      "inner-content-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+
+      "page-section": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+
+      "gerture-element": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+
+      "markdown-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+    }
   }
 }

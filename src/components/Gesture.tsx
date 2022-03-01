@@ -4,26 +4,26 @@ import * as React from "react";
 class Gesture extends React.Component<
   {
     event:
-      | "drag"
-      | "dragleft"
-      | "dragright"
-      | "dragup"
-      | "dragdown"
-      | "hold"
-      | "release"
-      | "swipe"
-      | "swipeleft"
-      | "swiperight"
-      | "swipeup"
-      | "swipedown"
-      | "tap"
-      | "doubletap"
-      | "touch"
-      | "transform"
-      | "pinch"
-      | "pinchin"
-      | "pinchout"
-      | "rotate";
+    | "drag"
+    | "dragleft"
+    | "dragright"
+    | "dragup"
+    | "dragdown"
+    | "hold"
+    | "release"
+    | "swipe"
+    | "swipeleft"
+    | "swiperight"
+    | "swipeup"
+    | "swipedown"
+    | "tap"
+    | "doubletap"
+    | "touch"
+    | "transform"
+    | "pinch"
+    | "pinchin"
+    | "pinchout"
+    | "rotate";
     callback(...props: any): void;
   },
   {}
@@ -43,7 +43,7 @@ class Gesture extends React.Component<
 
   public render() {
     const { children } = this.props;
-    return <div ref={this.gerstureID}>{children}</div>;
+    return <gerture-element ref={this.gerstureID}>{children}</gerture-element>;
   }
 }
 

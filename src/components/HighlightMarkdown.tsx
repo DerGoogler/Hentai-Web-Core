@@ -25,7 +25,7 @@ class HighlightedMarkdown extends React.Component<{ children: string }> {
 
   public render() {
     return (
-      <div ref={this.rootRef}>
+      <markdown-body ref={this.rootRef}>
         <Markdown
           options={{
             overrides: {
@@ -46,7 +46,7 @@ class HighlightedMarkdown extends React.Component<{ children: string }> {
         >
           {this.props.children}
         </Markdown>
-      </div>
+      </markdown-body>
     );
   }
 }

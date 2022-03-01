@@ -2,6 +2,7 @@ import * as React from "react";
 import { isMobile } from "react-device-detect";
 import config from "../misc/config";
 import native from "@Native/index";
+import AppRoot from "./AppRoot";
 
 /**
  * ContentBody is an optional component, to make the view better on desktop
@@ -29,7 +30,7 @@ class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element
   public render() {
     const { className } = this.props;
     return (
-      <div
+      <content-body
         className={
           className === "markdownBody"
             ? native.getPref("enableDarkmode") === "true"
@@ -39,8 +40,8 @@ class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element
         }
         style={this.checkDevice({ padding: native.isWindows || isMobile ? "" : "16px" }, {})}
       >
-        <div style={this.checkDevice(this.stlye, {})}>{this.props.children}</div>
-      </div>
+        <inner-content-body style={this.checkDevice(this.stlye, {})}>{this.props.children}</inner-content-body>
+      </content-body>
     );
   }
 }

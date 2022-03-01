@@ -5,9 +5,9 @@ class AnimeTab extends React.Component<{ content: JSX.Element }> {
   public render() {
     return (
       <Page>
-        <section>
+        <page-section>
           <span>{this.props.content}</span>
-        </section>
+        </page-section>
       </Page>
     );
   }
