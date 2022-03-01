@@ -88,6 +88,7 @@ const config = {
     modules: ["node_modules", path.join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
     extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
+      "@": path.resolve(__dirname, "src"),
       "@Builders": path.resolve(__dirname, "src/builders/index.ts"),
       "@Components": path.resolve(__dirname, "src/components"),
       "@Native": path.resolve(__dirname, "src/native"),
