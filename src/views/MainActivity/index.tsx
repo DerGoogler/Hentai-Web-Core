@@ -2,7 +2,7 @@ import { BaseActivity } from "@Views";
 import { Props, States } from "./interface";
 
 class MainActivity extends BaseActivity<Props, States> {
-  public constructor(props: any) {
+  public constructor(props: Readonly<Props> | Props) {
     super(props);
     this.state = {
       isContextOpen: false,
