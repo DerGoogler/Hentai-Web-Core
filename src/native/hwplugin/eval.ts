@@ -6,6 +6,10 @@ import HWPlugin from ".";
 import { PluginOptions } from "@Types/pluginContext";
 import ipc from "@Misc/ipc";
 
+/**
+ * Evaluates JavaScript code and executes it.
+ * @param javascriptString A String value that contains valid JavaScript code.
+ */
 class evil {
   private static purple = "color: #fff; background: #4a148c; padding: 4px; border-radius: 8px 0px 0px 8px;";
   private static lightPurple = "color: #fff; background: #bb86fc; padding: 4px; border-radius: 0px 8px 8px 0px;";
