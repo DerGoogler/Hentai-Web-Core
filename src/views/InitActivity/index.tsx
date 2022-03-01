@@ -6,7 +6,6 @@ import { PushPageProps } from "@Types/init";
 import Bootloader from "@Bootloader";
 import LoginActivity from "../LoginActivity";
 import { Props, States } from "./interface";
-import tools from "@Misc/tools";
 
 class InitActivity extends React.Component<Props, States> {
   public constructor(props: any) {
@@ -38,22 +37,6 @@ class InitActivity extends React.Component<Props, States> {
 
   public componentDidMount = () => {
     native.electron.discordRPC("Viewing images");
-
-    let pas,
-      customPlugins = null;
-    if (native.isAndroid || native.isWindows) {
-      if (native.fs.isFileExist("plugins.yaml")) {
-        pas = native.fs.readFile("plugins.yaml", { parse: { use: true, mode: "yaml" } });
-        customPlugins = pas.map((item: string) => tools.PluginInitial(item));
-      }
-    } else {
-      const getPlaygroundCode = native.getPref("playground");
-      native.eval(getPlaygroundCode, {
-        plugin: {
-          name: "playground",
-        },
-      });
-    }
 
     window.addEventListener("load", this.windowLoadPush);
     if (native.isMobile) {

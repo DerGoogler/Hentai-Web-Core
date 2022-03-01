@@ -7,12 +7,12 @@ import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import AnimeContent from "@Components/AnimeContent";
 import MDIcon from "@Components/MDIcon";
 import News from "@Components/News";
-import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity } from "@Views";
+import { BaseActivity, ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity } from "@Views";
 import images from "@DataPacks/images";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
 
-class MainActivity extends React.Component<Props, States> {
+class MainActivity extends BaseActivity<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = {
@@ -23,6 +23,7 @@ class MainActivity extends React.Component<Props, States> {
   }
 
   public componentDidMount = () => {
+    super.componentDidMount;
     if (native.isAndroid || native.isWindows) {
       tools.ref("download-app", (e: HTMLElement) => {
         e.style.display = "none";

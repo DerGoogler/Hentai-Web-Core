@@ -1,6 +1,6 @@
-import * as React from "react";
+import { BaseActivity } from "@Views";
 import { Props, States } from "./interface";
-declare class MainActivity extends React.Component<Props, States> {
+declare class MainActivity extends BaseActivity<Props, States> {
     constructor(props: any);
     componentDidMount: () => void;
     private handleClick;
