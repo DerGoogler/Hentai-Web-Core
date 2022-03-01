@@ -1,12 +1,12 @@
-import React from "react";
 import { Props, States } from "./interface";
-declare class LoginActivity extends React.Component<Props, States> {
+import { BaseActivity } from "@Views";
+declare class LoginActivity extends BaseActivity<Props, States> {
     constructor(props: any);
-    componentDidMount(): void;
-    private renderToolbar;
+    componentDidMount: () => void;
+    renderToolbar: () => JSX.Element;
     private handleClick;
     private handleUsernameChange;
     private handlePasswordChange;
-    render(): JSX.Element;
+    renderPage: () => JSX.Element;
 }
 export default LoginActivity;

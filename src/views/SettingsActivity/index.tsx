@@ -1,15 +1,14 @@
-import * as React from "react";
-import { Page, Toolbar } from "react-onsenui";
+import { Toolbar } from "react-onsenui";
 import { List } from "react-onsenui";
 import settings from "@DataPacks/settings";
-import native from "@Native/index";
 import { ToolbarBuilder, ListViewBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
+import { BaseActivity } from "@Views";
 
-class SettingsActivity extends React.Component<Props, States> {
-  private renderToolbar = () => {
+class SettingsActivity extends BaseActivity<Props, States> {
+  public renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
@@ -22,15 +21,13 @@ class SettingsActivity extends React.Component<Props, States> {
     );
   };
 
-  public render() {
+  public renderPage() {
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody>
-          <List>
-            <ListViewBuilder isPlugin={false} pluginName="" data={settings} />
-          </List>
-        </ContentBody>
-      </Page>
+      <ContentBody>
+        <List>
+          <ListViewBuilder isPlugin={false} pluginName="" data={settings} />
+        </List>
+      </ContentBody>
     );
   }
 }

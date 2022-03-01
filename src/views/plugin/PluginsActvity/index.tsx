@@ -8,11 +8,12 @@ import MDIcon from "@Components/MDIcon";
 import PluginAboutActivity from "../PluginAboutActivity";
 import EditorActivity from "../../EditorActivity";
 import { Props, States } from "./interface";
+import { BaseActivity } from "@Views";
 
-class PluginsActivity extends React.Component<Props, States> {
+class PluginsActivity extends BaseActivity<Props, States> {
   private scriptLosding = native.getPref("enableCustomScriptLoading") === "true";
 
-  private renderToolbar = () => {
+  public renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
@@ -25,7 +26,7 @@ class PluginsActivity extends React.Component<Props, States> {
     );
   };
 
-  public render() {
+  public renderPage() {
     let pas,
       customPlugins = null;
     if (native.isAndroid || native.isWindows) {
@@ -117,12 +118,10 @@ class PluginsActivity extends React.Component<Props, States> {
     }
 
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody>
-          <List>{customPlugins}</List>
-          <div style={{ padding: "8px" }}></div>
-        </ContentBody>
-      </Page>
+      <ContentBody>
+        <List>{customPlugins}</List>
+        <div style={{ padding: "8px" }}></div>
+      </ContentBody>
     );
   }
 }

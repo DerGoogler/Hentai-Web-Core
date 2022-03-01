@@ -1,5 +1,4 @@
 interface Props {
-    popPage: any;
 }
 interface States {
     username: string;

@@ -1,12 +1,13 @@
-import * as React from "react";
+/// <reference types="react" />
 import { Props, States } from "./interface";
-declare class PluginAboutActivity extends React.Component<Props, States> {
+import { BaseActivity } from "@Views";
+declare class PluginAboutActivity extends BaseActivity<Props, States> {
     private getPluginConfig;
     private author;
     private version;
     private language;
     private description;
-    private renderToolbar;
-    render(): JSX.Element;
+    renderToolbar: () => JSX.Element;
+    renderPage(): JSX.Element;
 }
 export default PluginAboutActivity;

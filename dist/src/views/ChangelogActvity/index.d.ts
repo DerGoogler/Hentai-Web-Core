@@ -1,9 +1,8 @@
-import React from "react";
 import { Props, States } from "./interface";
-declare class ChangelogActivity extends React.Component<Props, States> {
+import { BaseActivity } from "@Views";
+declare class ChangelogActivity extends BaseActivity<Props, States> {
     constructor(props: any);
-    componentDidMount: () => void;
     renderToolbar: () => JSX.Element;
-    render: () => JSX.Element;
+    renderPage: () => JSX.Element;
 }
 export default ChangelogActivity;

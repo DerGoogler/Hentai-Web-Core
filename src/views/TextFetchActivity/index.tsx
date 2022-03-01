@@ -6,12 +6,13 @@ import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import { Props, States } from "./interface";
+import { BaseActivity } from "@Views";
 
-class TextFetchActivity extends React.Component<Props, States> {
+class TextFetchActivity extends BaseActivity<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { data: "" };
-    
+
   }
 
   public componentDidMount = () => {
@@ -22,7 +23,7 @@ class TextFetchActivity extends React.Component<Props, States> {
     });
   };
 
-  private renderToolbar = () => {
+  public renderToolbar = () => {
     const { textFetch, popPage } = this.props;
     return (
       <Toolbar>
@@ -31,20 +32,18 @@ class TextFetchActivity extends React.Component<Props, States> {
     );
   };
 
-  public render() {
+  public renderPage() {
     const { data } = this.state;
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody className="markdownBody">
-          <div
-            style={{
-              padding: "16px",
-            }}
-          >
-            <HighlightedMarkdown>{data}</HighlightedMarkdown>
-          </div>
-        </ContentBody>
-      </Page>
+      <ContentBody className="markdownBody">
+        <div
+          style={{
+            padding: "16px",
+          }}
+        >
+          <HighlightedMarkdown>{data}</HighlightedMarkdown>
+        </div>
+      </ContentBody>
     );
   }
 }

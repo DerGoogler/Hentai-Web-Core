@@ -11,8 +11,9 @@ import { Ace } from "ace-builds";
 import ons from "onsenui";
 import editorTheme from "./editorTheme";
 import tools from "@Misc/tools";
+import { BaseActivity } from "@Views";
 
-class EditorActivity extends React.Component<Props, States> {
+class EditorActivity extends BaseActivity<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = {
@@ -32,7 +33,7 @@ class EditorActivity extends React.Component<Props, States> {
     );
   };
 
-  private renderToolbar = () => {
+  public renderToolbar = () => {
     return (
       <Toolbar>
         <ToolbarBuilder
@@ -73,12 +74,6 @@ class EditorActivity extends React.Component<Props, States> {
         />
       </Toolbar>
     );
-  };
-
-  private openFile = () => {
-    ons.notification.prompt("Notification").then((input) => {
-      const f = input;
-    });
   };
 
   private save = () => {
@@ -180,55 +175,53 @@ class EditorActivity extends React.Component<Props, States> {
     });
   };
 
-  public render() {
+  public renderPage = () => {
     const { data } = this.state;
     if (native.isWindows || native.isDesktop) {
       return (
-        <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-          <Editor
-            height="100%"
-            defaultLanguage="javascript"
-            defaultValue={data}
-            options={{
-              selectOnLineNumbers: true,
-              minimap: {
-                enabled: false,
-              },
-            }}
-            onChange={this.onChange}
-            onMount={this.editorDidMount}
-          />
-        </Page>
+        <Editor
+          height="100%"
+          defaultLanguage="javascript"
+          defaultValue={data}
+          options={{
+            selectOnLineNumbers: true,
+            minimap: {
+              enabled: false,
+            },
+          }}
+          onChange={this.onChange}
+          onMount={this.editorDidMount}
+        />
+
       );
     } else {
       return (
-        <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-          <AceEditor
-            placeholder="Write code ..."
-            mode="javascript"
-            theme="nord_dark"
-            name="blah2"
-            onLoad={this.onAndroidEditorLoad}
-            onChange={this.onChange}
-            fontSize={14}
-            width="100%"
-            height="100%"
-            maxLines={Infinity}
-            showPrintMargin={true}
-            showGutter={true}
-            highlightActiveLine={true}
-            value={data}
-            setOptions={{
-              enableBasicAutocompletion: true,
-              enableLiveAutocompletion: true,
-              cursorStyle: "smooth",
-              spellcheck: false,
-              enableSnippets: true,
-              showLineNumbers: true,
-              tabSize: 2,
-            }}
-          />
-        </Page>
+        <AceEditor
+          placeholder="Write code ..."
+          mode="javascript"
+          theme="nord_dark"
+          name="blah2"
+          onLoad={this.onAndroidEditorLoad}
+          onChange={this.onChange}
+          fontSize={14}
+          width="100%"
+          height="100%"
+          maxLines={Infinity}
+          showPrintMargin={true}
+          showGutter={true}
+          highlightActiveLine={true}
+          value={data}
+          setOptions={{
+            enableBasicAutocompletion: true,
+            enableLiveAutocompletion: true,
+            cursorStyle: "smooth",
+            spellcheck: false,
+            enableSnippets: true,
+            showLineNumbers: true,
+            tabSize: 2,
+          }}
+        />
+
       );
     }
   }

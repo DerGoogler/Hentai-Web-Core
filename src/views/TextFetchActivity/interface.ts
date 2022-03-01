@@ -1,7 +1,6 @@
 import { TextFetch } from "@Types/init";
 
 interface Props {
-  popPage: any;
   textFetch: TextFetch;
 }
 

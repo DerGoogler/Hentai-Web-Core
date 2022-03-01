@@ -1,8 +1,9 @@
-import * as React from "react";
+/// <reference types="react" />
 import { Props, States } from "./interface";
-declare class PluginsActivity extends React.Component<Props, States> {
+import { BaseActivity } from "@Views";
+declare class PluginsActivity extends BaseActivity<Props, States> {
     private scriptLosding;
-    private renderToolbar;
-    render(): JSX.Element;
+    renderToolbar: () => JSX.Element;
+    renderPage(): JSX.Element;
 }
 export default PluginsActivity;

@@ -11,14 +11,6 @@ class ChangelogActivity extends BaseActivity<Props, States> {
     super(props)
   }
 
-  public componentDidMount = () => {
-    super.componentDidMount;
-  }
-
-  public componentDidUpdate = () => {
-    super.componentDidUpdate;
-  }
-
   public renderToolbar = () => {
     return (
       <Toolbar>

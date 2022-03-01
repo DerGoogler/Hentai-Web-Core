@@ -1,25 +1,25 @@
 import ons from "onsenui";
-import React from "react";
 import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui";
 import native from "@Native/index";
 import { ToolbarBuilder } from "@Builders";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
+import { BaseActivity } from "@Views";
 
-class LoginActivity extends React.Component<Props, States> {
+class LoginActivity extends BaseActivity<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };
   }
 
-  public componentDidMount() {
-    native.android.setStatusbarColor("#4a148c");
+  public componentDidMount = () => {
+    super.componentDidMount;
     native.userAgentEqualWindows(true)
       ? window.Windows.notification("Welcome to HW", "The app includes nsfw content.")
       : null;
   }
 
-  private renderToolbar() {
+  public renderToolbar = () => {
     return (
       <Toolbar modifier="noshadow">
         <ToolbarBuilder title={string.signIn} hasWindowsButtons={true} />
@@ -44,9 +44,9 @@ class LoginActivity extends React.Component<Props, States> {
     this.setState({ password: e.target.value.toUpperCase() });
   };
 
-  public render() {
+  public renderPage = () => {
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
+      <>
         <section
           className="drag--windows"
           style={{
@@ -106,7 +106,7 @@ class LoginActivity extends React.Component<Props, States> {
             </p>
           </div>
         </section>
-      </Page>
+      </>
     );
   }
 }

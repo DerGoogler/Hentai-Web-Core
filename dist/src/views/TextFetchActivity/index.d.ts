@@ -1,9 +1,10 @@
-import React from "react";
+/// <reference types="react" />
 import { Props, States } from "./interface";
-declare class TextFetchActivity extends React.Component<Props, States> {
+import { BaseActivity } from "@Views";
+declare class TextFetchActivity extends BaseActivity<Props, States> {
     constructor(props: any);
     componentDidMount: () => void;
-    private renderToolbar;
-    render(): JSX.Element;
+    renderToolbar: () => JSX.Element;
+    renderPage(): JSX.Element;
 }
 export default TextFetchActivity;

@@ -1,6 +1,5 @@
 interface Props {
     extras: any;
-    popPage: any;
 }
 interface States {
     isContextOpen: boolean;

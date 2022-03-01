@@ -1,7 +1,8 @@
-import * as React from "react";
+/// <reference types="react" />
 import { Props, States } from "./interface";
-declare class SettingsActivity extends React.Component<Props, States> {
-    private renderToolbar;
-    render(): JSX.Element;
+import { BaseActivity } from "@Views";
+declare class SettingsActivity extends BaseActivity<Props, States> {
+    renderToolbar: () => JSX.Element;
+    renderPage(): JSX.Element;
 }
 export default SettingsActivity;

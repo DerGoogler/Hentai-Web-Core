@@ -1,7 +1,8 @@
-import * as React from "react";
+/// <reference types="react" />
 import { PushPageProps } from "@Types/init";
 import { Props, States } from "./interface";
-declare class InitActivity extends React.Component<Props, States> {
+import { BaseActivity } from "@Views";
+declare class InitActivity extends BaseActivity<Props, States> {
     constructor(props: any);
     componentDidMount: () => void;
     componentDidUpdate(): void;
@@ -12,8 +13,7 @@ declare class InitActivity extends React.Component<Props, States> {
     popPage: (options?: {}) => void;
     onPostPush: () => void;
     onPostPop: () => void;
-    renderPage: (route: any) => JSX.Element;
-    private renderToolbar;
-    render(): JSX.Element;
+    renderPage_: (route: any) => JSX.Element;
+    renderPage(): JSX.Element;
 }
 export default InitActivity;

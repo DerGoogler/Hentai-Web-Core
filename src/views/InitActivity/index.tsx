@@ -1,13 +1,13 @@
 import native from "@Native/index";
 import MainActivity from "../MainActivity";
-import * as React from "react";
 import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
 import Bootloader from "@Bootloader";
 import LoginActivity from "../LoginActivity";
 import { Props, States } from "./interface";
+import { BaseActivity } from "@Views";
 
-class InitActivity extends React.Component<Props, States> {
+class InitActivity extends BaseActivity<Props, States> {
   public constructor(props: any) {
     super(props);
 
@@ -36,8 +36,7 @@ class InitActivity extends React.Component<Props, States> {
   }
 
   public componentDidMount = () => {
-    native.electron.discordRPC("Viewing images");
-
+    super.componentDidMount;
     window.addEventListener("load", this.windowLoadPush);
     if (native.isMobile) {
       window.addEventListener("contextmenu", this.removeContextMenuMobile);
@@ -45,7 +44,7 @@ class InitActivity extends React.Component<Props, States> {
   };
 
   public componentDidUpdate() {
-    new Bootloader().styleInit();
+    super.componentDidUpdate;
   }
 
   public componentWillUnmount = () => {
@@ -137,35 +136,23 @@ class InitActivity extends React.Component<Props, States> {
     this.setState({ routeConfig });
   };
 
-  public renderPage = (route: any) => {
+  // Has confict with BaseActivity
+  public renderPage_ = (route: any) => {
     const props = route.props || {};
     return <route.component {...props} />;
   };
 
-  private renderToolbar() {
+  public renderPage() {
     return (
-      <Toolbar>
-        <div className="left">
-          <BackButton />
-        </div>
-        <div className="center">Stateless Navigator</div>
-      </Toolbar>
-    );
-  }
-
-  public render() {
-    return (
-      <Page>
-        <RouterNavigator
-          swipeable={true}
-          // @ts-ignore
-          swipePop={(options: any) => this.popPage(options)}
-          routeConfig={this.state.routeConfig}
-          renderPage={this.renderPage}
-          onPostPush={() => this.onPostPush()}
-          onPostPop={() => this.onPostPop()}
-        />
-      </Page>
+      <RouterNavigator
+        swipeable={true}
+        // @ts-ignore
+        swipePop={(options: any) => this.popPage(options)}
+        routeConfig={this.state.routeConfig}
+        renderPage={this.renderPage_}
+        onPostPush={() => this.onPostPush()}
+        onPostPop={() => this.onPostPop()}
+      />
     );
   }
 }

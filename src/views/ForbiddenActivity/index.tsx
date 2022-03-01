@@ -1,11 +1,11 @@
-import React from "react";
-import { Toolbar, Page } from "react-onsenui";
+import { Toolbar } from "react-onsenui";
 import native from "@Native/index";
 import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
+import { BaseActivity } from "@Views";
 
-class ForbiddenActivity extends React.Component {
-  private renderToolbar() {
+class ForbiddenActivity extends BaseActivity {
+  public renderToolbar() {
     return (
       <Toolbar>
         <ToolbarBuilder title={"Forbidden"} hasWindowsButtons={false} />
@@ -13,27 +13,25 @@ class ForbiddenActivity extends React.Component {
     );
   }
 
-  public render() {
+  public renderPage() {
     return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody>
-          {native.isIframe
-            ? "Embedding in iFrame are not allowed"
-            : native.isElectron
+      <ContentBody>
+        {native.isIframe
+          ? "Embedding in iFrame are not allowed"
+          : native.isElectron
             ? "This app does not support Electron"
             : native.isEdge
-            ? "There are no support for Edge"
-            : native.isIE
-            ? "IE is deprecated"
-            : native.isMIUI
-            ? "We don't allow MIUI devices/systems"
-            : native.isSamsungBrowser
-            ? "We don't allow the Samsung Browser"
-            : native.isSmartTV
-            ? "SmartTV are not optimized for this usage"
-            : null}
-        </ContentBody>
-      </Page>
+              ? "There are no support for Edge"
+              : native.isIE
+                ? "IE is deprecated"
+                : native.isMIUI
+                  ? "We don't allow MIUI devices/systems"
+                  : native.isSamsungBrowser
+                    ? "We don't allow the Samsung Browser"
+                    : native.isSmartTV
+                      ? "SmartTV are not optimized for this usage"
+                      : null}
+      </ContentBody>
     );
   }
 }
