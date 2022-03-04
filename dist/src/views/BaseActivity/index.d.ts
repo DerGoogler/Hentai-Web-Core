@@ -62,6 +62,7 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
             "js-yaml-loader": string;
             jss: string;
             "jss-preset-default": string;
+            "license-checker": string;
             "loader-utils": string;
             "localstorage-slim": string;
             "markdown-to-jsx": string;

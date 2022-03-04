@@ -1,12 +1,12 @@
 import native from "@Native/index";
 import { isMobile } from "react-device-detect";
 import config from "../misc/config";
-import BasicComponent from "./BasicComponent";
+import BaseComponent from "./BaseComponent";
 
 /**
  * ContentBody is an optional component, to make the view better on desktop
  */
-class ContentBody extends BasicComponent {
+class ContentBody extends BaseComponent {
   private stlye: any = {
     boxSizing: "border-box",
     display: "flex",

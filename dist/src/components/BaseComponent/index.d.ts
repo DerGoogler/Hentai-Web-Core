@@ -4,7 +4,7 @@ interface Props {
 }
 interface States {
 }
-declare class BasicComponent<P = {}, S = {}, SS = any> extends React.Component<P & Props & React.HTMLAttributes<Element>, S & States & Element, SS> {
+declare class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P & Props & React.HTMLAttributes<Element>, S & States & Element, SS> {
     constructor(props: Readonly<P & Props & React.HTMLAttributes<Element>> | P & Props & React.HTMLAttributes<Element>);
     renderComponent(): JSX.Element;
     /**
@@ -12,4 +12,4 @@ declare class BasicComponent<P = {}, S = {}, SS = any> extends React.Component<P
      */
     render: () => JSX.Element;
 }
-export default BasicComponent;
+export default BaseComponent;

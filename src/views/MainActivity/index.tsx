@@ -62,7 +62,7 @@ class MainActivity extends BaseActivity<Props, States> {
     this.setState({ isContextOpen: false });
   };
 
-  private renderSplitter() {
+  private renderSplitter = () => {
     return (<>
       <this.Splitter>
         <this.SplitterSide

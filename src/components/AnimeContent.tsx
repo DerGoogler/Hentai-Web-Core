@@ -6,8 +6,7 @@ import native from "@Native/index";
 import { string } from "@Strings";
 import MDIcon from "./MDIcon";
 import tools from "@Misc/tools";
-import { OnsSearchInputElement } from "onsenui";
-import CustomSearchbar from "./CustomSearchbar";
+import CustomSearchInput from "./CustomSearchInput";
 
 class AnimeContent extends React.Component<
   {
@@ -16,7 +15,7 @@ class AnimeContent extends React.Component<
   },
   { search: string; currentSerachText: string; searchButtonDisabled: boolean }
 > {
-  private searchBar: React.RefObject<CustomSearchbar>;
+  private searchBar: React.RefObject<CustomSearchInput>;
 
   public constructor(props: any) {
     super(props);
@@ -28,23 +27,8 @@ class AnimeContent extends React.Component<
     this.searchBar = React.createRef();
   }
 
-  /*
-  public componentDidMount() {
-    tools.ref(this.searchBar, (ref: SearchInput) => {
-      ref.addEventListener('keydown', (event: KeyboardEvent) => {
-        if (event.keyCode === 13) {
-          console.log("Enter")
-        }
-      });
-    })
-  } */
-
-  private filter = (e: any) => {
-    this.setState({ search: e.target.value.toLowerCase() });
-  };
-
   private triggerSearch = () => {
-    tools.ref(this.searchBar, (ref: CustomSearchbar) => {
+    tools.ref(this.searchBar, (ref: CustomSearchInput) => {
       this.setState({ search: ref.value.toLowerCase() });
     })
 
@@ -78,7 +62,7 @@ class AnimeContent extends React.Component<
               paddingBottom: "0px",
             }}
           >
-            <CustomSearchbar
+            <CustomSearchInput
               placeholder={`${string.search} ${this.props.name}`}
               ref={this.searchBar}
               style={{
@@ -87,7 +71,6 @@ class AnimeContent extends React.Component<
                 marginRight: "4px",
                 backgroundColor: native.getPref("enableDarkmode") === "true" ? "#1F1F1F" : "transparent",
               }}
-            // onChange={this.filter}
             />
             <Button
               onClick={this.triggerSearch}

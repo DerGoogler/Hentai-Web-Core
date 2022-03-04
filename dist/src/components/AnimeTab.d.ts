@@ -1,7 +1,8 @@
-import * as React from "react";
-declare class AnimeTab extends React.Component<{
+/// <reference types="react" />
+import BaseComponent from "./BaseComponent";
+declare class AnimeTab extends BaseComponent<{
     content: JSX.Element;
 }> {
-    render(): JSX.Element;
+    renderComponent: () => JSX.Element;
 }
 export default AnimeTab;

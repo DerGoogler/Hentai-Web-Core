@@ -1,21 +1,23 @@
 import { SearchInput } from "react-onsenui";
-import BasicComponent from "./BasicComponent";
+import BaseComponent from "./BaseComponent";
 
 interface Props {
     modifier?: string | undefined,
     disabled?: boolean | undefined,
     placeholder?: string | undefined,
-    value?: string | undefined,
     inputId?: string | undefined,
 }
 
-class CustomSearchbar extends BasicComponent<Props, any> {
+class CustomSearchInput extends BaseComponent<Props, any> {
     public constructor(props: any) {
         super(props)
-
         this.state = {
             value: ""
         }
+    }
+
+    public addEventListener(event: string, callback: Function): void {
+
     }
 
     /**
@@ -41,7 +43,7 @@ class CustomSearchbar extends BasicComponent<Props, any> {
     }
 
     public renderComponent() {
-        const { modifier, disabled, value, inputId, placeholder, style, className, } = this.props
+        const { modifier, disabled, inputId, placeholder, style, className, } = this.props
         return (<>
             <SearchInput
                 // @ts-ignore
@@ -51,11 +53,10 @@ class CustomSearchbar extends BasicComponent<Props, any> {
                 onChange={this.onChange}
                 modifier={modifier}
                 disabled={disabled}
-                value={value}
                 inputId={inputId}
             />
         </>)
     }
 }
 
-export default CustomSearchbar
+export default CustomSearchInput

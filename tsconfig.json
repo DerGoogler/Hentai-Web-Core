@@ -18,19 +18,26 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["/*"],
-      "@Native/*": ["native/*"],
-      "@Builders": ["builders/index.ts"],
-      "@Components/*": ["components/*"],
-      "@Types/*": ["typings/*"],
-      "@DataPacks/*": ["dataPacks/*"],
-      "@Misc/*": ["misc/*"],
-      "@Bootloader": ["index.tsx"],
-      "@Styles/*": ["styles/*"],
-      "@Strings": ["localization/index.ts"],
-      "@Views": ["views/index.ts"]
+      "@/*": ["./src/*"],
+      "@Native/*": ["./src/native/*"],
+      "@Builders": ["./src/builders/index.ts"],
+      "@Components/*": ["./src/components/*"],
+      "@Types/*": ["./src/typings/*"],
+      "@DataPacks/*": ["./src/dataPacks/*"],
+      "@Misc/*": ["./src/misc/*"],
+      "@Bootloader": ["./src/index.tsx"],
+      "@Styles/*": ["./src/styles/*"],
+      "@Strings": ["./src/localization/index.ts"],
+      "@Views": ["./src/views/index.ts"],
+
+      // Packages
+      "#OnsenUI-Package": ["./node_modules/onsenui/package.json"],
+      "#React-OnsenUI-Package": ["./node_modules/react-onsenui/package.json"],
+      "#React-Bootstrap-Package": ["./node_modules/react-bootstrap/package.json"],
+      "#React-Package": ["./node_modules/react/package.json"],
+      "#Package": ["./package.json"]
     }
   },
   "include": ["./src/**/*"]

@@ -1,13 +1,11 @@
-import * as React from "react";
 import { Page } from "react-onsenui";
+import BaseComponent from "./BaseComponent";
 
-class AnimeTab extends React.Component<{ content: JSX.Element }> {
-  public render() {
+class AnimeTab extends BaseComponent<{ content: JSX.Element }> {
+  public renderComponent = () => {
     return (
       <Page>
-        <page-section>
-          <span>{this.props.content}</span>
-        </page-section>
+        {this.props.content}
       </Page>
     );
   }

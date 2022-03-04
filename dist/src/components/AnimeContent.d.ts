@@ -9,7 +9,6 @@ declare class AnimeContent extends React.Component<{
 }> {
     private searchBar;
     constructor(props: any);
-    private filter;
     private triggerSearch;
     render: () => JSX.Element;
 }

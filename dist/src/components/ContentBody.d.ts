@@ -1,9 +1,9 @@
 /// <reference types="react" />
-import BasicComponent from "./BasicComponent";
+import BaseComponent from "./BaseComponent";
 /**
  * ContentBody is an optional component, to make the view better on desktop
  */
-declare class ContentBody extends BasicComponent {
+declare class ContentBody extends BaseComponent {
     private stlye;
     private checkDevice;
     renderComponent(): JSX.Element;
