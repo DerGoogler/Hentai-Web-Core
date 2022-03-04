@@ -19,6 +19,7 @@ declare class Bootloader {
     private androidSettingsinit;
     private makeExamplePlugin;
     private folderInit;
+    private defineCustomDomElement;
     init(): void;
 }
 export default Bootloader;

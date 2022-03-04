@@ -99,6 +99,13 @@ const config = {
       "@Styles": path.resolve(__dirname, "src/styles"),
       "@Strings": path.resolve(__dirname, "src/localization/index.ts"),
       "@Views": path.resolve(__dirname, "src/views/index.ts"),
+
+      // Packages
+      "#OnsenUI-Package": path.resolve(__dirname, "node_modules/onsenui/package.json"),
+      "#React-OnsenUI-Package": path.resolve(__dirname, "node_modules/react-onsenui/package.json"),
+      "#React-Bootstrap-Package": path.resolve(__dirname, "node_modules/react-bootstrap/package.json"),
+      "#React-Package": path.resolve(__dirname, "node_modules/react/package.json"),
+      "#Package": path.resolve(__dirname, "package.json"),
     },
   },
 };

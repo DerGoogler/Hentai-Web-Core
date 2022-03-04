@@ -10,4 +10,16 @@ import TextFetchActivity from "./TextFetchActivity";
 import LoginActivity from "./LoginActivity";
 import PluginsActivity from "./plugin/PluginsActvity";
 
-export { BaseActivity, InitActivity, PluginsActivity, MainActivity, LoginActivity, ChangelogActivity, PluginAboutActivity, SettingsActivity, EditorActivity, ForbiddenActivity, TextFetchActivity };
+export {
+  BaseActivity,
+  InitActivity,
+  PluginsActivity,
+  MainActivity,
+  LoginActivity,
+  ChangelogActivity,
+  PluginAboutActivity,
+  SettingsActivity,
+  EditorActivity,
+  ForbiddenActivity,
+  TextFetchActivity,
+};

@@ -41,6 +41,9 @@ class HighlightedMarkdown extends React.Component<{ children: string }> {
               discordwidget: {
                 component: DiscordWidget,
               },
+              a: {
+                component: "hw-a"
+              }
             },
           }}
         >

@@ -1,6 +1,4 @@
-import React from "react";
-import { Page, Toolbar } from "react-onsenui";
-import native from "@Native/index";
+import { Toolbar } from "react-onsenui";
 import axios from "axios";
 import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";

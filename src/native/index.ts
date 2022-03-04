@@ -5,7 +5,44 @@ import pkg from "./../../package.json";
 import CryptoJS from "crypto-js";
 import { BrowserWindowConstructorOptions } from "@Types/newWindow";
 import evil from "./hwplugin/eval";
-import { browserName, browserVersion, deviceType, engineName, engineVersion, isBrowser, isChrome, isChromium, isConsole, isDesktop, isEdge, isEdgeChromium, isElectron, isEmbedded, isFirefox, isIE, isIOS, isIOS13, isIPad13, isIPhone13, isIPod13, isMacOs, isMIUI, isMobile, isMobileOnly, isMobileSafari, isOpera, isSafari, isSamsungBrowser, isSmartTV, isTablet, isWearable, isWinPhone, isYandex, mobileModel, mobileVendor } from "react-device-detect";
+import {
+  browserName,
+  browserVersion,
+  deviceType,
+  engineName,
+  engineVersion,
+  isBrowser,
+  isChrome,
+  isChromium,
+  isConsole,
+  isDesktop,
+  isEdge,
+  isEdgeChromium,
+  isElectron,
+  isEmbedded,
+  isFirefox,
+  isIE,
+  isIOS,
+  isIOS13,
+  isIPad13,
+  isIPhone13,
+  isIPod13,
+  isMacOs,
+  isMIUI,
+  isMobile,
+  isMobileOnly,
+  isMobileSafari,
+  isOpera,
+  isSafari,
+  isSamsungBrowser,
+  isSmartTV,
+  isTablet,
+  isWearable,
+  isWinPhone,
+  isYandex,
+  mobileModel,
+  mobileVendor,
+} from "react-device-detect";
 
 /**
  * Native calls for Windows and Android

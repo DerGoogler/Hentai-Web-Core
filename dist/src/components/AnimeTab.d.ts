@@ -3,6 +3,6 @@ import BaseComponent from "./BaseComponent";
 declare class AnimeTab extends BaseComponent<{
     content: JSX.Element;
 }> {
-    renderComponent: () => JSX.Element;
+    render: () => JSX.Element;
 }
 export default AnimeTab;

@@ -82,6 +82,7 @@ class AnimeContent extends React.Component<
                 borderRadius: "8px",
               }}
             >
+
               <MDIcon icon="search" size="24" ignoreDarkmode={true} />
             </Button>
           </div>

@@ -112,7 +112,25 @@ interface Windows {
    * called first, a default log directory will be created equivalent to calling
    * `app.setAppLogsPath()` without a `path` parameter.
    */
-  appGetPath(path: "home" | "appData" | "userData" | "cache" | "temp" | "exe" | "module" | "desktop" | "documents" | "downloads" | "music" | "pictures" | "videos" | "recent" | "logs" | "crashDumps"): string | String;
+  appGetPath(
+    path:
+      | "home"
+      | "appData"
+      | "userData"
+      | "cache"
+      | "temp"
+      | "exe"
+      | "module"
+      | "desktop"
+      | "documents"
+      | "downloads"
+      | "music"
+      | "pictures"
+      | "videos"
+      | "recent"
+      | "logs"
+      | "crashDumps"
+  ): string | String;
 
   /**
    * Opens an selectd path

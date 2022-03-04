@@ -31,6 +31,7 @@
       "@Styles/*": ["./src/styles/*"],
       "@Strings": ["./src/localization/index.ts"],
       "@Views": ["./src/views/index.ts"],
+      "@Dom": ["./src/dom/index.ts"],
 
       // Packages
       "#OnsenUI-Package": ["./node_modules/onsenui/package.json"],

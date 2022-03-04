@@ -33,7 +33,9 @@ class evil {
         tools: tools,
         ipc: ipc,
         ons: ons,
-        __dirname: `${native.getPref("electron.hardDevice").toUpperCase()}:\\hentai-web\\plugins\\${extras.plugin.name}`,
+        __dirname: `${native.getPref("electron.hardDevice").toUpperCase()}:\\hentai-web\\plugins\\${
+          extras.plugin.name
+        }`,
         window: {
           Android: undefined,
           Windows: undefined,

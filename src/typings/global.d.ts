@@ -29,8 +29,6 @@ declare global {
        */
       "inner-content-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
-      "page-section": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
-
       "gerture-element": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
 
       "markdown-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
@@ -39,6 +37,9 @@ declare global {
        * HTML Element for Components
        */
       "hw-component": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+
+      // Custom abnormal dom elements
+      "hw-a": React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
     }
   }
 }

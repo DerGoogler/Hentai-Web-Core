@@ -45,7 +45,7 @@
     display: none !important;
   }
 
-  a {
+  hw-a {
     background-color: transparent;
     color: #4a148c;
     text-decoration: none;
@@ -548,7 +548,7 @@
     }
   }
 
-  a:not([href]) {
+  hw-a:not([href]) {
     color: inherit;
     text-decoration: none;
   }
@@ -590,7 +590,7 @@
     }
   }
 
-  sup > a {
+  sup > hw-a {
     &::before {
       content: "[";
     }

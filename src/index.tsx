@@ -4,9 +4,9 @@ import eruda from "eruda";
 import native from "@Native/index";
 import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
-import AppRoot from "@Components/AppRoot";
 import jss from "jss";
 import darkMode from "@Styles/dark";
+import { HwA, AppRoot } from "./dom";
 import lightMode from "@Styles/light";
 import { ForbiddenActivity, InitActivity } from "@Views";
 
@@ -72,6 +72,11 @@ class Bootloader {
     }
   }
 
+  private defineCustomDomElement() {
+    customElements.define("app-root", AppRoot);
+    customElements.define("hw-a", HwA);
+  }
+
   public init() {
     ons.platform.select("android");
     this.styleInit();
@@ -96,8 +101,7 @@ class Bootloader {
         native.setPref("disableNSFW", "true");
       }
 
-      customElements.define("app-root", AppRoot);
-
+      this.defineCustomDomElement();
       this.loadActivity(<InitActivity />);
     }
   }
