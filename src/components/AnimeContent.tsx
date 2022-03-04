@@ -7,6 +7,7 @@ import { string } from "@Strings";
 import MDIcon from "./MDIcon";
 import tools from "@Misc/tools";
 import { OnsSearchInputElement } from "onsenui";
+import CustomSearchbar from "./CustomSearchbar";
 
 class AnimeContent extends React.Component<
   {
@@ -15,7 +16,7 @@ class AnimeContent extends React.Component<
   },
   { search: string; currentSerachText: string; searchButtonDisabled: boolean }
 > {
-  private searchBar: React.RefObject<SearchInput>;
+  private searchBar: React.RefObject<CustomSearchbar>;
 
   public constructor(props: any) {
     super(props);
@@ -43,8 +44,10 @@ class AnimeContent extends React.Component<
   };
 
   private triggerSearch = () => {
-    const { currentSerachText, searchButtonDisabled, search } = this.state;
-    this.setState({ search: currentSerachText });
+    tools.ref(this.searchBar, (ref: CustomSearchbar) => {
+      this.setState({ search: ref.value.toLowerCase() });
+    })
+
   };
 
   public render = () => {
@@ -75,8 +78,7 @@ class AnimeContent extends React.Component<
               paddingBottom: "0px",
             }}
           >
-            <SearchInput
-              // @ts-ignore
+            <CustomSearchbar
               placeholder={`${string.search} ${this.props.name}`}
               ref={this.searchBar}
               style={{
@@ -85,7 +87,7 @@ class AnimeContent extends React.Component<
                 marginRight: "4px",
                 backgroundColor: native.getPref("enableDarkmode") === "true" ? "#1F1F1F" : "transparent",
               }}
-              onChange={this.filter}
+            // onChange={this.filter}
             />
             <Button
               onClick={this.triggerSearch}
