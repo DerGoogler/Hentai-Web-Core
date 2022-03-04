@@ -75,8 +75,9 @@ class BasicComponent<P = {}, S = {}, SS = any> extends React.Component<React.HTM
 
     public constructor(props: Readonly<P & Props> | P & Props) {
         super(props);
+        this.render = this.render.bind(this)
         const { setStatusbarColor } = this.props
-        this.native.android.setStatusbarColor(setStatusbarColor ? setStatusbarColor : "#4a148c")
+        native.android.setStatusbarColor(setStatusbarColor ? setStatusbarColor : "#4a148c")
     }
 
     public renderComponent(): JSX.Element {

@@ -22,6 +22,6 @@ declare class CustomSearchbar extends BasicComponent<Props, any> {
      * Change the current value
      */
     set value(text: string);
-    render(): JSX.Element;
+    renderComponent(): JSX.Element;
 }
 export default CustomSearchbar;

@@ -1,10 +1,11 @@
-import * as React from "react";
+/// <reference types="react" />
+import BasicComponent from "./BasicComponent";
 /**
  * ContentBody is an optional component, to make the view better on desktop
  */
-declare class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element> {
+declare class ContentBody extends BasicComponent {
     private stlye;
     private checkDevice;
-    render(): JSX.Element;
+    renderComponent(): JSX.Element;
 }
 export default ContentBody;

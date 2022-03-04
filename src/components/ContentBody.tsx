@@ -1,13 +1,12 @@
-import * as React from "react";
+import native from "@Native/index";
 import { isMobile } from "react-device-detect";
 import config from "../misc/config";
-import native from "@Native/index";
-import AppRoot from "./AppRoot";
+import BasicComponent from "./BasicComponent";
 
 /**
  * ContentBody is an optional component, to make the view better on desktop
  */
-class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element> {
+class ContentBody extends BasicComponent {
   private stlye: any = {
     boxSizing: "border-box",
     display: "flex",
@@ -20,14 +19,14 @@ class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element
   };
 
   private checkDevice(designWindows: any, designAndroid: any) {
-    if (window.navigator.userAgent !== config.options.userAgent) {
+    if (native.isWindows) {
       return designWindows;
     } else {
       return designAndroid;
     }
   }
 
-  public render() {
+  public renderComponent() {
     const { className } = this.props;
     return (
       <content-body

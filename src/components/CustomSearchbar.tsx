@@ -40,7 +40,7 @@ class CustomSearchbar extends BasicComponent<Props, any> {
         this.setState({ value: text })
     }
 
-    public render() {
+    public renderComponent() {
         const { modifier, disabled, value, inputId, placeholder, style, className, } = this.props
         return (<>
             <SearchInput
