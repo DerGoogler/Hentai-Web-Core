@@ -27,7 +27,7 @@ class BaseComponent<P = {}, S = {}, SS = any> extends React.Component<P & Props 
     public render = (): JSX.Element => {
         return (
             <hw-component style={{ width: '100%' }}>
-                {this.renderComponent()}
+                <this.renderComponent />
             </hw-component>)
     }
 }

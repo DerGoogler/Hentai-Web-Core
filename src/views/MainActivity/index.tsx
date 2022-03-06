@@ -290,7 +290,7 @@ class MainActivity extends BaseActivity<Props, States> {
   }
 
   public renderPage = () => {
-    return (this.renderSplitter());
+    return <this.renderSplitter />;
   };
 }
 

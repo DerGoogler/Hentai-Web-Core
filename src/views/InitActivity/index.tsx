@@ -137,7 +137,7 @@ class InitActivity extends BaseActivity<Props, States> {
     return <route.component {...props} />;
   };
 
-  public renderPage() {
+  public renderPage = () => {
     return (
       <this.RouterNavigator
         swipeable={true}

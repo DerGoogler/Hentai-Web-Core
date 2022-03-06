@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import BaseComponent from "./BaseComponent";
 /**
  * ContentBody is an optional component, to make the view better on desktop
@@ -6,6 +5,6 @@ import BaseComponent from "./BaseComponent";
 declare class ContentBody extends BaseComponent {
     private stlye;
     private checkDevice;
-    renderComponent(): JSX.Element;
+    renderComponent: () => JSX.Element;
 }
 export default ContentBody;

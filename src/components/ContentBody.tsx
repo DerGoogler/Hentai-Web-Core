@@ -26,7 +26,7 @@ class ContentBody extends BaseComponent {
     }
   }
 
-  public renderComponent() {
+  public renderComponent = () => {
     const { className } = this.props;
     return (
       <content-body

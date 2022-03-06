@@ -1,4 +1,3 @@
-/// <reference types="react" />
 import BaseComponent from "./BaseComponent";
 interface Props {
     modifier?: string | undefined;
@@ -22,6 +21,6 @@ declare class CustomSearchInput extends BaseComponent<Props, any> {
      * Change the current value
      */
     set value(text: string);
-    renderComponent(): JSX.Element;
+    renderComponent: () => JSX.Element;
 }
 export default CustomSearchInput;

@@ -42,7 +42,7 @@ class CustomSearchInput extends BaseComponent<Props, any> {
         this.setState({ value: text })
     }
 
-    public renderComponent() {
+    public renderComponent = () => {
         const { modifier, disabled, inputId, placeholder, style, className, } = this.props
         return (<>
             <SearchInput

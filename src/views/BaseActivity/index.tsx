@@ -199,7 +199,7 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
         onShow={this.onShow}
         onInit={this.onInit}
         renderToolbar={this.renderToolbar}>
-        {this.renderPage()}
+        <this.renderPage />
       </Page>
     );
   };
