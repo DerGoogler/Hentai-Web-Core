@@ -4,9 +4,9 @@ import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import { Props, States } from "./interface";
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 
-class TextFetchActivity extends BaseActivity<Props, States> {
+class TextFetchActivity extends Activity.Base<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { data: "" };

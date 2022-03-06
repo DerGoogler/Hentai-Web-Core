@@ -1,6 +1,6 @@
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 
-class ForbiddenActivity extends BaseActivity {
+class ForbiddenActivity extends Activity.Base {
   public constructor(props: any) {
     super(props)
   }

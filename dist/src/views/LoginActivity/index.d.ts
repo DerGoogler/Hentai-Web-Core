@@ -1,6 +1,6 @@
 import { Props, States } from "./interface";
-import { BaseActivity } from "@Views";
-declare class LoginActivity extends BaseActivity<Props, States> {
+import Activity from "@Views";
+declare class LoginActivity extends Activity.Base<Props, States> {
     constructor(props: any);
     componentDidMount: () => void;
     renderToolbar: () => JSX.Element;

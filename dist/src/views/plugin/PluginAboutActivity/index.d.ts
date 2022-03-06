@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { Props, States } from "./interface";
-import { BaseActivity } from "@Views";
-declare class PluginAboutActivity extends BaseActivity<Props, States> {
+import Activity from "@Views";
+declare class PluginAboutActivity extends Activity.Base<Props, States> {
     private getPluginConfig;
     private author;
     private version;

@@ -1,6 +1,6 @@
-declare class Logger {
-    static log(message?: any, ...optionalParams: any[]): void;
-    static warn(message?: any, ...optionalParams: any[]): void;
-    static error(message?: any, ...optionalParams: any[]): void;
+declare namespace Logger {
+    function log(message?: any, ...optionalParams: any[]): void;
+    function warn(message?: any, ...optionalParams: any[]): void;
+    function error(message?: any, ...optionalParams: any[]): void;
 }
 export default Logger;

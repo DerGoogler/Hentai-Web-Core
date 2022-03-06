@@ -9,4 +9,17 @@ import ForbiddenActivity from "./ForbiddenActivity";
 import TextFetchActivity from "./TextFetchActivity";
 import LoginActivity from "./LoginActivity";
 import PluginsActivity from "./plugin/PluginsActvity";
-export { BaseActivity, InitActivity, PluginsActivity, MainActivity, LoginActivity, ChangelogActivity, PluginAboutActivity, SettingsActivity, EditorActivity, ForbiddenActivity, TextFetchActivity, };
+declare namespace Activity {
+    const Base: typeof BaseActivity;
+    const Init: typeof InitActivity;
+    const Main: typeof MainActivity;
+    const Settings: typeof SettingsActivity;
+    const Editor: typeof EditorActivity;
+    const TextFetch: typeof TextFetchActivity;
+    const Changelog: typeof ChangelogActivity;
+    const Plugins: typeof PluginsActivity;
+    const Login: typeof LoginActivity;
+    const Forbidden: typeof ForbiddenActivity;
+    const PluginAbout: typeof PluginAboutActivity;
+}
+export default Activity;

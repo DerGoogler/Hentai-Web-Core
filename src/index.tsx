@@ -8,7 +8,8 @@ import jss from "jss";
 import darkMode from "@Styles/dark";
 import AppDom from "./dom";
 import lightMode from "@Styles/light";
-import { ForbiddenActivity, InitActivity } from "@Views";
+import doc from "@Misc/doc";
+import Activity from "@Views";
 
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/ext-language_tools";
@@ -19,7 +20,6 @@ import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
-import doc from "./misc/doc";
 
 class Bootloader {
   private mountNode: HTMLElement | null = doc.getByQuery<HTMLElement>("app-root");
@@ -91,7 +91,7 @@ class Bootloader {
       native.isMIUI ||
       native.isSamsungBrowser
     ) {
-      this.loadActivity(<ForbiddenActivity />);
+      this.loadActivity(<Activity.Forbidden />);
     } else {
       this.folderInit();
       this.makeExamplePlugin();
@@ -104,7 +104,7 @@ class Bootloader {
       }
 
       this.defineCustomDomElement();
-      this.loadActivity(<InitActivity />);
+      this.loadActivity(<Activity.Init />);
     }
   }
 }

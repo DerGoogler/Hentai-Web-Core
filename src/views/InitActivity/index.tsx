@@ -1,16 +1,16 @@
 import { PushPageProps } from "@Types/init";
 import { Props, States } from "./interface";
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 
-class InitActivity extends BaseActivity<Props, States> {
+class InitActivity extends Activity.Base<Props, States> {
   public constructor(props: Readonly<Props> | Props) {
     super(props);
 
     const doLogin = () => {
       if (this.native.getPref("loggedIn") === "true" || this.native.isInstagram || this.native.isFacebook) {
-        return this.MainActivity;
+        return Activity.Main;
       } else {
-        return this.LoginActivity;
+        return Activity.Login;
       }
     };
 

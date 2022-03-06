@@ -6,7 +6,6 @@ import jss from "jss";
 import pkg from "./../../../package.json";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light"; import ons from "onsenui";
-import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity, LoginActivity, MainActivity } from "@Views";
 import { Props, States } from "./interface"
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
@@ -68,17 +67,6 @@ class BaseActivity<P = {}, S = {}> extends React.PureComponent<P & Props, S> imp
   public ToolbarBuilder = ToolbarBuilder
   public TabbarBuilder = TabbarBuilder
   public ListDialogBuilder = ListDialogBuilder
-
-  // Views
-  public EditorActivity = EditorActivity
-  public TextFetchActivity = TextFetchActivity
-  public MainActivity = MainActivity
-  public SettingsActivity = SettingsActivity
-  public PluginsActivity = PluginsActivity
-  public ChangelogActivity = ChangelogActivity
-  public LoginActivity = LoginActivity
-
-
 
   public constructor(props: Readonly<P & Props> | P & Props) {
     super(props);

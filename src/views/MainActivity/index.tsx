@@ -1,8 +1,8 @@
 import { ListViewBuilder } from "@Builders";
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 import { Props, States } from "./interface";
 
-class MainActivity extends BaseActivity<Props, States> {
+class MainActivity extends Activity.Base<Props, States> {
   public constructor(props: Readonly<Props> | Props) {
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ class MainActivity extends BaseActivity<Props, States> {
           console.log("Newst version installed");
         } else {
           this.pushPage({
-            activity: this.ChangelogActivity,
+            activity: Activity.Changelog,
             key: "changelog",
             changelog: {
               version: data.version,
@@ -88,7 +88,7 @@ class MainActivity extends BaseActivity<Props, States> {
                     icon: "settings",
                     onClick: () => {
                       this.pushPage({
-                        activity: this.SettingsActivity,
+                        activity: Activity.Settings,
                         key: "settings",
                       });
                       this.handleCancel();
@@ -100,7 +100,7 @@ class MainActivity extends BaseActivity<Props, States> {
                     icon: "article",
                     onClick: () => {
                       this.pushPage({
-                        activity: this.TextFetchActivity,
+                        activity: Activity.TextFetch,
                         key: "licenses",
                         textFetch: {
                           title: this.string.licenses,
@@ -122,7 +122,7 @@ class MainActivity extends BaseActivity<Props, States> {
                     },
                     onClick: () => {
                       this.pushPage({
-                        activity: this.PluginsActivity,
+                        activity: Activity.Plugins,
                         key: "plugins",
                       });
                       this.handleCancel();
@@ -144,7 +144,7 @@ class MainActivity extends BaseActivity<Props, States> {
                     onClick: () => {
                       const getPlayground = this.native.getPref("playground");
                       this.pushPage({
-                        activity: this.EditorActivity,
+                        activity: Activity.Editor,
                         key: "plugin-play-ground",
                         extras: {
                           pluginName: "playground",

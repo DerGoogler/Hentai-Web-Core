@@ -2,7 +2,6 @@ import * as React from "react";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import ons from "onsenui";
-import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity, LoginActivity, MainActivity } from "@Views";
 import { Props } from "./interface";
 import { PushPageProps } from "@Types/init";
 import News from "@Components/News";
@@ -53,9 +52,7 @@ declare class BaseActivity<P = {}, S = {}> extends React.PureComponent<P & Props
             bota64: string;
             "core-js": string;
             "crypto-js": string;
-            electron: string; /**
-             * Gets the app packages
-             */
+            electron: string;
             eruda: string;
             "eruda-dom": string;
             "file-saver": string;
@@ -194,13 +191,6 @@ declare class BaseActivity<P = {}, S = {}> extends React.PureComponent<P & Props
     ToolbarBuilder: typeof ToolbarBuilder;
     TabbarBuilder: typeof TabbarBuilder;
     ListDialogBuilder: typeof ListDialogBuilder;
-    EditorActivity: typeof EditorActivity;
-    TextFetchActivity: typeof TextFetchActivity;
-    MainActivity: typeof MainActivity;
-    SettingsActivity: typeof SettingsActivity;
-    PluginsActivity: typeof PluginsActivity;
-    ChangelogActivity: typeof ChangelogActivity;
-    LoginActivity: typeof LoginActivity;
     constructor(props: Readonly<P & Props> | P & Props);
     componentDidMount(): void;
     componentDidUpdate(): void;

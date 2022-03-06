@@ -11,9 +11,9 @@ import { Ace } from "ace-builds";
 import ons from "onsenui";
 import editorTheme from "./editorTheme";
 import tools from "@Misc/tools";
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 
-class EditorActivity extends BaseActivity<Props, States> {
+class EditorActivity extends Activity.Base<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = {

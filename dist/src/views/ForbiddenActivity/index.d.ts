@@ -1,6 +1,6 @@
 /// <reference types="react" />
-import { BaseActivity } from "@Views";
-declare class ForbiddenActivity extends BaseActivity {
+import Activity from "@Views";
+declare class ForbiddenActivity extends Activity.Base {
     constructor(props: any);
     renderToolbar(): JSX.Element;
     renderFixed: () => JSX.Element;

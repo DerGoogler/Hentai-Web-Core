@@ -4,9 +4,9 @@ import native from "@Native/index";
 import { ToolbarBuilder } from "@Builders";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 
-class LoginActivity extends BaseActivity<Props, States> {
+class LoginActivity extends Activity.Base<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };

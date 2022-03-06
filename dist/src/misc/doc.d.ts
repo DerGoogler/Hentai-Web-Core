@@ -2,7 +2,8 @@ import * as React from "react";
 /**
  * Simplefied document tools
  */
-declare class doc {
+declare namespace doc {
+    const $: Document;
     /**
      * @description
      * Usage
@@ -12,8 +13,8 @@ declare class doc {
      * @param element
      * @returns {HTMLElement}
      */
-    static getById(element: string): HTMLElement | null;
-    static getByQuery<T extends HTMLElement = HTMLElement>(element: string): T | null;
+    function getById(element: string): HTMLElement | null;
+    function getByQuery<T extends HTMLElement = HTMLElement>(element: string): T | null;
     /**
      * @description
      * Usage
@@ -23,7 +24,7 @@ declare class doc {
      * @param element
      * @returns {T}
      */
-    static getByRef<T>(element: React.RefObject<T>): T | null;
-    static createRef<T>(): T | null;
+    function getByRef<T>(element: React.RefObject<T>): T | null;
+    function createRef<T>(): T | null;
 }
 export default doc;

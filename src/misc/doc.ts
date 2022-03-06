@@ -3,7 +3,9 @@ import * as React from "react";
 /**
  * Simplefied document tools
  */
-class doc {
+namespace doc {
+  export const $ = document;
+
   /**
    * @description
    * Usage
@@ -13,7 +15,7 @@ class doc {
    * @param element
    * @returns {HTMLElement}
    */
-  public static getById(element: string): HTMLElement | null {
+  export function getById(element: string): HTMLElement | null {
     var id: HTMLElement | null;
     if ((id = document.getElementById(element))) {
       return id;
@@ -22,7 +24,7 @@ class doc {
     }
   }
 
-  public static getByQuery<T extends HTMLElement = HTMLElement>(element: string): T | null {
+  export function getByQuery<T extends HTMLElement = HTMLElement>(element: string): T | null {
     var id: T | null;
     if ((id = document.querySelector<T>(element))) {
       return id;
@@ -40,7 +42,7 @@ class doc {
    * @param element
    * @returns {T}
    */
-  public static getByRef<T>(element: React.RefObject<T>): T | null {
+  export function getByRef<T>(element: React.RefObject<T>): T | null {
     var id: React.RefObject<T>;
     if ((id = element)) {
       if (id && id.current) {
@@ -54,9 +56,9 @@ class doc {
     }
   }
 
-  public static createRef<T>(): T | null {
+  export function createRef<T>(): T | null {
     const ref = React.createRef<T>();
-    return this.getByRef<T>(ref);
+    return doc.getByRef<T>(ref);
   }
 }
 

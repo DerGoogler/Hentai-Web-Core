@@ -8,9 +8,9 @@ import MDIcon from "@Components/MDIcon";
 import PluginAboutActivity from "../PluginAboutActivity";
 import EditorActivity from "../../EditorActivity";
 import { Props, States } from "./interface";
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 
-class PluginsActivity extends BaseActivity<Props, States> {
+class PluginsActivity extends Activity.Base<Props, States> {
   private scriptLosding = native.getPref("enableCustomScriptLoading") === "true";
 
   public renderToolbar = () => {

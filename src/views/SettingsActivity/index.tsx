@@ -5,9 +5,9 @@ import { ToolbarBuilder, ListViewBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
-import { BaseActivity } from "@Views";
+import Activity from "@Views";
 
-class SettingsActivity extends BaseActivity<Props, States> {
+class SettingsActivity extends Activity.Base<Props, States> {
   public renderToolbar = () => {
     return (
       <Toolbar>
