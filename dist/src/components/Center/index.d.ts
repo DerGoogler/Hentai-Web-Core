@@ -1,6 +1,6 @@
-import * as React from "react";
+import BaseComponent from "../BaseComponent";
 import CenterInterface from "./interface";
-declare class Center extends React.Component<CenterInterface> {
-    render(): JSX.Element;
+declare class Center extends BaseComponent<CenterInterface> {
+    render: () => JSX.Element;
 }
 export default Center;

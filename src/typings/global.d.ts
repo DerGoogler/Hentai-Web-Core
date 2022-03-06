@@ -23,24 +23,17 @@ declare global {
 
   namespace JSX {
     interface IntrinsicElements {
-      /**
-       * ContentBody is an optional component, to make the view better on desktop
-       */
       "content-body": HTMLAttributes<HTMLDivElement>;
-      /**
-       * ContentBody is an optional component, to make the view better on desktop
-       */
       "inner-content-body": HTMLAttributes<HTMLDivElement>;
-
       "gerture-element": HTMLAttributes<HTMLDivElement>;
-
       "markdown-body": HTMLAttributes<HTMLDivElement>;
-
       "hw-component": HTMLAttributes<HTMLElement, { name?: string }>;
       "hw-activity": HTMLAttributes<HTMLElement, { name?: string }>;
-
       // Custom abnormal dom elements
       "hw-a": AnchorHTMLAttributes<HTMLAnchorElement>;
+      "hw-center": HTMLAttributes<HTMLSpanElement>;
+      "hw-span": HTMLAttributes<HTMLSpanElement>;
+      "hw-font": HTMLAttributes<HTMLSpanElement>;
     }
   }
 }

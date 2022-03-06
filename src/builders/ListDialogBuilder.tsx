@@ -1,6 +1,6 @@
+import BaseComponent from "@Components/BaseComponent";
 import tools from "@Misc/tools";
 import { ListInterface } from "@Types/ListBuilder";
-import * as React from "react";
 import { Dialog, List } from "react-onsenui";
 import ListViewBuilder from "./ListViewBuilder";
 
@@ -12,8 +12,8 @@ interface Options {
   isCancelable?: boolean;
 }
 
-class ListDialogBuilder extends React.Component<{ data: ListInterface[]; options: Options }, { isOpen: boolean }> {
-  public render() {
+class ListDialogBuilder extends BaseComponent<{ data: ListInterface[]; options: Options }, { isOpen: boolean }> {
+  public render = () => {
     const { data, options } = this.props;
 
     return (

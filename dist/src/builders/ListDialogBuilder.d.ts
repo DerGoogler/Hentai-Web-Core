@@ -1,5 +1,5 @@
+import BaseComponent from "@Components/BaseComponent";
 import { ListInterface } from "@Types/ListBuilder";
-import * as React from "react";
 interface Options {
     isOpen: boolean;
     animation?: string;
@@ -7,12 +7,12 @@ interface Options {
     onCancel: Function;
     isCancelable?: boolean;
 }
-declare class ListDialogBuilder extends React.Component<{
+declare class ListDialogBuilder extends BaseComponent<{
     data: ListInterface[];
     options: Options;
 }, {
     isOpen: boolean;
 }> {
-    render(): JSX.Element;
+    render: () => JSX.Element;
 }
 export default ListDialogBuilder;

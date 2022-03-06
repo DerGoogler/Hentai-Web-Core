@@ -1,12 +1,12 @@
-import * as React from "react";
+import BaseComponent from "../BaseComponent";
 import CenterInterface from "./interface";
 
-class Center extends React.Component<CenterInterface> {
-  public render() {
+class Center extends BaseComponent<CenterInterface> {
+  public render = () => {
     const { children, style } = this.props;
     return (
-      <span style={style}>
-        <span
+      <hw-span style={style}>
+        <hw-center
           style={{
             display: "flex",
             justifyContent: "center",
@@ -14,8 +14,8 @@ class Center extends React.Component<CenterInterface> {
           }}
         >
           {children}
-        </span>
-      </span>
+        </hw-center>
+      </hw-span>
     );
   }
 }

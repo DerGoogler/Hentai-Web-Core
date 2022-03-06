@@ -1,5 +1,5 @@
 - title: Discord widget
-  msg: |- 
+  msg: |-
     # Discord Widgets
 
     <discordwidget/>
@@ -13,7 +13,7 @@
     ```
 - title: New Images
   msg: |-
-    New images has been added to **Neko** and **Slap**
+    <center>New images has been added to **Neko** and **Slap**</center>
 
 - title: HW 139
   msg: |-
