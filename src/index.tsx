@@ -19,9 +19,10 @@ import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
+import doc from "./misc/doc";
 
 class Bootloader {
-  private mountNode: any = document.querySelector("app-root");
+  private mountNode: HTMLElement | null = doc.getByQuery<HTMLElement>("app-root");
 
   private loadConsole() {
     if (native.getPref("erudaEnabled") === "true") {

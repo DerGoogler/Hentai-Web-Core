@@ -27,19 +27,19 @@ interface Props {
 }
 
 class Gesture extends React.Component<Props, {}> {
-  private gerstureID: React.RefObject<HTMLDivElement>;
+  private gersture: React.RefObject<HTMLDivElement>;
   constructor(props: any) {
     super(props);
-    this.gerstureID = React.createRef();
+    this.gersture = React.createRef();
   }
   public componentDidMount() {
     const { callback, event } = this.props;
-    doc.ref<HTMLDivElement>(this.gerstureID)?.addEventListener(event, callback)
+    doc.getByRef<HTMLDivElement>(this.gersture)?.addEventListener(event, callback)
   }
 
   public render() {
     const { children } = this.props;
-    return <gerture-element ref={this.gerstureID}>{children}</gerture-element>;
+    return <gerture-element ref={this.gersture}>{children}</gerture-element>;
   }
 }
 

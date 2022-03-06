@@ -18,11 +18,12 @@ import AnimeContent from "@Components/AnimeContent";
 import AceEditor from "react-ace";
 import { string } from "@Strings";
 import images from "@DataPacks/images";
+import { StringOfLength } from "@Misc/StringOfLength";
 
 /**
  * This should only used on Activitys
  */
-class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, S, SS> {
+class BaseActivity<P = {}, S = {}> extends React.PureComponent<P & Props, S> implements React.ComponentLifecycle<P & Props, S>  {
   /**
    * Gets the app packages
    */
@@ -144,7 +145,7 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
   /**
    * @default #4a148c
    */
-  public setStatusbarColor(): string {
+  public setStatusbarColor(): `#${string}` | `#${StringOfLength<3, 6>}` {
     return "#4a148c"
   }
 
@@ -189,18 +190,21 @@ class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, 
    */
   public render = () => {
     return (
-      <Page
-        modifier={native.checkPlatformForBorderStyle}
-        renderBottomToolbar={this.renderBottomToolbar}
-        renderFixed={this.renderFixed}
-        renderModal={this.renderModal}
-        onInfiniteScroll={this.onInfiniteScroll}
-        onHide={this.onHide}
-        onShow={this.onShow}
-        onInit={this.onInit}
-        renderToolbar={this.renderToolbar}>
-        <this.renderPage />
-      </Page>
+      <hw-activity name={this.constructor.name.replace("Activity", "")}>
+
+        <Page
+          modifier={native.checkPlatformForBorderStyle}
+          renderBottomToolbar={this.renderBottomToolbar}
+          renderFixed={this.renderFixed}
+          renderModal={this.renderModal}
+          onInfiniteScroll={this.onInfiniteScroll}
+          onHide={this.onHide}
+          onShow={this.onShow}
+          onInit={this.onInit}
+          renderToolbar={this.renderToolbar}>
+          <this.renderPage />
+        </Page>
+      </hw-activity>
     );
   };
 

@@ -8,12 +8,12 @@ class doc {
    * @description
    * Usage
    * ```ts
-   * doc.id("my-element")?.addEventListener(event, callback)
+   * doc.getById("my-element")?.addEventListener(event, callback)
    * ```
    * @param element
    * @returns {HTMLElement}
    */
-  public static id(element: string): HTMLElement | null {
+  public static getById(element: string): HTMLElement | null {
     var id: HTMLElement | null;
     if ((id = document.getElementById(element))) {
       return id;
@@ -22,20 +22,29 @@ class doc {
     }
   }
 
+  public static getByQuery<T extends HTMLElement = HTMLElement>(element: string): T | null {
+    var id: T | null;
+    if ((id = document.querySelector<T>(element))) {
+      return id;
+    } else {
+      return document.querySelector(element);
+    }
+  }
+
   /**
    * @description
    * Usage
    * ```ts
-   * doc.ref<HTMLDivElement>(this.gerstureID)?.addEventListener(event, callback)
+   * doc.getByRef<HTMLDivElement>(this.gerstureID)?.addEventListener(event, callback)
    * ```
    * @param element
-   * @returns {ElementType}
+   * @returns {T}
    */
-  public static ref<ElementType>(element: React.RefObject<ElementType>): ElementType | null {
-    var id: React.RefObject<ElementType>;
+  public static getByRef<T>(element: React.RefObject<T>): T | null {
+    var id: React.RefObject<T>;
     if ((id = element)) {
       if (id && id.current) {
-        const ref: ElementType = id.current;
+        const ref: T = id.current;
         return ref;
       } else {
         return id.current;
@@ -45,9 +54,9 @@ class doc {
     }
   }
 
-  public static createRef<ElementType>(): ElementType | null {
-    const ref = React.createRef<ElementType>();
-    return this.ref<ElementType>(ref);
+  public static createRef<T>(): T | null {
+    const ref = React.createRef<T>();
+    return this.getByRef<T>(ref);
   }
 }
 

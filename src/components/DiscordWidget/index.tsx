@@ -7,7 +7,7 @@ class DiscordWidget extends React.Component<DiscordWidgetInterface> {
     const { token, width, height, theme } = this.props;
     return (
       <>
-        <discord-widget
+        <iframe
           className="DiscordWidget--Custom card"
           style={{
             display: "flex",
@@ -26,7 +26,7 @@ class DiscordWidget extends React.Component<DiscordWidgetInterface> {
           allowTransparency={true}
           frameBorder="0"
           sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-        ></discord-widget>
+        ></iframe>
       </>
     );
   }

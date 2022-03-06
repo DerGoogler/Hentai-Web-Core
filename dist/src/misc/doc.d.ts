@@ -7,22 +7,23 @@ declare class doc {
      * @description
      * Usage
      * ```ts
-     * doc.id("my-element")?.addEventListener(event, callback)
+     * doc.getById("my-element")?.addEventListener(event, callback)
      * ```
      * @param element
      * @returns {HTMLElement}
      */
-    static id(element: string): HTMLElement | null;
+    static getById(element: string): HTMLElement | null;
+    static getByQuery<T extends HTMLElement = HTMLElement>(element: string): T | null;
     /**
      * @description
      * Usage
      * ```ts
-     * doc.ref<HTMLDivElement>(this.gerstureID)?.addEventListener(event, callback)
+     * doc.getByRef<HTMLDivElement>(this.gerstureID)?.addEventListener(event, callback)
      * ```
      * @param element
-     * @returns {ElementType}
+     * @returns {T}
      */
-    static ref<ElementType>(element: React.RefObject<ElementType>): ElementType | null;
-    static createRef<ElementType>(): ElementType | null;
+    static getByRef<T>(element: React.RefObject<T>): T | null;
+    static createRef<T>(): T | null;
 }
 export default doc;

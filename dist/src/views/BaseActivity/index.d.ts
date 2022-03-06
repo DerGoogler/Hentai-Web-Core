@@ -12,10 +12,11 @@ import MDIcon from "@Components/MDIcon";
 import ContentBody from "@Components/ContentBody";
 import AnimeContent from "@Components/AnimeContent";
 import AceEditor from "react-ace";
+import { StringOfLength } from "@Misc/StringOfLength";
 /**
  * This should only used on Activitys
  */
-declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P & Props, S, SS> {
+declare class BaseActivity<P = {}, S = {}> extends React.PureComponent<P & Props, S> implements React.ComponentLifecycle<P & Props, S> {
     /**
      * Gets the app packages
      */
@@ -52,7 +53,9 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
             bota64: string;
             "core-js": string;
             "crypto-js": string;
-            electron: string;
+            electron: string; /**
+             * Gets the app packages
+             */
             eruda: string;
             "eruda-dom": string;
             "file-saver": string;
@@ -208,7 +211,7 @@ declare class BaseActivity<P = {}, S = {}, SS = any> extends React.Component<P &
     /**
      * @default #4a148c
      */
-    setStatusbarColor(): string;
+    setStatusbarColor(): `#${string}` | `#${StringOfLength<3, 6>}`;
     /**
      * Renders the Toolbar
      */

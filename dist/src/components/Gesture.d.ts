@@ -4,7 +4,7 @@ interface Props {
     callback(...props: any): void;
 }
 declare class Gesture extends React.Component<Props, {}> {
-    private gerstureID;
+    private gersture;
     constructor(props: any);
     componentDidMount(): void;
     render(): JSX.Element;

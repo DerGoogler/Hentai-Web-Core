@@ -18,30 +18,29 @@ declare global {
     readonly Windows: Windows;
   }
 
+  type HTMLAttributes<E, P = {}> = React.DetailedHTMLProps<React.HTMLAttributes<E> & P, E>;
+  type AnchorHTMLAttributes<E, P = {}> = React.DetailedHTMLProps<React.AnchorHTMLAttributes<E> & P, E>;
+
   namespace JSX {
     interface IntrinsicElements {
       /**
        * ContentBody is an optional component, to make the view better on desktop
        */
-      "content-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+      "content-body": HTMLAttributes<HTMLDivElement>;
       /**
        * ContentBody is an optional component, to make the view better on desktop
        */
-      "inner-content-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+      "inner-content-body": HTMLAttributes<HTMLDivElement>;
 
-      "gerture-element": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+      "gerture-element": HTMLAttributes<HTMLDivElement>;
 
-      "markdown-body": React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+      "markdown-body": HTMLAttributes<HTMLDivElement>;
 
-      /**
-       * HTML Element for Components
-       */
-      "hw-component": React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+      "hw-component": HTMLAttributes<HTMLElement, { name?: string }>;
+      "hw-activity": HTMLAttributes<HTMLElement, { name?: string }>;
 
       // Custom abnormal dom elements
-      "hw-a": React.DetailedHTMLProps<React.AnchorHTMLAttributes<HTMLAnchorElement>, HTMLAnchorElement>;
-      "hw-img": React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>;
-      "discord-widget": React.DetailedHTMLProps<React.IframeHTMLAttributes<HTMLIFrameElement>, HTMLIFrameElement>;
+      "hw-a": AnchorHTMLAttributes<HTMLAnchorElement>;
     }
   }
 }
