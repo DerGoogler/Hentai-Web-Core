@@ -1,9 +1,7 @@
-import * as React from "react";
-declare class News extends React.Component {
-    state: {
-        data: never[];
-    };
+import BaseComponent from "./BaseComponent";
+declare class News extends BaseComponent<{}, any> {
+    constructor(props: any);
     componentDidMount(): void;
-    render(): JSX.Element;
+    renderComponent: () => JSX.Element;
 }
 export default News;

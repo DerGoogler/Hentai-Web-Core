@@ -1,6 +1,4 @@
 import native from "@Native/index";
-import { isMobile } from "react-device-detect";
-import config from "../misc/config";
 import BaseComponent from "./BaseComponent";
 
 /**
@@ -15,7 +13,7 @@ class ContentBody extends BaseComponent {
     minWidth: "200px",
     maxWidth: "580px",
     margin: "0px auto",
-    padding: native.isWindows || isMobile ? "" : "45px",
+    padding: native.isWindows || native.isMobile ? "" : "45px",
   };
 
   private checkDevice(designWindows: any, designAndroid: any) {
@@ -37,7 +35,7 @@ class ContentBody extends BaseComponent {
               : "markdown-body-light"
             : className
         }
-        style={this.checkDevice({ padding: native.isWindows || isMobile ? "" : "16px" }, {})}
+        style={this.checkDevice({ padding: native.isWindows || native.isMobile ? "" : "16px" }, {})}
       >
         <inner-content-body style={this.checkDevice(this.stlye, {})}>{this.props.children}</inner-content-body>
       </content-body>

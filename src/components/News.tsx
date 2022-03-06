@@ -1,16 +1,20 @@
 import * as React from "react";
-import { List, ListItem, SearchInput } from "react-onsenui";
+import { Card } from "react-onsenui";
 import ContentBody from "./ContentBody";
 import axios from "axios";
 import yaml from "js-yaml";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import { HighlightedMarkdown } from "./HighlightMarkdown";
+import BaseComponent from "./BaseComponent";
 
-class News extends React.Component {
-  public state = {
-    data: [],
-  };
+class News extends BaseComponent<{}, any> {
+  public constructor(props: any) {
+    super(props)
+    this.state = {
+      data: []
+    }
+  }
 
   public componentDidMount() {
     // Use no slash at the start
@@ -19,24 +23,25 @@ class News extends React.Component {
     });
   }
 
-  public render() {
+  public renderComponent = () => {
     /**
      * To load for every object an own AnimePicture from `data.ts`
      */
-    const listItems = this.state.data.map((item: any) => (
-      <ListItem expandable>
-        {item.title}
-        <div className="expandable-content">
-          <div className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
-            <HighlightedMarkdown>{item.msg}</HighlightedMarkdown>
-          </div>
+    const listItems = this.state.data.map((item: any) => (<React.Fragment>
+      <Card style={{ borderRadius: "8px", border: "0px" }}>
+        <div className="title">
+          {item.title}
         </div>
-      </ListItem>
+        <div className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light") + " content"} style={{ color: "black" }}>
+          <HighlightedMarkdown>{item.msg}</HighlightedMarkdown>
+        </div>
+      </Card>
+    </React.Fragment>
     ));
 
     return (
       <ContentBody>
-        <List>{listItems}</List>
+        {listItems}
       </ContentBody>
     );
   }
