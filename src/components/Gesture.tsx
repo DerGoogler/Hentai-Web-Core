@@ -1,4 +1,4 @@
-import tools from "@Misc/tools";
+import doc from "@Misc/doc";
 import * as React from "react";
 
 interface Props {
@@ -34,10 +34,7 @@ class Gesture extends React.Component<Props, {}> {
   }
   public componentDidMount() {
     const { callback, event } = this.props;
-
-    tools.ref(this.gerstureID, (ref: HTMLDivElement) => {
-      ref.addEventListener(event, callback);
-    });
+    doc.ref<HTMLDivElement>(this.gerstureID)?.addEventListener(event, callback)
   }
 
   public render() {

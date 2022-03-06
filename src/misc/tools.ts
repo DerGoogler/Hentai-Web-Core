@@ -61,7 +61,7 @@ class tools {
   /**
    * @param id
    * @param callback HTMLElement
-   *
+   * @deprecated Use `doc.id` or `doc.ref`
    * @description
    * Usage
    * ```ts

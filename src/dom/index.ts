@@ -1,4 +1,11 @@
 import AppRoot from "./AppRoot";
-import HwA from "./HwA";
+import HwA from "./hw-a";
+import HWIMG from "./hw-img";
 
-export { AppRoot, HwA };
+namespace AppDom {
+  export class App extends AppRoot {}
+  export class A extends HwA {}
+  export class IMG extends HWIMG {}
+}
+
+export default AppDom;

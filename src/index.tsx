@@ -6,7 +6,7 @@ import preset from "jss-preset-default";
 import erudaDom from "eruda-dom";
 import jss from "jss";
 import darkMode from "@Styles/dark";
-import { HwA, AppRoot } from "./dom";
+import AppDom from "./dom";
 import lightMode from "@Styles/light";
 import { ForbiddenActivity, InitActivity } from "@Views";
 
@@ -73,8 +73,9 @@ class Bootloader {
   }
 
   private defineCustomDomElement() {
-    customElements.define("app-root", AppRoot);
-    customElements.define("hw-a", HwA);
+    customElements.define("app-root", AppDom.App);
+    customElements.define("hw-a", AppDom.A);
+    customElements.define("hw-img", AppDom.IMG, { extends: "img" });
   }
 
   public init() {
