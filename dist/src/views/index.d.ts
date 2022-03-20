@@ -9,7 +9,13 @@ import ForbiddenActivity from "./ForbiddenActivity";
 import TextFetchActivity from "./TextFetchActivity";
 import LoginActivity from "./LoginActivity";
 import PluginsActivity from "./plugin/PluginsActvity";
+/**
+ * Includes all activitys in one
+ */
 declare namespace Activity {
+    /**
+     * Don't use as regular activity
+     */
     const Base: typeof BaseActivity;
     const Init: typeof InitActivity;
     const Main: typeof MainActivity;
