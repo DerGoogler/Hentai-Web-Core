@@ -191,7 +191,7 @@ declare class BaseActivity<P = {}, S = {}> extends React.PureComponent<P & Props
     ToolbarBuilder: typeof ToolbarBuilder;
     TabbarBuilder: typeof TabbarBuilder;
     ListDialogBuilder: typeof ListDialogBuilder;
-    constructor(props: Readonly<P & Props> | P & Props);
+    constructor(props: Readonly<P & Props> | (P & Props));
     componentDidMount(): void;
     componentDidUpdate(): void;
     private updateStyle;

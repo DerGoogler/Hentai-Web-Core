@@ -6,9 +6,9 @@ import { ToolbarBuilder } from "@Builders";
 import tools from "@Misc/tools";
 import { HighlightedMarkdown } from "../../../components/HighlightMarkdown";
 import { Props, States } from "./interface";
-import Activity from "@Views";
+import BaseActivity from "@/views/BaseActivity";
 
-class PluginAboutActivity extends Activity.Base<Props, States> {
+class PluginAboutActivity extends BaseActivity<Props, States> {
   private getPluginConfig = native.fs.readFile("plugins/" + this.props.pluginAbout.name + "/plugin.yaml", {
     parse: { use: true, mode: "yaml" },
   });

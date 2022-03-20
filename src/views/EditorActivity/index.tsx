@@ -8,12 +8,11 @@ import AceEditor from "react-ace";
 import { Props, States } from "./interface";
 import Editor, { Monaco } from "@monaco-editor/react";
 import { Ace } from "ace-builds";
-import ons from "onsenui";
 import editorTheme from "./editorTheme";
 import tools from "@Misc/tools";
-import Activity from "@Views";
+import BaseActivity from "../BaseActivity";
 
-class EditorActivity extends Activity.Base<Props, States> {
+class EditorActivity extends BaseActivity<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = {

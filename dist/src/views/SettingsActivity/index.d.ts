@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { Props, States } from "./interface";
-import Activity from "@Views";
-declare class SettingsActivity extends Activity.Base<Props, States> {
+import BaseActivity from "../BaseActivity";
+declare class SettingsActivity extends BaseActivity<Props, States> {
     renderToolbar: () => JSX.Element;
     renderPage(): JSX.Element;
 }

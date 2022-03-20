@@ -1,6 +1,6 @@
-import Activity from "@Views";
+import BaseActivity from "../BaseActivity";
 import { Props, States } from "./interface";
-declare class MainActivity extends Activity.Base<Props, States> {
+declare class MainActivity extends BaseActivity<Props, States> {
     constructor(props: Readonly<Props> | Props);
     componentDidMount: () => void;
     private handleClick;

@@ -1,7 +1,7 @@
 import { PushPageProps } from "@Types/init";
 import { Props, States } from "./interface";
-import Activity from "@Views";
-declare class InitActivity extends Activity.Base<Props, States> {
+import BaseActivity from "../BaseActivity";
+declare class InitActivity extends BaseActivity<Props, States> {
     constructor(props: Readonly<Props> | Props);
     componentDidMount: () => void;
     componentDidUpdate(): void;

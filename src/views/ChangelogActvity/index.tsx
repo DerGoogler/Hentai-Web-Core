@@ -4,9 +4,9 @@ import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
 import { HighlightedMarkdown } from "../../components/HighlightMarkdown";
 import { Props, States } from "./interface";
-import  Activity from "@Views";
+import BaseActivity from "../BaseActivity";
 
-class ChangelogActivity extends Activity.Base<Props, States> {
+class ChangelogActivity extends BaseActivity<Props, States> {
   public constructor(props: any) {
     super(props)
   }

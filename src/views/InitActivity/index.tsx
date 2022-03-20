@@ -1,8 +1,9 @@
 import { PushPageProps } from "@Types/init";
 import { Props, States } from "./interface";
 import Activity from "@Views";
+import BaseActivity from "../BaseActivity";
 
-class InitActivity extends Activity.Base<Props, States> {
+class InitActivity extends BaseActivity<Props, States> {
   public constructor(props: Readonly<Props> | Props) {
     super(props);
 
@@ -149,7 +150,7 @@ class InitActivity extends Activity.Base<Props, States> {
         onPostPop={() => this.onPostPop()}
       />
     );
-  }
+  };
 }
 
 export default InitActivity;
