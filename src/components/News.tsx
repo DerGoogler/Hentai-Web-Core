@@ -1,11 +1,12 @@
 import * as React from "react";
-import { List, ListItem, SearchInput } from "react-onsenui";
+import { List } from "react-onsenuix";
 import ContentBody from "./ContentBody";
 import axios from "axios";
 import yaml from "js-yaml";
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import { HighlightedMarkdown } from "./HighlightMarkdown";
+import { ListItem } from "react-onsenui";
 
 class News extends React.Component {
   public state = {
@@ -24,14 +25,15 @@ class News extends React.Component {
      * To load for every object an own AnimePicture from `data.ts`
      */
     const listItems = this.state.data.map((item: any) => (
-      <ListItem expandable>
+      // @ts-ignore
+      <List.Item expandable>
         {item.title}
         <div className="expandable-content">
           <div className={"markdown-body-" + tools.typeIF(native.getPref("enableDarkmode"), "dark", "light")}>
             <HighlightedMarkdown>{item.msg}</HighlightedMarkdown>
           </div>
         </div>
-      </ListItem>
+      </List.Item>
     ));
 
     return (

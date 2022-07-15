@@ -1,6 +1,7 @@
 import ons from "onsenui";
 import React from "react";
-import { Toolbar, Page, Input, Button, ToolbarButton, Icon } from "react-onsenui";
+import { Input } from "react-onsenui";
+import { Page, Button } from "react-onsenuix";
 import native from "@Native/index";
 import { ToolbarBuilder } from "@Builders";
 import { string } from "@Strings";
@@ -10,21 +11,16 @@ class LoginActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { username: "", password: "" };
+    this.renderToolbar = this.renderToolbar.bind(this);
   }
 
   public componentDidMount() {
     native.android.setStatusbarColor("#4a148c");
-    native.userAgentEqualWindows(true)
-      ? window.Windows.notification("Welcome to HW", "The app includes nsfw content.")
-      : null;
+    native.userAgentEqualWindows(true) ? window.Windows.notification("Welcome to HW", "The app includes nsfw content.") : null;
   }
 
   private renderToolbar() {
-    return (
-      <Toolbar modifier="noshadow">
-        <ToolbarBuilder title={string.signIn} hasWindowsButtons={true} />
-      </Toolbar>
-    );
+    return <ToolbarBuilder modifier="noshadow" title={string.signIn} hasWindowsButtons={true} />;
   }
 
   private handleClick = () => {
@@ -66,8 +62,7 @@ class LoginActivity extends React.Component<Props, States> {
               backgroundColor: "white",
               padding: "16px",
               borderRadius: "8px",
-              boxShadow:
-                "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),0 3px 1px -2px rgba(0, 0, 0, 0.2)",
+              boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),0 3px 1px -2px rgba(0, 0, 0, 0.2)",
             }}
           >
             <p
@@ -88,13 +83,7 @@ class LoginActivity extends React.Component<Props, States> {
               />
             </p>
             <p>
-              <Input
-                value={this.state.password}
-                onChange={this.handlePasswordChange}
-                modifier="underbar"
-                float
-                placeholder={native.isAndroid ? string.MODEL : "platform"}
-              />
+              <Input value={this.state.password} onChange={this.handlePasswordChange} modifier="underbar" float placeholder={native.isAndroid ? string.MODEL : "platform"} />
             </p>
             <p>
               <Button onClick={this.handleClick}>sign-in</Button>

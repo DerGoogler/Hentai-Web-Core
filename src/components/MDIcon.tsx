@@ -1,29 +1,36 @@
 import tools from "@Misc/tools";
 import native from "@Native/index";
 import * as React from "react";
+import { ViewX, ViewXRenderData } from "react-onsenuix";
 
-class MDIcon extends React.Component<{
+interface Props {
   icon: string;
   size: "18" | "24" | "36" | "48";
   disabled?: boolean;
   isInList?: boolean;
   ignoreDarkmode?: boolean;
   style?: React.CSSProperties;
-}> {
-  public render() {
-    const { icon, size, disabled, isInList, ignoreDarkmode, style } = this.props;
+}
+
+class MDIcon extends ViewX<Props, {}, HTMLSpanElement> {
+  public constructor(props: Props | Readonly<Props>) {
+    super(props);
+    this.createView = this.createView.bind(this);
+  }
+
+  public createView(data: ViewXRenderData<Props, {}, HTMLSpanElement>): JSX.Element {
     return (
-      <span style={style}>
+      <span style={data.p.style}>
         <span
           className={
             "material-icons-round " +
-            tools.typeIF(isInList, "list-item__icon", "") +
+            tools.typeIF(data.p.isInList, "list-item__icon", "") +
             " ons-icon " +
             "material-icons md-" +
-            size +
-            tools.typeCheck(ignoreDarkmode, " md-" + tools.typeIF(native.getPref("enableDarkmode"), "light", "dark")) +
+            data.p.size +
+            tools.typeCheck(data.p.ignoreDarkmode, " md-" + tools.typeIF(native.getPref("enableDarkmode"), "light", "dark")) +
             " " +
-            tools.typeIF(disabled, "md-inactive ", "")
+            tools.typeIF(data.p.disabled, "md-inactive ", "")
           }
           style={{
             textAlign: "center",
@@ -35,7 +42,7 @@ class MDIcon extends React.Component<{
             alignItems: "center",
           }}
         >
-          {icon}
+          {data.p.icon}
         </span>
       </span>
     );

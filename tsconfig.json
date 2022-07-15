@@ -1,22 +1,20 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "declaration": true,
-    "emitDeclarationOnly": false,
-    "declarationMap": false,
     "outDir": "./dist/",
     "typeRoots": ["src/typings/global.d.ts"],
+    "lib": ["ES2015", "dom", "ES2017"],
     "sourceMap": true,
+    "declaration": false,
     "strict": true,
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "module": "es6",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "types": ["node"],
-    "target": "es6",
+    "target": "es5",
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "allowJs": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
@@ -30,6 +28,12 @@
       "@Styles/*": ["styles/*"],
       "@Strings": ["localization/index.ts"],
       "@Views": ["views/index.ts"]
+    }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS",
+      "types": ["node"]
     }
   },
   "include": ["./src/**/*"]

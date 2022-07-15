@@ -6,13 +6,15 @@ import Video from "./Video";
 import Center from "./Center";
 import DiscordWidget from "./DiscordWidget";
 import Font from "./Font";
+import { ViewX, ViewXRenderData } from "react-onsenuix";
 // import "highlight.js/styles/atom-one-dark.css";
 
-class HighlightedMarkdown extends React.Component<{ children: string }> {
+class HighlightedMarkdown extends ViewX {
   rootRef: React.RefObject<HTMLDivElement>;
   public constructor(props: any) {
     super(props);
     this.rootRef = React.createRef();
+    this.createView = this.createView.bind(this);
   }
 
   public componentDidMount() {
@@ -23,7 +25,7 @@ class HighlightedMarkdown extends React.Component<{ children: string }> {
     });
   }
 
-  public render() {
+  public createView(data: ViewXRenderData<{}, {}, HTMLElement>): JSX.Element {
     return (
       <div ref={this.rootRef}>
         <Markdown
@@ -44,7 +46,7 @@ class HighlightedMarkdown extends React.Component<{ children: string }> {
             },
           }}
         >
-          {this.props.children}
+          {data.p.children as string}
         </Markdown>
       </div>
     );

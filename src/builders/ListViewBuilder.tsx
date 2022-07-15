@@ -1,5 +1,6 @@
 import * as React from "react";
-import { ListItem, ListTitle, Select, Switch } from "react-onsenui";
+import { ListItem, Select, Switch } from "react-onsenui";
+import { List } from "react-onsenuix";
 import { SelectValue, ListInterface, ListOptions } from "@Types/ListBuilder";
 import tools from "@Misc/tools";
 import native from "@Native/index";
@@ -70,11 +71,12 @@ class ListViewBuilder extends React.Component<{
     const list = data.map((header: ListInterface) => (
       <>
         <section id={header.id} className={header.className} style={header.style}>
-          <ListTitle>{header.title}</ListTitle>
+          <List.Title>{header.title}</List.Title>
           {header.content.map((item: ListOptions) => (
             <>
-              <ListItem
+              <List.Item
                 modifier={tools.typeCheck(item.modifier, "")}
+                // @ts-ignore
                 tappable={tools.typeCheck(item.tappable, false)}
                 id={item.key + "-ListItem"}
                 style={item.style}
@@ -139,10 +141,7 @@ class ListViewBuilder extends React.Component<{
                           <Select
                             id="choose-sel"
                             disabled={Boolean(item.disabled)}
-                            value={tools.typeCheck(
-                              this.getSettingSelect(item.key!),
-                              tools.typeCheck(item.selectDefaultValue, "")
-                            )}
+                            value={tools.typeCheck(this.getSettingSelect(item.key!), tools.typeCheck(item.selectDefaultValue, ""))}
                             onChange={(e: any) => {
                               /**
                                * This will keep the default funtion
@@ -173,7 +172,7 @@ class ListViewBuilder extends React.Component<{
                     }
                   })()}
                 </div>
-              </ListItem>
+              </List.Item>
             </>
           ))}
         </section>

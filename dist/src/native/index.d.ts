@@ -199,7 +199,7 @@ declare class native {
                 use: boolean;
                 mode: "json" | "yaml";
             };
-        } | undefined): string | any;
+        }): string | any;
         mkDir(path: string): void;
         writeFile(path: string, content: string): void;
         isFileExist(path: string): boolean;

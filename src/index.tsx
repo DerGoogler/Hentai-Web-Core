@@ -7,31 +7,22 @@ import erudaDom from "eruda-dom";
 import jss from "jss";
 import darkMode from "@Styles/dark";
 import lightMode from "@Styles/light";
-import { ForbiddenActivity, InitActivity } from "@Views";
+import { InitActivity } from "@Views";
+import { dom } from "googlers-tools";
 
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/ext-language_tools";
-import "ace-builds/src-noconflict/theme-nord_dark";
 import "onsenui/css/onsenui-core.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "material-icons/iconfont/material-icons.css";
 import "@Styles/default.scss";
 import "@Styles/github/markdown-dark.scss";
 import "@Styles/github/markdown-light.scss";
-import AppRoot from "@Components/AppRoot";
 
 class Bootloader {
-  private mountNode: any = document.querySelector("app-root");
-
   private loadConsole() {
     if (native.getPref("erudaEnabled") === "true") {
       eruda.init();
       eruda.add(erudaDom);
     }
-  }
-
-  private loadActivity(node: JSX.Element) {
-    ReactDOM.render(<>{node}</>, this.mountNode);
   }
 
   private electronInit() {
@@ -60,46 +51,18 @@ class Bootloader {
     }
   }
 
-  private makeExamplePlugin() {
-    native.fs.writeFile("plugins/example/plugin.yaml", "run: index.js");
-    native.fs.writeFile("plugins/example/index.js", "console.log('Example Plugin')");
-    native.fs.writeFile("plugins/example/note.txt", "THIS IS AN EXAMPLE PLUGIN AND CANNOT OVERRIDED");
-  }
-
-  private folderInit() {
-    if (!native.fs.isFileExist("plugins.yaml")) {
-      native.fs.writeFile("plugins.yaml", "- example");
-    }
-  }
-
   public init() {
     ons.platform.select("android");
     this.styleInit();
-    if (
-      native.isIframe ||
-      native.isElectron ||
-      native.isEmbedded ||
-      native.isIE ||
-      native.isEdge ||
-      native.isMIUI ||
-      native.isSamsungBrowser
-    ) {
-      this.loadActivity(<ForbiddenActivity />);
-    } else {
-      this.folderInit();
-      this.makeExamplePlugin();
-      this.loadConsole();
-      this.electronInit();
-      this.androidSettingsinit();
+    this.loadConsole();
+    this.electronInit();
+    this.androidSettingsinit();
 
-      if (native.isInstagram || native.isFacebook) {
-        native.setPref("disableNSFW", "true");
-      }
-      
-      customElements.define("app-root", AppRoot);
-
-      this.loadActivity(<InitActivity />);
+    if (native.isInstagram || native.isFacebook) {
+      native.setPref("disableNSFW", "true");
     }
+
+    dom.render(<InitActivity />, "app");
   }
 }
 

@@ -1,3 +1,6 @@
+/**
+ * Strings of the app
+ */
 declare const _default: {
     "close-windows-dialog-message-app-string": {
         en: string;
@@ -160,7 +163,4 @@ declare const _default: {
         de: string;
     };
 };
-/**
- * Strings of the app
- */
 export default _default;

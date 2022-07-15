@@ -1,17 +1,21 @@
-![hw](https://cdn.discordapp.com/attachments/808975524386177034/937078712338374736/hw139.png)
+[core]: https://github.com/Hentai-Web/Core
+[desktop]: https://github.com/Hentai-Web/Windows
+[android]: https://github.com/Hentai-Web/Android
+[discord]: https://github.com/Hentai-Web/Discord
+[telegam]: https://github.com/Hentai-Web/Telegram
 
-# The Hentai Web Project
+<h1 align="center"><pre>The Hentai Web Project</pre></h1>
 
 Get updates in the [Telegram](https://t.me/HentaiWebUpdates) channel.  
 Support this with a **Star**!
 
 Lets get started! The sources listed below:
 
-- [`Core`](https://github.com/Hentai-Web/Core) Source for the website
-- [`Windows`](https://github.com/Hentai-Web/Windows) Source for Windows
-- [`Android`](https://github.com/Hentai-Web/Android) Source for Andorid
-- [`Discord`](https://github.com/Hentai-Web/Discord) Source for Discord
-- [`Telegram`](https://github.com/Hentai-Web/Telegram) Source for Telegram
+- [`Core`][core] Source for the website
+- ~[`Windows`][desktop] Source for Windows~
+- ~[`Android`][android] Source for AndroidAndorid~
+- ~[`Discord`][discord] Source for Discord~
+- ~[`Telegram`][telegam] Source for Telegram~
 
 # Features
 

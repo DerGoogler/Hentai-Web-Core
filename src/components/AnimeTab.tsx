@@ -1,12 +1,21 @@
-import * as React from "react";
-import { Page } from "react-onsenui";
+import { ViewX, ViewXRenderData, Page } from "react-onsenuix";
 
-class AnimeTab extends React.Component<{ content: JSX.Element }> {
-  public render() {
+interface Props {
+  content: JSX.Element;
+}
+
+class AnimeTab extends ViewX<Props> {
+  public constructor(props: Props | Readonly<Props>) {
+    super(props);
+
+    this.createView = this.createView.bind(this);
+  }
+
+  public createView(data: ViewXRenderData<Props, {}, HTMLElement>): JSX.Element {
     return (
       <Page>
         <section>
-          <span>{this.props.content}</span>
+          <span>{data.p.content}</span>
         </section>
       </Page>
     );

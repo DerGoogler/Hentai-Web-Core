@@ -10,13 +10,14 @@ interface ToolbarBuilderInterface {
   /**
    * Object
    */
-  addToolbarButton?: HTMLElement | JSX.Element;
+  addToolbarButton?: JSX.Element;
   addToolbarButtonPosition?: "left" | "right";
   /**
    * Enable dark mode for this activity that includes this toolbar.
    * @deprecated
    */
   hasDarkMode?: boolean;
+  modifier?: string;
 }
 
 export { ToolbarBuilderInterface };

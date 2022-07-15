@@ -1,20 +1,27 @@
 import { PictureBuilder } from "@Builders";
 import * as React from "react";
-import { Button, List, SearchInput } from "react-onsenui";
+import { SearchInput } from "react-onsenui";
+import { Button, List } from "react-onsenuix";
 import ContentBody from "./ContentBody";
 import native from "@Native/index";
 import { string } from "@Strings";
 import MDIcon from "./MDIcon";
 import tools from "@Misc/tools";
 import { OnsSearchInputElement } from "onsenui";
+import { ViewX, ViewXRenderData } from "react-onsenuix";
 
-class AnimeContent extends React.Component<
-  {
-    data: any[];
-    name: string;
-  },
-  { search: string; currentSerachText: string; searchButtonDisabled: boolean }
-> {
+interface Props {
+  data: any[];
+  name: string;
+}
+
+interface States {
+  search: string;
+  currentSerachText: string;
+  searchButtonDisabled: boolean;
+}
+
+class AnimeContent extends ViewX<Props, States> {
   private searchBar: React.RefObject<SearchInput>;
 
   public constructor(props: any) {
@@ -25,6 +32,8 @@ class AnimeContent extends React.Component<
       searchButtonDisabled: true,
     };
     this.searchBar = React.createRef();
+
+    this.createView = this.createView.bind(this);
   }
 
   /*
@@ -47,12 +56,10 @@ class AnimeContent extends React.Component<
     this.setState({ search: currentSerachText });
   };
 
-  public render = () => {
-    const { currentSerachText, searchButtonDisabled, search } = this.state;
+  public createView(data: ViewXRenderData<Props, States, HTMLElement>): JSX.Element {
+    const { currentSerachText, searchButtonDisabled, search } = data.s;
 
-    const listItems = this.props.data.map((item: any[]) => (
-      <PictureBuilder searchState={search} key={item.toString()} source={item} note={item} />
-    ));
+    const listItems = this.props.data.map((item: any[]) => <PictureBuilder searchState={search} key={item.toString()} source={item} note={item} />);
 
     return (
       <ContentBody className="Anime-Content">
@@ -104,7 +111,7 @@ class AnimeContent extends React.Component<
         </div>
       </ContentBody>
     );
-  };
+  }
 }
 
 export default AnimeContent;

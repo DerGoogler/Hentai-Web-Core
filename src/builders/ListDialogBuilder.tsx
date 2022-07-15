@@ -1,7 +1,8 @@
 import tools from "@Misc/tools";
 import { ListInterface } from "@Types/ListBuilder";
 import * as React from "react";
-import { Dialog, List } from "react-onsenui";
+import { Dialog } from "react-onsenui";
+import { List } from "react-onsenuix";
 import ListViewBuilder from "./ListViewBuilder";
 
 interface Options {
@@ -17,6 +18,7 @@ class ListDialogBuilder extends React.Component<{ data: ListInterface[]; options
     const { data, options } = this.props;
 
     return (
+      // @ts-ignore
       <Dialog
         isCancelable={tools.typeCheck(options.isCancelable, true)}
         animation={tools.typeCheck(options.animation, "default")}

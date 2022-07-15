@@ -1,12 +1,17 @@
-import * as React from "react";
 import { isMobile } from "react-device-detect";
 import config from "../misc/config";
 import native from "@Native/index";
+import { ViewX, ViewXRenderData } from "react-onsenuix";
 
 /**
  * ContentBody is an optional component, to make the view better on desktop
  */
-class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element> {
+class ContentBody extends ViewX {
+  public constructor(props: {}) {
+    super(props);
+    this.createView = this.createView.bind(this);
+  }
+
   private stlye: any = {
     boxSizing: "border-box",
     display: "flex",
@@ -26,20 +31,13 @@ class ContentBody extends React.Component<React.HTMLAttributes<Element>, Element
     }
   }
 
-  public render() {
-    const { className } = this.props;
+  public createView(data: ViewXRenderData<{}, {}, HTMLElement>): JSX.Element {
     return (
       <div
-        className={
-          className === "markdownBody"
-            ? native.getPref("enableDarkmode") === "true"
-              ? "markdown-body-dark"
-              : "markdown-body-light"
-            : className
-        }
+        className={data.p.className === "markdownBody" ? (native.getPref("enableDarkmode") === "true" ? "markdown-body-dark" : "markdown-body-light") : data.p.className}
         style={this.checkDevice({ padding: native.isWindows || isMobile ? "" : "16px" }, {})}
       >
-        <div style={this.checkDevice(this.stlye, {})}>{this.props.children}</div>
+        <div style={this.checkDevice(this.stlye, {})}>{data.p.children}</div>
       </div>
     );
   }

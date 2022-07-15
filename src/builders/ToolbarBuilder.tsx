@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BackButton, Icon, ToolbarButton } from "react-onsenui";
+import { BackButton, Icon, Toolbar } from "react-onsenuix";
 import native from "@Native/index";
 import { ToolbarBuilderInterface } from "@Types/ToolbarBuilder";
 import tools from "@Misc/tools";
@@ -11,10 +11,10 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
   };
 
   public render() {
-    const { title, onBackButton, addToolbarButton, addToolbarButtonPosition, hasWindowsButtons } = this.props;
+    const { title, onBackButton, addToolbarButton, addToolbarButtonPosition, hasWindowsButtons, modifier } = this.props;
     return (
-      <>
-        <div className="left">
+      <Toolbar modifier={modifier}>
+        <Toolbar.Left>
           {onBackButton ? (
             <BackButton
               // @ts-ignore
@@ -28,10 +28,10 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
               return;
             }
           })()}
-        </div>
+        </Toolbar.Left>
         <div className="center drag--windows">{title}</div>
 
-        <div className="right">
+        <Toolbar.Right>
           {(() => {
             if (addToolbarButtonPosition === "right") {
               return addToolbarButton;
@@ -44,7 +44,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
               if (hasWindowsButtons) {
                 return (
                   <>
-                    <ToolbarButton
+                    <Toolbar.Button
                       modifier="windowsNormal paddingFIX"
                       style={{
                         display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
@@ -54,8 +54,8 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       }}
                     >
                       <MDIcon icon="remove" size="24" ignoreDarkmode={true}></MDIcon>
-                    </ToolbarButton>
-                    <ToolbarButton
+                    </Toolbar.Button>
+                    <Toolbar.Button
                       modifier="windowsNormal paddingFIX"
                       disabled={tools.typeIF(native.getPref("electron.enableFullscreen"), true, false)}
                       style={{
@@ -64,10 +64,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       onClick={() => {
                         if (window.Windows.isMaximized()) {
                           window.Windows.unmaximize();
-                          window.Windows.setWindowSize(
-                            Number(native.getPref("electron.windowSize.width")),
-                            Number(native.getPref("electron.windowSize.height"))
-                          );
+                          window.Windows.setWindowSize(Number(native.getPref("electron.windowSize.width")), Number(native.getPref("electron.windowSize.height")));
                           this.setState({ icon: "fullscreen" });
                         } else {
                           window.Windows.maximize();
@@ -76,8 +73,8 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       }}
                     >
                       <MDIcon icon={this.state.icon} size="24" ignoreDarkmode={true}></MDIcon>
-                    </ToolbarButton>
-                    <ToolbarButton
+                    </Toolbar.Button>
+                    <Toolbar.Button
                       modifier="windowsClose paddingFIX"
                       style={{
                         display: tools.typeIF(native.userAgentEqualWindows(true), "", "none"),
@@ -87,7 +84,7 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
                       }}
                     >
                       <MDIcon icon="close" size="24" ignoreDarkmode={true}></MDIcon>
-                    </ToolbarButton>
+                    </Toolbar.Button>
                   </>
                 );
               } else {
@@ -97,8 +94,8 @@ class ToolbarBuilder extends React.Component<ToolbarBuilderInterface> {
               return;
             }
           })()}
-        </div>
-      </>
+        </Toolbar.Right>
+      </Toolbar>
     );
   }
 }

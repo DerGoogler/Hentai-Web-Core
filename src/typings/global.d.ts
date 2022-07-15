@@ -21,4 +21,8 @@ declare global {
      */
     webkit: any;
   }
+
+  interface DefinePropsInterface<E = HTMLElement> {
+    children?: React.ReactNode | React.ReactNode[] | undefined;
+  }
 }

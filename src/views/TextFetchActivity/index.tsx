@@ -1,5 +1,5 @@
 import React from "react";
-import { Page, Toolbar } from "react-onsenui";
+import { Page } from "react-onsenuix";
 import native from "@Native/index";
 import axios from "axios";
 import { ToolbarBuilder } from "@Builders";
@@ -11,7 +11,7 @@ class TextFetchActivity extends React.Component<Props, States> {
   public constructor(props: any) {
     super(props);
     this.state = { data: "" };
-    
+    this.renderToolbar = this.renderToolbar.bind(this);
   }
 
   public componentDidMount = () => {
@@ -24,11 +24,7 @@ class TextFetchActivity extends React.Component<Props, States> {
 
   private renderToolbar = () => {
     const { textFetch, popPage } = this.props;
-    return (
-      <Toolbar>
-        <ToolbarBuilder title={textFetch.title} onBackButton={popPage} hasWindowsButtons={true} />
-      </Toolbar>
-    );
+    return <ToolbarBuilder title={textFetch.title} onBackButton={popPage} hasWindowsButtons={true} />;
   };
 
   public render() {

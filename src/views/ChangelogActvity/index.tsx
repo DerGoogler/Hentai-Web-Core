@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Page, Toolbar } from "react-onsenui";
+import { Button, Page } from "react-onsenuix";
 import native from "@Native/index";
 import { ToolbarBuilder } from "@Builders";
 import ContentBody from "@Components/ContentBody";
@@ -9,19 +9,12 @@ import { Props, States } from "./interface";
 class ChangelogActivity extends React.Component<Props, States> {
   public componentDidMount() {
     console.log(this.props.changelog.package.android);
+
+    this.renderToolbar = this.renderToolbar.bind(this);
   }
 
   private renderToolbar = () => {
-    return (
-      <Toolbar>
-        <ToolbarBuilder
-          title={"Changelog " + this.props.changelog.version}
-          onBackButton={this.props.popPage}
-          hasWindowsButtons={true}
-          hasDarkMode={true}
-        />
-      </Toolbar>
-    );
+    return <ToolbarBuilder title={"Changelog " + this.props.changelog.version} onBackButton={this.props.popPage} hasWindowsButtons={true} hasDarkMode={true} />;
   };
 
   public render = () => {

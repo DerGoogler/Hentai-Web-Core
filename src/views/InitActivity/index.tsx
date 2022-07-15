@@ -1,7 +1,8 @@
 import native from "@Native/index";
 import MainActivity from "../MainActivity";
 import * as React from "react";
-import { Page, Toolbar, BackButton, RouterNavigator, RouterUtil } from "react-onsenui";
+import { RouterUtil } from "react-onsenui";
+import { Page, BackButton, RouterNavigator } from "react-onsenui";
 import { PushPageProps } from "@Types/init";
 import Bootloader from "@Bootloader";
 import LoginActivity from "../LoginActivity";
@@ -158,17 +159,6 @@ class InitActivity extends React.Component<Props, States> {
     const props = route.props || {};
     return <route.component {...props} />;
   };
-
-  private renderToolbar() {
-    return (
-      <Toolbar>
-        <div className="left">
-          <BackButton />
-        </div>
-        <div className="center">Stateless Navigator</div>
-      </Toolbar>
-    );
-  }
 
   public render() {
     return (

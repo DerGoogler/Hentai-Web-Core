@@ -1,13 +1,13 @@
 import * as React from "react";
 import pkg from "./../../../package.json";
-import { Page, Toolbar, Tabbar, ToolbarButton } from "react-onsenui";
+import { Page, Toolbar, Tabbar, TabbarEvent } from "react-onsenuix";
 import native from "@Native/index";
 import tools from "@Misc/tools";
 import { ToolbarBuilder, TabbarBuilder, ListDialogBuilder } from "@Builders";
 import AnimeContent from "@Components/AnimeContent";
 import MDIcon from "@Components/MDIcon";
 import News from "@Components/News";
-import { ChangelogActivity, PluginsActivity, SettingsActivity, TextFetchActivity, EditorActivity } from "@Views";
+import { ChangelogActivity, SettingsActivity, TextFetchActivity } from "@Views";
 import images from "@DataPacks/images";
 import { string } from "@Strings";
 import { Props, States } from "./interface";
@@ -20,6 +20,7 @@ class MainActivity extends React.Component<Props, States> {
       sfw: images.sfw,
       nsfw: images.nsfw,
     };
+    this.renderToolbar = this.renderToolbar.bind(this);
   }
 
   public componentDidMount = () => {
@@ -79,9 +80,9 @@ class MainActivity extends React.Component<Props, States> {
           hasWindowsButtons={true}
           addToolbarButton={
             <>
-              <ToolbarButton id="menu-click" onClick={this.handleClick}>
+              <Toolbar.Button id="menu-click" onClick={this.handleClick}>
                 <MDIcon icon="menu" size="24" ignoreDarkmode={true}></MDIcon>
-              </ToolbarButton>
+              </Toolbar.Button>
             </>
           }
           addToolbarButtonPosition="left"
@@ -140,7 +141,6 @@ class MainActivity extends React.Component<Props, States> {
           swipeable={tools.stringToBoolean(native.getPref("enableSwipeBetweenTabs"))}
           position={native.getPref("enableBottomTabbar") === "true" ? "bottom" : "top"}
           index={this.tabIndexChecker()}
-          // @ts-ignore
           onPreChange={(event: any) => {
             event.preventDefault(); // For newer Onsen UI version
             if (event.index != this.tabIndexChecker) {
@@ -182,54 +182,6 @@ class MainActivity extends React.Component<Props, States> {
                       textFetch: {
                         title: string.licenses,
                         url: "https://cdn.dergoogler.com/others/hentai-web/vendor.bundle.js.LICENSE.txt",
-                      },
-                    });
-                    this.handleCancel();
-                  },
-                },
-                {
-                  text: "Plugins",
-                  type: "",
-                  icon: "extension",
-                  style: {
-                    display:
-                      (native.getPref("enablePluginTestting") && native.getPref("enableCustomScriptLoading")) === "true"
-                        ? ""
-                        : "none",
-                  },
-                  onClick: () => {
-                    this.props.pushPage({
-                      activity: PluginsActivity,
-                      key: "plugins",
-                    });
-                    this.handleCancel();
-                  },
-                },
-                {
-                  text: "Playground",
-                  type: "",
-                  icon: "code",
-                  style: {
-                    display:
-                      native.isAndroid || native.isWindows
-                        ? "none"
-                        : (native.getPref("enablePluginTestting") && native.getPref("enableCustomScriptLoading")) ===
-                          "true"
-                        ? ""
-                        : "none",
-                  },
-                  onClick: () => {
-                    const getPlayground = native.getPref("playground");
-                    this.props.pushPage({
-                      activity: EditorActivity,
-                      key: "plugin-play-ground",
-                      extras: {
-                        pluginName: "playground",
-                        fileName: "index.js",
-                        value:
-                          getPlayground === "false"
-                            ? 'initFile((plugin) => {\r\n  console.log("Hello, world!")\r\n});\r\n'
-                            : getPlayground,
                       },
                     });
                     this.handleCancel();

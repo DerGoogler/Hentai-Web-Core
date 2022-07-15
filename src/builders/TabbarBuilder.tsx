@@ -1,4 +1,4 @@
-import { Tab } from "react-onsenui";
+import { Tab } from "react-onsenuix";
 import AnimeTab from "@Components/AnimeTab";
 
 /**

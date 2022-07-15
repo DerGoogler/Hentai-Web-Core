@@ -29,6 +29,7 @@ class ActionSheetBuilder extends React.Component<{ data: MenuBuild[]; options: O
     const { data, options } = this.props;
 
     const result = data.map((item: MenuBuild) => (
+      // @ts-ignore
       <ActionSheetButton
         icon={item.icon}
         style={item.style}
@@ -46,24 +47,23 @@ class ActionSheetBuilder extends React.Component<{ data: MenuBuild[]; options: O
     ));
 
     return (
-      <>
-        <ActionSheet
-          isOpen={options.isOpen}
-          animation={tools.typeCheck(options.animation, "default")}
-          modifier={options.modifier}
-          onCancel={() => {
-            if (typeof options.onCancel == "function") {
-              options.onCancel();
-            } else {
-              throw new Error("onCancel is not a function");
-            }
-          }}
-          isCancelable={tools.typeCheck(options.isCancelable, true)}
-          title={options.title}
-        >
-          {result}
-        </ActionSheet>
-      </>
+      // @ts-ignore
+      <ActionSheet
+        isOpen={options.isOpen}
+        animation={tools.typeCheck(options.animation, "default")}
+        modifier={options.modifier}
+        onCancel={() => {
+          if (typeof options.onCancel == "function") {
+            options.onCancel();
+          } else {
+            throw new Error("onCancel is not a function");
+          }
+        }}
+        isCancelable={tools.typeCheck(options.isCancelable, true)}
+        title={options.title}
+      >
+        {result}
+      </ActionSheet>
     );
   }
 }

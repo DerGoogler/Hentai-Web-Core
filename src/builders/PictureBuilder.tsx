@@ -1,9 +1,9 @@
 import * as React from "react";
 import { Card } from "react-bootstrap";
-import { Button, Card as Kard } from "react-onsenui";
+import { Card as Kard } from "react-onsenui";
+import { Button } from "react-onsenuix";
 import axios from "axios";
 import native from "@Native/index";
-import { Icon } from "react-onsenui";
 import tools from "@Misc/tools";
 import { string } from "@Strings";
 import ListDialogBuilder from "./ListDialogBuilder";
@@ -96,39 +96,31 @@ class PictureBuilder extends React.Component<
     native.fs.mkDir("images");
     try {
       if (native.isAndroid || native.isWindows) {
-        axios
-          .get(
-            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/\s/g, "").toLowerCase() + ".json"
-          )
-          .then((res) => {
-            try {
-              const data = res.data;
-              native.fs.writeFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
-            } catch (error) {
-              Logger.error(error);
-            }
-          });
+        axios.get("https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/\s/g, "").toLowerCase() + ".json").then((res) => {
+          try {
+            const data = res.data;
+            native.fs.writeFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
+          } catch (error) {
+            Logger.error(error);
+          }
+        });
       } else {
-        axios
-          .get(
-            "https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/\s/g, "").toLowerCase() + ".json"
-          )
-          .then((res) => {
-            try {
-              const data = res.data;
-              native.setPref(image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
-            } catch (error) {
-              Logger.error(error);
-            }
-          });
+        axios.get("https://cdn.dergoogler.com/others/hentai-web/images/" + image.replace(/\s/g, "").toLowerCase() + ".json").then((res) => {
+          try {
+            const data = res.data;
+            native.setPref(image.replace(/\s/g, "").toLowerCase() + ".json", JSON.stringify(data));
+          } catch (error) {
+            Logger.error(error);
+          }
+        });
       }
       const data =
         native.isAndroid || native.isWindows
           ? native.fs.readFile("images/" + image.replace(/\s/g, "").toLowerCase() + ".json", {
-            parse: { use: true, mode: "json" },
-          })
+              parse: { use: true, mode: "json" },
+            })
           : // @ts-ignore
-          JSON.parse(native.getPref(image.replace(/\s/g, "").toLowerCase() + ".json"));
+            JSON.parse(native.getPref(image.replace(/\s/g, "").toLowerCase() + ".json"));
       return data[Math.floor(Math.random() * data.length)];
     } catch (error) {
       return "error";
@@ -154,6 +146,9 @@ class PictureBuilder extends React.Component<
             return (
               <>
                 <div ref={this.searchedCard}>
+                  {/**
+                   * 
+                  // @ts-ignore */}
                   <Kard style={{ padding: "0px", borderRadius: "8px", border: "0px" }}>
                     <Card
                       key={this.getID}
@@ -196,7 +191,6 @@ class PictureBuilder extends React.Component<
                             <MDIcon icon="more_horiz" size="18" ignoreDarkmode={true} />
                           </Button>
                         </div>
-
                       </Card.Header>
                       <Card.Body
                         style={{
@@ -265,11 +259,7 @@ class PictureBuilder extends React.Component<
                                       type: "",
                                       icon: "link",
                                       onClick: () => {
-                                        native.open(
-                                          `https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note
-                                            .toLowerCase()
-                                            .replace(/ /g, "")}.json`
-                                        );
+                                        native.open(`https://github.com/DerGoogler/cdn/blob/master/others/hentai-web/images/${note.toLowerCase().replace(/ /g, "")}.json`);
                                         this.handleCancel();
                                       },
                                     },
