@@ -1,40 +1,39 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "declaration": false,
+    "emitDeclarationOnly": false,
+    "declarationMap": false,
     "outDir": "./dist/",
     "typeRoots": ["src/typings/global.d.ts"],
-    "lib": ["ES2015", "dom", "ES2017"],
     "sourceMap": true,
-    "declaration": false,
     "strict": true,
     "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "module": "es6",
+    "noImplicitAny": false,
+    "module": "ES2022",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "target": "es5",
+    "types": ["node"],
+    "target": "es6",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "allowJs": true,
     "jsx": "react-jsx",
     "baseUrl": "./src",
     "paths": {
       "@Native/*": ["native/*"],
-      "@Builders": ["builders/index.ts"],
       "@Components/*": ["components/*"],
       "@Types/*": ["typings/*"],
-      "@DataPacks/*": ["dataPacks/*"],
-      "@Misc/*": ["misc/*"],
-      "@Bootloader": ["index.tsx"],
       "@Styles/*": ["styles/*"],
-      "@Strings": ["localization/index.ts"],
-      "@Views": ["views/index.ts"]
+      "@Views/*": ["views/*"],
+      "@Util/*": ["util/*"],
+      "@Hooks/*": ["hooks/*"]
     }
   },
   "ts-node": {
     "compilerOptions": {
-      "module": "CommonJS",
-      "types": ["node"]
+      "module": "CommonJS"
     }
   },
-  "include": ["./src/**/*"]
+  "include": ["./src/**/*", "./dep.ts", "./make_native.ts"],
+  "exclude": ["./src/view/TestPluginActivity/util/types.d.ts"]
 }

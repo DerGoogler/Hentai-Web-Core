@@ -1,12 +1,14 @@
-import { Configuration } from "webpack";
 import { resolve, join } from "path";
+import { Configuration } from "webpack";
+// Keep that for typings
+import webpackDevServer from "webpack-dev-server";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
 
 const defConfig: Configuration = {
   output: {
     filename: "bundle/[name].bundle.js",
-    path: resolve(__dirname, "dist"),
+    path: resolve(__dirname, "./build/www"),
     assetModuleFilename: "files/[name].[ext]",
   },
 };
@@ -22,6 +24,10 @@ const config: Configuration = {
         test: /(d)?\.ts(x)?$/,
         loader: "ts-loader",
         exclude: /node_modules/,
+      },
+      {
+        test: /\.d.ts$/i,
+        use: "raw-loader",
       },
       {
         test: /\.yaml$/,
@@ -72,22 +78,30 @@ const config: Configuration = {
     modules: ["node_modules", join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
   },
   resolve: {
-    symlinks: false,
-    cacheWithContext: false,
-    modules: ["node_modules", join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
-    extensions: [".js", ".ts", ".jsx", ".tsx"],
     alias: {
+      openfl: resolve(__dirname, "node_modules/openfl/lib/openfl"),
+
       "@Builders": resolve(__dirname, "src/builders/index.ts"),
       "@Components": resolve(__dirname, "src/components"),
       "@Native": resolve(__dirname, "src/native"),
       "@Types": resolve(__dirname, "src/typings"),
-      "@DataPacks": resolve(__dirname, "src/dataPacks"),
-      "@Misc": resolve(__dirname, "src/misc"),
-      "@Bootloader": resolve(__dirname, "src/index.tsx"),
       "@Styles": resolve(__dirname, "src/styles"),
-      "@Strings": resolve(__dirname, "src/localization/index.ts"),
-      "@Views": resolve(__dirname, "src/views/index.ts"),
+      "@Views": resolve(__dirname, "src/views"),
+      "@Util": resolve(__dirname, "src/util"),
+      "@Hooks": resolve(__dirname, "src/hooks"),
     },
+    modules: ["node_modules", join(process.env.NPM_CONFIG_PREFIX || __dirname, "lib/node_modules")],
+    extensions: [".js", ".jsx", ".ts", ".tsx", ".scss", ".sass", "css"],
+  },
+
+  devServer: {
+    static: {
+      directory: join(__dirname, "./build/www"),
+    },
+    open: false,
+    compress: true,
+    historyApiFallback: true,
+    port: 9000,
   },
 };
 

@@ -1,0 +1,250 @@
+[
+    {
+        "name": "@emotion/react",
+        "author": "Emotion Contributors",
+        "version": "11.10.4",
+        "license": "MIT",
+        "repository": "https://www.npmjs.com/package/@emotion/react"
+    },
+    {
+        "name": "@emotion/styled",
+        "description": "styled API for emotion",
+        "version": "11.10.4",
+        "license": "MIT",
+        "repository": "https://www.npmjs.com/package/@emotion/styled"
+    },
+    {
+        "name": "@monaco-editor/react",
+        "description": "Monaco Editor for React - use the monaco-editor in any React application without needing to use webpack (or rollup/parcel/etc) configuration files / plugins",
+        "author": "Suren Atoyan <contact@surenatoyan.com>",
+        "version": "4.4.6",
+        "license": "MIT",
+        "homepage": "https://github.com/suren-atoyan/monaco-react#readme",
+        "repository": "https://www.npmjs.com/package/@monaco-editor/react"
+    },
+    {
+        "name": "@mui/icons-material",
+        "description": "Material Design icons distributed as SVG React components.",
+        "author": "MUI Team",
+        "version": "5.10.9",
+        "license": "MIT",
+        "homepage": "https://mui.com/material-ui/material-icons/",
+        "repository": "https://www.npmjs.com/package/@mui/icons-material"
+    },
+    {
+        "name": "@mui/material",
+        "description": "React components that implement Google's Material Design.",
+        "author": "MUI Team",
+        "version": "5.10.9",
+        "license": "MIT",
+        "homepage": "https://mui.com/material-ui/getting-started/overview/",
+        "repository": "https://www.npmjs.com/package/@mui/material"
+    },
+    {
+        "name": "ajv",
+        "description": "Another JSON Schema Validator",
+        "author": "Evgeny Poberezkin",
+        "version": "8.11.0",
+        "license": "MIT",
+        "homepage": "https://ajv.js.org",
+        "repository": "https://www.npmjs.com/package/ajv"
+    },
+    {
+        "name": "axios",
+        "description": "Promise based HTTP client for the browser and node.js",
+        "author": "Matt Zabriskie",
+        "version": "0.27.2",
+        "license": "MIT",
+        "homepage": "https://axios-http.com",
+        "repository": "https://www.npmjs.com/package/axios"
+    },
+    {
+        "name": "file-saver",
+        "description": "An HTML5 saveAs() FileSaver implementation",
+        "author": "Eli Grey <me@eligrey.com>",
+        "version": "2.0.5",
+        "license": "MIT",
+        "homepage": "https://github.com/eligrey/FileSaver.js#readme",
+        "repository": "https://www.npmjs.com/package/file-saver"
+    },
+    {
+        "name": "googlers-tools",
+        "description": "My own tools / scripts that I use.",
+        "author": "Der_Googler <jimmyboehm@dergoogler.com>",
+        "version": "1.4.5",
+        "license": "GPL-3.0",
+        "homepage": "https://dergoogler.com/Der_Googler/googlers-tools",
+        "repository": "https://www.npmjs.com/package/googlers-tools"
+    },
+    {
+        "name": "js-parse-markdown-metadata",
+        "description": "CommonJS module to parse metadata comments out of markdown and return object with 'metadata' and 'markdown' properties.",
+        "author": "Ryan K Harris",
+        "version": "1.0.4",
+        "license": "MIT",
+        "homepage": "https://github.com/ryankharris/js-parse-markdown-metadata#readme",
+        "repository": "https://www.npmjs.com/package/js-parse-markdown-metadata"
+    },
+    {
+        "name": "localized-strings",
+        "description": "Simple module to localize the strings of any JS based program using the same syntax used in the ReactLocalization and ReactNativeLocalization module, use 'npm run build' before publishing",
+        "author": "Stefano Falda <stefano.falda@gmail.com> (http://www.babisoft.com)",
+        "version": "0.2.4",
+        "license": "MIT",
+        "homepage": "https://github.com/stefalda/localized-strings#readme",
+        "repository": "https://www.npmjs.com/package/localized-strings"
+    },
+    {
+        "name": "markdown-to-jsx",
+        "description": "Convert markdown to JSX with ease for React and React-like projects. Super lightweight and highly configurable.",
+        "author": "Evan Jacobs <probablyup@gmail.com>",
+        "version": "7.1.7",
+        "license": "MIT",
+        "homepage": "https://probablyup.github.io/markdown-to-jsx",
+        "repository": "https://www.npmjs.com/package/markdown-to-jsx"
+    },
+    {
+        "name": "material-ui-confirm",
+        "description": "Higher order component for straightforward use of @material-ui/core confirmation dialogs.",
+        "author": "Jonatan Kłosko",
+        "version": "3.0.6",
+        "license": "MIT",
+        "homepage": "https://github.com/jonatanklosko/material-ui-confirm",
+        "repository": "https://www.npmjs.com/package/material-ui-confirm"
+    },
+    {
+        "name": "onsenui",
+        "description": "HTML5 Mobile Framework & UI Components",
+        "version": "2.12.5",
+        "license": "Apache-2.0",
+        "homepage": "https://onsen.io/",
+        "repository": "https://www.npmjs.com/package/onsenui"
+    },
+    {
+        "name": "package-depend-list",
+        "description": "",
+        "author": "Der_Googler <jimmyboehm@dergoogler.com>",
+        "version": "1.0.3",
+        "homepage": "https://github.com/DerGoogler/package-depend-list#README",
+        "repository": "https://www.npmjs.com/package/package-depend-list"
+    },
+    {
+        "name": "print-html-block",
+        "description": "Print Html Block",
+        "author": "Denisoed",
+        "version": "2.0.0",
+        "license": "MIT",
+        "homepage": "https://github.com/denisoed/print-html-block",
+        "repository": "https://www.npmjs.com/package/print-html-block"
+    },
+    {
+        "name": "react",
+        "description": "React is a JavaScript library for building user interfaces.",
+        "version": "18.2.0",
+        "license": "MIT",
+        "homepage": "https://reactjs.org/",
+        "repository": "https://www.npmjs.com/package/react"
+    },
+    {
+        "name": "react-ace",
+        "description": "A react component for Ace Editor",
+        "author": "James Hrisho",
+        "version": "10.1.0",
+        "license": "MIT",
+        "repository": "https://www.npmjs.com/package/react-ace"
+    },
+    {
+        "name": "react-device-detect",
+        "description": "Detect device type and render your component according to it",
+        "author": {
+            "name": "Michael Laktionov",
+            "email": "duskload@gmail.com"
+        },
+        "version": "2.2.2",
+        "license": "MIT",
+        "repository": "https://www.npmjs.com/package/react-device-detect"
+    },
+    {
+        "name": "react-disappear",
+        "description": "Detects if the inner children are visible",
+        "author": "Der_Googler",
+        "version": "1.0.4",
+        "license": "MIT",
+        "homepage": "https://github.com/DerGoogler/react-disappear#README",
+        "repository": "https://www.npmjs.com/package/react-disappear"
+    },
+    {
+        "name": "react-dom",
+        "description": "React package for working with the DOM.",
+        "version": "18.2.0",
+        "license": "MIT",
+        "homepage": "https://reactjs.org/",
+        "repository": "https://www.npmjs.com/package/react-dom"
+    },
+    {
+        "name": "react-onsenui",
+        "description": "Onsen UI - React Components for Hybrid Cordova/PhoneGap Apps with Material Design and iOS UI components",
+        "author": "Onsen UI Team <team@monaca.io>",
+        "version": "1.13.2",
+        "license": "Apache-2.0",
+        "homepage": "https://onsen.io/react/",
+        "repository": "https://www.npmjs.com/package/react-onsenui"
+    },
+    {
+        "name": "react-render-tools",
+        "description": "Simple tools to make react render easier to use",
+        "author": "Der_Googler",
+        "version": "1.0.1",
+        "license": "GPL-3.0",
+        "homepage": "https://github.com/DerGoogler/react-render-tools",
+        "repository": "https://www.npmjs.com/package/react-render-tools"
+    },
+    {
+        "name": "react-string-replace",
+        "description": "String#replace for React components",
+        "author": {
+            "name": "Ian Sinnott",
+            "email": "ian@iansinnott.com",
+            "url": "https://github.com/iansinnott"
+        },
+        "version": "1.1.0",
+        "license": "MIT",
+        "repository": "https://www.npmjs.com/package/react-string-replace"
+    },
+    {
+        "name": "react-to-print",
+        "description": "Print React components in the browser",
+        "author": "gregnb <gregnb@gmail.com>",
+        "version": "2.14.7",
+        "license": "MIT",
+        "homepage": "https://github.com/gregnb/react-to-print#readme",
+        "repository": "https://www.npmjs.com/package/react-to-print"
+    },
+    {
+        "name": "styled-components",
+        "description": "Visual primitives for the component age. Use the best bits of ES6 and CSS to style your apps without stress",
+        "author": "Glen Maddern",
+        "version": "5.3.6",
+        "license": "MIT",
+        "homepage": "https://styled-components.com",
+        "repository": "https://www.npmjs.com/package/styled-components"
+    },
+    {
+        "name": "textarea-markdown-editor",
+        "description": "UI headless React markdown editor using only textarea",
+        "author": "Resetand",
+        "version": "1.0.1",
+        "license": "MIT",
+        "homepage": "https://github.com/Resetand/markdown-textarea",
+        "repository": "https://www.npmjs.com/package/textarea-markdown-editor"
+    },
+    {
+        "name": "usehooks-ts",
+        "description": "React hook library, ready to use, written in Typescript.",
+        "author": "Julien CARON <juliencaron@protonmail.com>",
+        "version": "2.9.1",
+        "license": "MIT",
+        "homepage": "https://usehooks-ts.com",
+        "repository": "https://www.npmjs.com/package/usehooks-ts"
+    }
+]

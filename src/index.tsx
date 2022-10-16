@@ -1,71 +1,38 @@
-import ReactDOM from "react-dom";
+import React from "react";
 import ons from "onsenui";
-import eruda from "eruda";
-import native from "@Native/index";
-import preset from "jss-preset-default";
-import erudaDom from "eruda-dom";
-import jss from "jss";
-import darkMode from "@Styles/dark";
-import lightMode from "@Styles/light";
-import { InitActivity } from "@Views";
-import { dom } from "googlers-tools";
+import { dom, rct } from "googlers-tools";
 
-import "onsenui/css/onsenui-core.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "material-icons/iconfont/material-icons.css";
-import "@Styles/default.scss";
-import "@Styles/github/markdown-dark.scss";
-import "@Styles/github/markdown-light.scss";
+// Styles
+import "onsenui/css/onsenui.css";
+import "./styles/default.scss";
+import { CssBaseline } from "@mui/material";
+import { LightTheme } from "./styles/light_theme";
+import { ConfirmProvider } from "material-ui-confirm";
+import RoutedApp from "./components/RoutedApp";
+import { DarkModeProvider } from "./hooks/useDarkmode";
+import { StringProvider } from "./hooks/useStrings";
+import { Preventer, render } from "react-render-tools";
 
-class Bootloader {
-  private loadConsole() {
-    if (native.getPref("erudaEnabled") === "true") {
-      eruda.init();
-      eruda.add(erudaDom);
-    }
-  }
+ons.platform.select("android");
 
-  private electronInit() {
-    native.electron.addEventListener("devtools-opened", () => {
-      console.log("DevTools opened");
-    });
-  }
+ons.ready(() => {
+  // @ts-ignore
+  window.onbackbutton = new Event("onbackbutton");
 
-  /**
-   * Loads styles dynamically
-   */
-  public styleInit() {
-    jss.setup(preset());
-    if (native.getPref("enableDarkmode") === "true") {
-      native.android.setStatusbarColor("#ff1f1f1f");
-      jss.createStyleSheet(darkMode).attach();
-    } else {
-      native.android.setStatusbarColor("#ff4a148c");
-      jss.createStyleSheet(lightMode).attach();
-    }
-  }
-
-  private androidSettingsinit() {
-    if (native.getPref("enableKeepScreenOn") === "true") {
-      native.android.keepScreenOn();
-    }
-  }
-
-  public init() {
-    ons.platform.select("android");
-    this.styleInit();
-    this.loadConsole();
-    this.electronInit();
-    this.androidSettingsinit();
-
-    if (native.isInstagram || native.isFacebook) {
-      native.setPref("disableNSFW", "true");
-    }
-
-    dom.render(<InitActivity />, "app");
-  }
-}
-
-new Bootloader().init();
-
-export default Bootloader;
+  render(
+    <React.StrictMode>
+      <Preventer prevent="contextmenu">
+        <StringProvider>
+            <DarkModeProvider>
+              <ConfirmProvider>
+                <CssBaseline />
+                <LightTheme />
+                <RoutedApp />
+              </ConfirmProvider>
+            </DarkModeProvider>
+        </StringProvider>
+      </Preventer>
+    </React.StrictMode>, 
+    "app"
+  );
+});

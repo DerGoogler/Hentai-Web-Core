@@ -1,439 +1,80 @@
-import * as React from "react";
-import ons from "onsenui";
-import tools from "@Misc/tools";
-import native from "@Native/index";
-import ContentBody from "@Components/ContentBody";
-import { ToolbarBuilder, ListViewBuilder } from "@Builders";
-import { List, Page } from "react-onsenuix";
-import { string } from "@Strings";
-import { Props, States } from "./interface";
-import { settingsIndex } from "./../../localization/languageIndexes";
+import { Page, Toolbar } from "react-onsenui";
+import { useTheme } from "@mui/system";
+import { useDarkmode } from "../../hooks/useDarkmode";
+import { AccentColorPickerItem } from "./components/AccentColorPickerItem";
+import { useConfirm } from "material-ui-confirm";
+import { useActivity } from "../../hooks/useActivity";
+import { BackButton } from "../../components/BackButton";
+import { useStrings } from "../../hooks/useStrings";
 
-class SettingsActivity extends React.Component<Props, States> {
-  public constructor(props: Props | Readonly<Props>) {
-    super(props);
-    this.renderToolbar = this.renderToolbar.bind(this);
-  }
+import FormControl from "@mui/material/FormControl";
+import NativeSelect from "@mui/material/NativeSelect";
+import { List, ListItem, ListSubheader, Switch } from "@mui/material";
+import { StyledListItemText } from "./components/StyledListItemText";
 
-  private renderToolbar = () => {
-    return <ToolbarBuilder title={string.settings} onBackButton={this.props.popPage} hasWindowsButtons={true} hasDarkMode={true} />;
+function SettingsActivity() {
+  const confirm = useConfirm();
+  const { context, extra } = useActivity();
+  const { strings, language, setLanguage } = useStrings();
+
+  const theme = useTheme();
+
+  const { darkmode, setDarkmode } = useDarkmode();
+
+  const renderToolbar = () => {
+    return (
+      <Toolbar modifier="noshadow">
+        <div className="left">
+          <BackButton onClick={context.popPage} />
+        </div>
+        <div className="center">{strings.settings}</div>
+      </Toolbar>
+    );
   };
 
-  public render() {
-    return (
-      <Page modifier={native.checkPlatformForBorderStyle} renderToolbar={this.renderToolbar}>
-        <ContentBody>
-          <List>
-            <ListViewBuilder
-              isPlugin={false}
-              pluginName=""
-              data={[
-                {
-                  title: string.appearance,
-                  content: [
-                    {
-                      key: "enableDarkmode",
-                      type: "switch",
-                      icon: "dark_mode",
-                      text: string.enableDarkmode,
-                    },
-                    {
-                      key: "hideSearchbar",
-                      icon: "search",
-                      type: "switch",
-                      text: string.hideSearchbar,
-                    },
-                    {
-                      key: "enableBottomTabbar",
-                      icon: "table_chart",
-                      type: "switch",
-                      text: string.placeTabberOnBottom,
-                      helper: {
-                        text: "This settings requires not app reload/start",
-                      },
-                    },
-                    {
-                      key: "language",
-                      icon: "language",
-                      type: "select",
-                      text: string.language,
-                      selectDefaultValue: "en",
-                      selectValue: settingsIndex,
-                      callback: (keepDefaultFuntion: void) => {
-                        if (native.confirm("Do you change the language?")) {
-                          native.reload();
-                          keepDefaultFuntion;
-                        } else {
-                          return;
-                        }
-                      },
-                    },
-                  ],
-                },
-
-                {
-                  title: string.card,
-                  content: [
-                    {
-                      key: "fitImageToCard",
-                      type: "switch",
-                      icon: "fit_screen",
-                      text: string.fitImageToCard,
-                    },
-                    {
-                      key: "displayDownload",
-                      icon: "file_download",
-                      type: "switch",
-                      text: string.displayMoreButton,
-                    },
-                    {
-                      key: "removeTitle",
-                      icon: "title",
-                      type: "switch",
-                      text: string.removeTitle,
-                    },
-                    {
-                      key: "hideCardWithImageError",
-                      icon: "error",
-                      type: "switch",
-                      text: string.hideCardWithImageError,
-                    },
-                  ],
-                },
-
-                {
-                  title: string.security,
-                  content: [
-                    {
-                      key: "alwaysLogin",
-                      type: "switch",
-                      icon: "login",
-                      text: string.alwaysLogin,
-                      disabled: native.isInstagram || native.isFacebook,
-                    },
-                    {
-                      key: "enableCustomScriptLoading",
-                      icon: "description",
-                      type: "switch",
-                      disabled: native.isInstagram || native.isFacebook,
-                      text: "Custom Scripting",
-                    },
-                    {
-                      key: "useFingerPrintToLogin",
-                      icon: "fingerprint",
-                      text: string.useFingerPrintToLogin,
-                      type: "switch",
-                      style: {
-                        display: native.isWindows || !native.android.isHardwareAvailable() ? "none" : "",
-                      },
-                      disabled: tools.typeIF(native.android.hasBiometricEnrolled(), false, true),
-                    },
-                    {
-                      key: "erudaEnabled",
-                      icon: "logo_dev",
-                      text: string.erudaEnabled,
-                      type: "switch",
-                      style: {
-                        display: native.isAndroid ? "" : "none",
-                      },
-                    },
-                  ],
-                },
-
-                {
-                  title: string.others,
-                  content: [
-                    {
-                      key: "enableSwipeBetweenTabs",
-                      icon: "swipe",
-                      type: "switch",
-                      text: string.enableSwipeBetweenTabs,
-                    },
-                    {
-                      key: "saveLastUsedTab",
-                      icon: "save",
-                      type: "switch",
-                      text: string.saveLastUsedTab,
-                    },
-                    {
-                      key: "enablePluginTestting",
-                      icon: "code",
-                      type: "switch",
-                      style: { display: native.isAndroid || native.isWindows ? "none" : "" },
-                      text: "Enable plugin testing",
-                      disabled: native.isInstagram || native.isFacebook,
-                    },
-                    {
-                      key: "disableNSFW",
-                      icon: "accessible_forward",
-                      type: "switch",
-                      text: string.disableNSFWcontent,
-                      disabled: native.isInstagram || native.isFacebook,
-                    },
-                  ],
-                },
-
-                {
-                  title: "Electron",
-                  className: "electron",
-                  style: { display: native.isWindows ? "" : "none" },
-                  content: [
-                    {
-                      key: "electron.screenSizeInUse",
-                      type: "select",
-                      icon: "aspect_ratio",
-                      text: string.electronWindowSize,
-                      selectDefaultValue: "<width>375</width><height>812</height>",
-                      callback: (e: any, key: string) => {
-                        const keyWin = "electron.windowSize";
-                        const regex = /<width>(.*?)<\/width><height>(.*?)<\/height>/gm;
-                        const width = Number(e.target.value.replace(regex, "$1"));
-                        const height = Number(e.target.value.replace(regex, "$2"));
-
-                        ons.notification.confirm({
-                          message: string.formatString(string.electronChangeWindowSizeDialogMessage, {
-                            size: e.target.value.replace(regex, "$1x$2"),
-                          }),
-                          title: string.electronChangeWindowSizeDialogTitle,
-                          buttonLabels: [string.yes, string.no],
-                          animation: "default",
-                          modifier: native.checkPlatformForBorderStyle,
-                          primaryButtonIndex: 1,
-                          cancelable: true,
-                          callback: (index: number) => {
-                            switch (index) {
-                              case 0:
-                                window.Windows.setPref(keyWin + ".width", width);
-                                window.Windows.setPref(keyWin + ".height", height);
-                                window.Windows.setPref(key, e.target.value);
-                                window.Windows.setWindowSize(width, height);
-                                break;
-
-                              default:
-                                e.target.value = window.Windows.getPref(key);
-                                break;
-                            }
-                          },
-                        });
-                      },
-                      selectValue: [
-                        {
-                          text: "iPhone X",
-                          value: "<width>375</width><height>812</height>",
-                        },
-                        {
-                          text: "Surface Duo",
-                          value: "<width>540</width><height>720</height>",
-                        },
-                        {
-                          text: "Moto G4 / Galaxy S5",
-                          value: "<width>360</width><height>640</height>",
-                        },
-                        {
-                          text: "Pixel 2",
-                          value: "<width>411</width><height>731</height>",
-                        },
-                        {
-                          text: "Pixel 2 XL",
-                          value: "<width>411</width><height>823</height>",
-                        },
-                        {
-                          text: "Galaxy Fold",
-                          value: "<width>280</width><height>653</height>",
-                        },
-                        {
-                          text: "Nest Hub",
-                          value: "<width>1024</width><height>600</height>",
-                        },
-                        {
-                          text: "Nest Hub Max",
-                          value: "<width>1280</width><height>800</height>",
-                        },
-                      ],
-                    },
-                    {
-                      key: "electron.devTools",
-                      type: "switch",
-                      icon: "logo_dev",
-                      text: string.enableDevTools,
-                    },
-                    {
-                      key: "electron.alwaysOnTop",
-                      type: "switch",
-                      icon: "pan_tool",
-                      text: string.enableAlwaysOnTop,
-                      callback: (keepDefaultFuntion: void) => {
-                        native.electron.notification("Restart", "Please restart the application");
-                        keepDefaultFuntion;
-                      },
-                    },
-                    {
-                      key: "electron.hardDevice",
-                      icon: "desktop_windows",
-                      type: "select",
-                      text: string.hardDevice,
-                      selectDefaultValue: "C",
-                      selectValue: [
-                        {
-                          text: "A",
-                          value: "A",
-                        },
-
-                        {
-                          text: "B",
-                          value: "B",
-                        },
-                        {
-                          text: "C",
-                          value: "C",
-                        },
-                        {
-                          text: "D",
-                          value: "D",
-                        },
-                        {
-                          text: "E",
-                          value: "E",
-                        },
-                        {
-                          text: "F",
-                          value: "F",
-                        },
-                        {
-                          text: "G",
-                          value: "G",
-                        },
-                        {
-                          text: "H",
-                          value: "H",
-                        },
-                        {
-                          text: "I",
-                          value: "I",
-                        },
-                        {
-                          text: "J",
-                          value: "J",
-                        },
-                        {
-                          text: "K",
-                          value: "K",
-                        },
-                        {
-                          text: "L",
-                          value: "L",
-                        },
-                        {
-                          text: "M",
-                          value: "M",
-                        },
-                        {
-                          text: "N",
-                          value: "N",
-                        },
-                        {
-                          text: "O",
-                          value: "O",
-                        },
-                        {
-                          text: "P",
-                          value: "P",
-                        },
-                        {
-                          text: "Q",
-                          value: "Q",
-                        },
-                        {
-                          text: "R",
-                          value: "R",
-                        },
-                        {
-                          text: "S",
-                          value: "S",
-                        },
-                        {
-                          text: "T",
-                          value: "T",
-                        },
-                        {
-                          text: "U",
-                          value: "U",
-                        },
-                        {
-                          text: "V",
-                          value: "V",
-                        },
-                        {
-                          text: "W",
-                          value: "W",
-                        },
-                        {
-                          text: "X",
-                          value: "X",
-                        },
-                        {
-                          text: "Y",
-                          value: "Y",
-                        },
-                        {
-                          text: "Z",
-                          value: "Z",
-                        },
-                      ],
-                    },
-                    {
-                      key: "electron.disableDiscordRPC",
-                      type: "switch",
-                      icon: "discord",
-                      text: "Disable Discord RPC",
-                    },
-                    {
-                      key: "electron.rpcLogo",
-                      type: "select",
-                      icon: "discord",
-                      text: "Discord RPC Logo",
-                      selectDefaultValue: "hentaiweb__",
-                      selectValue: [
-                        {
-                          text: "Hentai Web",
-                          value: "hentaiweb__",
-                        },
-                        {
-                          text: "Bot Logo",
-                          value: "bot_logo",
-                        },
-                        {
-                          text: "Googler",
-                          value: "googler",
-                        },
-                        {
-                          text: "App Icon",
-                          value: "ic_launcher",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                {
-                  title: "Android",
-                  className: "android",
-                  style: { display: native.isAndroid ? "" : "none" },
-                  content: [
-                    {
-                      key: "enableKeepScreenOn",
-                      type: "switch",
-                      icon: "visibility",
-                      text: string.enableKeepScreenOn,
-                    },
-                  ],
-                },
-              ]}
-            />
-          </List>
-        </ContentBody>
-      </Page>
-    );
-  }
+  return (
+    <Page renderToolbar={renderToolbar}>
+      <List
+        subheader={
+          <ListSubheader sx={(theme) => ({ bgcolor: theme.palette.background.default })}>Aussehen</ListSubheader>
+        }
+      >
+        <ListItem>
+          <StyledListItemText id="switch-list-label-wifi" primary={strings.dark_mode} />
+          <Switch
+            edge="end"
+            onChange={(e: any) => {
+              setDarkmode(e.target.checked);
+            }}
+            checked={darkmode}
+            inputProps={{
+              "aria-labelledby": "switch-list-label-wifi",
+            }}
+          />
+        </ListItem>
+        <AccentColorPickerItem />
+        <ListItem>
+          <StyledListItemText id="sts-language" primary={strings.language} />
+          <FormControl>
+            <NativeSelect
+              variant="outlined"
+              defaultValue={language}
+              inputProps={{
+                name: "lang",
+                "aria-labelledby": "sts-language",
+              }}
+              onChange={(e) => {
+                setLanguage(e.target.value);
+              }}
+            >
+              <option value="de">German</option>
+              <option value="en">English</option>
+            </NativeSelect>
+          </FormControl>
+        </ListItem>
+      </List>
+    </Page>
+  );
 }
 
 export default SettingsActivity;
