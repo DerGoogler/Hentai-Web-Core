@@ -1,22 +1,35 @@
-# Dist folder
-dist/*
-!dist/index.html
-!dist/misc
-!dist/src
-
-# Others
-test.js
 .cache/
 coverage/
-.vscode/*
+dist/*
+!dist/www/index.html
+!dist/www/cordova.js
+!dist/www/cordova_plugins.js
+!.vscode/settings.json
+package_lock.json
 node_modules/
+cdn_modules/
 *.log
 
 # OS generated files
+/node_modules
+/test/js
+/test/browsertest/js
+/test/fixtures/temp-*
+/test/temp
+/test/ChangesAndRemovals
+/test/**/dev-defaults.webpack.lock
+/benchmark/js
+/benchmark/fixtures
+/examples/**/dist
+/assembly/**/*.wat
+/assembly/**/*.wasm
+/coverage
+/.nyc_output
+/.jest-cache
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+*.log
+.idea
+.vscode
+.cache
+.eslintcache
+package-lock.json

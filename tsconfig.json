@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "allowJs": true,
-    "declaration": true,
+    "declaration": false,
     "emitDeclarationOnly": false,
     "declarationMap": false,
     "outDir": "./dist/",
@@ -9,8 +9,8 @@
     "sourceMap": true,
     "strict": true,
     "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "module": "es6",
+    "noImplicitAny": false,
+    "module": "ES2022",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "types": ["node"],
@@ -21,16 +21,19 @@
     "baseUrl": "./src",
     "paths": {
       "@Native/*": ["native/*"],
-      "@Builders": ["builders/index.ts"],
       "@Components/*": ["components/*"],
       "@Types/*": ["typings/*"],
-      "@DataPacks/*": ["dataPacks/*"],
-      "@Misc/*": ["misc/*"],
-      "@Bootloader": ["index.tsx"],
       "@Styles/*": ["styles/*"],
-      "@Strings": ["localization/index.ts"],
-      "@Views": ["views/index.ts"]
+      "@Views/*": ["views/*"],
+      "@Util/*": ["util/*"],
+      "@Hooks/*": ["hooks/*"]
     }
   },
-  "include": ["./src/**/*"]
+  "ts-node": {
+    "compilerOptions": {
+      "module": "CommonJS"
+    }
+  },
+  "include": ["./src/**/*", "./dep.ts", "./make_native.ts"],
+  "exclude": ["./src/view/TestPluginActivity/util/types.d.ts"]
 }
