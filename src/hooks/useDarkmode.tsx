@@ -3,6 +3,7 @@ import { colors as kolors, useTheme as useMom, createTheme, ThemeProvider } from
 import shadeColor from "../util/shadeColor";
 import { useLocalStorage } from "usehooks-ts";
 import { UI } from "@Native/components/UI";
+import { useNativeStorage } from "./useNativeStorage";
 
 export type AccentColors = Array<{
   name: string;
@@ -141,8 +142,8 @@ export const useTheme = () => {
 };
 
 export const DarkModeProvider = (props: DarkModeProviderProps) => {
-  const [darkmode, setDarkmode] = useLocalStorage("darkmode", false);
-  const [scheme, setScheme] = useLocalStorage<AccentColors[0]>("accent_scheme", accent_colors[0]);
+  const [darkmode, setDarkmode] = useNativeStorage("darkmode", false);
+  const [scheme, setScheme] = useNativeStorage<AccentColors[0]>("accent_scheme", accent_colors[0]);
 
   const theme = createTheme({
     shape: {

@@ -3,6 +3,7 @@ import LocalizedStrings from "localized-strings";
 import { useLocalStorage } from "usehooks-ts";
 import { DE_Locale } from "../locales/de";
 import { EN_Locale } from "../locales/en";
+import { useNativeStorage } from "./useNativeStorage";
 
 const std = new LocalizedStrings(
   {
@@ -25,7 +26,7 @@ export type StringProviderProps = {
 };
 
 export const StringProvider = (props: StringProviderProps) => {
-  const [language, setLanguage] = useLocalStorage("language", "de");
+  const [language, setLanguage] = useNativeStorage("language", "de");
 
   std.setLanguage(language);
   return (
